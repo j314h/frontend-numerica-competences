@@ -30,8 +30,8 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
 
 > in progess
 
-`' / '` => router for HomeConnect view (connect user)
-`' /dashbord-page '` => router for home page this app (user connected)
+`' / '` => router for HomeConnect view (connect user)  
+`' /dashbord-page '` => router for home page this app (user connected)  
 `' /dashbord-page/setting '` => router access root user, page for custom app
 
 ## Data / vuex
