@@ -10,7 +10,7 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
 > [Maquette Figma](https://www.figma.com/proto/ILECZVkbsHWVSmTIbRFCEF/projet-co-maquette?node-id=547%3A5085&scaling=min-zoom)  
 > [Trello](https://trello.com/b/E2KKZtPq/prod-numerica-comp%C3%A9tences)  
 > [Soutenance N°1](https://prezi.com/dashboard/next/#/presentations)  
-> [Documentation Back-End](https://github.com/j314h/numerica-competences/blob/email-verify/back/documentation.md)
+> [Documentation Back-End](https://github.com/j314h/backend-numerica-competences/tree/developp)
 
 # Documentation
 
