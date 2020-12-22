@@ -26,18 +26,18 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
     - execute the following command `npm run serve`
       > if you have encountered any errors at this time, you have executed a command incorrectly or you have placed the commands in the wrong place
 
-## Roads => vue-router
+## Roads / vue-router
 
 > in progess
 
-' / ' => router for HomeConnect view (connect user)  
-' /dashbord-page ' => router for home page this app (user connected)  
-' /dashbord-page/setting ' => router access root user, page for custom app
+`' / '` => router for HomeConnect view (connect user)
+`' /dashbord-page '` => router for home page this app (user connected)
+`' /dashbord-page/setting '` => router access root user, page for custom app
 
-## Data => vuex
+## Data / vuex
 
 > in progress
 
-### scss => class personal
+### Scss / class personal
 
 > in progress
