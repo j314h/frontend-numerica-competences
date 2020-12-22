@@ -1,0 +1,36 @@
+/* title of app */
+.ti-1 {
+  font-size: $font-size-h1;
+  font-weight: $font-wbold;
+}
+.ti-2 {
+  font-size: $font-size-h2;
+  font-weight: $font-wbold;
+}
+.ti-3 {
+  font-size: $font-size-h3;
+  font-weight: $font-wbold;
+}
+.ti-4 {
+  font-size: $font-size-h4;
+  font-weight: $font-wbold;
+}
+
+@media screen and (max-width: 700px) {
+  .ti-1 {
+    font-size: 3.6rem;
+    font-weight: $font-wbold;
+  }
+  .ti-2 {
+    font-size: $font-size-h2;
+    font-weight: $font-wbold;
+  }
+  .ti-3 {
+    font-size: $font-size-h3;
+    font-weight: $font-wbold;
+  }
+  .ti-4 {
+    font-size: $font-size-h4;
+    font-weight: $font-wbold;
+  }
+}

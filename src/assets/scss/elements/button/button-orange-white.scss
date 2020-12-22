@@ -1,0 +1,28 @@
+.btn-orange-white {
+  display: block;
+  padding: 14px 22px;
+  background-color: transparent;
+  border: 1px solid $color-secondary-app;
+  color: $color-secondary-app;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.btn-orange-white:hover {
+  background-color: $color-secondary-app;
+  color: $color-secondary;
+  cursor: pointer;
+}
+
+.btn-orange-white:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 700px) {
+  .btn-orange-white {
+    padding: 7px 15px;
+  }
+}

@@ -1,0 +1,80 @@
+/* text divers */
+.t-body {
+  font-size: $font-size-m;
+  font-weight: $font-wlight;
+}
+.t-intro {
+  font-size: $font-size-h;
+  font-weight: $font-wmedium;
+}
+.t-slogan {
+  font-size: $font-size-m;
+  font-weight: $font-wbold;
+  text-transform: uppercase;
+}
+.t-small {
+  font-size: $font-size-ms;
+  font-weight: $font-wregular;
+}
+.t-extrasmall {
+  font-size: $font-size-s;
+  font-weight: $font-wmedium;
+}
+.t-extrasmallxl {
+  font-size: 1rem;
+  font-weight: $font-wmedium;
+}
+.t-label {
+  font-size: $font-size-s;
+  font-weight: $font-wbold;
+}
+.t-btn-primary {
+  font-size: $font-size-ms;
+  font-weight: $font-wmedium;
+  text-transform: uppercase;
+}
+.t-btn-secondary {
+  font-size: $font-size-ms;
+  font-weight: $font-wregular;
+}
+
+@media screen and (max-width: 700px) {
+  .t-body {
+    font-size: $font-size-m;
+    font-weight: $font-wlight;
+  }
+  .t-intro {
+    font-size: $font-size-m;
+    font-weight: $font-wmedium;
+  }
+  .t-slogan {
+    font-size: $font-size-m;
+    font-weight: $font-wbold;
+    text-transform: uppercase;
+  }
+  .t-small {
+    font-size: $font-size-ms;
+    font-weight: $font-wregular;
+  }
+  .t-extrasmall {
+    font-size: $font-size-s;
+    font-weight: $font-wmedium;
+  }
+  .t-extrasmallxl {
+    font-size: 1rem;
+    font-weight: $font-wmedium;
+  }
+  .t-label {
+    font-size: $font-size-s;
+    font-weight: $font-wbold;
+  }
+  .t-btn-primary {
+    font-size: $font-size-ms;
+    font-weight: $font-wmedium;
+    text-transform: uppercase;
+  }
+  .t-btn-secondary {
+    font-size: $font-size-ms;
+    font-weight: $font-wregular;
+  }
+}

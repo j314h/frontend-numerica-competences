@@ -1,0 +1,28 @@
+.btn-blue-white {
+  display: block;
+  padding: 14px 22px;
+  background-color: transparent;
+  border: 1px solid $color-primary-app;
+  color: $color-primary-app;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.btn-blue-white:hover {
+  background-color: $color-primary-app;
+  color: $color-secondary;
+  cursor: pointer;
+}
+
+.btn-blue-white:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 700px) {
+  .btn-blue-white {
+    padding: 7px 15px;
+  }
+}
