@@ -10,7 +10,7 @@ export default {
       colorText1Menu: "gray", // blue, orange, white, gray
       colorText2Menu: "blue", // blue, orange, white, gray
     },
-    imgs: {},
+    imgs: null,
     errors: [],
   },
   actions,

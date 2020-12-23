@@ -12,6 +12,10 @@ export default {
     orange: Boolean,
     blue: Boolean,
     whiteGray: Boolean,
+    minigrayWhite: Boolean,
+    miniorange: Boolean,
+    miniblue: Boolean,
+    miniwhiteGray: Boolean,
     textBtn: String,
   },
   computed: {
@@ -22,6 +26,10 @@ export default {
         "btn-orange-white": this.orange,
         "btn-blue-white": this.blue,
         "btn-white-gray": this.whiteGray,
+        "btnm-gray-white": this.minigrayWhite,
+        "btnm-orange-white": this.miniorange,
+        "btnm-blue-white": this.miniblue,
+        "btnm-white-gray": this.miniwhiteGray,
       };
     },
   },

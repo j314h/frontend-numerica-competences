@@ -4,7 +4,7 @@ import HomeView from "../views/HomeView";
 import DashbordPage from "../views/DashbordPage";
 import store from "../store";
 import VueCookies from "vue-cookies";
-import Setting from "../components/ContentApp/Setting.vue";
+import Setting from "../components/ContentApp/Setting/Setting.vue";
 
 Vue.use(VueRouter);
 

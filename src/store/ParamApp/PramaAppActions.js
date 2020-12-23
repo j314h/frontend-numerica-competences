@@ -15,4 +15,13 @@ export default {
       store.commit("UserConnect/disableLoading");
     }
   },
+
+  async getFilesImg(context, options) {
+    try {
+      const files = await Vue.prototype.$http.get("http://localhost:5000/files-i");
+      context.commit("getImgsFiles", files.data);
+    } catch (e) {
+      context.commit("addErrors", e.response.data.message);
+    }
+  },
 };

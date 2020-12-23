@@ -4,8 +4,8 @@
       <!-- form -->
       <form @submit.prevent="connexionUser">
         <!-- img form -->
-        <div class="box_img">
-          <img src="../../assets/img/logo-numerica-petit.svg" />
+        <div v-for="(img, i) in imgs" :key="i" class="box_img">
+          <img v-if="img.name === 'logoNumerica'" :src="`${urlApiImg}${img.fieldName}`" />
         </div>
         <!-- input -->
         <div class="box_input">
@@ -49,6 +49,7 @@ export default {
   name: "HomeForm",
   data() {
     return {
+      urlApiImg: process.env.VUE_APP_URL_API_IMG,
       dataConnectUser: {
         data: {
           email: "",
@@ -62,9 +63,10 @@ export default {
   },
   computed: {
     ...mapGetters("UserConnect", ["errors"]),
+    ...mapGetters("ParamApp", ["imgs"]),
   },
   methods: {
-    //
+    //connexion user
     connexionUser() {
       this.$store.dispatch("UserConnect/signIn", this.dataConnectUser);
       this.dataConnectUser.data.email = "";
@@ -86,6 +88,11 @@ export default {
 .box_img {
   text-align: center;
   margin-bottom: 20px;
+}
+
+img {
+  width: 80px;
+  height: 80px;
 }
 
 .box_input {
