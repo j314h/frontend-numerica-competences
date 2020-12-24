@@ -49,7 +49,7 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
   - `params: {`  
      //color  
      `bgMenuHeadband: String,` // blue, gray  
-     `colorText1Menu: String,` // blue, orange, white, gray
+     `colorText1Menu: String,` // blue, orange, white, gray  
     `colorText2Menu: String,` // blue, orange, white, gray  
     `},`
   - `imgs: null,` // img for app
