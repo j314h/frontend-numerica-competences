@@ -9,7 +9,9 @@
       <the-headband class="head_principal"></the-headband>
       <!-- content text -->
       <div class="content">
+        <!-- view home for dashbord -->
         <router-view name="HomeDashbord"></router-view>
+        <!-- view for setting app -->
         <router-view name="Setting"></router-view>
       </div>
     </div>

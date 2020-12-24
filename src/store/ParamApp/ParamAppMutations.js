@@ -5,4 +5,7 @@ export default {
   getImgsFiles(state, files) {
     state.imgs = files;
   },
+  resetErrors(state, data) {
+    state.errors = [];
+  },
 };

@@ -11,11 +11,9 @@
       <!-- menu option onglet active  -->
     </div>
     <!-- btn prametre juste for root -->
-    <div v-if="currentUser.role.libelle === 'root'">
-      <router-link to="dashbord-page/setting" tag="button" class="btn-menu" :class="classColorText1"
-        >Paramètres</router-link
-      >
-    </div>
+    <router-link to="dashbord-page/setting" tag="button" class="btn-menu t-btn-secondary" :class="classColorText1"
+      >Paramètres</router-link
+    >
     <!-- btn disconnect -->
     <div class="box_btn_deco">
       <button @click="logOut" class="btn-deco t-btn-primary" :class="classColorText1">Déconnexion</button>

@@ -38,6 +38,25 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
 
 > in progress
 
+- UserConnect => store namespaced
+
+  - `currentUser: Object,` //info for user connected
+  - `isSignIn: Booleen,` // connected
+  - `isLoading: Booleen,` //loading for user connect
+  - `errors: Array,` // error user connect
+
+- ParamApp => store namespaced
+  - `params: {`  
+     //color  
+     `bgMenuHeadband: String,` // blue, gray  
+     `colorText1Menu: String,` // blue, orange, white, gray
+    `colorText2Menu: String,` // blue, orange, white, gray  
+    `},`
+  - `imgs: null,` // img for app
+  - `errors: Array,` // error param app
+
 ### Scss / class personal
 
 > in progress
+
+globals-rules.scss => is load in App component, and he charge all rules css for everyone component
