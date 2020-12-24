@@ -7,7 +7,7 @@
           <label>{{ text }}</label>
           <!-- input load file -->
           <div class="input_file">
-            <input type="file" ref="file" @change="submitImage" enctype="multipart/form-data" required />
+            <input type="file" :ref="file" @change="submitImage" enctype="multipart/form-data" required />
           </div>
         </div>
         <!-- img an relation with label -->
@@ -24,7 +24,9 @@
         </div>
         <!-- error content -->
       </div>
-      <error-content class="error_logo_numerica" :error="errors[0]"></error-content>
+      <div class="error_img">
+        <error-content :error="errors[0]"></error-content>
+      </div>
       <!-- submit -->
       <div>
         <button-app :miniorange="true" :textBtn="'Envoyer'"></button-app>
@@ -57,6 +59,7 @@ export default {
     return {
       //url for api, for recover image
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
+      file: "",
     };
   },
   computed: {
@@ -66,6 +69,7 @@ export default {
   methods: {
     //recover img load for user click in input
     submitImage(e) {
+      console.log(this.file);
       this.file = e.target.files[0];
     },
     //request api for load img user save
@@ -105,5 +109,8 @@ form {
 }
 .content_form {
   display: flex;
+}
+.error_img {
+  height: 40px;
 }
 </style>
