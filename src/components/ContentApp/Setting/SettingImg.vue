@@ -7,7 +7,7 @@
           <label>{{ text }}</label>
           <!-- input load file -->
           <div class="input_file">
-            <input type="file" :ref="file" @change="submitImage" enctype="multipart/form-data" required />
+            <input type="file" ref="file" enctype="multipart/form-data" required />
           </div>
         </div>
         <!-- img an relation with label -->
@@ -22,13 +22,9 @@
             />
           </div>
         </div>
-        <!-- error content -->
-      </div>
-      <div class="error_img">
-        <error-content :error="errors[0]"></error-content>
       </div>
       <!-- submit -->
-      <div>
+      <div class="box_btn">
         <button-app :miniorange="true" :textBtn="'Envoyer'"></button-app>
       </div>
     </form>
@@ -59,25 +55,48 @@ export default {
     return {
       //url for api, for recover image
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
-      file: "",
     };
   },
   computed: {
-    //recover error relation with ParamApp
-    ...mapGetters("ParamApp", ["errors", "imgs"]),
+    //get image are stocked in store ParamApp
+    imgs() {
+      return this.$store.getters["ParamApp/imgs"];
+    },
   },
+  updated() {},
   methods: {
     //recover img load for user click in input
-    submitImage(e) {
-      console.log(this.file);
-      this.file = e.target.files[0];
-    },
     //request api for load img user save
-    changeLogoNumerica() {
+    async changeLogoNumerica() {
+      //build formData for send api
       const data = new FormData();
-      data.append(this.nameImgTarget, this.file);
-      this.$store.dispatch(this.commandeDispatch, data);
-      this.file = "";
+      data.append(this.nameImgTarget, this.$refs.file.files[0]);
+      //send file
+      await this.$store.dispatch(this.commandeDispatch, data);
+      //if errors show alert custom
+      if (this.$store.getters["ParamApp/errors"][0]) {
+        this.$swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: this.$store.getters["ParamApp/errors"][0],
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setTimeout(() => {
+          this.$store.commit("ParamApp/resetErrors");
+        }, 2000);
+      } else {
+        //if success show alert custom
+        this.$swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Updating your successful image",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+      //reset input file
+      this.$refs.file.value = "";
     },
   },
 };
@@ -110,7 +129,7 @@ form {
 .content_form {
   display: flex;
 }
-.error_img {
-  height: 40px;
+.box_btn {
+  margin-top: 20px;
 }
 </style>

@@ -5,9 +5,11 @@ import "./lib/axios.config"; // axios config
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import Sweet from "vue-sweetalert2"; // alert custom bibliotheque
 
 Vue.prototype.$http = axios;
 Vue.use(VueCookies);
+Vue.use(Sweet);
 Vue.config.productionTip = false;
 
 new Vue({
