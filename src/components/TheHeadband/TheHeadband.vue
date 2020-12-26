@@ -1,5 +1,5 @@
 <template>
-  <div class="headband" :class="classColorMenu"></div>
+  <div class="headband" :class="currentUser.themeColor.bgMenuHeadband"></div>
 </template>
 
 <script>
@@ -8,14 +8,11 @@ import { mapGetters } from "vuex";
 export default {
   name: "TheHeadband",
   data() {
-    return {
-      colorMenu: "bgm-",
-    };
+    return {};
   },
   computed: {
-    classColorMenu() {
-      return (this.colorMenu += this.$store.getters["ParamApp/params"].bgMenuHeadband);
-    },
+    //load theme color for currentUser
+    ...mapGetters("UserConnect", ["currentUser"]),
   },
 };
 </script>

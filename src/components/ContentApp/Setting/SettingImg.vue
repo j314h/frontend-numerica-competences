@@ -25,22 +25,22 @@
       </div>
       <!-- submit -->
       <div class="box_btn">
-        <button-app :miniorange="true" :textBtn="'Envoyer'"></button-app>
+        <button-app-mini :textBtn="'Envoyer'"></button-app-mini>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import ButtonApp from "../../Elements/ButtonApp.vue";
 import ErrorContent from "../../Elements/ErrorContent.vue";
 import { mapGetters } from "vuex";
+import ButtonAppMini from "../../Elements/ButtonAppMini.vue";
 
 export default {
   name: "SettingImg",
   components: {
-    ButtonApp,
     ErrorContent,
+    ButtonAppMini,
   },
   props: {
     //custome box add or change image
@@ -103,10 +103,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-form {
-  padding: 0 0 20px 0;
-  border-bottom: 1px solid #b1b3b7;
-}
 .input_file {
   margin: 10px 0 0 0;
   padding: 10px 20px;
@@ -131,5 +127,14 @@ form {
 }
 .box_btn {
   margin-top: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  .content_form {
+    flex-direction: column;
+  }
+  .box_img {
+    margin-top: 20px;
+  }
 }
 </style>

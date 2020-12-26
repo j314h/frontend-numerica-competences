@@ -8,7 +8,7 @@
       <!-- headband -->
       <the-headband class="head_principal"></the-headband>
       <!-- content text -->
-      <div class="content">
+      <div class="content" :class="classColorTextContent">
         <!-- view home for dashbord -->
         <router-view name="HomeDashbord"></router-view>
         <!-- view for setting app -->
@@ -25,6 +25,17 @@ import TheMenu from "../components/TheMenu/TheMenu";
 export default {
   components: { TheMenu, TheHeadband },
   name: "DashbordPage",
+  data() {
+    return {
+      textColorContent: "ct-custom-",
+    };
+  },
+  computed: {
+    //load color text content of app
+    classColorTextContent() {
+      return this.textColorContent + this.$store.getters["UserConnect/currentUser"].themeColor.colorTextPrimary;
+    },
+  },
 };
 </script>
 
@@ -56,6 +67,6 @@ export default {
 .content {
   flex: 5;
   overflow: auto;
-  padding: 20px;
+  padding: 40px 40px 100px 40px;
 }
 </style>

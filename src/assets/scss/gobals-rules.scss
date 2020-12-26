@@ -51,11 +51,16 @@ input {
   height: 100%;
 }
 
+.box {
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
 html body.swal2-height-auto {
   height: 100% !important;
 }
 
-@import "./title.scss";
-@import "./text.scss";
-@import "./color-text.scss";
 @import "./globals-components.scss";

@@ -1,5 +1,11 @@
 /* elements import */
-@import "./color-bg.scss";
+@import "./title.scss";
+@import "./text.scss";
+@import "./color-text.scss";
+@import "./colors-custom/color-bg-custom.scss";
+@import "./colors-custom/color-text-custom.scss";
+@import "./colors-custom/color-btn-custom.scss";
+@import "./colors-custom/color-diver-custom.scss";
 @import "./elements/input/input.scss";
 @import "./elements/input/input-image.scss";
 @import "./elements/error/error-basic.scss";

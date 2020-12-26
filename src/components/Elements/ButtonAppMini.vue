@@ -1,13 +1,6 @@
 <template>
   <div class="box_btn">
-    <!-- if currentUser exist -->
-    <button v-if="currentUser.themeColor" class="t-btn-primary" :class="currentUser.themeColor.colorBtnPrimary">
-      {{ textBtn }}
-    </button>
-    <!-- if currentUser not exist -->
-    <button v-else class="t-btn-primary cbtn-orange">
-      {{ textBtn }}
-    </button>
+    <button class="t-btn-secondary" :class="currentUser.themeColor.colorBtnSecondary">{{ textBtn }}</button>
   </div>
 </template>
 
@@ -15,7 +8,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "ButtonApp",
+  name: "ButtonAppMini",
   props: {
     //text for btn
     textBtn: String,

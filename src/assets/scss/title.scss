@@ -13,7 +13,8 @@
 }
 .ti-4 {
   font-size: $font-size-h4;
-  font-weight: $font-wbold;
+  font-weight: $font-wmedium;
+  color: $color-primary-app;
 }
 
 @media screen and (max-width: 700px) {

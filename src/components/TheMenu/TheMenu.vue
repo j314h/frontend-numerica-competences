@@ -1,5 +1,5 @@
 <template>
-  <div class="menu" :class="classColorMenu">
+  <div class="menu" :class="currentUser.themeColor.bgMenuHeadband">
     <!-- img menu principal -->
     <div>
       <img />
@@ -11,12 +11,18 @@
       <!-- menu option onglet active  -->
     </div>
     <!-- btn prametre juste for root -->
-    <router-link to="dashbord-page/setting" tag="button" class="btn-menu t-btn-secondary" :class="classColorText1"
+    <router-link
+      to="dashbord-page/setting"
+      tag="button"
+      class="btn-menu t-btn-secondary"
+      :class="currentUser.themeColor.colorTextInactive"
       >Paramètres</router-link
     >
     <!-- btn disconnect -->
     <div class="box_btn_deco">
-      <button @click="logOut" class="btn-deco t-btn-primary" :class="classColorText1">Déconnexion</button>
+      <button @click="logOut" class="btn-deco t-btn-primary" :class="currentUser.themeColor.colorTextInactive">
+        Déconnexion
+      </button>
     </div>
   </div>
 </template>
@@ -29,26 +35,14 @@ export default {
   data() {
     return {
       user: null,
-      //first class custom color menu
-      colorText1: "ctm-",
-      colorText2: "ctm-",
+      //class custom color menu
+      colorTextInactive: "ctm-",
+      colorTextActive: "ctm-",
       colorMenu: "bgm-",
     };
   },
   computed: {
-    //class for color text
-    classColorText1() {
-      return (this.colorText1 += this.$store.getters["ParamApp/params"].colorText1Menu);
-    },
-    //class for color background menu
-    classColorMenu() {
-      return (this.colorMenu += this.$store.getters["ParamApp/params"].bgMenuHeadband);
-    },
-    //class for color text 2
-    classColorText2() {
-      return (this.colorText2 += this.$store.getters["ParamApp/params"].colorText2Menu);
-    },
-
+    //load theme color for currentUser
     ...mapGetters("UserConnect", ["currentUser"]),
   },
   methods: {
