@@ -2,17 +2,42 @@
   <div class="menu" :class="currentUser.themeColor.bgMenuHeadband">
     <!-- img menu principal -->
     <div>
-      <img />
+      <img src="" />
     </div>
     <!-- all menu navigation -->
     <div>
       <!-- menu navigation principal -->
+      <div class="box_menu_pricipal">
+        <ul>
+          <router-link
+            to="home"
+            tag="button"
+            class="btn-menu t-btn-secondary"
+            :class="currentUser.themeColor.colorTextInactive"
+            >Tableau de bord</router-link
+          >
+          <router-link
+            to="home"
+            tag="button"
+            class="btn-menu t-btn-secondary"
+            :class="currentUser.themeColor.colorTextInactive"
+            >Entreprises</router-link
+          >
+          <router-link
+            to="home"
+            tag="button"
+            class="btn-menu t-btn-secondary"
+            :class="currentUser.themeColor.colorTextInactive"
+            >Personnes</router-link
+          >
+        </ul>
+      </div>
       <!-- menu onglet active -->
       <!-- menu option onglet active  -->
     </div>
     <!-- btn prametre juste for root -->
     <router-link
-      to="dashbord-page/setting"
+      to="setting"
       tag="button"
       class="btn-menu t-btn-secondary"
       :class="currentUser.themeColor.colorTextInactive"
@@ -44,6 +69,7 @@ export default {
   computed: {
     //load theme color for currentUser
     ...mapGetters("UserConnect", ["currentUser"]),
+    ...mapGetters("ParamApp", ["imgs"]),
   },
   methods: {
     //disconnect user connected
@@ -63,5 +89,9 @@ export default {
 .box_btn_deco {
   display: flex;
   justify-content: center;
+}
+
+.box_menu_pricipal {
+  border-bottom: 1px solid #ffffff;
 }
 </style>

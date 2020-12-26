@@ -14,7 +14,7 @@ export default {
       //check cookies jwt exist
       context.commit("checkedJwt", VueCookies.isKey("jwt"));
       //go roads
-      router.push({ name: "DashbordPage" });
+      router.push({ name: "HomeDashbord" });
       //disable page loading
       context.commit("disableLoading");
     } catch (error) {

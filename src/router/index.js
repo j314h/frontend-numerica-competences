@@ -5,6 +5,7 @@ import DashbordPage from "../views/DashbordPage";
 import store from "../store";
 import VueCookies from "vue-cookies";
 import Setting from "../components/ContentApp/Setting/Setting.vue";
+import HomeDashbord from "../components/ContentApp/HomeDashbord.vue";
 
 Vue.use(VueRouter);
 
@@ -24,12 +25,20 @@ const routes = [
   {
     path: "/dashbord-page",
     name: "DashbordPage",
+    redirect: { name: "HomeDashbord" },
     components: {
       DashbordPage,
     },
     children: [
       {
-        path: "/dashbord-page/setting",
+        path: "home",
+        name: "HomeDashbord",
+        components: {
+          HomeDashbord,
+        },
+      },
+      {
+        path: "setting",
         name: "Setting",
         components: {
           Setting,
