@@ -26,13 +26,13 @@
         </div>
         <!-- text password forget -->
         <p class="t-extrasmall password_forget">
-          <a href="#" class="c-t-primary-app">Mot de passe oublé</a>
+          <a href="#" class="ctblue stxs-r">Mot de passe oublé</a>
         </p>
         <!-- error message -->
         <error-content class="error_box" :error="errors[0]"></error-content>
         <!-- btn connexion -->
         <!-- <div style="font-size:2rem;">sign in : {{ isSignIn }}, jwt: {{ jwt }}</div> -->
-        <button-app class="btn_connexion" :orange="true" :textBtn="'Connexion'"></button-app>
+        <button-app class="btn_connexion" :textBtn="'Connexion'"></button-app>
       </form>
     </div>
   </div>
@@ -81,18 +81,18 @@ export default {
   max-width: 300px;
   margin: auto;
   background-color: #ffffff;
-  padding: 30px 30px 50px 30px;
-  border-radius: 20px;
+  padding: 30px 30px 30px 30px;
+  border-radius: 10px;
 }
 
 .box_img {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 img {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 }
 
 .box_input {
@@ -113,7 +113,7 @@ img {
   padding: 10px 0;
 }
 
-.c-t-primary-app:hover {
+.ctblue:hover {
   cursor: pointer;
   text-decoration: underline;
 }

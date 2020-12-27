@@ -7,8 +7,8 @@
     <div class="box_content_app">
       <!-- headband -->
       <the-headband class="head_principal"></the-headband>
-      <!-- content text -->
-      <div class="content" :class="classColorTextContent">
+      <!-- content text assigns background and text color according to dark mode-->
+      <div class="content" :class="currentUser.themeColor.bgContent + ' ' + currentUser.themeColor.colorText">
         <!-- view home for dashbord -->
         <router-view name="HomeDashbord"></router-view>
         <!-- view for setting app -->
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import TheHeadband from "../components/TheHeadband/TheHeadband";
 import TheMenu from "../components/TheMenu/TheMenu";
 
@@ -26,15 +27,11 @@ export default {
   components: { TheMenu, TheHeadband },
   name: "DashbordPage",
   data() {
-    return {
-      textColorContent: "ct-custom-",
-    };
+    return {};
   },
   computed: {
     //load color text content of app
-    classColorTextContent() {
-      return this.textColorContent + this.$store.getters["UserConnect/currentUser"].themeColor.colorTextPrimary;
-    },
+    ...mapGetters("UserConnect", ["currentUser"]),
   },
 };
 </script>

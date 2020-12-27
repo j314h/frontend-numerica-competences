@@ -1,0 +1,23 @@
+.btnm-blue {
+  display: block;
+  padding: 5px 10px;
+  background-color: transparent;
+  @extend .stm-r;
+  @extend .cbrblue;
+  @extend .ctblue;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.btnm-blue:hover {
+  cursor: pointer;
+  @extend .cbgblue;
+  @extend .ctwhite;
+}
+
+.btnm-blue:focus {
+  outline: none;
+}

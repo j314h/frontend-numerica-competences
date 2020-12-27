@@ -1,13 +1,14 @@
 <template>
   <div>
     <form @submit.prevent="changeLogoNumerica">
+      <div class="title_box stxm-r">{{ title }}</div>
       <div class="content_form">
         <!-- content form -->
         <div class="box_input">
-          <label>{{ text }}</label>
+          <label for="fileImg" class="input_file stxm-m cbginput ctblack">{{ text }}</label>
           <!-- input load file -->
-          <div class="input_file">
-            <input type="file" ref="file" enctype="multipart/form-data" required />
+          <div>
+            <input id="fileImg" type="file" ref="file" enctype="multipart/form-data" required />
           </div>
         </div>
         <!-- img an relation with label -->
@@ -25,7 +26,7 @@
       </div>
       <!-- submit -->
       <div class="box_btn">
-        <button-app-mini :textBtn="'Envoyer'"></button-app-mini>
+        <button-app :mini="true" :textBtn="'Envoyer'"></button-app>
       </div>
     </form>
   </div>
@@ -34,13 +35,13 @@
 <script>
 import ErrorContent from "../../Elements/ErrorContent.vue";
 import { mapGetters } from "vuex";
-import ButtonAppMini from "../../Elements/ButtonAppMini.vue";
+import ButtonApp from "../../Elements/ButtonApp.vue";
 
 export default {
   name: "SettingImg",
   components: {
     ErrorContent,
-    ButtonAppMini,
+    ButtonApp,
   },
   props: {
     //custome box add or change image
@@ -50,6 +51,7 @@ export default {
     commandeDispatch: String,
     text: String,
     bg: Boolean,
+    title: String,
   },
   data() {
     return {
@@ -103,30 +105,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+form {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.title_box {
+  flex: 1;
+}
+/* content */
+input[type="file"] {
+  display: none;
+}
 .input_file {
-  margin: 10px 0 0 0;
+  display: block;
   padding: 10px 20px;
-  border: 1px solid #b1b3b7;
   border-radius: 4px;
 }
+.input_file:hover {
+  cursor: pointer;
+  background-color: #707070;
+  color: #ffffff;
+}
+
 .input_file_background {
   background-color: #7e818b;
 }
 
-.box_input {
-  flex: 1;
-}
 .box_img {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .content_form {
+  margin: 10px 0;
+  flex: 3;
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
+/******** */
 .box_btn {
-  margin-top: 20px;
+  display: flex;
+  align-items: flex-end;
+  flex: 1;
 }
 
 @media screen and (max-width: 800px) {

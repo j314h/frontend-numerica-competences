@@ -29,4 +29,12 @@ export default {
     state.isSignIn = false;
     state.errors = [];
   },
+  //update user current in front
+  updateUserCurrent(state, user) {
+    state.currentUser = user;
+  },
+  //reset errors of UserConnect store
+  resetErrors(state) {
+    state.errors = [];
+  },
 };

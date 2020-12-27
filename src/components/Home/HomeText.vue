@@ -1,14 +1,14 @@
 <template>
-  <div class="c-t-secondary">
+  <div class="ctwhite">
     <!-- slogan -->
-    <div class="t-slogan slogan">
+    <div class="stxm-b upper slogan">
       <p>Pôle numérique</p>
       <p>de Bourgogne Franche-Comté</p>
     </div>
     <!-- title -->
-    <h1 class="ti-1 title">Numerica compétences</h1>
+    <h1 class="stxxl-b title">Numerica compétences</h1>
     <!-- intro -->
-    <div class="box_intro_home">
+    <div class="box_intro_home stl-r">
       <p class="t-intro">
         Numerica a conçu un module spécifique pour accompagner votre entreprise dans l’évaluation de ses collaborateurs
         et dans sa stratégie d’évolution des carrières.
@@ -33,11 +33,9 @@ export default {
 .title {
   margin: 50px 0;
 }
-
 .box_intro_home {
   max-width: 704px;
 }
-
 .box_intro_home p:nth-child(2) {
   margin-top: 25px;
 }

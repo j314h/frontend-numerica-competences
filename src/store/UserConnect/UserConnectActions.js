@@ -64,4 +64,21 @@ export default {
       context.commit("disableLoading");
     }
   },
+
+  //change mode dark
+  async modeDark(context, data) {
+    try {
+      //see page loading
+      context.commit("isloading");
+      //send name of mode for api and recover user with newdata
+      const user = await Vue.prototype.$http.post("http://localhost:5000/cu-theme-color", data, data.headers);
+      context.commit("updateUserCurrent", user.data);
+      context.commit("disableLoading");
+    } catch (error) {
+      //add error in data
+      context.commit("signInError", error.response.data.message);
+      //disable page loading
+      context.commit("disableLoading");
+    }
+  },
 };

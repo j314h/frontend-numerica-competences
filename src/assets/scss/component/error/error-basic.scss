@@ -1,0 +1,5 @@
+.error-basic {
+  @extend .stm-b;
+  @extend .cterror;
+  height: 20px;
+}

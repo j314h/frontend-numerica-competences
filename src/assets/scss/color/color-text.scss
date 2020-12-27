@@ -1,0 +1,33 @@
+.ctblue {
+  color: $blue;
+}
+.ctblack {
+  color: $black;
+}
+.ctwhite {
+  color: $white;
+}
+.ctorange {
+  color: $orange;
+}
+.ctinactifN {
+  color: $textinactif;
+}
+.ctinactifD {
+  color: $textinactif;
+}
+.cterror {
+  color: $error;
+}
+.ctsuccess {
+  color: $success;
+}
+::placeholder {
+  color: $placeholder;
+}
+.ctinactifN:hover {
+  color: $white;
+}
+.ctinactifD:hover {
+  color: $orange;
+}

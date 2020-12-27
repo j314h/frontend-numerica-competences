@@ -1,5 +1,5 @@
 <template>
-  <div class="headband" :class="currentUser.themeColor.bgMenuHeadband"></div>
+  <div class="headband" :class="currentUser.themeColor.bgLayout"></div>
 </template>
 
 <script>

@@ -1,0 +1,44 @@
+/* input email */
+.input-email {
+  @extend .cbginput;
+  @extend .imginput-email;
+  @extend .stxm-r;
+  border: transparent;
+  border-radius: 4px;
+  padding: 10px 40px;
+  display: block;
+}
+
+.input-email:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px 0px rgba(0, 120, 190, 0.8);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 120, 190, 0.8);
+}
+
+/* input password */
+.input-password {
+  @extend .cbginput;
+  @extend .imginput-password;
+  @extend .stxm-r;
+  border: transparent;
+  border-radius: 4px;
+  padding: 10px 40px;
+  display: block;
+}
+
+.input-password:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px 0px rgba(0, 120, 190, 0.8);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 120, 190, 0.8);
+}
+
+@media screen and (max-width: 700px) {
+  .input-email {
+    background-size: 12px;
+    padding: 5px 30px;
+  }
+  .input-password {
+    background-size: 12px;
+    padding: 5px 30px;
+  }
+}

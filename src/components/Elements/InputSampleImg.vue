@@ -1,7 +1,7 @@
 <template>
   <div>
     <input
-      class="t-body c-gray-1 img_input"
+      class="img_input"
       v-bind:class="classObject"
       :placeholder="place"
       :type="typeInput"
