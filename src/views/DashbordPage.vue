@@ -19,16 +19,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import TheHeadband from "../components/TheHeadband/TheHeadband";
 import TheMenu from "../components/TheMenu/TheMenu";
+import { mapGetters } from "vuex";
 
 export default {
   components: { TheMenu, TheHeadband },
   name: "DashbordPage",
-  data() {
-    return {};
-  },
   computed: {
     //load color text content of app
     ...mapGetters("UserConnect", ["currentUser"]),
@@ -42,16 +39,9 @@ export default {
   height: 100%;
   display: flex;
 }
-
 .menu_principal {
   width: 250px;
 }
-
-.head_principal {
-  width: 100%;
-  height: 60px;
-}
-
 .box_content_app {
   width: 100%;
   overflow: auto;
@@ -60,7 +50,10 @@ export default {
   display: flex;
   flex-direction: column;
 }
-
+.head_principal {
+  width: 100%;
+  height: 60px;
+}
 .content {
   flex: 5;
   overflow: auto;

@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/", //home connect
     name: "HomeView",
     components: {
       HomeView,
@@ -23,7 +23,7 @@ const routes = [
     },
   },
   {
-    path: "/dashbord-page",
+    path: "/dashbord-page", // dashbord
     name: "DashbordPage",
     redirect: { name: "HomeDashbord" },
     components: {
@@ -31,14 +31,14 @@ const routes = [
     },
     children: [
       {
-        path: "home",
+        path: "home", //dashbord home
         name: "HomeDashbord",
         components: {
           HomeDashbord,
         },
       },
       {
-        path: "setting",
+        path: "setting", // setting app
         name: "Setting",
         components: {
           Setting,
@@ -53,12 +53,6 @@ const routes = [
   },
 ];
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
-});
-
 //verification user connected if jwt cookie exist
 router.beforeEach(async (to, from, next) => {
   try {
@@ -71,6 +65,13 @@ router.beforeEach(async (to, from, next) => {
   } catch (error) {
     next("/");
   }
+});
+
+//options roads
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
 });
 
 export default router;

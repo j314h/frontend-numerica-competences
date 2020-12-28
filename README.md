@@ -32,13 +32,14 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
 
 `' / '` => router for HomeConnect view (connect user)  
 `' /dashbord-page '` => router for home page this app (user connected)  
+`' /dashbord-page/home '` => router for home page with dashbord primary content this app (user connected)  
 `' /dashbord-page/setting '` => router access root user, page for custom app
 
 ## Data / vuex
 
 > in progress
 
-- UserConnect => store namespaced
+- ### UserConnect => store namespaced
 
   - `currentUser: Object,` //info for user connected  
     => currentUser, containe themes of colors for app
@@ -46,12 +47,117 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
   - `isLoading: Booleen,` //loading for user connect
   - `errors: Array,` // error user connect
 
-- ParamApp => store namespaced
+  #### Actions
+
+  - `function signIn` => connect user
+
+          - Active load page
+          - Call api for connect user => return cookie jwt + user infos
+          - Assigned user info in store.currentUser
+          - Verification exist jwt in cookie
+          - Redirect in page dashbord
+          - Desactived page load
+          - If error, add errors message in store.errors
+          - and desactived page load
+
+  - `function userConnectVerification` => verification this jwt is validate
+
+          - Active load page
+          - Call api in roads GET juste for check jwt is validate and recover info for user
+          - Assigned user info in store.currentUser
+          - Verification exist jwt in cookie
+          - Desactived page load
+          - If error, add errors message in store.errors
+          - and desactived page load
+
+  - `function logOut` => disconnect currentUser
+
+          - Active load page
+          - Call api in roads sign-out for delete jwt
+          - Delete data in UserConnect store
+          - Redirect in page connect user
+          - Desactived page load
+          - If error, add errors message in store.errors
+          - and desactived page load
+
+  - `function DarkMode` => change theme color
+
+          - Active load page
+          - Call api for change theme attribut in current user and recover user update
+          - Assigned user info in store.currentUser
+          - Desactived page load
+          - See Alert custom after desactivate page load for more info for user (success or error)
+          - If error, add errors message in store.errors
+          - and desactived page load
+
+  #### Mutations
+
+  - `isloading` => activate page loading
+  - `disableLoading` => disable loading of page loading
+  - `signInSuccess` => connection user success, assignate info in currentUser
+  - `signInError` => error de connection user
+  - `checkedJwt` => check if jwt existed
+  - `logOutUser` => user disconnect, delete data in currentUser
+  - `updateUserCurrent` => update info for currentUser
+  - `resetErrors` => reset tab for errors
+
+* ### ParamApp => store namespaced
+
   - `imgs: null,` // img for app
   - `errors: Array,` // error param app
+
+  #### Actions
+
+  - `function changeLogoNumerica` => change image logo numerica
+
+        - Active load page
+        - Call api in roads `/file/logo-numerica` for change img in database
+        - Reset error exist after
+        - call function `getFilesImg`
+        - Desactived page load
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+  - `function changeLogoIdentifiant` => change image icon personne or salarié
+
+        - Active load page
+        - Call api in roads `/file/logo-identifiant` for change img in database
+        - Reset error exist after
+        - call function `getFilesImg`
+        - Desactived page load
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+  - `function changeLogoMenu` => change image logo in menu primary
+
+        - Active load page
+        - Call api in roads `/file/logo-menu` for change img in database
+        - Reset error exist after
+        - call function `getFilesImg`
+        - Desactived page load
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+  - `function getFilesImag` => load img in database
+
+        - Call api in roads `/files-i` for recover url img in database
+        - Save new url (update) in array imgs in ParamApp
+        - Reset error exist after
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+  #### Mutations
+
+  - `getImgsFiles` => recover img database and set array store imgs
+  - `addErrors` => add errors in store ParamApp
+  - `resetErrors` => reset errors in store ParamApp
 
 ### Scss / class personal
 
 > in progress
 
-globals-rules.scss => is load in App component, and he charge all rules css for everyone component
+`/color` => colors of all app  
+`/component` => style for divers component  
+`/size-text` => size for text of all app  
+`/style` => style for elements isolate  
+`globals-rules.scss` => is load in App component, and he charge all rules css for everyone component
