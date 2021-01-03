@@ -33,6 +33,10 @@ export default {
   updateUserCurrent(state, user) {
     state.currentUser = user;
   },
+  //add error
+  addError(state, error) {
+    state.errors = [...state.errors, error];
+  },
   //reset errors of UserConnect store
   resetErrors(state) {
     state.errors = [];

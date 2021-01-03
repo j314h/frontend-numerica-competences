@@ -1,14 +1,24 @@
 <template>
   <div>
     <form @submit.prevent="changeLogoNumerica">
-      <div class="title_box stxm-r">{{ title }}</div>
+      <h3 class="title_box stxm-m" :class="currentUser.themeColor.colorTextTab">{{ title }}</h3>
       <div class="content_form">
         <!-- content form -->
         <div class="box_input">
-          <label for="fileImg" class="input_file stxm-m cbginput ctblack">{{ text }}</label>
+          <label :for="nameImgTarget" class="input_file stxm-m cbginput ctblack" :class="fileIsLoad">
+            {{ text }}
+          </label>
+          <span @click="deleteLoad" v-show="fileLoad" class="close"></span>
           <!-- input load file -->
           <div>
-            <input id="fileImg" type="file" ref="file" enctype="multipart/form-data" required />
+            <input
+              :id="nameImgTarget"
+              @change="loadPending"
+              type="file"
+              ref="file"
+              enctype="multipart/form-data"
+              required
+            />
           </div>
         </div>
         <!-- img an relation with label -->
@@ -26,7 +36,7 @@
       </div>
       <!-- submit -->
       <div class="box_btn">
-        <button-app :mini="true" :textBtn="'Envoyer'"></button-app>
+        <button-app v-show="fileLoad" :mini="true" :textBtn="'Envoyer'"></button-app>
       </div>
     </form>
   </div>
@@ -49,7 +59,6 @@ export default {
     tailleH: String,
     nameImgTarget: String,
     commandeDispatch: String,
-    text: String,
     bg: Boolean,
     title: String,
   },
@@ -57,16 +66,32 @@ export default {
     return {
       //url for api, for recover image
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
+      fileIsLoad: "", // for add class binding
+      fileLoad: false, // for see btn close in input (v-show)
+      text: "Upload",
     };
   },
   computed: {
+    ...mapGetters("UserConnect", ["currentUser"]),
     //get image are stocked in store ParamApp
     imgs() {
       return this.$store.getters["ParamApp/imgs"];
     },
   },
-  updated() {},
   methods: {
+    deleteLoad() {
+      this.text = "Upload";
+      this.fileIsLoad = "";
+      this.fileLoad = false;
+    },
+    loadPending(e) {
+      if (e) {
+        console.log("salut");
+        this.fileIsLoad = "is_load";
+        this.fileLoad = true;
+        return (this.text = e.target.value);
+      }
+    },
     //recover img load for user click in input
     //request api for load img user save
     async changeLogoNumerica() {
@@ -75,6 +100,9 @@ export default {
       data.append(this.nameImgTarget, this.$refs.file.files[0]);
       //send file
       await this.$store.dispatch(this.commandeDispatch, data);
+      this.text = "Upload";
+      this.fileIsLoad = "";
+      this.fileLoad = false;
       //if errors show alert custom
       if (this.$store.getters["ParamApp/errors"][0]) {
         this.$swal.fire({
@@ -114,12 +142,18 @@ form {
 .title_box {
   flex: 1;
 }
+.box_input {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 /* content */
 input[type="file"] {
   display: none;
 }
 .input_file {
   display: block;
+  overflow: hidden;
   padding: 10px 20px;
   border-radius: 4px;
 }
@@ -127,6 +161,11 @@ input[type="file"] {
   cursor: pointer;
   background-color: #707070;
   color: #ffffff;
+}
+
+/**class for input add new file load this add in DOM with binding */
+.is_load {
+  background-color: #61ff84;
 }
 
 .input_file_background {
@@ -137,6 +176,7 @@ input[type="file"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 .content_form {
   margin: 10px 0;

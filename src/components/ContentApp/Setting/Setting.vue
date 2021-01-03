@@ -1,61 +1,84 @@
 <template>
   <div class="stxm-l">
-    <!-- title of page -->
-    <div class="box_title">
-      <h3 class="stl-m">Paramètres de l'application</h3>
+    <!-- content for user info and user entreprise info -->
+    <div class="global_user_info">
+      <setting-user-info class="box" :class="currentUser.themeColor.cbgBox"></setting-user-info>
     </div>
+    <!-- content upload img for juste root user -->
     <div v-show="currentUser.role.libelle === 'root'">
-      <!-- subtitle for image app -->
-      <div class="box_subtitle">
-        <h4 class="stl-m" :class="currentUser.themeColor.colorTextTab">Images</h4>
-      </div>
       <!-- form change logo numerica access for role 'root'-->
       <div class="box_global_input_file">
         <!-- logo numerica -->
-        <div class="box box_input_file">
+        <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
           <setting-img
             :bg="false"
             :tailleW="'70px'"
             :tailleH="'70px'"
             :nameImgTarget="'logoNumerica'"
             :commandeDispatch="'ParamApp/changeLogoNumerica'"
-            :text="'Upload'"
             :title="'Modifier le logo Numerica'"
           ></setting-img>
         </div>
         <!-- logo personne -->
-        <div class="box box_input_file">
+        <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
           <setting-img
             :bg="false"
             :tailleW="'70px'"
             :tailleH="'70px'"
             :nameImgTarget="'logoIdentifiant'"
             :commandeDispatch="'ParamApp/changeLogoIdentifiant'"
-            :text="'Upload'"
             :title="'Modifier icon personnes, salariés, etc...'"
           ></setting-img>
         </div>
         <!-- logo menu -->
-        <div class="box box_input_file">
+        <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
           <setting-img
             :bg="true"
             :tailleW="'70px'"
             :tailleH="'70px'"
             :nameImgTarget="'logoMenu'"
             :commandeDispatch="'ParamApp/changeLogoMenu'"
-            :text="'Upload'"
             :title="'Modifier logo Numerica menu'"
+          ></setting-img>
+        </div>
+        <!-- logo numerica footer -->
+        <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
+          <setting-img
+            :bg="true"
+            :tailleW="'200px'"
+            :tailleH="'70px'"
+            :nameImgTarget="'logoFooterNumerica'"
+            :commandeDispatch="'ParamApp/changeLogoFooterNumerica'"
+            :title="'Modifier logo Numerica dans le footer'"
+          ></setting-img>
+        </div>
+        <!-- logo update -->
+        <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
+          <setting-img
+            :bg="false"
+            :tailleW="'70px'"
+            :tailleH="'70px'"
+            :nameImgTarget="'logoUpdateElement'"
+            :commandeDispatch="'ParamApp/changeLogoUpdateElement'"
+            :title="'Modifier logo modifier un élément'"
+          ></setting-img>
+        </div>
+        <!-- logo close update -->
+        <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
+          <setting-img
+            :bg="false"
+            :tailleW="'70px'"
+            :tailleH="'70px'"
+            :nameImgTarget="'logoCloseUpdateElement'"
+            :commandeDispatch="'ParamApp/changelogoCloseUpdateElement'"
+            :title="'Modifier logo fermer les modifications'"
           ></setting-img>
         </div>
       </div>
     </div>
     <!-- content theme colors -->
     <div>
-      <!-- subtitle for theme colors -->
-      <div class="box_subtitle">
-        <h4 class="stl-m" :class="currentUser.themeColor.colorTextTab">Couleurs</h4>
-      </div>
-      <div class="box dark_mode">
+      <div class="box dark_mode" :class="currentUser.themeColor.cbgBox">
         <setting-theme-color></setting-theme-color>
       </div>
     </div>
@@ -66,9 +89,10 @@
 import { mapGetters } from "vuex";
 import SettingImg from "./SettingImg.vue";
 import SettingThemeColor from "./SettingThemeColor.vue";
+import SettingUserInfo from "./SettingUserInfo/SettingUserInfo.vue";
 
 export default {
-  components: { SettingImg, SettingThemeColor },
+  components: { SettingImg, SettingThemeColor, SettingUserInfo },
   name: "Setting",
   data() {
     return {};
@@ -76,10 +100,6 @@ export default {
   computed: {
     //get info user connected
     ...mapGetters("UserConnect", ["currentUser"]),
-  },
-  created() {
-    //call api for get all files image
-    this.$store.dispatch("ParamApp/getFilesImg");
   },
 };
 </script>
@@ -89,20 +109,21 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-self: start;
+  justify-content: space-between;
 }
 .box_title {
   display: flex;
   justify-content: center;
 }
 .box_subtitle {
-  padding: 50px 0 30px 0;
+  padding: 30px 0 0px 0;
 }
 .box_input_file {
-  margin: 20px;
-  width: 300px;
+  margin-top: 20px;
+  width: 290px;
 }
 .dark_mode {
-  margin: 20px 0 0 20px;
+  margin: 20px 0 0 0px;
 }
 </style>

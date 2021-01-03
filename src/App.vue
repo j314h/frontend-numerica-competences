@@ -27,6 +27,10 @@ export default {
       size: "100px",
     };
   },
+  created() {
+    //call api for get all files image
+    this.$store.dispatch("ParamApp/getFilesImg");
+  },
   computed: {
     //true or false loading
     ...mapGetters("UserConnect", ["isLoading"]),

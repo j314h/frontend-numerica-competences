@@ -8,7 +8,11 @@ export default {
     try {
       //see page loading
       context.commit("isloading");
-      const user = await Vue.prototype.$http.post("http://localhost:5000/sign-in", options.data, options.headers);
+      const user = await Vue.prototype.$http.post(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sign-in`,
+        options.data,
+        options.headers
+      );
       //if success request execute mutation
       context.commit("signInSuccess", user.data);
       //check cookies jwt exist
@@ -30,7 +34,7 @@ export default {
     try {
       //see page loading
       context.commit("isloading");
-      const user = await Vue.prototype.$http.get("http://localhost:5000/auth/verification");
+      const user = await Vue.prototype.$http.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}auth/verification`);
       //if success request execute mutation
       context.commit("signInSuccess", user.data);
       //check cookies jwt exist
@@ -51,7 +55,7 @@ export default {
       //see page loading
       context.commit("isloading");
       //request api
-      await Vue.prototype.$http.get("http://localhost:5000/sign-out");
+      await Vue.prototype.$http.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sign-out`);
       //delete data user connected
       context.commit("logOutUser");
       router.push({ name: "HomeView" });
@@ -71,8 +75,36 @@ export default {
       //see page loading
       context.commit("isloading");
       //send name of mode for api and recover user with newdata
-      const user = await Vue.prototype.$http.post("http://localhost:5000/cu-theme-color", data, data.headers);
+      const user = await Vue.prototype.$http.post(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}cu-theme-color`,
+        data,
+        data.headers
+      );
+      //update current user
       context.commit("updateUserCurrent", user.data);
+      //disable load page
+      context.commit("disableLoading");
+    } catch (error) {
+      //add error in data
+      context.commit("signInError", error.response.data.message);
+      //disable page loading
+      context.commit("disableLoading");
+    }
+  },
+
+  //update user
+  async updateUser(context, data) {
+    try {
+      //see page loading
+      context.commit("isloading");
+      const user = await Vue.prototype.$http.post(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}update-user-root`,
+        data,
+        data.headers
+      );
+      //update current user
+      context.commit("updateUserCurrent", user.data);
+      //disable load page
       context.commit("disableLoading");
     } catch (error) {
       //add error in data

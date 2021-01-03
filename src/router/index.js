@@ -53,6 +53,13 @@ const routes = [
   },
 ];
 
+//options roads
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
+});
+
 //verification user connected if jwt cookie exist
 router.beforeEach(async (to, from, next) => {
   try {
@@ -65,13 +72,6 @@ router.beforeEach(async (to, from, next) => {
   } catch (error) {
     next("/");
   }
-});
-
-//options roads
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
 });
 
 export default router;

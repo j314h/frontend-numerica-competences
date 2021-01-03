@@ -8,6 +8,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@alfsnd/vue-bootstrap-select": "^0.4.4",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "qs": "^6.9.4",

@@ -6,8 +6,8 @@
       <div class="box_footer_up">
         <!-- left -->
         <div class="content_footer_left">
-          <div v-for="(img, i) in imgNumerica" :key="i">
-            <img v-if="img.name === 'logoMenu'" :src="`${urlApiImg}${img.fieldName}`" />
+          <div v-for="(img, i) in imgs" :key="i">
+            <img v-if="img.name === 'logoFooterNumerica'" :src="`${urlApiImg}${img.fieldName}`" class="img_footer" />
           </div>
           <div>
             <p>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import TheFooterMenu from "./TheFooterMenu";
 
 export default {
@@ -39,12 +40,11 @@ export default {
   },
   data() {
     return {
-      imgNumerica: null,
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
     };
   },
-  created() {
-    this.imgNumerica = this.$store.getters["ParamApp/imgs"];
+  computed: {
+    ...mapGetters("ParamApp", ["imgs"]),
   },
 };
 </script>
@@ -72,6 +72,10 @@ p {
   padding: 35px 65px 10px 65px;
 }
 
+.img_footer {
+  padding-bottom: 15px;
+}
+
 /** left */
 .box_footer_up {
   display: flex;
@@ -87,8 +91,6 @@ p {
 
 .content_footer_left div {
   width: 100%;
-  padding-top: 17px;
-  flex: 3;
 }
 
 .content_footer_left div p {

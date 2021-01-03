@@ -1,12 +1,13 @@
 <template>
   <div>
-    <form></form>
-    <!-- text is switch compare of value -->
-    <p v-if="value" class="stxm-r">Désactiver le mode sombre</p>
-    <p v-else class="stxm-r">Activer le mode sombre</p>
-    <!-- input design with label in css -->
-    <input @change="modeDark" class="switch" type="checkbox" id="switch" v-model="value" />
-    <label class="switchlabel" for="switch"></label>
+    <form>
+      <!-- text is switch compare of value -->
+      <p v-if="value" class="stxm-m" :class="currentUser.themeColor.colorTextTab">Désactiver le mode sombre</p>
+      <p v-else class="stxm-m" :class="currentUser.themeColor.colorTextTab">Activer le mode sombre</p>
+      <!-- input design with label in css -->
+      <input @change="modeDark" class="switch" type="checkbox" id="switch" v-model="value" />
+      <label class="switchlabel" for="switch"></label>
+    </form>
   </div>
 </template>
 
@@ -41,7 +42,7 @@ export default {
         this.$swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Updating your successful image",
+          title: "Updating your theme colors",
           showConfirmButton: false,
           timer: 1000,
         });
@@ -59,8 +60,19 @@ export default {
       }
     },
   },
-  computed: {},
+  computed: {
+    ...mapGetters("UserConnect", ["currentUser"]),
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+form {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+p {
+  margin-right: 40px;
+}
+</style>

@@ -57,6 +57,6 @@ export default {
 .content {
   flex: 5;
   overflow: auto;
-  padding: 40px 40px 100px 40px;
+  padding: 20px 20px 100px 20px;
 }
 </style>
