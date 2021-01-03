@@ -86,17 +86,18 @@ export default {
       context.commit("disableLoading");
     } catch (error) {
       //add error in data
-      context.commit("signInError", error.response.data.message);
+      context.commit("addError", error.response.data.message);
       //disable page loading
       context.commit("disableLoading");
     }
   },
 
-  //update user
+  //update user referent minimum
   async updateUserRefMin(context, data) {
     try {
       //see page loading
       context.commit("isloading");
+      //call api for update user, juste user root admin referent
       const user = await Vue.prototype.$http.post(
         `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}update-user-root`,
         data,
@@ -109,6 +110,7 @@ export default {
     } catch (error) {
       //disable page loading
       context.commit("disableLoading");
+      //send error
       throw error;
     }
   },

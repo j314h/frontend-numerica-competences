@@ -67,13 +67,6 @@
                 :options="['root', 'administrateur', 'référent', 'manager', 'collaborateur']"
                 v-model="dataForm.role"
               ></v-select>
-              <!-- <select class="input_select space_input" v-model="dataForm.role">
-                <option class="box_option_list_appellation" value="root">root</option>
-                <option class="box_option_list_appellation" value="administrateur">administrateur</option>
-                <option class="box_option_list_appellation" value="référent">référent</option>
-                <option class="box_option_list_appellation" value="manager">manager</option>
-                <option class="box_option_list_appellation" value="collaborateur">collaborateur</option>
-              </select> -->
             </div>
             <div v-else>
               <p class="stxm-m" :class="user.themeColor.colorText">Rôle</p>
@@ -124,6 +117,7 @@ export default {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       },
+      //for wait the controle in function updateUser
       passwordOld: "",
       password: "",
       confirmPasswordNew: "",
@@ -176,7 +170,7 @@ export default {
         this.$swal.fire({
           position: "top-end",
           icon: "error",
-          title: e.response ? e.response.data.message : e.message,
+          title: e.response ? e.response.data.message : e.message, //if throw error see your error in throw
           showConfirmButton: false,
           timer: 2000,
         });
