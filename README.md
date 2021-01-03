@@ -24,7 +24,7 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
     - go in project 'frontend-numerica-competence'
     - execute the following command `npm i`
     - execute the following command `npm run serve`
-      > if you have encountered any errors at this time, you have executed a command incorrectly or you have placed the commands in the wrong place
+      > if you have encountered any errors at this time you have executed a command incorrectly or you have placed the commands in the wrong place
 
 ## Roads / vue-router
 
