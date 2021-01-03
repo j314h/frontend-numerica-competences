@@ -93,7 +93,7 @@ export default {
   },
 
   //update user
-  async updateUser(context, data) {
+  async updateUserRefMin(context, data) {
     try {
       //see page loading
       context.commit("isloading");
@@ -107,10 +107,9 @@ export default {
       //disable load page
       context.commit("disableLoading");
     } catch (error) {
-      //add error in data
-      context.commit("signInError", error.response.data.message);
       //disable page loading
       context.commit("disableLoading");
+      throw error;
     }
   },
 };

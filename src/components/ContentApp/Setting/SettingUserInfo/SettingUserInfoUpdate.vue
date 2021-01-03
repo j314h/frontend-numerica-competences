@@ -40,14 +40,14 @@
             <label>Mot de passe</label>
             <input
               type="password"
-              v-model="dataForm.passwordOld"
+              v-model="passwordOld"
               class="input space_input"
               placeholder="Ancien mot de passe"
               autocomplete="new-password"
             />
             <input
               type="password"
-              v-model="dataForm.password"
+              v-model="password"
               class="input space_input"
               placeholder="Nouveau mot de passe"
               autocomplete="new-password"
@@ -59,7 +59,7 @@
               placeholder="Confirmer mot de passe"
               autocomplete="new-password"
             />
-            <error-content class="error_password" :error="errors[0]"></error-content>
+            <error-content class="error_password" :error="errors[errors.length - 1]"></error-content>
             <div v-if="user.role.libelle === 'root' || user.role.libelle === 'admin'">
               <label>Rôle</label>
               <v-select
@@ -124,7 +124,10 @@ export default {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       },
+      passwordOld: "",
+      password: "",
       confirmPasswordNew: "",
+      messageAlert: "",
     };
   },
   methods: {
@@ -137,32 +140,52 @@ export default {
     async updateUser() {
       try {
         //if the password is entered, and the new password does not match, we find an error
-        if (this.confirmPasswordNew && this.dataForm.passwordOld && this.dataForm.password) {
-          if (this.confirmPasswordNew != this.dataForm.password) {
-            throw new Error("Les mots de passe ne correspondent pas");
+        if (this.passwordOld) {
+          if (this.password === this.confirmPasswordNew && this.password && this.confirmPasswordNew) {
+            this.dataForm.passwordOld = this.passwordOld;
+            this.dataForm.password = this.password;
+            this.messageAlert = "Updating user is completed with password";
+          } else {
+            throw new Error("An error occurred while updating the password");
           }
+        } else {
+          this.messageAlert = "Updating user is successful without password";
         }
-        //close window update
-        this.$parent.update();
         //call api for update user
-        await this.$store.dispatch("UserConnect/updateUser", this.dataForm);
+        await this.$store.dispatch("UserConnect/updateUserRefMin", this.dataForm);
         //if success show alert custom
         this.$swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Updating user is successful",
+          title: this.messageAlert,
           showConfirmButton: false,
           timer: 2000,
         });
         //reset tab errors in UserConnect
         this.$store.commit("UserConnect/resetErrors");
+        //close window update with function in component parent
+        this.$parent.update();
       } catch (e) {
         //clear input password
         this.dataForm.passwordOld = "";
         this.dataForm.password = "";
+        this.passwordOld = "";
+        this.password = "";
         this.confirmPasswordNew = "";
+        //if error show alert custom
+        this.$swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: e.response ? e.response.data.message : e.message,
+          showConfirmButton: false,
+          timer: 2000,
+        });
         //add error in tab in store UserConnect
-        this.$store.commit("UserConnect/addError", e);
+        if (e.response) {
+          this.$store.commit("UserConnect/addError", e.response.data.message);
+        } else {
+          this.$store.commit("UserConnect/addError", e.message);
+        }
       }
     },
   },
@@ -192,9 +215,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.select {
-  margin: 10px 0 30px 0;
-}
 p {
   margin: 7px 0;
 }
@@ -221,10 +241,15 @@ label {
   min-width: 250px;
   flex: 2;
 }
+.select {
+  margin: 10px 0 30px 0;
+  width: 80%;
+}
 .box_btn {
   display: flex;
   justify-content: flex-end;
   margin-top: 30px;
+  width: 80%;
 }
 .error_password {
   margin: 20px 0;
