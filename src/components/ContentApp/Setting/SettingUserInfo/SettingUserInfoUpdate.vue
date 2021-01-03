@@ -94,7 +94,7 @@
 import { mapGetters } from "vuex";
 import ButtonApp from "../../../Elements/ButtonApp";
 import ErrorContent from "../../../Elements/ErrorContent.vue";
-import VSelect from "@alfsnd/vue-bootstrap-select/src/vue-bootstrap-select";
+import VSelect from "../../../Elements/vue-bootstrap-select";
 
 export default {
   components: { ButtonApp, ErrorContent, VSelect },
