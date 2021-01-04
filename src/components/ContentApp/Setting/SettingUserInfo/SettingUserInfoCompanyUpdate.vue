@@ -1,6 +1,5 @@
 <template>
   <div class="stxm-r" :class="user.themeColor.colorTextTab">
-    <h6 class="stxm-m subscrite_title" :class="user.themeColor.colorText">Votre entreprise</h6>
     <form @submit.prevent="updateCompany">
       <div class="box_info_company">
         <!-- info personel company-->
@@ -36,6 +35,7 @@
             <label>Code NAF</label>
             <input class="input" type="text" v-model="user.company.naf" required />
           </div>
+          <error-content class="box_error" :error="errors[errors.length - 1]"></error-content>
           <div class="box_btn">
             <button-app :mini="true" :textBtn="'Modifier'"></button-app>
           </div>
@@ -46,10 +46,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import ButtonApp from "../../../Elements/ButtonApp.vue";
+import ErrorContent from "../../../Elements/ErrorContent.vue";
 
 export default {
-  components: { ButtonApp },
+  components: { ButtonApp, ErrorContent },
   name: "SettingUserInfoCompanyUpdate",
   data() {
     return {};
@@ -59,12 +61,21 @@ export default {
     upperFirstLetter(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
-    updateCompany() {},
+
+    //call in fucntion for request api
+    updateCompany() {
+      this.$parent.updateCompany();
+    },
   },
   computed: {
+    //recover errors in store UserConnect
+    ...mapGetters("UserConnect", ["errors"]),
+
+    //recover current user
     user() {
       return this.$store.getters["UserConnect/currentUser"];
     },
+    //format text company for see
     userCompanyName() {
       return this.user.company.name;
     },
@@ -88,12 +99,6 @@ label {
 p {
   margin: 7px 0;
 }
-.box_btn {
-  display: flex;
-  justify-content: flex-end;
-  width: 80%;
-  margin-top: 30px;
-}
 .subscrite_title {
   padding-bottom: 30px;
 }
@@ -114,5 +119,14 @@ p {
   min-width: 300px;
   flex: 1;
   padding: 0 30px;
+}
+.box_btn {
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+  margin-top: 30px;
+}
+.box_error {
+  margin: 10px 0;
 }
 </style>

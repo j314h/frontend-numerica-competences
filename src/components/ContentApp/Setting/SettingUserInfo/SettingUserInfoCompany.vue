@@ -1,6 +1,5 @@
 <template>
   <div class="stxm-r" :class="user.themeColor.colorTextTab">
-    <h6 class="stxm-m subscrite_title" :class="user.themeColor.colorText">Votre entreprise</h6>
     <div class="box_info_company">
       <!-- info personel -->
       <div class="info_company">

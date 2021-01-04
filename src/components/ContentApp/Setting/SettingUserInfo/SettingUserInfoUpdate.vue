@@ -158,7 +158,7 @@ export default {
         //reset tab errors in UserConnect
         this.$store.commit("UserConnect/resetErrors");
         //close window update with function in component parent
-        this.$parent.update();
+        this.$parent.updateUser();
       } catch (e) {
         //clear input password
         this.dataForm.passwordOld = "";
