@@ -12,7 +12,9 @@
       <setting-user-info-update v-if="isUpdate"></setting-user-info-update>
       <setting-user-info-detail v-else></setting-user-info-detail>
       <!-- company info if isUpdate is true on see -->
-      <setting-user-info-company-update v-if="isUpdate"></setting-user-info-company-update>
+      <setting-user-info-company-update
+        v-if="isUpdate && authorization.includes(currentUser.role.libelle)"
+      ></setting-user-info-company-update>
       <setting-user-info-company v-else></setting-user-info-company>
     </div>
   </div>
@@ -33,6 +35,7 @@ export default {
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
       image: "logoUpdateElement",
       isUpdate: false,
+      authorization: ["root", "administrateur", "référent"],
     };
   },
   computed: {
