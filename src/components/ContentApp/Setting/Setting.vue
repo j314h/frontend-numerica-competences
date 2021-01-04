@@ -87,12 +87,13 @@
 
 <script>
 import { mapGetters } from "vuex";
+import TheFooter from "../../TheFooter/TheFooter.vue";
 import SettingImg from "./SettingImg.vue";
 import SettingThemeColor from "./SettingThemeColor.vue";
 import SettingUserInfo from "./SettingUserInfo/SettingUserInfo.vue";
 
 export default {
-  components: { SettingImg, SettingThemeColor, SettingUserInfo },
+  components: { SettingImg, SettingThemeColor, SettingUserInfo, TheFooter },
   name: "Setting",
   data() {
     return {};

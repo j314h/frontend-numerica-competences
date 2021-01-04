@@ -28,7 +28,12 @@ import SettingUserInfoDetail from "./SettingUserInfoDetail.vue";
 import SettingUserInfoUpdate from "./SettingUserInfoUpdate.vue";
 
 export default {
-  components: { SettingUserInfoDetail, SettingUserInfoCompany, SettingUserInfoUpdate, SettingUserInfoCompanyUpdate },
+  components: {
+    SettingUserInfoDetail,
+    SettingUserInfoCompany,
+    SettingUserInfoUpdate,
+    SettingUserInfoCompanyUpdate,
+  },
   name: "SettingUserInfo",
   data() {
     return {

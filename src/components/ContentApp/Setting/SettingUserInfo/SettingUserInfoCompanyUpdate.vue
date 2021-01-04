@@ -1,32 +1,55 @@
 <template>
   <div class="stxm-r" :class="user.themeColor.colorTextTab">
     <h6 class="stxm-m subscrite_title" :class="user.themeColor.colorText">Votre entreprise</h6>
-    <div class="box_info_company">
-      <!-- info personel -->
-      <div class="info_company">
-        <p>{{ userCompanyName }}</p>
-        <p>{{ user.company.address.street }}</p>
-        <p>{{ userCompanyAddress }}</p>
-        <p>{{ user.company.phoneNumber }}</p>
+    <form @submit.prevent="updateCompany">
+      <div class="box_info_company">
+        <!-- info personel company-->
+        <div class="info_company">
+          <div>
+            <label>Dénomination sociale</label>
+            <input class="input" type="text" v-model="userCompanyName" required />
+          </div>
+          <div>
+            <label>Adresse, numéro et rue</label>
+            <input class="input" type="text" v-model="user.company.address.street" />
+          </div>
+          <div>
+            <label>Code postal</label>
+            <input class="input" type="text" v-model="user.company.address.postCode" />
+          </div>
+          <div>
+            <label>Ville</label>
+            <input class="input" type="text" v-model="user.company.address.city" required />
+          </div>
+        </div>
+        <!-- info detail -->
+        <div class="info_company">
+          <div>
+            <label>Site de production</label>
+            <input class="input" type="text" v-model="user.company.filliale" />
+          </div>
+          <div>
+            <label>Numéro de Siret</label>
+            <input class="input" type="text" v-model="user.company.siret" required />
+          </div>
+          <div>
+            <label>Code NAF</label>
+            <input class="input" type="text" v-model="user.company.naf" required />
+          </div>
+          <div class="box_btn">
+            <button-app :mini="true" :textBtn="'Modifier'"></button-app>
+          </div>
+        </div>
       </div>
-      <!-- info detail -->
-      <div class="info_company">
-        <p class="stxm-m" :class="user.themeColor.colorText">Numéro de siret</p>
-        <p>{{ user.company.siret }}</p>
-        <p class="stxm-m" :class="user.themeColor.colorText">Code NAF</p>
-        <p>{{ user.company.naf }}</p>
-      </div>
-      <!-- info detail 2 -->
-      <div class="info_company">
-        <p class="stxm-m" :class="user.themeColor.colorText">Site de production - Filliale</p>
-        <p>{{ userCompanyFilliale }}</p>
-      </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
+import ButtonApp from "../../../Elements/ButtonApp.vue";
+
 export default {
+  components: { ButtonApp },
   name: "SettingUserInfoCompanyUpdate",
   data() {
     return {};
@@ -36,6 +59,7 @@ export default {
     upperFirstLetter(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
+    updateCompany() {},
   },
   computed: {
     user() {
@@ -58,8 +82,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+label {
+  display: block;
+}
 p {
   margin: 7px 0;
+}
+.box_btn {
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+  margin-top: 30px;
 }
 .subscrite_title {
   padding-bottom: 30px;
@@ -69,17 +102,17 @@ p {
   flex-wrap: wrap;
   justify-content: space-around;
 }
+.box_info_company input {
+  margin: 10px 0;
+}
 .box_info_company .info_company:nth-child(1) {
   min-width: 300px;
-  flex: 3;
+  flex: 1;
+  padding: 0 30px;
 }
 .box_info_company .info_company:nth-child(2) {
-  min-width: 200px;
-  flex: 2;
-  margin: 0 0 0 60px;
-}
-.box_info_company .info_company:nth-child(3) {
-  min-width: 200px;
-  flex: 2;
+  min-width: 300px;
+  flex: 1;
+  padding: 0 30px;
 }
 </style>

@@ -81,7 +81,7 @@
               <p>0</p>
             </div>
             <div class="box_btn">
-              <button-app :mini="true" :textBtn="'Enregristrer'"></button-app>
+              <button-app :mini="true" :textBtn="'Modifier'"></button-app>
             </div>
           </div>
         </div>
