@@ -73,7 +73,7 @@
               <p>{{ user.role.libelle }}</p>
             </div>
             <div>
-              <p class="stxm-m" :class="user.themeColor.colorText">Statu</p>
+              <p class="stxm-m" :class="user.themeColor.colorText">Statut</p>
               <p>{{ user.state.libelle }}</p>
             </div>
             <div>

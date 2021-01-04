@@ -114,4 +114,27 @@ export default {
       throw error;
     }
   },
+
+  //update company's user referent minimum
+  async updateCompanyRefMin(context, data) {
+    try {
+      //see page loading
+      context.commit("isloading");
+      //call api for update user, juste user root admin referent
+      const user = await Vue.prototype.$http.post(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}update-company-user`,
+        data,
+        data.headers
+      );
+      //update current user
+      context.commit("updateUserCurrent", user.data);
+      //disable load page
+      context.commit("disableLoading");
+    } catch (error) {
+      //disable page loading
+      context.commit("disableLoading");
+      //send error
+      throw error;
+    }
+  },
 };

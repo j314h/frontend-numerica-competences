@@ -6,34 +6,38 @@
         <div class="info_company">
           <div>
             <label>Dénomination sociale</label>
-            <input class="input" type="text" v-model="userCompanyName" required />
+            <input class="input" type="text" v-model="dataForm.name" required />
           </div>
           <div>
             <label>Adresse, numéro et rue</label>
-            <input class="input" type="text" v-model="user.company.address.street" />
+            <input class="input" type="text" v-model="dataForm.street" />
           </div>
           <div>
             <label>Code postal</label>
-            <input class="input" type="text" v-model="user.company.address.postCode" />
+            <input class="input" type="text" v-model="dataForm.postCode" />
           </div>
           <div>
             <label>Ville</label>
-            <input class="input" type="text" v-model="user.company.address.city" required />
+            <input class="input" type="text" v-model="dataForm.city" required />
+          </div>
+          <div>
+            <label>Numero de téléphone</label>
+            <input class="input" type="text" v-model="dataForm.phoneNumber" required />
           </div>
         </div>
         <!-- info detail -->
         <div class="info_company">
           <div>
             <label>Site de production</label>
-            <input class="input" type="text" v-model="user.company.filliale" />
+            <input class="input" type="text" v-model="dataForm.filliale" />
           </div>
           <div>
             <label>Numéro de Siret</label>
-            <input class="input" type="text" v-model="user.company.siret" required />
+            <input class="input" type="text" v-model="dataForm.siret" required />
           </div>
           <div>
             <label>Code NAF</label>
-            <input class="input" type="text" v-model="user.company.naf" required />
+            <input class="input" type="text" v-model="dataForm.naf" required />
           </div>
           <error-content class="box_error" :error="errors[errors.length - 1]"></error-content>
           <div class="box_btn">
@@ -54,17 +58,56 @@ export default {
   components: { ButtonApp, ErrorContent },
   name: "SettingUserInfoCompanyUpdate",
   data() {
-    return {};
+    return {
+      //data for request update company's user
+      dataForm: {
+        email: this.$store.getters["UserConnect/currentUser"].email,
+        name: this.$store.getters["UserConnect/currentUser"].company.name,
+        street: this.$store.getters["UserConnect/currentUser"].company.address.street,
+        postCode: this.$store.getters["UserConnect/currentUser"].company.address.postCode,
+        city: this.$store.getters["UserConnect/currentUser"].company.address.city,
+        filliale: this.$store.getters["UserConnect/currentUser"].company.filliale,
+        siret: this.$store.getters["UserConnect/currentUser"].company.siret,
+        naf: this.$store.getters["UserConnect/currentUser"].company.naf,
+        phoneNumber: this.$store.getters["UserConnect/currentUser"].company.phoneNumber,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    };
   },
   methods: {
-    //first letter of text uppercase
-    upperFirstLetter(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    },
-
-    //call in fucntion for request api
-    updateCompany() {
-      this.$parent.updateCompany();
+    //call api for update company's user
+    async updateCompany() {
+      try {
+        await this.$store.dispatch("UserConnect/updateCompanyRefMin", this.dataForm);
+        //if success show alert custom
+        this.$swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Company is updating",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        //reset tab errors in UserConnect
+        this.$store.commit("UserConnect/resetErrors");
+        this.$parent.updateCompany();
+      } catch (e) {
+        //if error show alert custom
+        this.$swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: e.response ? e.response.data.message : e.message, //if throw error see your error in throw
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        //add error in tab in store UserConnect
+        if (e.response) {
+          this.$store.commit("UserConnect/addError", e.response.data.message);
+        } else {
+          this.$store.commit("UserConnect/addError", e.message);
+        }
+      }
     },
   },
   computed: {
@@ -74,19 +117,6 @@ export default {
     //recover current user
     user() {
       return this.$store.getters["UserConnect/currentUser"];
-    },
-    //format text company for see
-    userCompanyName() {
-      return this.user.company.name;
-    },
-    userCompanyAddress() {
-      return `
-      ${this.user.company.address.postCode} 
-      ${this.upperFirstLetter(this.user.company.address.city)} 
-      `;
-    },
-    userCompanyFilliale() {
-      return this.upperFirstLetter(this.user.company.filliale);
     },
   },
 };
