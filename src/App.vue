@@ -5,7 +5,13 @@
     <!-- dasbord app -->
     <router-view name="DashbordPage"></router-view>
     <!-- preloader -->
-    <ring-loader :loading="isLoading" :color="color" :color2="color2" :size="size"></ring-loader>
+    <ring-loader
+      v-if="!currentUser.name"
+      :loading="isLoading"
+      :color="color"
+      :color2="color2"
+      :size="size"
+    ></ring-loader>
   </div>
 </template>
 
@@ -34,6 +40,7 @@ export default {
   computed: {
     //true or false loading
     ...mapGetters("UserConnect", ["isLoading"]),
+    ...mapGetters("UserConnect", ["currentUser"]),
   },
 };
 </script>

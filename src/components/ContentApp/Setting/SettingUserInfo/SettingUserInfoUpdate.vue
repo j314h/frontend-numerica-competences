@@ -13,11 +13,11 @@
             <input type="text" v-model="dataForm.lastName" class="input space_input" required />
           </div>
           <div>
-            <label class="space_input">Adresse</label>
+            <label class="space_input">Adresse, numéro et rue</label>
             <input type="text" v-model="dataForm.street" class="input space_input" />
           </div>
           <div>
-            <label class="space_input">Code postale</label>
+            <label class="space_input">Code postal</label>
             <input type="text" v-model="dataForm.postCode" class="input space_input" />
           </div>
           <div>
@@ -153,7 +153,7 @@ export default {
           icon: "success",
           title: this.messageAlert,
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1500,
         });
         //reset tab errors in UserConnect
         this.$store.commit("UserConnect/resetErrors");

@@ -5,7 +5,7 @@
       <div class="content_form">
         <!-- content form -->
         <div class="box_input">
-          <label :for="nameImgTarget" class="input_file stxm-m cbginput ctblack" :class="fileIsLoad">
+          <label :for="nameImgTarget" class="input_file stxm-m ctorange cbrorange" :class="fileIsLoad">
             {{ text }}
           </label>
           <span @click="deleteLoad" v-show="fileLoad" class="close"></span>
@@ -68,7 +68,7 @@ export default {
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
       fileIsLoad: "", // for add class binding
       fileLoad: false, // for see btn close in input (v-show)
-      text: "Upload",
+      text: "Modifier",
     };
   },
   computed: {
@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     deleteLoad() {
-      this.text = "Upload";
+      this.text = "Modifier";
       this.fileIsLoad = "";
       this.fileLoad = false;
     },
@@ -100,7 +100,7 @@ export default {
       data.append(this.nameImgTarget, this.$refs.file.files[0]);
       //send file
       await this.$store.dispatch(this.commandeDispatch, data);
-      this.text = "Upload";
+      this.text = "Modifier";
       this.fileIsLoad = "";
       this.fileLoad = false;
       //if errors show alert custom
@@ -144,7 +144,7 @@ form {
 }
 .box_input {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
 }
 /* content */
@@ -156,16 +156,19 @@ input[type="file"] {
   overflow: hidden;
   padding: 10px 20px;
   border-radius: 4px;
+  transition: all 0.5s;
 }
 .input_file:hover {
   cursor: pointer;
-  background-color: #707070;
+  background-color: #f84210;
   color: #ffffff;
 }
 
 /**class for input add new file load this add in DOM with binding */
 .is_load {
   background-color: #61ff84;
+  border: transparent;
+  color: #000;
 }
 
 .input_file_background {

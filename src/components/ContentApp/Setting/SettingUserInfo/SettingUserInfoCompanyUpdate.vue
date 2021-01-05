@@ -28,16 +28,16 @@
         <!-- info detail -->
         <div class="info_company">
           <div>
-            <label>Site de production</label>
-            <input class="input" type="text" v-model="dataForm.filliale" />
-          </div>
-          <div>
             <label>Numéro de Siret</label>
             <input class="input" type="text" v-model="dataForm.siret" required />
           </div>
           <div>
             <label>Code NAF</label>
             <input class="input" type="text" v-model="dataForm.naf" required />
+          </div>
+          <div>
+            <label>Site de production</label>
+            <input class="input" type="text" v-model="dataForm.filliale" />
           </div>
           <error-content class="box_error" :error="errors[errors.length - 1]"></error-content>
           <div class="box_btn">
@@ -87,7 +87,7 @@ export default {
           icon: "success",
           title: "Company is updating",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1500,
         });
         //reset tab errors in UserConnect
         this.$store.commit("UserConnect/resetErrors");

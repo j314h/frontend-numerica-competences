@@ -1,4 +1,7 @@
 export default {
+  changeTitleHeadBand(state, text) {
+    state.titleHeadBand = text;
+  },
   //recover files in store
   getImgsFiles(state, files) {
     state.imgs = files;

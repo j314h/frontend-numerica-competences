@@ -7,6 +7,7 @@ export default {
   state: {
     imgs: null, // img for app
     errors: [], // error param app
+    titleHeadBand: "",
   },
   actions,
   mutations,

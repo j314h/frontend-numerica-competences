@@ -4,7 +4,7 @@
       <!-- info personnal -->
       <div class="info_detail">
         <p>{{ userName }}</p>
-        <p>{{ user.address.street }}</p>
+        <p>{{ upperFirstLetter(user.address.street) }}</p>
         <p>{{ userAddress }}</p>
         <p>{{ user.phoneNumber }}</p>
         <p>{{ user.email }}</p>
@@ -12,22 +12,21 @@
       <!-- info work -->
       <div class="info_detail">
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">Rôle</p>
-          <p>{{ user.role.libelle }}</p>
+          <p class="stxm-m" :class="user.themeColor.colorText">Mot de passe: <span>**********</span></p>
         </div>
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">Statut</p>
-          <p>{{ user.state.libelle }}</p>
+          <p class="stxm-m" :class="user.themeColor.colorText">
+            Rôle: <span>{{ user.role.libelle }}</span>
+          </p>
         </div>
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">Nombre de clients</p>
-          <p>0</p>
+          <p class="stxm-m" :class="user.themeColor.colorText">
+            Statut: <span>{{ user.state.libelle }}</span>
+          </p>
         </div>
-      </div>
-      <!-- info password -->
-      <div class="info_detail">
-        <p class="stxm-m" :class="user.themeColor.colorText">Mot de passe</p>
-        <p>********</p>
+        <div>
+          <p class="stxm-m" :class="user.themeColor.colorText">Nombre de clients: <span>0</span></p>
+        </div>
       </div>
     </div>
   </div>
@@ -73,20 +72,20 @@ p {
 .box_info_detail {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  margin: 0 auto;
+  justify-content: flex-start;
   padding-bottom: 40px;
 }
-.box_info_detail .info_detail:nth-child(1) {
-  min-width: 300px;
-  flex: 3;
+.box_info_detail .info_detail {
+  margin-right: 100px;
 }
-.box_info_detail .info_detail:nth-child(2) {
-  min-width: 200px;
-  flex: 2;
-  margin: 0 0 0 60px;
+.info_detail p {
+  margin-bottom: 10px;
 }
-.box_info_detail .info_detail:nth-child(3) {
-  min-width: 200px;
-  flex: 2;
+.info_detail div p {
+  margin-bottom: 20px;
+}
+.info_detail div p span {
+  color: #4c39e9;
 }
 </style>

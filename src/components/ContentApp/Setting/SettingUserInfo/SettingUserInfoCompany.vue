@@ -10,16 +10,20 @@
       </div>
       <!-- info detail -->
       <div class="info_company">
-        <p class="stxm-m" :class="user.themeColor.colorText">Numéro de siret</p>
-        <p>{{ user.company.siret }}</p>
-        <p class="stxm-m" :class="user.themeColor.colorText">Code NAF</p>
-        <p>{{ user.company.naf }}</p>
+        <p class="stxm-m" :class="user.themeColor.colorText">
+          Numéro de siret: <span>{{ user.company.siret }}</span>
+        </p>
+        <p></p>
+        <p class="stxm-m" :class="user.themeColor.colorText">
+          Code NAF: <span>{{ user.company.naf }}</span>
+        </p>
+        <p></p>
+        <p class="stxm-m" :class="user.themeColor.colorText">
+          Site de production - Filliale : <span>{{ userCompanyFilliale }}</span>
+        </p>
+        <p></p>
       </div>
       <!-- info detail 2 -->
-      <div class="info_company">
-        <p class="stxm-m" :class="user.themeColor.colorText">Site de production - Filliale</p>
-        <p>{{ userCompanyFilliale }}</p>
-      </div>
     </div>
   </div>
 </template>
@@ -66,19 +70,15 @@ p {
 .box_info_company {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
-.box_info_company .info_company:nth-child(1) {
-  min-width: 300px;
-  flex: 3;
+.box_info_company .info_company:first-child {
+  margin-right: 100px;
 }
-.box_info_company .info_company:nth-child(2) {
-  min-width: 200px;
-  flex: 2;
-  margin: 0 0 0 60px;
+.box_info_company p {
+  margin-bottom: 15px;
 }
-.box_info_company .info_company:nth-child(3) {
-  min-width: 200px;
-  flex: 2;
+.box_info_company p span {
+  color: #4c39e9;
 }
 </style>

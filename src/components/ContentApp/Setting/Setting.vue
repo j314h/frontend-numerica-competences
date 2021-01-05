@@ -1,5 +1,5 @@
 <template>
-  <div class="stxm-l">
+  <div class="box_setting stxm-l">
     <!-- content for user info and user entreprise info -->
     <div class="global_user_info">
       <setting-user-info class="box" :class="currentUser.themeColor.cbgBox"></setting-user-info>
@@ -16,7 +16,7 @@
             :tailleH="'70px'"
             :nameImgTarget="'logoNumerica'"
             :commandeDispatch="'ParamApp/changeLogoNumerica'"
-            :title="'Modifier le logo Numerica'"
+            :title="'Modifier le logo Numerica principal'"
           ></setting-img>
         </div>
         <!-- logo personne -->
@@ -27,7 +27,7 @@
             :tailleH="'70px'"
             :nameImgTarget="'logoIdentifiant'"
             :commandeDispatch="'ParamApp/changeLogoIdentifiant'"
-            :title="'Modifier icon personnes, salariés, etc...'"
+            :title="'Modifier l\'icon personnes, salariés, etc...'"
           ></setting-img>
         </div>
         <!-- logo menu -->
@@ -38,7 +38,7 @@
             :tailleH="'70px'"
             :nameImgTarget="'logoMenu'"
             :commandeDispatch="'ParamApp/changeLogoMenu'"
-            :title="'Modifier logo Numerica menu'"
+            :title="'Modifier le logo Numerica du menu'"
           ></setting-img>
         </div>
         <!-- logo numerica footer -->
@@ -49,7 +49,7 @@
             :tailleH="'70px'"
             :nameImgTarget="'logoFooterNumerica'"
             :commandeDispatch="'ParamApp/changeLogoFooterNumerica'"
-            :title="'Modifier logo Numerica dans le footer'"
+            :title="'Modifier le logo Numerica dans le bas de page'"
           ></setting-img>
         </div>
         <!-- logo update -->
@@ -60,7 +60,7 @@
             :tailleH="'70px'"
             :nameImgTarget="'logoUpdateElement'"
             :commandeDispatch="'ParamApp/changeLogoUpdateElement'"
-            :title="'Modifier logo modifier un élément'"
+            :title="'Modifier l\'icon de modification des élément'"
           ></setting-img>
         </div>
         <!-- logo close update -->
@@ -71,7 +71,7 @@
             :tailleH="'70px'"
             :nameImgTarget="'logoCloseUpdateElement'"
             :commandeDispatch="'ParamApp/changelogoCloseUpdateElement'"
-            :title="'Modifier logo fermer les modifications'"
+            :title="'Modifier l\'icon de fermeture'"
           ></setting-img>
         </div>
       </div>
@@ -98,6 +98,9 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    this.$store.commit("ParamApp/changeTitleHeadBand", "Parametres");
+  },
   computed: {
     //get info user connected
     ...mapGetters("UserConnect", ["currentUser"]),
@@ -106,13 +109,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.box_setting {
+  max-width: 1000px;
+  margin: 0 auto;
+}
 .box_global_input_file {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-self: start;
-  justify-content: space-between;
+  justify-content: space-around;
 }
+
 .box_title {
   display: flex;
   justify-content: center;
@@ -121,10 +128,16 @@ export default {
   padding: 30px 0 0px 0;
 }
 .box_input_file {
-  margin-top: 20px;
+  margin: 20px 20px 0 0;
   width: 290px;
 }
 .dark_mode {
   margin: 20px 0 0 0px;
+}
+@media (max-width: 600px) {
+  .box_input_file {
+    margin: 20px 0 0 0;
+    width: 290px;
+  }
 }
 </style>

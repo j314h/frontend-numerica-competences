@@ -2,13 +2,15 @@
   <div>
     <!-- head -->
     <div class="header">
-      <h3 class="stxxm-m" :class="currentUser.themeColor.colorTextTab">Informations</h3>
+      <h3 class="stxxm-m" :class="currentUser.themeColor.colorTextTab">Informations personnelles</h3>
       <img @click="updateUser" :src="`${urlApiImg}${imageUpdateUser[0].fieldName}`" />
     </div>
     <div>
-      <!-- user info detail if isUpdate is true on see-->
-      <setting-user-info-update v-if="isUpdateUser"></setting-user-info-update>
-      <setting-user-info-detail v-else></setting-user-info-detail>
+      <transition name="fade" mode="out-in">
+        <!-- user info detail if isUpdate is true on see-->
+        <setting-user-info-update v-if="isUpdateUser"></setting-user-info-update>
+        <setting-user-info-detail v-else></setting-user-info-detail>
+      </transition>
       <!-- company info if isUpdate is true on see -->
       <div class="box_title_company">
         <h6 class="stxm-m subscrite_title" :class="currentUser.themeColor.colorText">Votre entreprise</h6>
@@ -16,10 +18,12 @@
           <img @click="updateCompany" :src="`${urlApiImg}${imageUpdateCompany[0].fieldName}`" />
         </div>
       </div>
-      <setting-user-info-company-update
-        v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
-      ></setting-user-info-company-update>
-      <setting-user-info-company v-else></setting-user-info-company>
+      <transition name="fade" mode="out-in">
+        <setting-user-info-company-update
+          v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
+        ></setting-user-info-company-update>
+        <setting-user-info-company v-else></setting-user-info-company>
+      </transition>
     </div>
   </div>
 </template>
@@ -92,21 +96,35 @@ export default {
 img {
   width: 20px;
   height: 20px;
+  margin-left: 20px;
 }
 img:hover {
   cursor: pointer;
 }
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 0.3s;
+}
+.fade-leave {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: opacity 0.3s;
+  opacity: 0;
+}
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: baseline;
   padding-bottom: 20px;
 }
 
 .box_title_company {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: baseline;
   margin-bottom: 30px;
 }
 </style>
