@@ -9,7 +9,7 @@
       <the-headband class="head_principal"></the-headband>
       <!-- content text assigns background and text color according to dark mode-->
       <div class="content" :class="currentUser.themeColor.bgContent + ' ' + currentUser.themeColor.colorText">
-        <transition appear="true" name="fade" mode="out-in">
+        <transition appear name="fade" mode="out-in">
           <!-- view home for dashbord -->
           <router-view name="HomeDashbord"></router-view>
           <!-- view for setting app -->

@@ -120,7 +120,7 @@ export default {
         this.$swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Updating your successful image",
+          title: "Enregistrement réussis",
           showConfirmButton: false,
           timer: 2000,
         });

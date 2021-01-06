@@ -99,7 +99,8 @@ export default {
     return {};
   },
   mounted() {
-    this.$store.commit("ParamApp/changeTitleHeadBand", "Parametres");
+    //when loading the component, modify the title in the title bar
+    this.$store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
   },
   computed: {
     //get info user connected
@@ -128,7 +129,7 @@ export default {
   padding: 30px 0 0px 0;
 }
 .box_input_file {
-  margin: 20px 20px 0 0;
+  margin: 20px 0px 0 0;
   width: 290px;
 }
 .dark_mode {

@@ -1,23 +1,25 @@
 <template>
   <div>
     <!-- head -->
+    <!-- title -->
     <div class="header">
       <h3 class="stxxm-m" :class="currentUser.themeColor.colorTextTab">Informations personnelles</h3>
       <img @click="updateUser" :src="`${urlApiImg}${imageUpdateUser[0].fieldName}`" />
     </div>
     <div>
+      <!-- user info detail if isUpdate is true on see-->
       <transition name="fade" mode="out-in">
-        <!-- user info detail if isUpdate is true on see-->
         <setting-user-info-update v-if="isUpdateUser"></setting-user-info-update>
         <setting-user-info-detail v-else></setting-user-info-detail>
       </transition>
-      <!-- company info if isUpdate is true on see -->
+      <!-- sous title -->
       <div class="box_title_company">
         <h6 class="stxm-m subscrite_title" :class="currentUser.themeColor.colorText">Votre entreprise</h6>
         <div>
           <img @click="updateCompany" :src="`${urlApiImg}${imageUpdateCompany[0].fieldName}`" />
         </div>
       </div>
+      <!-- company info if isUpdate is true on see -->
       <transition name="fade" mode="out-in">
         <setting-user-info-company-update
           v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
@@ -54,8 +56,10 @@ export default {
     };
   },
   computed: {
+    //recover current user
     ...mapGetters("UserConnect", ["currentUser"]),
 
+    //this variable for change image pencil and X for update user and company
     imageUpdateUser() {
       return this.$store.getters["ParamApp/imgs"].filter((el) => el.name === this.imageUser);
     },
