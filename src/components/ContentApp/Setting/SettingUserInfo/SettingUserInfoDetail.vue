@@ -12,20 +12,24 @@
       <!-- info work -->
       <div class="info_detail">
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">Mot de passe: <span>**********</span></p>
-        </div>
-        <div>
           <p class="stxm-m" :class="user.themeColor.colorText">
-            Rôle: <span>{{ user.role.libelle }}</span>
+            Mot de passe: <span :class="user.themeColor.colorTextImportant">**********</span>
           </p>
         </div>
         <div>
           <p class="stxm-m" :class="user.themeColor.colorText">
-            Statut: <span>{{ user.state.libelle }}</span>
+            Rôle: <span :class="user.themeColor.colorTextImportant">{{ user.role.libelle }}</span>
           </p>
         </div>
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">Nombre de clients: <span>0</span></p>
+          <p class="stxm-m" :class="user.themeColor.colorText">
+            Statut: <span :class="user.themeColor.colorTextImportant">{{ user.state.libelle }}</span>
+          </p>
+        </div>
+        <div>
+          <p class="stxm-m" :class="user.themeColor.colorText">
+            Nombre de clients: <span :class="user.themeColor.colorTextImportant">0</span>
+          </p>
         </div>
       </div>
     </div>
@@ -84,8 +88,5 @@ p {
 }
 .info_detail div p {
   margin-bottom: 20px;
-}
-.info_detail div p span {
-  color: #4c39e9;
 }
 </style>

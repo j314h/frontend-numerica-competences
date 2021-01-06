@@ -11,15 +11,16 @@
       <!-- info detail -->
       <div class="info_company">
         <p class="stxm-m" :class="user.themeColor.colorText">
-          Numéro de siret: <span>{{ user.company.siret }}</span>
+          Numéro de siret: <span :class="user.themeColor.colorTextImportant">{{ user.company.siret }}</span>
         </p>
         <p></p>
         <p class="stxm-m" :class="user.themeColor.colorText">
-          Code NAF: <span>{{ user.company.naf }}</span>
+          Code NAF: <span :class="user.themeColor.colorTextImportant">{{ user.company.naf }}</span>
         </p>
         <p></p>
         <p class="stxm-m" :class="user.themeColor.colorText">
-          Site de production - Filliale : <span>{{ userCompanyFilliale }}</span>
+          Site de production - Filliale :
+          <span :class="user.themeColor.colorTextImportant">{{ userCompanyFilliale }}</span>
         </p>
         <p></p>
       </div>
@@ -77,8 +78,5 @@ p {
 }
 .box_info_company p {
   margin-bottom: 15px;
-}
-.box_info_company p span {
-  color: #4c39e9;
 }
 </style>
