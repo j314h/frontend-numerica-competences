@@ -15,7 +15,7 @@
       <div class="user_menu">
         <div class="stxm-r">{{ nameUser }}</div>
         <div class="box_img_setting_disconnect">
-          <router-link to="setting" tag="button" class="btn_img_menu box_svg">
+          <router-link :to="{ name: 'Setting' }" tag="button" class="btn_img_menu box_svg">
             <svg
               class="icon_setting"
               width="18"
@@ -50,7 +50,11 @@
       <!-- dashbord -->
       <div>
         <div>
-          <router-link class="link_menu stxm-r" :class="currentUser.themeColor.colorMenuActive" to="home">
+          <router-link
+            class="link_menu stxm-r"
+            :class="currentUser.themeColor.colorMenuActive"
+            :to="{ name: 'HomeDashbord' }"
+          >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 18H15V12H10V18ZM4 18H9V5H4V18ZM16 18H21V12H16V18ZM10 5V11H21V5H10Z" fill="#fff" />
             </svg>

@@ -42,7 +42,7 @@ export default {
         this.$swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Updating your theme colors",
+          title: "Le theme des couleurs à bien été modifié",
           showConfirmButton: false,
           timer: 1000,
         });

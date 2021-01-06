@@ -5,7 +5,10 @@ import DashbordPage from "../views/DashbordPage";
 import store from "../store";
 import VueCookies from "vue-cookies";
 import Setting from "../components/ContentApp/Setting/Setting.vue";
-import HomeDashbord from "../components/ContentApp/HomeDashbord.vue";
+import HomeDashbord from "../components/ContentApp/HomeDashbord/HomeDashbord.vue";
+import CreateCompany from "../components/ContentApp/HomeDashbord/CreateCompany/CreateCompany.vue";
+import CreateNews from "../components/ContentApp/HomeDashbord/CreateNews/CreateNews.vue";
+import DashHome from "../components/ContentApp/HomeDashbord/DashHome/DashHome.vue";
 
 Vue.use(VueRouter);
 
@@ -33,9 +36,33 @@ const routes = [
       {
         path: "home", //dashbord home
         name: "HomeDashbord",
+        redirect: { name: "DashHome" },
         components: {
           HomeDashbord,
         },
+        children: [
+          {
+            path: "dashbord-home", //dashbord home
+            name: "DashHome",
+            components: {
+              DashHome,
+            },
+          },
+          {
+            path: "create-company", //dashbord home
+            name: "CreateCompany",
+            components: {
+              CreateCompany,
+            },
+          },
+          {
+            path: "create-news", //dashbord home
+            name: "CreateNews",
+            components: {
+              CreateNews,
+            },
+          },
+        ],
       },
       {
         path: "setting", // setting app

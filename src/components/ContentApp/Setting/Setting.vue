@@ -99,6 +99,8 @@ export default {
     return {};
   },
   mounted() {
+    //for see or not sub menu
+    this.$store.commit("ParamApp/seeSubMenu", false);
     //when loading the component, modify the title in the title bar
     this.$store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
   },

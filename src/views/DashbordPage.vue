@@ -7,6 +7,7 @@
     <div class="box_content_app">
       <!-- headband -->
       <the-headband class="head_principal"></the-headband>
+      <the-sub-menu v-show="isSubMenu"></the-sub-menu>
       <!-- content text assigns background and text color according to dark mode-->
       <div class="content" :class="currentUser.themeColor.bgContent + ' ' + currentUser.themeColor.colorText">
         <transition appear name="fade" mode="out-in">
@@ -15,9 +16,9 @@
           <!-- view for setting app -->
           <router-view name="Setting"></router-view>
         </transition>
+        <!-- preloader -->
+        <ring-loader :loading="isLoading" :color="color" :color2="color2" :size="size"></ring-loader>
       </div>
-      <!-- preloader -->
-      <ring-loader :loading="isLoading" :color="color" :color2="color2" :size="size"></ring-loader>
     </div>
   </div>
 </template>
@@ -26,11 +27,12 @@
 import TheHeadband from "../components/TheHeadband/TheHeadband";
 import TheMenu from "../components/TheMenu/TheMenu";
 import RingLoader from "../components/PreLoader/RingLoader";
+import TheSubMenu from "../components/TheSubMenu/TheSubMenu";
 
 import { mapGetters } from "vuex";
 
 export default {
-  components: { TheMenu, TheHeadband, RingLoader },
+  components: { TheMenu, TheHeadband, RingLoader, TheSubMenu },
   name: "DashbordPage",
   data() {
     return {
@@ -44,6 +46,7 @@ export default {
     //load color text content of app
     ...mapGetters("UserConnect", ["currentUser"]),
     ...mapGetters("UserConnect", ["isLoading"]),
+    ...mapGetters("ParamApp", ["isSubMenu"]),
   },
 };
 </script>
@@ -82,6 +85,7 @@ export default {
   height: 50px;
 }
 .content {
+  position: relative;
   flex: 5;
   overflow: auto;
   padding: 20px 20px 100px 20px;

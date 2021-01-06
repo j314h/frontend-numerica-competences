@@ -8,6 +8,7 @@ export default {
     imgs: null, // img for app
     errors: [], // error param app
     titleHeadBand: "",
+    isSubMenu: false,
   },
   actions,
   mutations,
