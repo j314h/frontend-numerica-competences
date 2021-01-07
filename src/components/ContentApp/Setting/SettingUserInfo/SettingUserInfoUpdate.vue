@@ -33,7 +33,6 @@
             <input type="email" v-model="dataForm.email" class="input space_input" autocomplete="off" required />
           </div>
         </div>
-
         <!-- info password -->
         <div class="info_detail">
           <div>
@@ -191,6 +190,7 @@ export default {
     user() {
       return this.$store.getters["UserConnect/currentUser"];
     },
+    //return new format name user
     userName() {
       return `
       ${this.user.civility}
@@ -198,6 +198,7 @@ export default {
       ${this.upperFirstLetter(this.user.name.lastName)}
       `;
     },
+    //return new format address user
     userAddress() {
       return `
       ${this.user.address.postCode}

@@ -68,25 +68,26 @@ export default {
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
       fileIsLoad: "", // for add class binding
       fileLoad: false, // for see btn close in input (v-show)
-      text: "Modifier",
+      text: "Modifier", // text of btn input file
     };
   },
   computed: {
+    //recover info current user
     ...mapGetters("UserConnect", ["currentUser"]),
-    //get image are stocked in store ParamApp
-    imgs() {
-      return this.$store.getters["ParamApp/imgs"];
-    },
+    //recover image app
+    ...mapGetters("ParamApp", ["imgs"]),
   },
   methods: {
+    //change design if user delete file in input load file
     deleteLoad() {
       this.text = "Modifier";
       this.fileIsLoad = "";
       this.fileLoad = false;
     },
+    //change class and value text of input load file
+    //for change design if user load file
     loadPending(e) {
       if (e) {
-        console.log("salut");
         this.fileIsLoad = "is_load";
         this.fileLoad = true;
         return (this.text = e.target.value);

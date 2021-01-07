@@ -11,10 +11,11 @@
     </div>
     <!-- content menu -->
     <div class="item_menu content_menu">
-      <!-- setting disconnect user -->
+      <!-- setting and disconnect user -->
       <div class="user_menu">
         <div class="stxm-r">{{ nameUser }}</div>
         <div class="box_img_setting_disconnect">
+          <!-- setting -->
           <router-link :to="{ name: 'Setting' }" tag="button" class="btn_img_menu box_svg">
             <svg
               class="icon_setting"
@@ -29,6 +30,7 @@
                 fill="#fff"
               />
             </svg>
+            <!-- disconnect -->
           </router-link>
           <div class="box_svg" @click="logOut">
             <svg
@@ -47,9 +49,10 @@
           </div>
         </div>
       </div>
-      <!-- dashbord -->
+      <!-- item dashbord -->
       <div>
         <div>
+          <!-- dashbord -->
           <router-link
             class="link_menu stxm-r"
             :class="currentUser.themeColor.colorMenuActive"
@@ -78,25 +81,23 @@ export default {
   name: "TheMenu",
   data() {
     return {
-      user: null,
-      //class custom color menu
-      colorTextInactive: "ctm-",
-      colorTextActive: "ctm-",
-      colorMenu: "bgm-",
+      //toggle open close menu
       menuIsOpen: true,
+      //url backend image
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
     };
   },
   computed: {
     //load theme color for currentUser
     ...mapGetters("UserConnect", ["currentUser"]),
+    //recover image backend
     ...mapGetters("ParamApp", ["imgs"]),
     //add class for menu burger
     stateMenu() {
       return this.menuIsOpen ? "active" : "";
     },
 
-    //name user
+    //name user format
     nameUser() {
       return `
       ${this.upperFirstLetter(this.$store.getters["UserConnect/currentUser"].name.firstName)}

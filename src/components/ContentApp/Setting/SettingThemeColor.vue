@@ -25,10 +25,12 @@ export default {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       },
+      //for change btn in template
       value: null,
     };
   },
   created() {
+    //recover booleen for dark mode
     this.value = this.$store.getters["UserConnect/currentUser"].themeColor.darkMode;
   },
   methods: {
@@ -36,6 +38,7 @@ export default {
     //call api for save setting
     async modeDark() {
       try {
+        //depending on the value we change the name of the color theme in the user database
         this.value ? (this.data.name = "dark") : (this.data.name = "normal");
         await this.$store.dispatch("UserConnect/modeDark", this.data);
         //if success show alert custom
@@ -47,6 +50,7 @@ export default {
           timer: 1000,
         });
       } catch (e) {
+        //if error pop up for see error
         this.$swal.fire({
           position: "top-end",
           icon: "error",
@@ -61,6 +65,7 @@ export default {
     },
   },
   computed: {
+    //recover info current user
     ...mapGetters("UserConnect", ["currentUser"]),
   },
 };

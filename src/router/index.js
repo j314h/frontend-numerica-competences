@@ -26,7 +26,7 @@ const routes = [
     },
   },
   {
-    path: "/dashbord-page", // dashbord
+    path: "/dashbord-page", // acces dashbord
     name: "DashbordPage",
     redirect: { name: "HomeDashbord" },
     components: {
@@ -34,7 +34,7 @@ const routes = [
     },
     children: [
       {
-        path: "home", //dashbord home
+        path: "home", //dashbord
         name: "HomeDashbord",
         redirect: { name: "DashHome" },
         components: {
@@ -49,14 +49,14 @@ const routes = [
             },
           },
           {
-            path: "create-company", //dashbord home
+            path: "create-company", //dashbord create company
             name: "CreateCompany",
             components: {
               CreateCompany,
             },
           },
           {
-            path: "create-news", //dashbord home
+            path: "create-news", //dashbord create newsLetter
             name: "CreateNews",
             components: {
               CreateNews,

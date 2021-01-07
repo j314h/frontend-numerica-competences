@@ -4,7 +4,7 @@
     <router-view name="HomeView"></router-view>
     <!-- dasbord app -->
     <router-view name="DashbordPage"></router-view>
-    <!-- preloader -->
+    <!-- preloader juste for load connect user-->
     <ring-loader
       v-if="!currentUser.name"
       :loading="isLoading"
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-//preloader
 import RingLoader from "./components/PreLoader/RingLoader";
 import { mapGetters } from "vuex";
 
@@ -40,6 +39,7 @@ export default {
   computed: {
     //true or false loading
     ...mapGetters("UserConnect", ["isLoading"]),
+    //recover info user
     ...mapGetters("UserConnect", ["currentUser"]),
   },
 };

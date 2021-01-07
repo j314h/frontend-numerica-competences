@@ -1,8 +1,11 @@
 <template>
   <div>
     <transition appear name="fade" mode="out-in">
+      <!-- views home in home dashbord -->
       <router-view name="DashHome"></router-view>
+      <!-- views create company in dashbord -->
       <router-view name="CreateCompany"></router-view>
+      <!-- views create newsletter in dashbord -->
       <router-view name="CreateNews"></router-view>
     </transition>
   </div>

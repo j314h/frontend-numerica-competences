@@ -7,9 +7,9 @@ import router from "./router";
 import store from "./store";
 import Sweet from "vue-sweetalert2"; // alert custom bibliotheque
 
-Vue.prototype.$http = axios;
-Vue.use(VueCookies);
-Vue.use(Sweet);
+Vue.prototype.$http = axios; // librarie axios in vue
+Vue.use(VueCookies); // function access cookies in instance vue
+Vue.use(Sweet); //sweet alert in instance of vue
 Vue.config.productionTip = false;
 
 new Vue({

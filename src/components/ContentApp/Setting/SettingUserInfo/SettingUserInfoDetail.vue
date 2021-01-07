@@ -49,9 +49,11 @@ export default {
     },
   },
   computed: {
+    //recover info current user
     user() {
       return this.$store.getters["UserConnect/currentUser"];
     },
+    //return new format of name user
     userName() {
       return `
       ${this.user.civility} 
@@ -59,6 +61,7 @@ export default {
       ${this.upperFirstLetter(this.user.name.lastName)}
       `;
     },
+    //return new format address user
     userAddress() {
       return `
       ${this.user.address.postCode}  

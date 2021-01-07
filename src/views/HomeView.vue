@@ -1,5 +1,6 @@
 <template>
   <div class="box_home">
+    <!-- component home for page connection user -->
     <home></home>
   </div>
 </template>

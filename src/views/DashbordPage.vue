@@ -16,7 +16,7 @@
           <!-- view for setting app -->
           <router-view name="Setting"></router-view>
         </transition>
-        <!-- preloader -->
+        <!-- preloader for all app, each load-->
         <ring-loader :loading="isLoading" :color="color" :color2="color2" :size="size"></ring-loader>
       </div>
     </div>
@@ -43,9 +43,11 @@ export default {
     };
   },
   computed: {
-    //load color text content of app
+    //recover current user
     ...mapGetters("UserConnect", ["currentUser"]),
+    //check variable load of app
     ...mapGetters("UserConnect", ["isLoading"]),
+    //check if see or not sub menu
     ...mapGetters("ParamApp", ["isSubMenu"]),
   },
 };

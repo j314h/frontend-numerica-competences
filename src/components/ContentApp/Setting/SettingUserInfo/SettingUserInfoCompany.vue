@@ -24,7 +24,6 @@
         </p>
         <p></p>
       </div>
-      <!-- info detail 2 -->
     </div>
   </div>
 </template>
@@ -42,18 +41,22 @@ export default {
     },
   },
   computed: {
+    //return user current
     user() {
       return this.$store.getters["UserConnect/currentUser"];
     },
+    //return name company
     userCompanyName() {
       return this.user.company.name;
     },
+    //return new format address company
     userCompanyAddress() {
       return `
       ${this.user.company.address.postCode} 
       ${this.upperFirstLetter(this.user.company.address.city)} 
       `;
     },
+    //return new formation for filliale company
     userCompanyFilliale() {
       return this.upperFirstLetter(this.user.company.filliale);
     },

@@ -1,14 +1,18 @@
 <template>
   <div class="sub_menu stxm-r" :class="currentUser.themeColor.bgSubMenu">
-    <div>
-      <router-link class="link_sub_menu ctorange" :to="{ name: 'DashHome' }">Accueil</router-link>
+    <!-- sub menu for dashbord -->
+    <div v-if="titleHeadBand === 'Tableau de bord'" class="sub_menu_dashbord">
+      <div>
+        <router-link class="link_sub_menu ctorange" :to="{ name: 'DashHome' }">Accueil</router-link>
+      </div>
+      <div>
+        <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateCompany' }">Créer une entreprise</router-link>
+      </div>
+      <div>
+        <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateNews' }">Créer un fils d'actualité</router-link>
+      </div>
     </div>
-    <div>
-      <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateCompany' }">Créer une entreprise</router-link>
-    </div>
-    <div>
-      <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateNews' }">Créer un fils d'actualité</router-link>
-    </div>
+    <!-- other sub menu -->
   </div>
 </template>
 
@@ -18,7 +22,10 @@ import { mapGetters } from "vuex";
 export default {
   name: "TheSubMenu",
   computed: {
+    //recover info current user
     ...mapGetters("UserConnect", ["currentUser"]),
+    //recover title head band
+    ...mapGetters("ParamApp", ["titleHeadBand"]),
   },
 };
 </script>
@@ -33,6 +40,8 @@ export default {
   border-bottom: 5px solid #f84210;
 }
 .sub_menu {
+}
+.sub_menu_dashbord {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

@@ -33,7 +33,10 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
 `' / '` => router for HomeConnect view (connect user)  
 `' /dashbord-page '` => router for home page this app (user connected)  
 `' /dashbord-page/home '` => router for home page with dashbord primary content this app (user connected)  
-`' /dashbord-page/setting '` => router access root user, page for custom app
+`' /dashbord-page/setting '` => router access root user, page for custom app  
+`' /dashbord-page/home/dashbord-home '` => router for home this dashbord  
+`' /dashbord-page/home/create-company '` => router for create company  
+`' /dashbord-page/home/create-new '` => router for send message in ligne of news
 
 ## Data / vuex
 
@@ -90,21 +93,44 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
           - If error, add errors message in store.errors
           - and desactived page load
 
-  #### Mutations
+  - `function updateUserRefMin` => update user root, admin, referent
 
-  - `isloading` => activate page loading
-  - `disableLoading` => disable loading of page loading
-  - `signInSuccess` => connection user success, assignate info in currentUser
-  - `signInError` => error de connection user
-  - `checkedJwt` => check if jwt existed
-  - `logOutUser` => user disconnect, delete data in currentUser
-  - `updateUserCurrent` => update info for currentUser
-  - `resetErrors` => reset tab for errors
+          - Active load page
+          - Call api and back-end update info user current
+          - Assigned user info in store.currentUser
+          - Desactived page load
+          - See Alert custom after desactivate page load for more info for user (success or error)
+          - If error, add errors message in store.errors
+          - and desactived page load
+
+  - `function updateCompanyRefMin` => update company for current user root, admin, referent
+
+        - Active load page
+        - Call api and back-end update info company of user current
+        - Assigned user info in store.currentUser with new info company
+        - Desactived page load
+        - See Alert custom after desactivate page load for more info for user (success or error)
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+#### Mutations
+
+- `isloading` => activate page loading
+- `disableLoading` => disable loading of page loading
+- `signInSuccess` => connection user success, assignate info in currentUser
+- `signInError` => error de connection user
+- `checkedJwt` => check if jwt existed
+- `logOutUser` => user disconnect, delete data in currentUser
+- `updateUserCurrent` => update info for currentUser
+- `addError` => add error in tab errors user connected
+- `resetErrors` => reset tab for errors
 
 * ### ParamApp => store namespaced
 
   - `imgs: null,` // img for app
   - `errors: Array,` // error param app
+  - `titleHeadBand` // title headband
+  - `isSubMenu` // see sub menu
 
   #### Actions
 
@@ -138,6 +164,36 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
         - If error, add errors message in store.errors
         - and desactived page load
 
+  - `function changeLogoFooterNumerica` => change image logo in footer for logo numerica
+
+        - Active load page
+        - Call api in roads `/file/logo-numerica-footer` for change img in database
+        - Reset error exist after
+        - call function `getFilesImg`
+        - Desactived page load
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+  - `function changeLogoUpdateElement` => change logo pencil for update element
+
+        - Active load page
+        - Call api in roads `/file/logo-update-element` for change img in database
+        - Reset error exist after
+        - call function `getFilesImg`
+        - Desactived page load
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+  - `function changelogoCloseUpdateElement` => change logo X for close update element
+
+        - Active load page
+        - Call api in roads `/file/logo-close-update-element` for change img in database
+        - Reset error exist after
+        - call function `getFilesImg`
+        - Desactived page load
+        - If error, add errors message in store.errors
+        - and desactived page load
+
   - `function getFilesImag` => load img in database
 
         - Call api in roads `/files-i` for recover url img in database
@@ -146,11 +202,13 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
         - If error, add errors message in store.errors
         - and desactived page load
 
-  #### Mutations
+#### Mutations
 
-  - `getImgsFiles` => recover img database and set array store imgs
-  - `addErrors` => add errors in store ParamApp
-  - `resetErrors` => reset errors in store ParamApp
+- `getImgsFiles` => recover img database and set array store imgs
+- `addErrors` => add errors in store ParamApp
+- `resetErrors` => reset errors in store ParamApp
+- `seeSubMenu` => change booleen for see or not sub menu
+- `changeTitleHeadBand` => change title in headband
 
 ### Scss / class personal
 
@@ -160,4 +218,5 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
 `/component` => style for divers component  
 `/size-text` => size for text of all app  
 `/style` => style for elements isolate  
-`globals-rules.scss` => is load in App component, and he charge all rules css for everyone component
+`globals-rules.scss` => is load in App component, and he charge all rules css for everyone component  
+`root.scss` => load all variable for project
