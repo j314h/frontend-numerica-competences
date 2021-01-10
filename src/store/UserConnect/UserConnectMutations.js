@@ -9,7 +9,9 @@ export default {
   },
   //request connect user succes
   signInSuccess(state, data) {
-    state.currentUser = data;
+    state.currentUser = {};
+    localStorage.setItem("currentUser", JSON.stringify(data));
+    state.currentUser = JSON.parse(localStorage.getItem("currentUser"));
     state.errors = [];
   },
   //request connect user error
@@ -28,10 +30,14 @@ export default {
     state.currentUser = {};
     state.isSignIn = false;
     state.errors = [];
+    localStorage.removeItem("imgs");
+    localStorage.removeItem("currentUser");
   },
   //update user current in front
   updateUserCurrent(state, user) {
-    state.currentUser = user;
+    state.currentUser = {};
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    state.currentUser = JSON.parse(localStorage.getItem("currentUser"));
   },
   //add error
   addError(state, error) {

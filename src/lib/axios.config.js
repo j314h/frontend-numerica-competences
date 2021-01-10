@@ -18,3 +18,9 @@ axios.interceptors.response.use((res) => {
   console.log("Interceptor res", res);
   return res;
 });
+
+export const headers = {
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+};

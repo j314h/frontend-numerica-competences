@@ -34,11 +34,13 @@ export default {
     try {
       //see page loading
       context.commit("isloading");
-      const user = await Vue.prototype.$http.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}auth/verification`);
-      //if success request execute mutation
-      context.commit("signInSuccess", user.data);
-      //check cookies jwt exist
       context.commit("checkedJwt", VueCookies.isKey("jwt"));
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      if (!user) {
+        user = await Vue.prototype.$http.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}auth/verification`);
+      }
+      //if success request execute mutation
+      context.commit("updateUserCurrent", user);
       //disable page loading
       context.commit("disableLoading");
     } catch (error) {

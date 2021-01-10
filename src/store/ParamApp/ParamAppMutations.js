@@ -9,6 +9,7 @@ export default {
   },
   //recover files in store
   getImgsFiles(state, files) {
+    //localStorage.setItem("imgs", JSON.stringify(files));
     state.imgs = files;
   },
   //add error in store ParamApp

@@ -68,7 +68,7 @@
     </div>
     <!-- footer menu -->
     <div class="item_menu footer_menu">
-      <img :src="`${urlApiImg}${logoNumericaFooter[0].fieldName}`" />
+      <img :src="logoNumericaFooter" />
       <span class="sts-r">© {{ new Date().getFullYear() }} - Numerica-compétences</span>
     </div>
   </div>
@@ -90,13 +90,17 @@ export default {
   computed: {
     //load theme color for currentUser
     ...mapGetters("UserConnect", ["currentUser"]),
-    //recover image backend
-    ...mapGetters("ParamApp", ["imgs"]),
     //add class for menu burger
     stateMenu() {
       return this.menuIsOpen ? "active" : "";
     },
-
+    //recover logo in menu
+    logoNumericaFooter() {
+      if (this.$store.getters["ParamApp/imgs"]) {
+        const { fieldName } = this.$store.getters["ParamApp/imgs"].find((el) => el.name === "logoMenu");
+        return `${this.urlApiImg}${fieldName}`;
+      }
+    },
     //name user format
     nameUser() {
       return `
@@ -108,11 +112,6 @@ export default {
     //add class close block of menu side
     openMenu() {
       return this.menuIsOpen ? "menu" : "menu_close";
-    },
-
-    //img logo footer menu, return tab with img info
-    logoNumericaFooter() {
-      return this.$store.getters["ParamApp/imgs"].filter((el) => el.name === "logoMenu");
     },
   },
   methods: {

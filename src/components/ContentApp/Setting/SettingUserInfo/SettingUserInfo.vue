@@ -4,7 +4,7 @@
     <!-- title -->
     <div class="header">
       <h3 class="stxxm-m" :class="currentUser.themeColor.colorTextTab">Informations personnelles</h3>
-      <img @click="updateUser" :src="`${urlApiImg}${imageUpdateUser[0].fieldName}`" />
+      <img @click="updateUser" :src="imageUpdateUser" />
     </div>
     <div>
       <!-- user info detail if isUpdate is true on see-->
@@ -16,7 +16,7 @@
       <div class="box_title_company">
         <h6 class="stxm-m subscrite_title" :class="currentUser.themeColor.colorText">Votre entreprise</h6>
         <div>
-          <img @click="updateCompany" :src="`${urlApiImg}${imageUpdateCompany[0].fieldName}`" />
+          <img @click="updateCompany" :src="imageUpdateCompany" />
         </div>
       </div>
       <!-- company info if isUpdate is true on see -->
@@ -61,10 +61,16 @@ export default {
 
     //this variable for change image pencil and X for update user and company
     imageUpdateUser() {
-      return this.$store.getters["ParamApp/imgs"].filter((el) => el.name === this.imageUser);
+      if (this.$store.getters["ParamApp/imgs"]) {
+        const { fieldName } = this.$store.getters["ParamApp/imgs"].find((el) => el.name === this.imageUser);
+        return `${this.urlApiImg}${fieldName}`;
+      }
     },
     imageUpdateCompany() {
-      return this.$store.getters["ParamApp/imgs"].filter((el) => el.name === this.imageUserCompany);
+      if (this.$store.getters["ParamApp/imgs"]) {
+        const { fieldName } = this.$store.getters["ParamApp/imgs"].find((el) => el.name === this.imageUserCompany);
+        return `${this.urlApiImg}${fieldName}`;
+      }
     },
   },
   methods: {

@@ -1,10 +1,14 @@
 <template>
-  <div>Home</div>
+  <div>
+    home
+  </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "DashHome",
+  computed: {},
 };
 </script>
 

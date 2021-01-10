@@ -5,7 +5,7 @@ import getters from "./UserConnectGetters";
 export default {
   namespaced: true,
   state: {
-    currentUser: {}, //info for user connected
+    currentUser: localStorage.getItem("currentUser") ? JSON.parse(localStorage.getItem("currentUser")) : {}, //info for user connected
     isSignIn: false, // connected
     isLoading: false, //loading for user connect
     errors: [], // error user connect

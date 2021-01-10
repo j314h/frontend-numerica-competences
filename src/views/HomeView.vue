@@ -11,10 +11,6 @@ import Home from "../components/Home/Home";
 export default {
   name: "HomeView",
   components: { Home },
-  created() {
-    //call api for get all files image
-    this.$store.dispatch("ParamApp/getFilesImg");
-  },
 };
 </script>
 

@@ -34,7 +34,9 @@ export default {
   },
   created() {
     //call api for get all files image
-    this.$store.dispatch("ParamApp/getFilesImg");
+    if (!localStorage.getItem("imgs")) {
+      this.$store.dispatch("ParamApp/getFilesImg");
+    }
   },
   computed: {
     //true or false loading

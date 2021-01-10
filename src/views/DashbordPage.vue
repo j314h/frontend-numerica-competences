@@ -42,6 +42,10 @@ export default {
       size: "100px",
     };
   },
+  beforeCreate() {
+    //get all state in database
+    this.$store.dispatch("States/getAllState");
+  },
   computed: {
     //recover current user
     ...mapGetters("UserConnect", ["currentUser"]),
