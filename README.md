@@ -113,17 +113,17 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
         - If error, add errors message in store.errors
         - and desactived page load
 
-#### Mutations
+    #### Mutations
 
-- `isloading` => activate page loading
-- `disableLoading` => disable loading of page loading
-- `signInSuccess` => connection user success, assignate info in currentUser
-- `signInError` => error de connection user
-- `checkedJwt` => check if jwt existed
-- `logOutUser` => user disconnect, delete data in currentUser
-- `updateUserCurrent` => update info for currentUser
-- `addError` => add error in tab errors user connected
-- `resetErrors` => reset tab for errors
+    - `isloading` => activate page loading
+    - `disableLoading` => disable loading of page loading
+    - `signInSuccess` => connection user success, assignate info in currentUser
+    - `signInError` => error de connection user
+    - `checkedJwt` => check if jwt existed
+    - `logOutUser` => user disconnect, delete data in currentUser
+    - `updateUserCurrent` => update info for currentUser
+    - `addError` => add error in tab errors user connected
+    - `resetErrors` => reset tab for errors
 
 * ### ParamApp => store namespaced
 
@@ -202,13 +202,84 @@ _Project created and monitored by Cécile Maillard-Salin, David Caignaert and Jo
         - If error, add errors message in store.errors
         - and desactived page load
 
-#### Mutations
+    #### Mutations
 
-- `getImgsFiles` => recover img database and set array store imgs
-- `addErrors` => add errors in store ParamApp
-- `resetErrors` => reset errors in store ParamApp
-- `seeSubMenu` => change booleen for see or not sub menu
-- `changeTitleHeadBand` => change title in headband
+    - `getImgsFiles` => recover img database and set array store imgs
+    - `addErrors` => add errors in store ParamApp
+    - `resetErrors` => reset errors in store ParamApp
+    - `seeSubMenu` => change booleen for see or not sub menu
+    - `changeTitleHeadBand` => change title in headband
+
+* ### Companies => store namespaced
+
+  - `companies: null,` // list tab companies
+  - `errors: Array,` // error companies
+
+  #### Actions
+
+  - `function getAllCompanies` => recover list companies
+
+        - Reset error exist after
+        - Actived page load
+        - Call api in roads `/companies` for recover list companies attached of user current admin or root state
+        - And recover list sector attached of companies list
+        - call function `addAllCompanies` for save list companies in store
+        - call function `addAllSectors` for save list sectors in store
+        - Desactived page load
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+  - `function createCompany` => create company and sector in data base
+
+        - Reset error exist after
+        - Active load page
+        - Call api in roads `/file/create-company` for create company and sector of company
+        - Desactived page load
+        - If error, add errors message in store.errors
+        - and desactived page load
+
+    #### Mutations
+
+    - `addAllCompanies` => recover list companies
+    - `addErrors` => add errors in store Companies
+    - `resetErrors` => reset errors in store Companies
+
+* ### Sector => store namespaced
+
+  - `sector: null,` // list tab sector
+  - `errors: Array,` // error sector
+
+  #### Actions
+
+  - `function getAllSector` => recover list sector
+
+        - we collect the sectors related to the companies so we assign our sectors variable when we collect the companies
+        - In `Companies/getAllCompanies`
+
+    #### Mutations
+
+    - `addAllSectors` => recover list sectors
+    - `addErrors` => add errors in store Companies
+    - `resetErrors` => reset errors in store Companies
+
+* ### States => store namespaced
+
+  - `states: null,` // list tab states
+  - `errors: Array,` // error sector
+
+  #### Actions
+
+  - `function getAllState` => recover list sector
+
+        - Call api for recover list state in data base
+        - Save list in states in store States
+        - If error, add errors message in store.errors
+
+    #### Mutations
+
+    - `allState` => recover list states
+    - `addErrors` => add errors in store Companies
+    - `resetErrors` => reset errors in store Companies
 
 ### Scss / class personal
 
