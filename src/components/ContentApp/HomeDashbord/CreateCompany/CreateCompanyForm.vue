@@ -1,33 +1,33 @@
 <template>
-  <div class="box global_box" :class="user.themeColor.cbgBox">
-    <h3 class="stxxm-m title" :class="user.themeColor.colorTextTab">Creation entreprise</h3>
+  <div class="box global_box" :class="cbgBox">
+    <h3 class="stxxm-m title" :class="colorTextTab">Creation entreprise</h3>
     <!-- form -->
     <form @submit.prevent="createCompanyInBdd">
       <!-- block left -->
       <div class="block_left">
         <!-- name -->
         <div>
-          <label :class="user.themeColor.colorTextTab">Renseignez la dénomination sociale *</label>
+          <label :class="colorTextTab">Renseignez la dénomination sociale *</label>
           <input class="input" type="text" v-model="data.name" required />
         </div>
         <!-- street -->
         <div>
-          <label :class="user.themeColor.colorTextTab">Renseignez le numéro et la rue *</label>
+          <label :class="colorTextTab">Renseignez le numéro et la rue *</label>
           <input class="input" type="text" v-model="data.address.street" required />
         </div>
         <!-- code post -->
         <div>
-          <label :class="user.themeColor.colorTextTab">Renseignez le code postal *</label>
+          <label :class="colorTextTab">Renseignez le code postal *</label>
           <input class="input" type="text" v-model="data.address.codePost" required />
         </div>
         <!-- city -->
         <div>
-          <label :class="user.themeColor.colorTextTab">Renseignez la ville *</label>
+          <label :class="colorTextTab">Renseignez la ville *</label>
           <input class="input" type="text" v-model="data.address.city" required />
         </div>
         <!-- phoneNumber -->
         <div>
-          <label :class="user.themeColor.colorTextTab">Renseignez le numéro de téléphone *</label>
+          <label :class="colorTextTab">Renseignez le numéro de téléphone *</label>
           <input class="input" type="text" v-model="data.phoneNumber" required />
         </div>
       </div>
@@ -35,23 +35,23 @@
       <div class="block_right">
         <!-- filliale -->
         <div>
-          <label :class="user.themeColor.colorTextTab">Renseignez le site de production ou la filliale *</label>
+          <label :class="colorTextTab">Renseignez le site de production ou la filliale *</label>
           <input class="input" type="text" v-model="data.filliale" required />
         </div>
         <!-- siret -->
         <div>
-          <label :class="user.themeColor.colorTextTab">Renseignez le numéro de siret *</label>
+          <label :class="colorTextTab">Renseignez le numéro de siret *</label>
           <input class="input" type="text" v-model="data.siret" required />
         </div>
         <!-- naf -->
         <div>
-          <label :class="user.themeColor.colorTextTab">Renseignez le code NAF (ou APE) *</label>
+          <label :class="colorTextTab">Renseignez le code NAF (ou APE) *</label>
           <input class="input" type="text" v-model="data.naf" required />
         </div>
         <!-- sector -->
         <div>
           <div class="box_btn_add_input">
-            <label :class="user.themeColor.colorTextTab">Ajoutez un secteur</label>
+            <label :class="colorTextTab">Ajoutez un secteur</label>
             <!-- btn for add input -->
             <button class="btn_add_input" @click.prevent="addInputSector">
               <svg
@@ -113,6 +113,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import ButtonApp from "../../../Elements/ButtonApp.vue";
 import ErrorContent from "../../../Elements/ErrorContent.vue";
 
@@ -149,6 +150,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("UserConnect", ["colorTextTab", "cbgBox"]),
     user() {
       return (this.data.admin = this.$store.getters["UserConnect/currentUser"]);
     },

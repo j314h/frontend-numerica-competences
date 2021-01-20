@@ -6,6 +6,7 @@ export default {
   namespaced: true,
   state: {
     companies: null,
+    referentOfCompanies: null,
     errors: [],
   },
   mutations,

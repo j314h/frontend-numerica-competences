@@ -9,12 +9,14 @@
       <the-headband class="head_principal"></the-headband>
       <the-sub-menu v-show="isSubMenu"></the-sub-menu>
       <!-- content text assigns background and text color according to dark mode-->
-      <div class="content" :class="currentUser.themeColor.bgContent + ' ' + currentUser.themeColor.colorText">
+      <div class="content" :class="bgContent + ' ' + colorText">
         <transition appear name="fade" mode="out-in">
           <!-- view home for dashbord -->
           <router-view name="HomeDashbord"></router-view>
           <!-- view for setting app -->
           <router-view name="Setting"></router-view>
+          <!-- views see company -->
+          <router-view name="SeeCompany"></router-view>
         </transition>
         <!-- preloader for all app, each load-->
         <ring-loader :loading="isLoading" :color="color" :color2="color2" :size="size"></ring-loader>
@@ -48,7 +50,7 @@ export default {
   },
   computed: {
     //recover current user
-    ...mapGetters("UserConnect", ["currentUser"]),
+    ...mapGetters("UserConnect", ["bgContent", "colorText"]),
     //check variable load of app
     ...mapGetters("UserConnect", ["isLoading"]),
     //check if see or not sub menu
@@ -62,13 +64,13 @@ export default {
   opacity: 0;
 }
 .fade-enter-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
 }
 .fade-leave {
   opacity: 1;
 }
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
   opacity: 0;
 }
 .box_dashbord {

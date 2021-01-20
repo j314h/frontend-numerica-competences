@@ -1,5 +1,5 @@
 <template>
-  <div class="sub_menu stxm-r" :class="currentUser.themeColor.bgSubMenu">
+  <div class="sub_menu stxm-r" :class="bgSubMenu">
     <!-- sub menu for dashbord -->
     <div v-if="titleHeadBand === 'Tableau de bord'" class="sub_menu_dashbord">
       <div>
@@ -8,11 +8,24 @@
       <div>
         <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateCompany' }">Créer une entreprise</router-link>
       </div>
-      <div>
-        <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateNews' }">Créer un fils d'actualité</router-link>
-      </div>
     </div>
     <!-- other sub menu -->
+    <!-- sub menu for dashbord -->
+    <div v-if="titleHeadBand === 'Entreprise'" class="sub_menu_dashbord">
+      <div>
+        <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyHome' }">Accueil</router-link>
+      </div>
+      <div>
+        <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateUser' }"
+          >Créer un salarié</router-link
+        >
+      </div>
+      <div>
+        <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateFileWork' }"
+          >Créer une fiche métier</router-link
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,7 +36,7 @@ export default {
   name: "TheSubMenu",
   computed: {
     //recover info current user
-    ...mapGetters("UserConnect", ["currentUser"]),
+    ...mapGetters("UserConnect", ["bgSubMenu"]),
     //recover title head band
     ...mapGetters("ParamApp", ["titleHeadBand"]),
   },

@@ -5,6 +5,7 @@ import ParamApp from "./ParamApp/ParamApp"; // setting of app
 import Sectors from "./Sectors/Sectors"; // info for sector
 import Companies from "./Companies/Companies"; // info for companies
 import States from "./States/States"; // info for state
+import CurrentCompany from "./CurrentCompany/CurrentCompany";
 
 Vue.use(Vuex);
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
     Sectors,
     Companies,
     States,
+    CurrentCompany,
   },
 });

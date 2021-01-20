@@ -9,6 +9,10 @@ import HomeDashbord from "../components/ContentApp/HomeDashbord/HomeDashbord.vue
 import CreateCompany from "../components/ContentApp/HomeDashbord/CreateCompany/CreateCompany.vue";
 import CreateNews from "../components/ContentApp/HomeDashbord/CreateNews/CreateNews.vue";
 import DashHome from "../components/ContentApp/HomeDashbord/DashHome/DashHome.vue";
+import SeeCompany from "../components/ContentApp/SeeCompany/SeeCompany.vue";
+import SeeCompanyCreateUser from "../components/ContentApp/SeeCompany/SeeCompanyCreateUser.vue";
+import SeeCompanyHome from "../components/ContentApp/SeeCompany/SeeCompanyHome.vue";
+import SeeCompanyCreateFileWork from "../components/ContentApp/SeeCompany/SeeCompanyCreateFileWork.vue";
 
 Vue.use(VueRouter);
 
@@ -47,19 +51,18 @@ const routes = [
             components: {
               DashHome,
             },
+            //if not connect, not next
+            beforeEnter: async (to, from, next) => {
+              //recover companies and referent of companies
+              await store.dispatch("Companies/getAllCompanies");
+              next();
+            },
           },
           {
             path: "create-company", //dashbord create company
             name: "CreateCompany",
             components: {
               CreateCompany,
-            },
-          },
-          {
-            path: "create-news", //dashbord create newsLetter
-            name: "CreateNews",
-            components: {
-              CreateNews,
             },
           },
         ],
@@ -70,6 +73,37 @@ const routes = [
         components: {
           Setting,
         },
+      },
+      {
+        path: "seecompany", //dashbord company with id params
+        name: "SeeCompany",
+        redirect: { name: "SeeCompanyHome" },
+        components: {
+          SeeCompany,
+        },
+        children: [
+          {
+            path: "seecompany-home", //dashbord create user compared with id company
+            name: "SeeCompanyHome",
+            components: {
+              SeeCompanyHome,
+            },
+          },
+          {
+            path: "create-user", //dashbord create user compared with id company
+            name: "SeeCompanyCreateUser",
+            components: {
+              SeeCompanyCreateUser,
+            },
+          },
+          {
+            path: "create-file-work", //dashbord create user compared with id company
+            name: "SeeCompanyCreateFileWork",
+            components: {
+              SeeCompanyCreateFileWork,
+            },
+          },
+        ],
       },
     ],
     //if not connect, not next
