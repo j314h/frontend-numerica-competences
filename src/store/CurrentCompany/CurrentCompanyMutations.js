@@ -8,4 +8,13 @@ export default {
     state.idCompaniesSelected = "";
     localStorage.removeItem("currentCompany");
   },
+  addCurrentCompany(state, company) {
+    state.currentCompany = company;
+  },
+  resetErrors(state) {
+    state.errors = [];
+  },
+  addError(state, error) {
+    state.errors = [...state.errors, error];
+  },
 };

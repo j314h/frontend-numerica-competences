@@ -51,9 +51,8 @@ const routes = [
             components: {
               DashHome,
             },
-            //if not connect, not next
+            //recover companies and referent of companies
             beforeEnter: async (to, from, next) => {
-              //recover companies and referent of companies
               await store.dispatch("Companies/getAllCompanies");
               next();
             },
@@ -87,6 +86,14 @@ const routes = [
             name: "SeeCompanyHome",
             components: {
               SeeCompanyHome,
+            },
+            //recover company selected
+            beforeEnter: async (to, from, next) => {
+              await store.dispatch(
+                "CurrentCompany/getSelectedCompany",
+                store.getters["CurrentCompany/idCompaniesSelected"]
+              );
+              next();
             },
           },
           {

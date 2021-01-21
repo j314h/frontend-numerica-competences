@@ -1,6 +1,6 @@
 <template>
   <div class="stxm-r">
-    coucou
+    Creer salarié
   </div>
 </template>
 

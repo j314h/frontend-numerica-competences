@@ -65,7 +65,7 @@
       <div v-if="idCompaniesSelected">
         <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'SeeCompany' }">
           <div class="link_menu onglet" :class="colorMenuActive">
-            <span>Entreprise selectionnée</span>
+            <span>{{ upperFirstLetter(currentCompany.name) }}</span>
           </div>
           <router-link
             class="link_menu close_entreprise stxm-r"
@@ -114,7 +114,7 @@ export default {
   computed: {
     //load theme color for currentUser
     ...mapGetters("UserConnect", ["colorMenuActive", "bgLayout"]),
-    ...mapGetters("CurrentCompany", ["idCompaniesSelected"]), //@click="outCurrentCompany"
+    ...mapGetters("CurrentCompany", ["idCompaniesSelected", "currentCompany"]), //@click="outCurrentCompany"
     //add class for menu burger
     stateMenu() {
       return this.menuIsOpen ? "active" : "";
