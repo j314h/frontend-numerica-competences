@@ -1,45 +1,50 @@
 <template>
   <div>
+    <!-- tab employee -->
     <div class="salarie box stxm-r" :class="currentUser.themeColor.cbgBox">
       <div class="header">
         <h3 class="stxxm-m" :class="currentUser.themeColor.colorTextTab">Salariés</h3>
       </div>
+      <company-selected-employees
+        :employeesCompanySelected="employeesCompanySelected"
+        :currentUser="currentUser"
+      ></company-selected-employees>
     </div>
+
+    <!-- informations company -->
     <div class="box stxm-r" :class="currentUser.themeColor.cbgBox">
       <div class="header">
         <h3 class="stxxm-m" :class="currentUser.themeColor.colorTextTab">Informations</h3>
         <img :src="imageUpdateCompany" />
       </div>
-      <company-selected-info :company="currentCompany" :user="currentUser"></company-selected-info>
+      <company-selected-info
+        :companySelected="companySelected"
+        :currentUser="currentUser"
+        :sectorsCompanySelected="sectorsCompanySelected"
+      ></company-selected-info>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import CompanySelectedEmployees from "./SeeCompanyComponent/CompanySelectedEmployees.vue";
 import CompanySelectedInfo from "./SeeCompanyComponent/CompanySelectedInfo.vue";
 
 export default {
-  components: { CompanySelectedInfo },
+  components: { CompanySelectedInfo, CompanySelectedEmployees },
   name: "SeeCompanyHome",
+  props: {
+    idCompaniesSelected: String,
+    companySelected: Object,
+    sectorsCompanySelected: Array,
+    currentUser: Object,
+    employeesCompanySelected: Array,
+    imageUpdateCompany: String,
+  },
   data() {
-    return {
-      urlApiImg: process.env.VUE_APP_URL_API_IMG,
-      imageCompany: "logoUpdateElement",
-    };
+    return {};
   },
-  computed: {
-    ...mapGetters("CurrentCompany", ["idCompaniesSelected", "currentCompany"]),
-    ...mapGetters("UserConnect", ["currentUser"]),
-
-    //this variable for change image pencil and X for update user and company
-    imageUpdateCompany() {
-      if (this.$store.getters["ParamApp/imgs"]) {
-        const { fieldName } = this.$store.getters["ParamApp/imgs"].find((el) => el.name === this.imageCompany);
-        return `${this.urlApiImg}${fieldName}`;
-      }
-    },
-  },
+  computed: {},
 };
 </script>
 

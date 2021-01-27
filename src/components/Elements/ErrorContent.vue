@@ -1,6 +1,6 @@
 <template>
   <div class="error-basic">
-    {{ error }}
+    {{ error[0] }}
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: "ErrorContent",
   props: {
-    error: "",
+    error: Array,
   },
 };
 </script>

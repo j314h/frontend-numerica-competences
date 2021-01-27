@@ -43,7 +43,7 @@ export default {
   computed: {
     //return user current
     user() {
-      return this.$store.getters["UserConnect/currentUser"];
+      return this.$store.getters["CurrentUser/currentUser"];
     },
     //return name company
     userCompanyName() {

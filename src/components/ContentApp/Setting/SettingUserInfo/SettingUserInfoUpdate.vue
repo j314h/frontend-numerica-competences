@@ -6,31 +6,31 @@
         <div class="info_detail">
           <div>
             <label>Prénom</label>
-            <input type="text" v-model="dataForm.firstName" class="input space_input" required />
+            <input type="text" v-model="dataForm.data.name.firstName" class="input space_input" required />
           </div>
           <div>
             <label class="space_input">Nom</label>
-            <input type="text" v-model="dataForm.lastName" class="input space_input" required />
+            <input type="text" v-model="dataForm.data.name.lastName" class="input space_input" required />
           </div>
           <div>
             <label class="space_input">Adresse, numéro et rue</label>
-            <input type="text" v-model="dataForm.street" class="input space_input" />
+            <input type="text" v-model="dataForm.data.address.street" class="input space_input" />
           </div>
           <div>
             <label class="space_input">Code postal</label>
-            <input type="text" v-model="dataForm.postCode" class="input space_input" />
+            <input type="text" v-model="dataForm.data.address.postCode" class="input space_input" />
           </div>
           <div>
             <label class="space_input">Ville</label>
-            <input type="text" v-model="dataForm.city" class="input space_input" />
+            <input type="text" v-model="dataForm.data.address.city" class="input space_input" />
           </div>
           <div>
             <label class="space_input">Téléphone</label>
-            <input type="tel" v-model="dataForm.phoneNumber" class="input space_input" />
+            <input type="tel" v-model="dataForm.data.phoneNumber" class="input space_input" />
           </div>
           <div>
             <label class="space_input">Adresse mail</label>
-            <input type="email" v-model="dataForm.email" class="input space_input" autocomplete="off" required />
+            <input type="email" v-model="dataForm.data.email" class="input space_input" autocomplete="off" required />
           </div>
         </div>
         <!-- info password -->
@@ -64,7 +64,7 @@
               <v-select
                 class="select"
                 :options="['root', 'administrateur', 'référent', 'manager', 'collaborateur']"
-                v-model="dataForm.role"
+                v-model="dataForm.data.role"
               ></v-select>
             </div>
             <div v-else>
@@ -102,19 +102,23 @@ export default {
     return {
       //data for update user, send for api
       dataForm: {
-        firstName: this.$store.getters["UserConnect/currentUser"].name.firstName,
-        lastName: this.$store.getters["UserConnect/currentUser"].name.lastName,
-        street: this.$store.getters["UserConnect/currentUser"].address.street,
-        postCode: this.$store.getters["UserConnect/currentUser"].address.postCode,
-        city: this.$store.getters["UserConnect/currentUser"].address.city,
-        phoneNumber: this.$store.getters["UserConnect/currentUser"].phoneNumber,
-        email: this.$store.getters["UserConnect/currentUser"].email,
-        role: this.$store.getters["UserConnect/currentUser"].role.libelle,
-        passwordOld: "",
-        password: "",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+        data: {
+          name: {
+            firstName: this.$store.getters["UserConnect/currentUser"].name.firstName,
+            lastName: this.$store.getters["UserConnect/currentUser"].name.lastName,
+          },
+          address: {
+            street: this.$store.getters["UserConnect/currentUser"].address.street,
+            postCode: this.$store.getters["UserConnect/currentUser"].address.postCode,
+            city: this.$store.getters["UserConnect/currentUser"].address.city,
+          },
+          phoneNumber: this.$store.getters["UserConnect/currentUser"].phoneNumber,
+          email: this.$store.getters["UserConnect/currentUser"].email,
+          role: this.$store.getters["UserConnect/currentUser"].role.libelle,
         },
+        _id: this.$store.getters["UserConnect/currentUser"]._id,
+        oldPassword: "",
+        password: "",
       },
       //for wait the controle in function updateUser
       passwordOld: "",
@@ -135,7 +139,7 @@ export default {
         //if the password is entered, and the new password does not match, we find an error
         if (this.passwordOld) {
           if (this.password === this.confirmPasswordNew && this.password && this.confirmPasswordNew) {
-            this.dataForm.passwordOld = this.passwordOld;
+            this.dataForm.oldPassword = this.passwordOld;
             this.dataForm.password = this.password;
             this.messageAlert = "Updating user is completed with password";
           } else {
@@ -160,7 +164,7 @@ export default {
         this.$parent.updateUser();
       } catch (e) {
         //clear input password
-        this.dataForm.passwordOld = "";
+        this.dataForm.oldPassword = "";
         this.dataForm.password = "";
         this.passwordOld = "";
         this.password = "";

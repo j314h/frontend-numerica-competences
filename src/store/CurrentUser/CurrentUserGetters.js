@@ -1,5 +1,14 @@
 export default {
+  //retrun info user connected
   currentUser: (state) => state.currentUser,
+
+  idCurrentUser: (state) => state.currentUser._id,
+
+  //return info company of user connected
+  currentUserCompany: (state) => state.currentUserCompany,
+
+  //theme color
+  thColor: (state) => state.currentUser.themeColor,
   bgContent: (state) => state.currentUser.themeColor.bgContent,
   colorText: (state) => state.currentUser.themeColor.colorText,
   bgSubMenu: (state) => state.currentUser.themeColor.bgSubMenu,
@@ -7,7 +16,9 @@ export default {
   bgLayout: (state) => state.currentUser.themeColor.bgLayout,
   cbgBox: (state) => state.currentUser.themeColor.cbgBox,
   colorTextTab: (state) => state.currentUser.themeColor.colorTextTab,
+  btnm: (state) => state.currentUser.themeColor.btnm,
+  btn: (state) => state.currentUser.themeColor.btn,
+
+  //return bool for know if user is connected
   isSignIn: (state) => state.isSignIn,
-  isLoading: (state) => state.isLoading,
-  errors: (state) => state.errors,
 };

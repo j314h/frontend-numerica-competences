@@ -3,33 +3,62 @@ import store from "../index";
 import { headers } from "../../lib/axios.config";
 
 export default {
-  //recover all companies in database
-  async getAllCompanies(context) {
+  //recover all companies of user connected
+  async getAllCompaniesAdmin(context) {
     try {
-      const companies = await Vue.prototype.$http.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}companies`);
-      context.commit("resetErrors");
-      context.commit("addAllCompanies", companies.data.companies);
-      context.commit("addAllReferentOfCompanies", companies.data.tabReferent);
-    } catch (e) {
-      context.commit("addError", e.response.data.message);
+      //reset error
+      store.commit("Error/resetError");
+
+      //call api for get comapnies of user connected
+      const data = await Vue.axios.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}companies-admin`);
+
+      //add companies of user connected
+      context.commit("addAllCompaniesUserConnected", data.data.companies);
+      store.commit("Employees/addEmployeesReferentCompaniesAdmin", data.data.tabReferent);
+    } catch (error) {
+      store.commit("Error/addError", error);
+    }
+  },
+
+  //get company selected and users of company
+  async getCompanySelected(context, idCompany) {
+    try {
+      //see page loading and reset error
+      //store.commit("Loading/stateLoading", true);
+      store.commit("Error/resetError");
+
+      //call api for recover company selected and users of company selected
+      const company = await Vue.axios.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}company/${idCompany}`);
+      const usersCompany = await Vue.axios.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}users/${idCompany}`);
+
+      //add company in store and recover and add sectors of company selected
+      context.commit("addCompanySelected", company.data);
+      store.commit("Employees/addEmployeeCompanySelected", usersCompany.data);
+      //store.commit("Loading/stateLoading", false);
+    } catch (error) {
+      //add error in store disable page loading
+      store.commit("Error/addError", error);
+      //store.commit("Loading/stateLoading", false);
     }
   },
 
   //create company
-  async createCompany(context, data) {
+  async createCompany(context, company) {
     try {
-      store.commit("UserConnect/isloading");
-      //send data in api and recover all companies
-      await Vue.prototype.$http.post(
-        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}create-company`,
-        data,
-        headers.headers
-      );
-      context.commit("resetErrors");
-      store.commit("UserConnect/disableLoading");
-    } catch (e) {
-      context.commit("addError", e.response.data.message);
-      store.commit("UserConnect/disableLoading");
+      //see page loading and reset error
+      //store.commit("Loading/stateLoading", true);
+      store.commit("Error/resetError");
+
+      //call api for create company
+      await Vue.axios.post(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}company-create`, company, headers);
+
+      //reload comapnies of user connected and disable page loading
+      context.dispatch("getAllCompaniesAdmin");
+      //store.commit("Loading/stateLoading", false);
+    } catch (error) {
+      //add error in store disable page loading
+      store.commit("Error/addError", error);
+      //store.commit("Loading/stateLoading", false);
     }
   },
 };

@@ -1,7 +1,6 @@
 <template>
   <div class="box" :class="cbgBox">
     <h3 class="stxxm-m title" :class="colorTextTab">Vos clients</h3>
-    <!-- faire tableau -->
     <!-- ligne head -->
     <div class="line linehead cbginput" :class="colorTextTab">
       <div>
@@ -14,20 +13,21 @@
         Référent
       </div>
     </div>
+
     <!-- ligne -->
-    <div v-for="(item, i) in tabHomeCompanies" :key="i" class="line">
+    <div v-for="(item, i) in companiesReferents" :key="i" class="line">
       <div class="link">
         <router-link class="link_router" :to="{ name: 'SeeCompany' }">
-          <div @click="test(item.company._id)">{{ item.company.name }}</div>
+          <div @click="selectedCompany(item.company)">{{ upperFirstLetter(item.company.name) }}</div>
         </router-link>
       </div>
       <div>
-        {{ item.company.filliale }}
+        {{ upperFirstLetter(item.company.filliale) }}
       </div>
       <div class="link">
         <router-link class="link_router" :to="{ name: 'SeeUserReferentCompany' }">
-          {{ item.referent.name.firstName }}
-          {{ item.referent.name.lastName }}
+          {{ upperFirstLetter(item.employee.name.firstName) }}
+          {{ upperFirstLetter(item.employee.name.lastName) }}
         </router-link>
       </div>
     </div>
@@ -35,20 +35,28 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "DashHomeArrayCompanies",
+  props: {
+    cbgBox: String,
+    colorTextTab: String,
+    companiesReferents: Array,
+  },
   data() {
     return {};
   },
-  computed: {
-    ...mapGetters("UserConnect", ["cbgBox", "colorTextTab"]),
-    ...mapGetters("Companies", ["tabHomeCompanies"]),
-  },
+  computed: {},
   methods: {
-    test(id) {
+    //first letter of text uppercase
+    upperFirstLetter(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+
+    //selected company
+    selectedCompany(company) {
       //add id in store currentcompany in companiesSelected
-      this.$store.commit("CurrentCompany/addCompaniesSelected", id);
+      this.$store.commit("Companies/addIdCompanySelected", company._id);
+      this.$store.commit("ParamApp/changeTitleHeadBand", company.name);
     },
   },
 };

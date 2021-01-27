@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     //recover current user
-    ...mapGetters("UserConnect", ["currentUser"]),
+    ...mapGetters("CurrentUser", ["currentUser"]),
 
     //this variable for change image pencil and X for update user and company
     imageUpdateUser() {

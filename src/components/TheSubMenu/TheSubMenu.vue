@@ -11,7 +11,7 @@
     </div>
     <!-- other sub menu -->
     <!-- sub menu for dashbord -->
-    <div v-if="titleHeadBand === 'Entreprise'" class="sub_menu_dashbord">
+    <div v-if="titleHeadBand === companySelected.name" class="sub_menu_dashbord">
       <div>
         <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyHome' }">Accueil</router-link>
       </div>
@@ -35,9 +35,9 @@ import { mapGetters } from "vuex";
 export default {
   name: "TheSubMenu",
   computed: {
-    //recover info current user
-    ...mapGetters("UserConnect", ["bgSubMenu"]),
-    //recover title head band
+    //recover info current user and company selected and title head band
+    ...mapGetters("CurrentUser", ["bgSubMenu"]),
+    ...mapGetters("Companies", ["companySelected"]),
     ...mapGetters("ParamApp", ["titleHeadBand"]),
   },
 };

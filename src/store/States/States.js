@@ -5,8 +5,8 @@ import getters from "./StatesGetters";
 export default {
   namespaced: true,
   state: {
-    states: null,
-    errors: [],
+    //all states
+    states: [],
   },
   mutations,
   actions,

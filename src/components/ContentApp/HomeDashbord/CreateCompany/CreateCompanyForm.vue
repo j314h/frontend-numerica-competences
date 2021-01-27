@@ -95,12 +95,12 @@
         </div>
         <!-- gestion errors -->
         <div>
-          <error-content v-for="(error, i) in errors" :key="i" :error="error"></error-content>
+          <error-content :error="errors"></error-content>
         </div>
         <!-- btn for form -->
         <div class="btn_submit">
           <!-- btn reset for clear all input -->
-          <button @click.prevent="resetInput" :class="user.themeColor.btnm">Effacer</button>
+          <button @click.prevent="resetInput" :class="btnm">Effacer</button>
           <button-app class="btn_sub" :mini="true" :textBtn="'Créer'"></button-app>
         </div>
       </div>
@@ -113,13 +113,20 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import ButtonApp from "../../../Elements/ButtonApp.vue";
 import ErrorContent from "../../../Elements/ErrorContent.vue";
 
 export default {
   components: { ButtonApp, ErrorContent },
   name: "CreateCompanyForm",
+  props: {
+    cbgBox: String,
+    colorTextTab: String,
+    errors: Array,
+    btnm: String,
+    stateActif: String,
+    idCurrentUser: String,
+  },
   data() {
     return {
       nbrInputSector: [],
@@ -128,58 +135,35 @@ export default {
       isAddSector: false,
       //data for send api for create company
       sendData: {
-        company: null,
+        company: Object,
         sectors: [],
       },
       //for company
       data: {
         name: "",
+        filliale: "",
+        siret: "",
+        naf: "",
+        phoneNumber: "",
         address: {
           street: "",
           codePost: "",
           city: "",
         },
-        filliale: "",
-        siret: "",
-        naf: "",
-        state: "",
-        admin: "",
-        phoneNumber: "",
-        state: "",
+        state: this.stateActif,
+        admin: this.idCurrentUser,
       },
     };
   },
-  computed: {
-    ...mapGetters("UserConnect", ["colorTextTab", "cbgBox"]),
-    user() {
-      return (this.data.admin = this.$store.getters["UserConnect/currentUser"]);
-    },
-    //recover id for current user
-    idUser() {
-      return (this.data.admin = this.$store.getters["UserConnect/currentUser"]._id);
-    },
-    //recover object state of bdd with libelle actif
-    stateActif() {
-      if (this.$store.getters["States/states"]) {
-        const stateActif = this.$store.getters["States/states"].find((el) => el.libelle === "actif");
-        return (this.data.state = stateActif._id);
-      }
-    },
-    //recover error in company store
-    errors() {
-      return this.$store.getters["Companies/errors"];
-    },
-  },
+  computed: {},
   methods: {
     //data in input send in api for create entreprise
     async createCompanyInBdd() {
       try {
         //create one object for send and affect idUser and id state "actif"
         this.sendData.company = this.data;
-        this.sendData.company.admin = this.idUser;
-        this.sendData.company.state = this.stateActif;
-        const response = await this.$store.dispatch("Companies/createCompany", this.sendData);
-        if (this.$store.getters["Companies/errors"].length > 0)
+        await this.$store.dispatch("Companies/createCompany", this.sendData);
+        if (this.$store.getters["Error/errors"].length > 0)
           throw "Une Erreur est survenue au moment de la création d'une entreprise";
         this.resetInput();
         //if success show alert custom
@@ -197,7 +181,7 @@ export default {
         this.$swal.fire({
           position: "top-end",
           icon: "error",
-          title: this.$store.getters["Companies/errors"][0],
+          title: this.$store.getters["Error/firstError"],
           showConfirmButton: false,
           timer: 1000,
         });
@@ -217,13 +201,12 @@ export default {
     //reset input and clear capture user
     resetInput() {
       //reset error if exist error
-      this.$store.commit("Companies/resetErrors");
+      this.$store.commit("Error/resetError");
       this.nbrInputSector = [];
       this.countSector = 0;
       this.isAddSector = false;
       this.sendData.company = null;
       this.sendData.sectors = [];
-      this.sendData.idUser = null;
       this.data.name = "";
       this.data.address.street = "";
       this.data.address.codePost = "";
@@ -232,13 +215,14 @@ export default {
       this.data.siret = "";
       this.data.naf = "";
       this.data.state = this.stateActif;
-      this.data.admin = this.idUser;
+      this.data.admin = this.idCurrentUser;
       this.data.phoneNumber = "";
     },
   },
+
   destroyed() {
     //reset error if exist error
-    this.$store.commit("Companies/resetErrors");
+    this.$store.commit("Error/resetError");
   },
 };
 </script>

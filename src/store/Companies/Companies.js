@@ -5,9 +5,14 @@ import getters from "./CompaniesGetters";
 export default {
   namespaced: true,
   state: {
-    companies: null,
-    referentOfCompanies: null,
-    errors: [],
+    //all companies
+    companiesAdmin: [],
+    //id of company selected and save in localstorage to persist data in case of recharging
+    idCompaniesSelected: localStorage.getItem("idCompanySelected")
+      ? JSON.parse(localStorage.getItem("idCompanySelected"))
+      : "",
+    //company selected by current user
+    companySelected: {},
   },
   mutations,
   actions,

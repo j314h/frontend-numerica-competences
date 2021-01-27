@@ -2,17 +2,17 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView";
 import DashbordPage from "../views/DashbordPage";
+import HomeDashbord from "../components/ContentApp/HomeDashbord/HomeDashbord.vue";
+import DashHome from "../components/ContentApp/HomeDashbord/DashHome/DashHome.vue";
 import store from "../store";
 import VueCookies from "vue-cookies";
-import Setting from "../components/ContentApp/Setting/Setting.vue";
-import HomeDashbord from "../components/ContentApp/HomeDashbord/HomeDashbord.vue";
-import CreateCompany from "../components/ContentApp/HomeDashbord/CreateCompany/CreateCompany.vue";
-import CreateNews from "../components/ContentApp/HomeDashbord/CreateNews/CreateNews.vue";
-import DashHome from "../components/ContentApp/HomeDashbord/DashHome/DashHome.vue";
-import SeeCompany from "../components/ContentApp/SeeCompany/SeeCompany.vue";
-import SeeCompanyCreateUser from "../components/ContentApp/SeeCompany/SeeCompanyCreateUser.vue";
-import SeeCompanyHome from "../components/ContentApp/SeeCompany/SeeCompanyHome.vue";
-import SeeCompanyCreateFileWork from "../components/ContentApp/SeeCompany/SeeCompanyCreateFileWork.vue";
+const Setting = () => import("../components/ContentApp/Setting/Setting.vue");
+const CreateCompany = () => import("../components/ContentApp/HomeDashbord/CreateCompany/CreateCompany.vue");
+const SeeCompany = () => import("../components/ContentApp/SeeCompany/SeeCompany.vue");
+const SeeCompanyCreateUser = () => import("../components/ContentApp/SeeCompany/SeeCompanyCreateUser.vue");
+const SeeCompanyHome = () => import("../components/ContentApp/SeeCompany/SeeCompanyHome.vue");
+const SeeCompanyCreateFileWork = () => import("../components/ContentApp/SeeCompany/SeeCompanyCreateFileWork.vue");
+const HomeValidateAccount = () => import("../views/HomeValidateAccount.vue");
 
 Vue.use(VueRouter);
 
@@ -23,10 +23,14 @@ const routes = [
     components: {
       HomeView,
     },
-    //if cookie token not exist not next
-    beforeEnter: (to, from, next) => {
-      store.commit("UserConnect/checkedJwt", VueCookies.isKey("jwt"));
-      store.getters["UserConnect/isSignIn"] ? next("/dashbord-page") : next();
+
+    beforeEnter: async (to, from, next) => {
+      //check if cookie for variable isSignIn and check if img is load or not
+      store.commit("CurrentUser/checkedJwt", VueCookies.isKey("jwt"));
+      !localStorage.getItem("imgs") ? await store.dispatch("Files/getFiles") : null;
+
+      //if cookie token not exist not next
+      store.getters["CurrentUser/isSignIn"] ? next("/dashbord-page") : next();
     },
   },
   {
@@ -44,17 +48,23 @@ const routes = [
         components: {
           HomeDashbord,
         },
+        //recover state and companies admin, referent recover in dispatch getAllCompaniesAdmin
+        beforeEnter: async (to, from, next) => {
+          await store.dispatch("States/getAllState");
+          await store.dispatch("Companies/getAllCompaniesAdmin");
+          //if company selected is define reload info company selected and users of company selected
+          if (store.getters["Companies/idCompaniesSelected"]) {
+            await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+            await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          }
+          next();
+        },
         children: [
           {
             path: "dashbord-home", //dashbord home
             name: "DashHome",
             components: {
               DashHome,
-            },
-            //recover companies and referent of companies
-            beforeEnter: async (to, from, next) => {
-              await store.dispatch("Companies/getAllCompanies");
-              next();
             },
           },
           {
@@ -80,20 +90,20 @@ const routes = [
         components: {
           SeeCompany,
         },
+        //recover company selected and sectors and users of company selected
+        beforeEnter: async (to, from, next) => {
+          console.log(store.getters["Companies/idCompaniesSelected"]);
+          await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          store.commit("ParamApp/changeTitleHeadBand", store.getters["Companies/companySelected"].name);
+          next();
+        },
         children: [
           {
             path: "seecompany-home", //dashbord create user compared with id company
             name: "SeeCompanyHome",
             components: {
               SeeCompanyHome,
-            },
-            //recover company selected
-            beforeEnter: async (to, from, next) => {
-              await store.dispatch(
-                "CurrentCompany/getSelectedCompany",
-                store.getters["CurrentCompany/idCompaniesSelected"]
-              );
-              next();
             },
           },
           {
@@ -114,9 +124,16 @@ const routes = [
       },
     ],
     //if not connect, not next
-    beforeEnter: (to, from, next) => {
-      store.commit("UserConnect/checkedJwt", VueCookies.isKey("jwt"));
-      store.getters["UserConnect/isSignIn"] ? next() : next("/");
+    // beforeEnter: (to, from, next) => {
+    //   store.commit("CurrentUser/checkedJwt", VueCookies.isKey("jwt"));
+    //   store.getters["CurrentUser/isSignIn"] ? next() : next("/");
+    // },
+  },
+  {
+    path: "/user-verify-create", //home connect
+    name: "HomeValidateAccount",
+    components: {
+      HomeValidateAccount,
     },
   },
 ];
@@ -128,14 +145,20 @@ const router = new VueRouter({
   routes,
 });
 
-//verification user connected if jwt cookie exist
+//test all roads for verification user connected if jwt cookie exist
 router.beforeEach(async (to, from, next) => {
   try {
+    //if cookie exist verification user in backend
+    //else if not cookie, redirect in "/"
     if (VueCookies.isKey("jwt")) {
-      await store.dispatch("UserConnect/userConnectVerification");
+      await store.dispatch("CurrentUser/verificationUserConnect");
       next({ name: from });
     } else {
-      next();
+      if (to.path !== "/") {
+        next("/");
+      } else {
+        next();
+      }
     }
   } catch (error) {
     next("/");
@@ -143,12 +166,3 @@ router.beforeEach(async (to, from, next) => {
 });
 
 export default router;
-
-// {
-//   path: "/about",
-//   name: "About",
-//   // route level code-splitting
-//   // this generates a separate chunk (about.[hash].js) for this route
-//   // which is lazy-loaded when the route is visited.
-//   component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
-// },

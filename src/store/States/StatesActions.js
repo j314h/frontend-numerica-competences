@@ -5,14 +5,15 @@ export default {
   //call api for recover all state
   async getAllState(context) {
     try {
-      //recover all state in database
+      //reset error and call api for recover all state
+      store.commit("Error/resetError");
       const states = await Vue.prototype.$http.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}states`);
+
       //add all state in store
-      context.commit("allState", states.data);
-      context.commit("resetErrors");
-    } catch (e) {
+      context.commit("addAllState", states.data);
+    } catch (error) {
       //add error
-      context.commit("addError", e.response.data.message);
+      store.commit("Error/addError", error);
     }
   },
 };

@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     //load color btn with currentUser
-    ...mapGetters("UserConnect", ["currentUser"]),
+    ...mapGetters("CurrentUser", ["currentUser"]),
   },
 };
 </script>

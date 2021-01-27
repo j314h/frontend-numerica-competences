@@ -2,15 +2,20 @@
   <div class="globals_App">
     <!-- page home connect -->
     <router-view name="HomeView"></router-view>
+
     <!-- dasbord app -->
     <router-view name="DashbordPage"></router-view>
+
+    <!-- validate account -->
+    <router-view name="HomeValidateAccount"></router-view>
+
     <!-- preloader juste for load connect user-->
     <ring-loader
-      v-if="!currentUser.name"
+      v-if="!isSignIn"
       :loading="isLoading"
-      :color="color"
-      :color2="color2"
-      :size="size"
+      :color="'#F84210'"
+      :color2="'#4C39E9'"
+      :size="'100px'"
     ></ring-loader>
   </div>
 </template>
@@ -24,29 +29,16 @@ export default {
   components: {
     RingLoader,
   },
-  data() {
-    return {
-      //for preloader
-      color: "#F84210",
-      color2: "#4C39E9",
-      size: "100px",
-    };
-  },
-  created() {
-    //call api for get all files image
-    if (!localStorage.getItem("imgs")) {
-      this.$store.dispatch("ParamApp/getFilesImg");
-    }
-  },
   computed: {
     //true or false loading
-    ...mapGetters("UserConnect", ["isLoading"]),
+    ...mapGetters("Loading", ["isLoading"]),
     //recover info user
-    ...mapGetters("UserConnect", ["currentUser"]),
+    ...mapGetters("CurrentUser", ["isSignIn"]),
   },
 };
 </script>
 
 <style lang="scss">
+//load css globals app no scoped
 @import "./assets/scss/gobals-rules.scss";
 </style>

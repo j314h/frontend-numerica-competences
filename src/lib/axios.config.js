@@ -20,7 +20,9 @@ axios.interceptors.response.use((res) => {
 });
 
 export const headers = {
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
+  "Content-Type": "application/x-www-form-urlencoded",
+};
+
+export const headersData = {
+  "Content-Type": "multipart/form-data",
 };

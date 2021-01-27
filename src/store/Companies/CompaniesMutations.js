@@ -1,18 +1,24 @@
 export default {
   //save companies in store companies that comes from database
-  addAllCompanies(state, companies) {
-    state.companies = companies;
+  addAllCompaniesUserConnected(state, companies) {
+    state.companiesAdmin = companies;
   },
-  //save user referent of companies
-  addAllReferentOfCompanies(state, referent) {
-    state.referentOfCompanies = referent;
+
+  //add id company selected
+  addIdCompanySelected(state, idCompany) {
+    state.idCompaniesSelected = idCompany;
+    localStorage.setItem("idCompanySelected", JSON.stringify(idCompany));
   },
-  //add error in tab errors store companies
-  addError(state, error) {
-    state.errors = [...state.errors, error];
+
+  //add info of company selected
+  addCompanySelected(state, company) {
+    state.companySelected = company;
   },
-  //reset error in store companies
-  resetErrors(state) {
-    state.errors = [];
+
+  //delete company selected for user
+  deleteCompaniesSelected(state) {
+    state.companySelected = {};
+    state.idCompaniesSelected = "";
+    localStorage.removeItem("idCompanySelected");
   },
 };

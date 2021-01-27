@@ -4,34 +4,38 @@
       <!-- form -->
       <form @submit.prevent="connexionUser">
         <!-- img form -->
-        <div v-for="(img, i) in imgs" :key="i" class="box_img">
-          <img v-if="img.name === 'logoNumerica'" :src="`${urlApiImg}${img.fieldName}`" />
+        <div class="box_img">
+          <img :src="`${urlApiImg}${logoNumerica}`" />
         </div>
+
         <!-- input -->
         <div class="box_input">
           <!-- input mail -->
           <input-sample-img
-            v-model="dataConnectUser.data.email"
+            v-model="data.email"
             :email="true"
             :place="'E-mail'"
             :typeInput="'email'"
           ></input-sample-img>
+
           <!-- input password -->
           <input-sample-img
-            v-model="dataConnectUser.data.password"
+            v-model="data.password"
             :password="true"
             :place="'Mot de passe'"
             :typeInput="'password'"
           ></input-sample-img>
         </div>
+
         <!-- text password forget -->
         <p class="t-extrasmall password_forget">
           <a href="#" class="ctblue stxs-r">Mot de passe oublé</a>
         </p>
+
         <!-- error message -->
-        <error-content class="error_box" :error="errors[0]"></error-content>
+        <error-content class="error_box" :error="errors"></error-content>
+
         <!-- btn connexion -->
-        <!-- <div style="font-size:2rem;">sign in : {{ isSignIn }}, jwt: {{ jwt }}</div> -->
         <button-app class="btn_connexion" :textBtn="'Connexion'"></button-app>
       </form>
     </div>
@@ -45,32 +49,32 @@ import InputSampleImg from "../Elements/InputSampleImg.vue";
 import { mapGetters } from "vuex";
 
 export default {
-  components: { InputSampleImg, ErrorContent, ButtonApp },
   name: "HomeForm",
+  components: { InputSampleImg, ErrorContent, ButtonApp },
+  props: {
+    //for img logo numerica
+    urlApiImg: String,
+    logoNumerica: String,
+  },
   data() {
     return {
-      urlApiImg: process.env.VUE_APP_URL_API_IMG,
-      dataConnectUser: {
-        data: {
-          email: "",
-          password: "",
-        },
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+      //for call api
+      data: {
+        email: "",
+        password: "",
       },
     };
   },
   computed: {
-    ...mapGetters("UserConnect", ["errors"]),
-    ...mapGetters("ParamApp", ["imgs"]),
+    //get errors
+    ...mapGetters("Error", ["errors"]),
   },
   methods: {
     //connexion user
     connexionUser() {
-      this.$store.dispatch("UserConnect/signIn", this.dataConnectUser);
-      this.dataConnectUser.data.email = "";
-      this.dataConnectUser.data.password = "";
+      this.$store.dispatch("CurrentUser/signIn", this.data);
+      this.data.email = "";
+      this.data.password = "";
     },
   },
 };

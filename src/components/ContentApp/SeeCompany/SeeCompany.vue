@@ -2,7 +2,15 @@
   <div>
     <transition appear name="fade" mode="out-in">
       <!-- view home -->
-      <router-view name="SeeCompanyHome"></router-view>
+      <router-view
+        :idCompaniesSelected="idCompaniesSelected"
+        :companySelected="companySelected"
+        :sectorsCompanySelected="sectorsCompanySelected"
+        :currentUser="currentUser"
+        :employeesCompanySelected="employeesCompanySelected"
+        :imageUpdateCompany="imageUpdateCompany"
+        name="SeeCompanyHome"
+      ></router-view>
       <!-- view create user -->
       <router-view name="SeeCompanyCreateUser"></router-view>
       <!-- view create file work -->
@@ -15,13 +23,43 @@
 export default {
   name: "SeeCompany",
   data() {
-    return {};
+    return {
+      idCompaniesSelected: String,
+      companySelected: Object,
+      sectorsCompanySelected: Array,
+      currentUser: Object,
+      employeesCompanySelected: Array,
+      urlApiImg: process.env.VUE_APP_URL_API_IMG,
+      nameImageUpdate: "logoUpdateElement",
+    };
   },
-  mounted() {
-    //for see or not sub menu
-    this.$store.commit("ParamApp/seeSubMenu", true);
-    //when title headband
-    this.$store.commit("ParamApp/changeTitleHeadBand", "Entreprise");
+  created() {
+    this.loadData();
+  },
+  updated() {
+    this.loadData();
+  },
+  computed: {
+    //this variable for change image pencil and X for update user and company
+    imageUpdateCompany() {
+      if (this.$store.getters["Files/imgs"]) {
+        const { fieldName } = this.$store.getters["Files/imgs"].find((el) => el.name === this.nameImageUpdate);
+        return `${this.urlApiImg}${fieldName}`;
+      }
+    },
+  },
+  methods: {
+    loadData() {
+      //for see or not sub menu
+      this.$store.commit("ParamApp/seeSubMenu", true);
+
+      //load data for company selected
+      this.idCompaniesSelected = this.$store.getters["Companies/idCompaniesSelected"];
+      this.companySelected = this.$store.getters["Companies/companySelected"];
+      this.sectorsCompanySelected = this.$store.getters["Sectors/sectorsCompanySelected"];
+      this.currentUser = this.$store.getters["CurrentUser/currentUser"];
+      this.employeesCompanySelected = this.$store.getters["Employees/employeesCompanySelected"];
+    },
   },
 };
 </script>

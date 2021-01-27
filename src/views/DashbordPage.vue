@@ -3,11 +3,13 @@
   <div class="box_dashbord">
     <!-- menu -->
     <the-menu class="menu_principal"></the-menu>
+
     <!-- content app with headband -->
     <div class="box_content_app">
       <!-- headband -->
       <the-headband class="head_principal"></the-headband>
       <the-sub-menu v-show="isSubMenu"></the-sub-menu>
+
       <!-- content text assigns background and text color according to dark mode-->
       <div class="content" :class="bgContent + ' ' + colorText">
         <transition appear name="fade" mode="out-in">
@@ -18,8 +20,9 @@
           <!-- views see company -->
           <router-view name="SeeCompany"></router-view>
         </transition>
+
         <!-- preloader for all app, each load-->
-        <ring-loader :loading="isLoading" :color="color" :color2="color2" :size="size"></ring-loader>
+        <ring-loader :loading="isLoading" :color="'#F84210'" :color2="'#4C39E9'" :size="'100px'"></ring-loader>
       </div>
     </div>
   </div>
@@ -36,23 +39,11 @@ import { mapGetters } from "vuex";
 export default {
   components: { TheMenu, TheHeadband, RingLoader, TheSubMenu },
   name: "DashbordPage",
-  data() {
-    return {
-      //for preloader
-      color: "#F84210",
-      color2: "#4C39E9",
-      size: "100px",
-    };
-  },
-  beforeCreate() {
-    //get all state in database
-    this.$store.dispatch("States/getAllState");
-  },
   computed: {
     //recover current user
-    ...mapGetters("UserConnect", ["bgContent", "colorText"]),
+    ...mapGetters("CurrentUser", ["bgContent", "colorText"]),
     //check variable load of app
-    ...mapGetters("UserConnect", ["isLoading"]),
+    ...mapGetters("Loading", ["isLoading"]),
     //check if see or not sub menu
     ...mapGetters("ParamApp", ["isSubMenu"]),
   },

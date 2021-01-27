@@ -1,37 +1,46 @@
 <template>
   <div class="box_info_company_selected">
     <div class="box_left">
-      <p>{{ upperFirstLetter(company.name) }}</p>
-      <p>{{ company.address.street }}</p>
-      <p>
-        <span>{{ company.address.codePost }}</span
-        ><span>{{ upperFirstLetter(company.address.city) }}</span>
-      </p>
-      <p>
-        Tél: <span :class="user.themeColor.colorTextTab">{{ company.phoneNumber }}</span>
-      </p>
-      <p>
-        Site de production - Filliale:
-        <span :class="user.themeColor.colorTextTab">{{ upperFirstLetter(company.filliale) }}</span>
-      </p>
-      <p>
-        Numéro de siret: <span :class="user.themeColor.colorTextTab">{{ company.siret }}</span>
-      </p>
-      <p>
-        Code NAF: <span :class="user.themeColor.colorTextTab">{{ company.naf }}</span>
-      </p>
+      <div v-if="companySelected" class="box_info_company_primary">
+        <p>{{ upperFirstLetter(companySelected.name) }}</p>
+        <p>{{ companySelected.address.street }}</p>
+        <p>
+          <span>{{ companySelected.address.codePost }}</span
+          ><span>{{ upperFirstLetter(companySelected.address.city) }}</span>
+        </p>
+        <p>
+          Tél: <span :class="currentUser.themeColor.colorTextTab">{{ companySelected.phoneNumber }}</span>
+        </p>
+      </div>
+      <div v-if="companySelected" class="box_info_company_secondary">
+        <p>
+          Site de production - Filliale:
+          <span :class="currentUser.themeColor.colorTextTab">{{ upperFirstLetter(companySelected.filliale) }}</span>
+        </p>
+        <p>
+          Numéro de siret: <span :class="currentUser.themeColor.colorTextTab">{{ companySelected.siret }}</span>
+        </p>
+        <p>
+          Code NAF: <span :class="currentUser.themeColor.colorTextTab">{{ companySelected.naf }}</span>
+        </p>
+      </div>
     </div>
     <div class="box_right">
-      <p>Nombre de salariés:</p>
-      <p>Nombre de fiches métier:</p>
-      <p>Nombre des entretients:</p>
+      <div class="box_info_company_secondary">
+        <p>Nombre de salariés:</p>
+        <p>Nombre de fiches métier:</p>
+        <p>Nombre des entretients:</p>
+      </div>
       <ul>
         Secteurs:
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
+        <div v-if="sectorsCompanySelected.length > 0">
+          <li v-for="(sector, i) in sectorsCompanySelected" :key="i" :class="currentUser.themeColor.colorTextTab">
+            {{ upperFirstLetter(sector.libelle) }}
+          </li>
+        </div>
+        <div v-else>
+          <li :class="currentUser.themeColor.colorTextTab">Aucun Secteur</li>
+        </div>
       </ul>
     </div>
   </div>
@@ -41,8 +50,9 @@
 export default {
   name: "CompanySelectedInfo",
   props: {
-    company: Object,
-    user: Object,
+    companySelected: Object,
+    currentUser: Object,
+    sectorsCompanySelected: Array,
   },
   methods: {
     //first letter of text uppercase
@@ -55,6 +65,7 @@ export default {
 
 <style lang="scss" scoped>
 li {
+  padding: 10px 10px;
   list-style: none;
 }
 .box_info_company_selected {
@@ -65,5 +76,14 @@ li {
 }
 .box_right {
   flex: 1;
+}
+.box_info_company_primary {
+  margin-bottom: 20px;
+}
+.box_info_company_primary p {
+  margin-bottom: 5px;
+}
+.box_info_company_secondary p {
+  margin-bottom: 10px;
 }
 </style>

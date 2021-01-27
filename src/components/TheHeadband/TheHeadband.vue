@@ -14,7 +14,7 @@ export default {
   },
   computed: {
     //load theme color for currentUser and title band
-    ...mapGetters("UserConnect", ["currentUser"]),
+    ...mapGetters("CurrentUser", ["currentUser"]),
     ...mapGetters("ParamApp", ["titleHeadBand"]),
   },
 };

@@ -9,6 +9,7 @@
       </div>
       <span class="stxxm-m upper">Menu</span>
     </div>
+
     <!-- content menu -->
     <div class="item_menu content_menu">
       <!-- setting and disconnect user -->
@@ -30,6 +31,7 @@
                 fill="#fff"
               />
             </svg>
+
             <!-- disconnect -->
           </router-link>
           <div class="box_svg" @click="logOut">
@@ -49,6 +51,7 @@
           </div>
         </div>
       </div>
+
       <!-- item dashbord -->
       <div>
         <div>
@@ -61,11 +64,12 @@
           </router-link>
         </div>
       </div>
+
       <!--  company box -->
-      <div v-if="idCompaniesSelected">
+      <div v-if="companySelected.name !== undefined">
         <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'SeeCompany' }">
           <div class="link_menu onglet" :class="colorMenuActive">
-            <span>{{ upperFirstLetter(currentCompany.name) }}</span>
+            <span>{{ upperFirstLetter(companySelected.name) }}</span>
           </div>
           <router-link
             class="link_menu close_entreprise stxm-r"
@@ -73,7 +77,7 @@
             :to="{ name: 'HomeDashbord' }"
           >
             <svg
-              @click="outCurrentCompany"
+              @click="outCompanySelected"
               width="15"
               height="16"
               viewBox="0 0 15 16"
@@ -89,6 +93,7 @@
         </router-link>
       </div>
     </div>
+
     <!-- footer menu -->
     <div class="item_menu footer_menu">
       <img :src="logoNumericaFooter" />
@@ -99,7 +104,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import router from "../../router";
 
 export default {
   name: "TheMenu",
@@ -113,24 +117,29 @@ export default {
   },
   computed: {
     //load theme color for currentUser
-    ...mapGetters("UserConnect", ["colorMenuActive", "bgLayout"]),
-    ...mapGetters("CurrentCompany", ["idCompaniesSelected", "currentCompany"]), //@click="outCurrentCompany"
+    ...mapGetters("CurrentUser", ["colorMenuActive", "bgLayout"]),
+
+    //load info company selected
+    ...mapGetters("Companies", ["companySelected"]),
+
     //add class for menu burger
     stateMenu() {
       return this.menuIsOpen ? "active" : "";
     },
+
     //recover logo in menu
     logoNumericaFooter() {
-      if (this.$store.getters["ParamApp/imgs"]) {
-        const { fieldName } = this.$store.getters["ParamApp/imgs"].find((el) => el.name === "logoMenu");
+      if (this.$store.getters["Files/imgs"]) {
+        const { fieldName } = this.$store.getters["Files/imgs"].find((el) => el.name === "logoMenu");
         return `${this.urlApiImg}${fieldName}`;
       }
     },
+
     //name user format
     nameUser() {
       return `
-      ${this.upperFirstLetter(this.$store.getters["UserConnect/currentUser"].name.firstName)}
-      ${this.upperFirstLetter(this.$store.getters["UserConnect/currentUser"].name.lastName)}
+      ${this.upperFirstLetter(this.$store.getters["CurrentUser/currentUser"].name.firstName)}
+      ${this.upperFirstLetter(this.$store.getters["CurrentUser/currentUser"].name.lastName)}
       `;
     },
 
@@ -140,10 +149,11 @@ export default {
     },
   },
   methods: {
-    outCurrentCompany() {
-      this.$store.commit("CurrentCompany/deleteCompaniesSelected");
-      //router.push({ name: "HomeDashbord" });
+    //delete companySelected in store and in localstorage
+    outCompanySelected() {
+      this.$store.commit("Companies/deleteCompaniesSelected");
     },
+
     //first letter of text uppercase
     upperFirstLetter(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
@@ -151,17 +161,15 @@ export default {
 
     //disconnect user connected
     logOut() {
-      this.$store.dispatch("UserConnect/logOut");
-      this.$store.commit("CurrentCompany/deleteCompaniesSelected");
+      this.$store.dispatch("CurrentUser/logOut");
+      this.$store.commit("Companies/deleteCompaniesSelected");
     },
 
     //open or close menu with menu
     openCloseMenu() {
       if (this.menuIsOpen) {
         this.menuIsOpen = false;
-        //this.activeMenu = "";
       } else {
-        //this.activeMenu = "active";
         this.menuIsOpen = true;
       }
     },

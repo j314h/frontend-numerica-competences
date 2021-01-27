@@ -4,6 +4,7 @@
     <div class="global_user_info">
       <setting-user-info class="box" :class="currentUser.themeColor.cbgBox"></setting-user-info>
     </div>
+
     <!-- content upload img for juste root user -->
     <div v-show="currentUser.role.libelle === 'root'">
       <!-- form change logo numerica access for role 'root'-->
@@ -19,6 +20,7 @@
             :title="'Modifier le logo Numerica principal'"
           ></setting-img>
         </div>
+
         <!-- logo personne -->
         <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
           <setting-img
@@ -30,6 +32,7 @@
             :title="'Modifier l\'icon personnes, salariés, etc...'"
           ></setting-img>
         </div>
+
         <!-- logo menu -->
         <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
           <setting-img
@@ -41,6 +44,7 @@
             :title="'Modifier le logo Numerica du menu'"
           ></setting-img>
         </div>
+
         <!-- logo numerica footer -->
         <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
           <setting-img
@@ -52,6 +56,7 @@
             :title="'Modifier le logo Numerica dans le bas de page'"
           ></setting-img>
         </div>
+
         <!-- logo update -->
         <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
           <setting-img
@@ -63,6 +68,7 @@
             :title="'Modifier l\'icon de modification des élément'"
           ></setting-img>
         </div>
+
         <!-- logo close update -->
         <div class="box box_input_file" :class="currentUser.themeColor.cbgBox">
           <setting-img
@@ -76,6 +82,7 @@
         </div>
       </div>
     </div>
+
     <!-- content theme colors -->
     <div>
       <div class="box dark_mode" :class="currentUser.themeColor.cbgBox">

@@ -6,8 +6,8 @@
       <div class="box_footer_up">
         <!-- left -->
         <div class="content_footer_left">
-          <div v-for="(img, i) in imgs" :key="i">
-            <img v-if="img.name === 'logoFooterNumerica'" :src="`${urlApiImg}${img.fieldName}`" class="img_footer" />
+          <div>
+            <img :src="`${urlApiImg}${logoNumericaFooter}`" class="img_footer" />
           </div>
           <div>
             <p>
@@ -16,11 +16,13 @@
             </p>
           </div>
         </div>
+
         <!-- rigth -->
         <div>
           <the-footer-menu></the-footer-menu>
         </div>
       </div>
+
       <!-- down footer -->
       <div class="box_footer_down">
         <p>Copyright © 2020 Numerica. Tous droits réservés.</p>
@@ -30,7 +32,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import TheFooterMenu from "./TheFooterMenu";
 
 export default {
@@ -38,13 +39,10 @@ export default {
   components: {
     TheFooterMenu,
   },
-  data() {
-    return {
-      urlApiImg: process.env.VUE_APP_URL_API_IMG,
-    };
-  },
-  computed: {
-    ...mapGetters("ParamApp", ["imgs"]),
+  props: {
+    //for image logo numerica footer
+    urlApiImg: String,
+    logoNumericaFooter: String,
   },
 };
 </script>
