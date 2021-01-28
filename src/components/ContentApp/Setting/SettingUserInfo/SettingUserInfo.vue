@@ -9,29 +9,58 @@
     <div>
       <!-- user info detail if isUpdate is true on see-->
       <transition name="fade" mode="out-in">
-        <setting-user-info-update v-if="isUpdateUser"></setting-user-info-update>
-        <setting-user-info-detail v-else></setting-user-info-detail>
+        <!-- update user -->
+        <setting-user-info-update
+          v-if="isUpdateUser"
+          :currentUser="currentUser"
+          :errors="errors"
+          :roles="roles"
+        ></setting-user-info-update>
+
+        <!-- see info user -->
+        <setting-user-info-detail
+          v-else
+          :currentUser="currentUser"
+          :companiesAdmin="companiesAdmin"
+        ></setting-user-info-detail>
       </transition>
+
       <!-- sous title -->
       <div class="box_title_company">
         <h6 class="stxm-m subscrite_title" :class="currentUser.themeColor.colorText">Votre entreprise</h6>
         <div>
-          <img @click="updateCompany" :src="imageUpdateCompany" />
+          <img
+            v-if="authorization.includes(currentUser.role.libelle)"
+            @click="updateCompany"
+            :src="imageUpdateCompany"
+          />
         </div>
       </div>
+
       <!-- company info if isUpdate is true on see -->
       <transition name="fade" mode="out-in">
+        <!-- update company user -->
         <setting-user-info-company-update
+          :currentUserCompany="currentUserCompany"
+          :sectorsCompanyCurrentUser="sectorsCompanyCurrentUser"
+          :currentUser="currentUser"
+          :errors="errors"
           v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
         ></setting-user-info-company-update>
-        <setting-user-info-company v-else></setting-user-info-company>
+
+        <!-- see info company user -->
+        <setting-user-info-company
+          v-else
+          :currentUserCompany="currentUserCompany"
+          :sectorsCompanyCurrentUser="sectorsCompanyCurrentUser"
+          :currentUser="currentUser"
+        ></setting-user-info-company>
       </transition>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import SettingUserInfoCompany from "./SettingUserInfoCompany.vue";
 import SettingUserInfoCompanyUpdate from "./SettingUserInfoCompanyUpdate.vue";
 import SettingUserInfoDetail from "./SettingUserInfoDetail.vue";
@@ -45,30 +74,38 @@ export default {
     SettingUserInfoCompanyUpdate,
   },
   name: "SettingUserInfo",
+  props: {
+    currentUser: Object,
+    urlApiImg: String,
+    authorization: Array,
+    companiesAdmin: Array,
+    currentUserCompany: Object,
+    errors: Array,
+    roles: Array,
+  },
   data() {
     return {
-      urlApiImg: process.env.VUE_APP_URL_API_IMG,
-      imageUser: "logoUpdateElement",
-      imageUserCompany: "logoUpdateElement",
+      nameImageUser: "logoUpdateElement",
+      nameImageUserCompany: "logoUpdateElement",
       isUpdateUser: false,
       isUpdateCompany: false,
-      authorization: ["root", "administrateur", "référent"],
     };
   },
   computed: {
-    //recover current user
-    ...mapGetters("CurrentUser", ["currentUser"]),
-
+    //load company of currentUser for if reload
+    sectorsCompanyCurrentUser() {
+      return this.$store.getters["CurrentUser/sectorsCompanyCurrentUser"];
+    },
     //this variable for change image pencil and X for update user and company
     imageUpdateUser() {
-      if (this.$store.getters["ParamApp/imgs"]) {
-        const { fieldName } = this.$store.getters["ParamApp/imgs"].find((el) => el.name === this.imageUser);
+      if (this.$store.getters["Files/imgs"]) {
+        const { fieldName } = this.$store.getters["Files/imgs"].find((el) => el.name === this.nameImageUser);
         return `${this.urlApiImg}${fieldName}`;
       }
     },
     imageUpdateCompany() {
-      if (this.$store.getters["ParamApp/imgs"]) {
-        const { fieldName } = this.$store.getters["ParamApp/imgs"].find((el) => el.name === this.imageUserCompany);
+      if (this.$store.getters["Files/imgs"]) {
+        const { fieldName } = this.$store.getters["Files/imgs"].find((el) => el.name === this.nameImageUserCompany);
         return `${this.urlApiImg}${fieldName}`;
       }
     },
@@ -78,11 +115,11 @@ export default {
     //activate in children for close window update
     //is not good, change this in futur versionning
     updateUser() {
-      if (this.imageUser === "logoUpdateElement") {
-        this.imageUser = "logoCloseUpdateElement";
+      if (this.nameImageUser === "logoUpdateElement") {
+        this.nameImageUser = "logoCloseUpdateElement";
         this.isUpdateUser = true;
       } else {
-        this.imageUser = "logoUpdateElement";
+        this.nameImageUser = "logoUpdateElement";
         this.isUpdateUser = false;
       }
     },
@@ -90,11 +127,11 @@ export default {
     //activate in children for close window update
     //is not good, change this in futur versionning
     updateCompany() {
-      if (this.imageUserCompany === "logoUpdateElement") {
-        this.imageUserCompany = "logoCloseUpdateElement";
+      if (this.nameImageUserCompany === "logoUpdateElement") {
+        this.nameImageUserCompany = "logoCloseUpdateElement";
         this.isUpdateCompany = true;
       } else {
-        this.imageUserCompany = "logoUpdateElement";
+        this.nameImageUserCompany = "logoUpdateElement";
         this.isUpdateCompany = false;
       }
     },

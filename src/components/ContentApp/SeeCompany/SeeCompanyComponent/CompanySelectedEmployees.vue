@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import services from "../../../../lib/services";
+import { Services } from "../../../../lib/services";
 
 export default {
   name: "CompanySelectedEmployees",
@@ -85,22 +85,22 @@ export default {
   computed: {
     //full name with new format
     fullName() {
-      return (firstName, lastName) => `${services.upperFirstLetter(firstName)} ${services.upperFirstLetter(lastName)}`;
+      return (firstName, lastName) => `${Services.upperFirstLetter(firstName)} ${Services.upperFirstLetter(lastName)}`;
     },
 
     //trade with first letter uppercase
     trade() {
-      return (trade) => `${services.upperFirstLetter(trade)}`;
+      return (trade) => `${Services.upperFirstLetter(trade)}`;
     },
 
     //role with first letter uppercase
     role() {
-      return (role) => `${services.upperFirstLetter(role)}`;
+      return (role) => `${Services.upperFirstLetter(role)}`;
     },
 
     //sector with first letter uppercase
     sector() {
-      return (sector) => `${services.upperFirstLetter(sector)}`;
+      return (sector) => `${Services.upperFirstLetter(sector)}`;
     },
   },
   methods: {},

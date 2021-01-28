@@ -9,6 +9,8 @@ export default {
     currentUser: {},
     //info for company of current user
     currentUserCompany: {},
+    //for sectors of company current user
+    sectorsCompanyCurrentUser: [],
     // connected
     isSignIn: false,
   },

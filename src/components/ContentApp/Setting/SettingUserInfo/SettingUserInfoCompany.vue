@@ -1,70 +1,98 @@
 <template>
-  <div class="stxm-r" :class="user.themeColor.colorTextTab">
+  <div class="stxm-r" :class="currentUser.themeColor.colorTextTab">
     <div class="box_info_company">
       <!-- info personel -->
       <div class="info_company">
-        <p>{{ userCompanyName }}</p>
-        <p>{{ user.company.address.street }}</p>
-        <p>{{ userCompanyAddress }}</p>
-        <p>{{ user.company.phoneNumber }}</p>
+        <p>{{ companyName }}</p>
+        <p>{{ companyStreet }}</p>
+        <p>{{ companyCodePostCity }}</p>
+        <p>{{ currentUserCompany.phoneNumber }}</p>
       </div>
+
       <!-- info detail -->
       <div class="info_company">
-        <p class="stxm-m" :class="user.themeColor.colorText">
-          Numéro de siret: <span :class="user.themeColor.colorTextImportant">{{ user.company.siret }}</span>
+        <!-- siret -->
+        <p class="stxm-m" :class="currentUser.themeColor.colorText">
+          Numéro de siret:
+          <span :class="currentUser.themeColor.colorTextImportant">{{ currentUserCompany.siret }}</span>
         </p>
-        <p></p>
-        <p class="stxm-m" :class="user.themeColor.colorText">
-          Code NAF: <span :class="user.themeColor.colorTextImportant">{{ user.company.naf }}</span>
+
+        <!-- NAF -->
+        <p class="stxm-m" :class="currentUser.themeColor.colorText">
+          Code NAF: <span :class="currentUser.themeColor.colorTextImportant">{{ currentUserCompany.naf }}</span>
         </p>
-        <p></p>
-        <p class="stxm-m" :class="user.themeColor.colorText">
+
+        <!-- filliale -->
+        <p class="stxm-m" :class="currentUser.themeColor.colorText">
           Site de production - Filliale :
-          <span :class="user.themeColor.colorTextImportant">{{ userCompanyFilliale }}</span>
+          <span :class="currentUser.themeColor.colorTextImportant">{{ companyFilliale }}</span>
         </p>
-        <p></p>
+
+        <!-- sectors -->
+        <ul>
+          <span class="stxm-m" :class="currentUser.themeColor.colorText">Secteurs:</span>
+          <div v-if="sectorsCompanyCurrentUser.length > 0">
+            <li v-for="(sector, i) in sectorsCompanyCurrentUser" :key="i" :class="currentUser.themeColor.colorTextTab">
+              {{ upper(sector.libelle) }}
+            </li>
+          </div>
+          <div v-else>
+            <li :class="currentUser.themeColor.colorTextTab">Aucun Secteur</li>
+          </div>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Services } from "../../../../lib/services";
+
 export default {
   name: "SettingUserInfoCompany",
-  data() {
-    return {};
+  props: {
+    currentUserCompany: Object,
+    currentUser: Object,
+    sectorsCompanyCurrentUser: Array,
   },
   methods: {
-    //first letter of text uppercase
-    upperFirstLetter(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
+    //uppercase
+    upper(str) {
+      return Services.upperFirstLetter(str);
     },
   },
   computed: {
-    //return user current
-    user() {
-      return this.$store.getters["CurrentUser/currentUser"];
-    },
     //return name company
-    userCompanyName() {
-      return this.user.company.name;
+    companyName() {
+      return Services.manyWordFirstLetterUpper(this.currentUserCompany.name);
     },
+
+    //return company street with new format
+    companyStreet() {
+      return Services.streetOneLine(this.currentUserCompany.address.street);
+    },
+
     //return new format address company
-    userCompanyAddress() {
-      return `
-      ${this.user.company.address.postCode} 
-      ${this.upperFirstLetter(this.user.company.address.city)} 
-      `;
+    companyCodePostCity() {
+      return Services.codePostCityOneLine(
+        this.currentUserCompany.address.codePost,
+        this.currentUserCompany.address.city
+      );
     },
+
     //return new formation for filliale company
-    userCompanyFilliale() {
-      return this.upperFirstLetter(this.user.company.filliale);
+    companyFilliale() {
+      return Services.manyWordFirstLetterUpper(this.currentUserCompany.filliale);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+li {
+  padding: 10px 10px;
+  list-style: none;
+}
 p {
   margin: 7px 0;
 }
@@ -80,6 +108,6 @@ p {
   margin-right: 100px;
 }
 .box_info_company p {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 </style>

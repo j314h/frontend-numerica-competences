@@ -1,45 +1,113 @@
 <template>
-  <div class="stxm-r" :class="user.themeColor.colorTextTab">
+  <div class="stxm-r" :class="currentUser.themeColor.colorTextTab">
     <form @submit.prevent="updateCompany">
       <div class="box_info_company">
         <!-- info personel company-->
         <div class="info_company">
+          <!-- name company -->
           <div>
             <label>Dénomination sociale</label>
-            <input class="input" type="text" v-model="dataForm.name" required />
+            <input class="input" type="text" v-model="dataForm.data.name" required />
           </div>
+
+          <!-- street -->
           <div>
             <label>Adresse, numéro et rue</label>
-            <input class="input" type="text" v-model="dataForm.street" />
+            <input class="input" type="text" v-model="dataForm.data.address.street" />
           </div>
           <div>
             <label>Code postal</label>
-            <input class="input" type="text" v-model="dataForm.postCode" />
+            <input class="input" type="text" v-model="dataForm.data.address.postCode" />
           </div>
           <div>
             <label>Ville</label>
-            <input class="input" type="text" v-model="dataForm.city" required />
+            <input class="input" type="text" v-model="dataForm.data.address.city" required />
           </div>
+
+          <!-- phone number -->
           <div>
             <label>Numero de téléphone</label>
-            <input class="input" type="text" v-model="dataForm.phoneNumber" required />
+            <input class="input" type="text" v-model="dataForm.data.phoneNumber" required />
           </div>
         </div>
         <!-- info detail -->
         <div class="info_company">
+          <!-- siret -->
           <div>
             <label>Numéro de Siret</label>
-            <input class="input" type="text" v-model="dataForm.siret" required />
+            <input class="input" type="text" v-model="dataForm.data.siret" required />
           </div>
+
+          <!-- naf -->
           <div>
             <label>Code NAF</label>
-            <input class="input" type="text" v-model="dataForm.naf" required />
+            <input class="input" type="text" v-model="dataForm.data.naf" required />
           </div>
+
+          <!-- fillale -->
           <div>
-            <label>Site de production</label>
-            <input class="input" type="text" v-model="dataForm.filliale" />
+            <label>Site de production - Filliale</label>
+            <input class="input" type="text" v-model="dataForm.data.filliale" />
           </div>
-          <error-content class="box_error" :error="errors[errors.length - 1]"></error-content>
+
+          <!-- sectors -->
+          <div class="box_sectors">
+            <label>Secteur: </label>
+            <div v-for="(sector, i) in dataForm.sectors" :key="i">
+              <input class="input" v-model="sector.libelle" />
+            </div>
+          </div>
+
+          <!-- add sectors -->
+          <div>
+            <div class="box_btn_add_input">
+              <label>Ajoutez un secteur</label>
+              <!-- btn for add input -->
+              <button class="btn_add_input" @click.prevent="addInputSector">
+                <svg
+                  class="addbtn"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20C15.5228 20 20 15.5228 20 10C20 7.34784 18.9464 4.8043 17.0711 2.92893C15.1957 1.05357 12.6522 0 10 0ZM10 18.7499C5.16751 18.7499 1.25 14.8324 1.25 9.99994C1.25 5.16745 5.16751 1.24994 10 1.24994C14.8325 1.24994 18.75 5.16745 18.75 9.99994C18.75 12.3206 17.8281 14.5462 16.1872 16.1871C14.5462 17.8281 12.3206 18.7499 10 18.7499ZM10.625 9.37493H15.1063C15.4515 9.37493 15.7313 9.65475 15.7313 9.99993C15.7313 10.3451 15.4515 10.6249 15.1063 10.6249H10.625V15.1062C10.625 15.4514 10.3452 15.7312 10 15.7312C9.65487 15.7312 9.37505 15.4514 9.37505 15.1062V10.6249H4.8938C4.54862 10.6249 4.2688 10.3451 4.2688 9.99993C4.2688 9.65475 4.54862 9.37493 4.8938 9.37493H9.37505V4.89368C9.37505 4.5485 9.65487 4.26868 10 4.26868C10.3452 4.26868 10.625 4.5485 10.625 4.89368V9.37493Z"
+                    fill="#4c39e9"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="input_sector" v-for="(input, i) in nbrInputSector" :key="i">
+              <input class="input" v-model="dataForm.newSectors[i]" />
+              <!-- btn delete input -->
+              <button class="box_delete_input" @click.prevent="deleteSector(i)">
+                <svg
+                  class="btn_delete_input"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M19.9999 2.22217C10.1815 2.22217 2.22217 10.1815 2.22217 19.9999C2.22217 29.8183 10.1815 37.7777 19.9999 37.7777C29.8183 37.7777 37.7777 29.8183 37.7777 19.9999C37.7777 15.285 35.9047 10.7631 32.5707 7.42916C29.2367 4.09518 24.7149 2.22217 19.9999 2.22217ZM19.9999 35.5555C11.4088 35.5555 4.44438 28.591 4.44438 19.9999C4.44438 11.4089 11.4088 4.44439 19.9999 4.44439C28.591 4.44439 35.5555 11.4089 35.5555 19.9999C35.5555 24.1255 33.9166 28.0822 30.9994 30.9994C28.0821 33.9166 24.1255 35.5555 19.9999 35.5555ZM13.3333 18.8888H26.6666C27.2803 18.8888 27.7777 19.3863 27.7777 19.9999C27.7777 20.6136 27.2803 21.1111 26.6666 21.1111H13.3333C12.7196 21.1111 12.2222 20.6136 12.2222 19.9999C12.2222 19.3863 12.7196 18.8888 13.3333 18.8888Z"
+                    fill="#DB0000"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- errors -->
+          <error-content class="box_error" :error="errors"></error-content>
+
+          <!-- submit -->
           <div class="box_btn">
             <button-app :mini="true" :textBtn="'Modifier'"></button-app>
           </div>
@@ -50,38 +118,72 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import ButtonApp from "../../../Elements/ButtonApp.vue";
 import ErrorContent from "../../../Elements/ErrorContent.vue";
 
 export default {
   components: { ButtonApp, ErrorContent },
   name: "SettingUserInfoCompanyUpdate",
+  props: {
+    currentUserCompany: Object,
+    sectorsCompanyCurrentUser: Array,
+    currentUser: Object,
+    errors: Array,
+  },
   data() {
     return {
+      nbrInputSector: [],
+      countSector: 0,
       //data for request update company's user
       dataForm: {
-        email: this.$store.getters["UserConnect/currentUser"].email,
-        name: this.$store.getters["UserConnect/currentUser"].company.name,
-        street: this.$store.getters["UserConnect/currentUser"].company.address.street,
-        postCode: this.$store.getters["UserConnect/currentUser"].company.address.postCode,
-        city: this.$store.getters["UserConnect/currentUser"].company.address.city,
-        filliale: this.$store.getters["UserConnect/currentUser"].company.filliale,
-        siret: this.$store.getters["UserConnect/currentUser"].company.siret,
-        naf: this.$store.getters["UserConnect/currentUser"].company.naf,
-        phoneNumber: this.$store.getters["UserConnect/currentUser"].company.phoneNumber,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+        data: {
+          name: this.currentUserCompany.name,
+          filliale: this.currentUserCompany.filliale,
+          siret: this.currentUserCompany.siret,
+          naf: this.currentUserCompany.naf,
+          phoneNumber: this.currentUserCompany.phoneNumber,
+          address: {
+            street: this.currentUserCompany.address.street,
+            postCode: this.currentUserCompany.address.codePost,
+            city: this.currentUserCompany.address.city,
+          },
+          state: this.currentUserCompany.state,
         },
+        _id: this.currentUserCompany._id,
+        sectors: this.sectorsCompanyCurrentUser,
+        newSectors: [],
       },
     };
   },
   methods: {
+    //count in fack tab for simulate loop in template for created input for sectors
+    //+ insert new input in template (in DOM)
+    addInputSector() {
+      this.countSector += 1;
+      this.nbrInputSector.push(this.countSector);
+    },
+    //delete input in template and delete value and fack value in array
+    deleteSector(i) {
+      this.nbrInputSector.splice(i, 1);
+      this.dataForm.newSectors.splice(i, 1);
+    },
+
     //call api for update company's user
     async updateCompany() {
       try {
-        await this.$store.dispatch("UserConnect/updateCompanyRefMin", this.dataForm);
-        //if success show alert custom
+        //reset error
+        this.$store.commit("Error/resetError");
+
+        //call api for update company
+        await this.$store.dispatch("CurrentUser/updateCurrentUserCompany", this.dataForm);
+        if (this.dataForm.newSectors.length > 0) {
+          await this.$store.dispatch("Sectors/createSectors", this.dataForm, "currentUser");
+        }
+        if (this.dataForm.sectors.length > 0) {
+          await this.$store.dispatch("Sectors/updateSectors", this.dataForm, "currentUser");
+        }
+
+        //if success show alert custom and close window update
         this.$swal.fire({
           position: "top-end",
           icon: "success",
@@ -89,10 +191,10 @@ export default {
           showConfirmButton: false,
           timer: 1500,
         });
-        //reset tab errors in UserConnect
-        this.$store.commit("UserConnect/resetErrors");
         this.$parent.updateCompany();
-      } catch (e) {
+      } catch (error) {
+        //add error
+        this.$store.commit("Error/addError", error);
         //if error show alert custom
         this.$swal.fire({
           position: "top-end",
@@ -101,24 +203,10 @@ export default {
           showConfirmButton: false,
           timer: 2000,
         });
-        //add error in tab in store UserConnect
-        if (e.response) {
-          this.$store.commit("UserConnect/addError", e.response.data.message);
-        } else {
-          this.$store.commit("UserConnect/addError", e.message);
-        }
       }
     },
   },
-  computed: {
-    //recover errors in store UserConnect
-    ...mapGetters("UserConnect", ["errors"]),
-
-    //recover current user
-    user() {
-      return this.$store.getters["UserConnect/currentUser"];
-    },
-  },
+  computed: {},
 };
 </script>
 
@@ -150,6 +238,39 @@ p {
   flex: 1;
   padding: 0 30px;
 }
+.box_sectors {
+  margin: 10px 0 20px 0;
+}
+/**btn add input */
+.btn_add_input {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin-left: 20px;
+}
+.addbtn:hover path {
+  background-color: #f84210;
+  fill: #f84210;
+}
+.box_btn_add_input {
+  display: flex;
+}
+.input_sector {
+  display: flex;
+  align-items: center;
+}
+.box_delete_input {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin-left: 10px;
+  display: block;
+}
+.btn_delete_input:hover path {
+  fill: #db0000;
+}
+
+/********************* */
 .box_btn {
   display: flex;
   justify-content: flex-end;

@@ -2,36 +2,30 @@
   <div>
     <form>
       <!-- text is switch compare of value -->
-      <p v-if="value" class="stxm-m" :class="currentUser.themeColor.colorTextTab">Désactiver le mode sombre</p>
+      <p v-if="valueTheme" class="stxm-m" :class="currentUser.themeColor.colorTextTab">Désactiver le mode sombre</p>
       <p v-else class="stxm-m" :class="currentUser.themeColor.colorTextTab">Activer le mode sombre</p>
       <!-- input design with label in css -->
-      <input @change="modeDark" class="switch" type="checkbox" id="switch" v-model="value" />
+      <input @change="modeDark" class="switch" type="checkbox" id="switch" v-model="valueTheme" />
       <label class="switchlabel" for="switch"></label>
     </form>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
 export default {
   components: {},
   name: "SettingThemeColor",
+  props: {
+    currentUser: Object,
+  },
   data() {
     return {
       //data for api for update theme color
       data: {
         name: String,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
       },
-      //for change btn in template
-      value: null,
+      valueTheme: this.currentUser.themeColor.darkMode,
     };
-  },
-  created() {
-    //recover booleen for dark mode
-    this.value = this.$store.getters["UserConnect/currentUser"].themeColor.darkMode;
   },
   methods: {
     //switch mode dark or not
@@ -39,8 +33,9 @@ export default {
     async modeDark() {
       try {
         //depending on the value we change the name of the color theme in the user database
-        this.value ? (this.data.name = "dark") : (this.data.name = "normal");
-        await this.$store.dispatch("UserConnect/modeDark", this.data);
+        this.valueTheme ? (this.data.name = "dark") : (this.data.name = "normal");
+        await this.$store.dispatch("CurrentUser/modeDark", this.data);
+
         //if success show alert custom
         this.$swal.fire({
           position: "top-end",
@@ -50,24 +45,22 @@ export default {
           timer: 1000,
         });
       } catch (e) {
+        this.$store.commit("Error/addError");
         //if error pop up for see error
         this.$swal.fire({
           position: "top-end",
           icon: "error",
-          title: this.$store.getters["UserConnect/errors"][0],
+          title: this.$store.getters["Error/errors"][0],
           showConfirmButton: false,
           timer: 1000,
         });
         setTimeout(() => {
-          this.$store.commit("UserConnect/resetErrors");
+          this.$store.commit("Error/resetError");
         }, 1000);
       }
     },
   },
-  computed: {
-    //recover info current user
-    ...mapGetters("UserConnect", ["currentUser"]),
-  },
+  computed: {},
 };
 </script>
 

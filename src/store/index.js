@@ -10,6 +10,7 @@ import Files from "./Files/Files";
 import Loading from "./Loading/Loading";
 import ValidateAccount from "./ValidateAccount/ValidateAccount";
 import Employees from "./Employees/Employees";
+import Roles from "./Roles/Roles";
 
 Vue.use(Vuex);
 
@@ -28,5 +29,6 @@ export default new Vuex.Store({
     States,
     Error,
     Employees,
+    Roles,
   },
 });

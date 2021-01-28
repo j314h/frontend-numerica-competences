@@ -61,6 +61,8 @@ export default {
     commandeDispatch: String,
     bg: Boolean,
     title: String,
+    currentUser: Object,
+    imgs: Array,
   },
   data() {
     return {
@@ -71,12 +73,7 @@ export default {
       text: "Modifier", // text of btn input file
     };
   },
-  computed: {
-    //recover info current user
-    ...mapGetters("UserConnect", ["currentUser"]),
-    //recover image app
-    ...mapGetters("ParamApp", ["imgs"]),
-  },
+  computed: {},
   methods: {
     //change design if user delete file in input load file
     deleteLoad() {

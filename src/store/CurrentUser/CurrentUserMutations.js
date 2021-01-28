@@ -14,6 +14,11 @@ export default {
     state.currentUserCompany = company;
   },
 
+  //add sectors of company of current user
+  addSectorsCompanyCurrentUser(state, sectors) {
+    state.sectorsCompanyCurrentUser = sectors;
+  },
+
   //delete data user connected for logout
   logOutUser(state) {
     state.currentUser = {};

@@ -2,10 +2,14 @@ export default {
   //retrun info user connected
   currentUser: (state) => state.currentUser,
 
+  //recover id current user
   idCurrentUser: (state) => state.currentUser._id,
 
   //return info company of user connected
   currentUserCompany: (state) => state.currentUserCompany,
+
+  //return sectors company
+  sectorsCompanyCurrentUser: (state) => state.sectorsCompanyCurrentUser,
 
   //theme color
   thColor: (state) => state.currentUser.themeColor,

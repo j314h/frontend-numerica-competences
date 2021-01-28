@@ -13,14 +13,20 @@ export default {
       store.commit("Error/resetError");
 
       //call api for recover current user and recover company of current user
+      //call api for verification and call api for company of current user
+      //call api and add sector company selected in store
       const user = await Vue.axios.post(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sign-in`, data, headers);
       const company = await Vue.axios.get(
         `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}company/${user.data.company}`
+      );
+      const sectors = await Vue.axios.get(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sectors/${company.data._id}`
       );
 
       //add user in store and add company and check cookies jwt exist and update isSignIn
       context.commit("signInSuccess", user.data);
       context.commit("addCompanyOfCurrentUser", company.data);
+      context.commit("addSectorsCompanyCurrentUser", sectors.data);
       context.commit("checkedJwt", VueCookies.isKey("jwt"));
 
       //go roads and disable page loading
@@ -40,11 +46,20 @@ export default {
       //store.commit("Loading/stateLoading", true);
       store.commit("Error/resetError");
 
-      //call api for verification
+      //call api for verification and call api for company of current user
+      //call api and add sector company selected in store
       const user = await Vue.axios.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}verification-connect`);
+      const company = await Vue.axios.get(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}company/${user.data.company}`
+      );
+      const sectors = await Vue.axios.get(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sectors/${company.data._id}`
+      );
 
-      //update user in store and disabled loading page
+      //update user in store and update currentCompany of currentUser disabled loading page
       context.commit("signInSuccess", user.data);
+      context.commit("addCompanyOfCurrentUser", company.data);
+      context.commit("addSectorsCompanyCurrentUser", sectors.data);
       //store.commit("Loading/stateLoading", false);
     } catch (error) {
       //add error in store disable page loading
@@ -111,7 +126,9 @@ export default {
         userData,
         headers
       );
-      const company = await Vue.axios.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}company/${user.company}`);
+      const company = await Vue.axios.get(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}company/${user.data.company}`
+      );
 
       //update current user and recover company and disable load page
       context.commit("signInSuccess", user.data);

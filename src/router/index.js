@@ -82,6 +82,15 @@ const routes = [
         components: {
           Setting,
         },
+        beforeEnter: async (to, from, next) => {
+          //for see or not sub menu and modify the title in the title bar
+          store.commit("ParamApp/seeSubMenu", false);
+          store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
+          await store.dispatch("Roles/getRoles");
+          await store.dispatch("States/getAllState");
+          await store.dispatch("Companies/getAllCompaniesAdmin");
+          next();
+        },
       },
       {
         path: "seecompany", //dashbord company with id params
@@ -92,7 +101,6 @@ const routes = [
         },
         //recover company selected and sectors and users of company selected
         beforeEnter: async (to, from, next) => {
-          console.log(store.getters["Companies/idCompaniesSelected"]);
           await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
           await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
           store.commit("ParamApp/changeTitleHeadBand", store.getters["Companies/companySelected"].name);

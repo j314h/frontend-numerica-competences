@@ -1,34 +1,52 @@
 <template>
-  <div class="stxm-r" :class="user.themeColor.colorTextTab">
+  <div class="stxm-r" :class="currentUser.themeColor.colorTextTab">
     <div class="box_info_detail">
       <!-- info personnal -->
       <div class="info_detail">
-        <p>{{ userName }}</p>
-        <p>{{ upperFirstLetter(user.address.street) }}</p>
-        <p>{{ userAddress }}</p>
-        <p>{{ user.phoneNumber }}</p>
-        <p>{{ user.email }}</p>
+        <p>{{ fullName }}</p>
+        <p>{{ street }}</p>
+        <p>{{ codePostCity }}</p>
+        <p>{{ currentUser.phoneNumber }}</p>
+        <p>{{ currentUser.email }}</p>
       </div>
+
       <!-- info work -->
       <div class="info_detail">
+        <!-- mot de passe -->
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">
-            Mot de passe: <span :class="user.themeColor.colorTextImportant">**********</span>
+          <p class="stxm-m" :class="currentUser.themeColor.colorText">
+            Mot de passe: <span :class="currentUser.themeColor.colorTextImportant">**********</span>
           </p>
         </div>
+
+        <!-- role -->
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">
-            Rôle: <span :class="user.themeColor.colorTextImportant">{{ user.role.libelle }}</span>
+          <p class="stxm-m" :class="currentUser.themeColor.colorText">
+            Rôle: <span :class="currentUser.themeColor.colorTextImportant">{{ currentUser.role.libelle }}</span>
           </p>
         </div>
+
+        <!-- statut -->
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">
-            Statut: <span :class="user.themeColor.colorTextImportant">{{ user.state.libelle }}</span>
+          <p class="stxm-m" :class="currentUser.themeColor.colorText">
+            Statut: <span :class="currentUser.themeColor.colorTextImportant">{{ currentUser.state.libelle }}</span>
           </p>
         </div>
+
+        <!-- etat du compte -->
         <div>
-          <p class="stxm-m" :class="user.themeColor.colorText">
-            Nombre de clients: <span :class="user.themeColor.colorTextImportant">0</span>
+          <p class="stxm-m" :class="currentUser.themeColor.colorText">
+            Etat du compte:
+            <span v-if="currentUser.activated === true" :class="currentUser.themeColor.colorTextImportant">Vérifé</span>
+            <span v-else :class="currentUser.themeColor.colorTextImportant">Non vérifié</span>
+          </p>
+        </div>
+
+        <!-- nombre de clients -->
+        <div v-if="currentUser.role.libelle === 'root' || currentUser.role.libelle === 'administrateur'">
+          <p class="stxm-m" :class="currentUser.themeColor.colorText">
+            Nombre de clients:
+            <span :class="currentUser.themeColor.colorTextImportant">{{ companiesAdmin.length }}</span>
           </p>
         </div>
       </div>
@@ -37,36 +55,32 @@
 </template>
 
 <script>
+import { Services } from "../../../../lib/services";
+
 export default {
   name: "SettingUserInfoDetail",
-  data() {
-    return {};
-  },
-  methods: {
-    //first letter of text uppercase
-    upperFirstLetter(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    },
+  props: {
+    currentUser: Object,
+    companiesAdmin: Array,
   },
   computed: {
-    //recover info current user
-    user() {
-      return this.$store.getters["UserConnect/currentUser"];
-    },
     //return new format of name user
-    userName() {
-      return `
-      ${this.user.civility} 
-      ${this.upperFirstLetter(this.user.name.firstName)} 
-      ${this.upperFirstLetter(this.user.name.lastName)}
-      `;
+    fullName() {
+      return Services.fullName(
+        this.currentUser.civility,
+        this.currentUser.name.firstName,
+        this.currentUser.name.lastName
+      );
     },
+
+    //create format street of address
+    street() {
+      return Services.streetOneLine(this.currentUser.address.street);
+    },
+
     //return new format address user
-    userAddress() {
-      return `
-      ${this.user.address.postCode}  
-      ${this.upperFirstLetter(this.user.address.city)}
-      `;
+    codePostCity() {
+      return Services.codePostCityOneLine(this.currentUser.address.codePost, this.currentUser.address.city);
     },
   },
 };

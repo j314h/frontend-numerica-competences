@@ -2,7 +2,17 @@
   <div class="box_setting stxm-l">
     <!-- content for user info and user entreprise info -->
     <div class="global_user_info">
-      <setting-user-info class="box" :class="currentUser.themeColor.cbgBox"></setting-user-info>
+      <setting-user-info
+        :currentUser="currentUser"
+        :urlApiImg="urlApiImg"
+        :authorization="authorization"
+        :companiesAdmin="companiesAdmin"
+        :currentUserCompany="currentUserCompany"
+        :errors="errors"
+        :roles="roles"
+        class="box"
+        :class="currentUser.themeColor.cbgBox"
+      ></setting-user-info>
     </div>
 
     <!-- content upload img for juste root user -->
@@ -15,6 +25,8 @@
             :bg="false"
             :tailleW="'70px'"
             :tailleH="'70px'"
+            :currentUser="currentUser"
+            :imgs="imgs"
             :nameImgTarget="'logoNumerica'"
             :commandeDispatch="'ParamApp/changeLogoNumerica'"
             :title="'Modifier le logo Numerica principal'"
@@ -27,6 +39,8 @@
             :bg="false"
             :tailleW="'70px'"
             :tailleH="'70px'"
+            :currentUser="currentUser"
+            :imgs="imgs"
             :nameImgTarget="'logoIdentifiant'"
             :commandeDispatch="'ParamApp/changeLogoIdentifiant'"
             :title="'Modifier l\'icon personnes, salariés, etc...'"
@@ -39,6 +53,8 @@
             :bg="true"
             :tailleW="'70px'"
             :tailleH="'70px'"
+            :currentUser="currentUser"
+            :imgs="imgs"
             :nameImgTarget="'logoMenu'"
             :commandeDispatch="'ParamApp/changeLogoMenu'"
             :title="'Modifier le logo Numerica du menu'"
@@ -51,6 +67,8 @@
             :bg="true"
             :tailleW="'200px'"
             :tailleH="'70px'"
+            :currentUser="currentUser"
+            :imgs="imgs"
             :nameImgTarget="'logoFooterNumerica'"
             :commandeDispatch="'ParamApp/changeLogoFooterNumerica'"
             :title="'Modifier le logo Numerica dans le bas de page'"
@@ -63,6 +81,8 @@
             :bg="false"
             :tailleW="'70px'"
             :tailleH="'70px'"
+            :currentUser="currentUser"
+            :imgs="imgs"
             :nameImgTarget="'logoUpdateElement'"
             :commandeDispatch="'ParamApp/changeLogoUpdateElement'"
             :title="'Modifier l\'icon de modification des élément'"
@@ -75,6 +95,8 @@
             :bg="false"
             :tailleW="'70px'"
             :tailleH="'70px'"
+            :currentUser="currentUser"
+            :imgs="imgs"
             :nameImgTarget="'logoCloseUpdateElement'"
             :commandeDispatch="'ParamApp/changelogoCloseUpdateElement'"
             :title="'Modifier l\'icon de fermeture'"
@@ -86,14 +108,13 @@
     <!-- content theme colors -->
     <div>
       <div class="box dark_mode" :class="currentUser.themeColor.cbgBox">
-        <setting-theme-color></setting-theme-color>
+        <setting-theme-color :currentUser="currentUser"></setting-theme-color>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import TheFooter from "../../TheFooter/TheFooter.vue";
 import SettingImg from "./SettingImg.vue";
 import SettingThemeColor from "./SettingThemeColor.vue";
@@ -103,17 +124,44 @@ export default {
   components: { SettingImg, SettingThemeColor, SettingUserInfo, TheFooter },
   name: "Setting",
   data() {
-    return {};
+    return {
+      authorization: ["root", "administrateur", "référent"],
+      urlApiImg: process.env.VUE_APP_URL_API_IMG,
+      roles: Array,
+      imgs: Array,
+    };
   },
-  mounted() {
-    //for see or not sub menu
-    this.$store.commit("ParamApp/seeSubMenu", false);
-    //when loading the component, modify the title in the title bar
-    this.$store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
+  created() {
+    this.loadData();
+  },
+  updated() {
+    this.loadData();
   },
   computed: {
-    //get info user connected
-    ...mapGetters("UserConnect", ["currentUser"]),
+    //load currentUser for if reload user
+    currentUser() {
+      return this.$store.getters["CurrentUser/currentUser"];
+    },
+
+    //load company of currentUser for if reload
+    currentUserCompany() {
+      return this.$store.getters["CurrentUser/currentUserCompany"];
+    },
+
+    companiesAdmin() {
+      return this.$store.getters["Companies/companiesAdmin"];
+    },
+
+    //load errors for if reload
+    errors() {
+      return this.$store.getters["Error/errors"];
+    },
+  },
+  methods: {
+    loadData() {
+      this.roles = this.$store.getters["Roles/roles"];
+      this.imgs = this.$store.getters["Files/imgs"];
+    },
   },
 };
 </script>
