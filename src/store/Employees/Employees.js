@@ -1,4 +1,4 @@
-//import actions from "./EmployeesActions";
+import actions from "./EmployeesActions";
 import mutations from "./EmployeesMutations";
 import getters from "./EmployeesGetters";
 
@@ -8,7 +8,7 @@ export default {
     employeesReferentOfCompaniesAdmin: [],
     employeesCompanySelected: [],
   },
-  //actions,
+  actions,
   mutations,
   getters,
 };

@@ -11,8 +11,19 @@
         :imageUpdateCompany="imageUpdateCompany"
         name="SeeCompanyHome"
       ></router-view>
+
       <!-- view create user -->
-      <router-view name="SeeCompanyCreateUser"></router-view>
+      <router-view
+        :idCompaniesSelected="idCompaniesSelected"
+        :currentUser="currentUser"
+        :sectorsCompanySelected="sectorsCompanySelected"
+        :employeesCompanySelected="employeesCompanySelected"
+        :roles="roles"
+        :civ="civ"
+        :trades="trades"
+        name="SeeCompanyCreateUser"
+      ></router-view>
+
       <!-- view create file work -->
       <router-view name="SeeCompanyCreateFileWork"></router-view>
     </transition>
@@ -28,9 +39,11 @@ export default {
       companySelected: Object,
       sectorsCompanySelected: Array,
       currentUser: Object,
-      employeesCompanySelected: Array,
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
       nameImageUpdate: "logoUpdateElement",
+      roles: Array,
+      civ: ["Mr", "Mme"],
+      trades: Array,
     };
   },
   created() {
@@ -47,6 +60,11 @@ export default {
         return `${this.urlApiImg}${fieldName}`;
       }
     },
+
+    //recover employee of company selected
+    employeesCompanySelected() {
+      return this.$store.getters["Employees/employeesCompanySelected"];
+    },
   },
   methods: {
     loadData() {
@@ -58,7 +76,8 @@ export default {
       this.companySelected = this.$store.getters["Companies/companySelected"];
       this.sectorsCompanySelected = this.$store.getters["Sectors/sectorsCompanySelected"];
       this.currentUser = this.$store.getters["CurrentUser/currentUser"];
-      this.employeesCompanySelected = this.$store.getters["Employees/employeesCompanySelected"];
+      this.trades = this.$store.getters["Trades/tradesCompanySelected"];
+      this.roles = this.$store.getters["Roles/roles"];
     },
   },
 };

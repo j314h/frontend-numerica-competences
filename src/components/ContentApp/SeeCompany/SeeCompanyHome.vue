@@ -41,6 +41,9 @@ export default {
     employeesCompanySelected: Array,
     imageUpdateCompany: String,
   },
+  created() {
+    this.$store.commit("ParamApp/seeSubMenu", true);
+  },
   data() {
     return {};
   },

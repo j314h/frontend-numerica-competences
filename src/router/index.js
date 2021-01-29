@@ -101,7 +101,11 @@ const routes = [
         beforeEnter: async (to, from, next) => {
           await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
           await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          await store.dispatch("Trades/getTradesOfCompany", store.getters["Companies/idCompaniesSelected"]);
           store.commit("ParamApp/changeTitleHeadBand", store.getters["Companies/companySelected"].name);
+          store.commit("ParamApp/seeSubMenu", true);
+          await store.dispatch("Roles/getRoles");
+
           next();
         },
         children: [
