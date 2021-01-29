@@ -45,8 +45,11 @@ export default {
     //check variable load of app
     ...mapGetters("Loading", ["isLoading"]),
     //check if see or not sub menu
-    ...mapGetters("ParamApp", ["isSubMenu"]),
+    isSubMenu() {
+      return this.$store.getters["ParamApp/isSubMenu"];
+    },
   },
+  methods: {},
 };
 </script>
 

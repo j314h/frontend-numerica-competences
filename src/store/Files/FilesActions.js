@@ -24,7 +24,7 @@ export default {
   },
 
   //update log, set options.targetUrl for target api url
-  async updateImg(context, options) {
+  async updateImg(context, { data, targetUrl }) {
     try {
       //active loading and reset error
       store.commit("Loading/stateLoading", true);
@@ -32,8 +32,8 @@ export default {
 
       //call api for update image logo numerica
       await Vue.axios.post(
-        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}file/${options.targetUrl}`,
-        options.data,
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}file/${targetUrl}`, //
+        data,
         headersData
       );
 

@@ -53,8 +53,26 @@
           <!-- sectors -->
           <div class="box_sectors">
             <label>Secteur: </label>
-            <div v-for="(sector, i) in dataForm.sectors" :key="i">
+            <div class="input_sector" v-for="(sector, i) in dataForm.sectors" :key="i">
               <input class="input" v-model="sector.libelle" />
+              <!-- btn delete input -->
+              <button class="box_delete_input" @click.prevent="deleteSectorData(sector, i)">
+                <svg
+                  class="btn_delete_input"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M19.9999 2.22217C10.1815 2.22217 2.22217 10.1815 2.22217 19.9999C2.22217 29.8183 10.1815 37.7777 19.9999 37.7777C29.8183 37.7777 37.7777 29.8183 37.7777 19.9999C37.7777 15.285 35.9047 10.7631 32.5707 7.42916C29.2367 4.09518 24.7149 2.22217 19.9999 2.22217ZM19.9999 35.5555C11.4088 35.5555 4.44438 28.591 4.44438 19.9999C4.44438 11.4089 11.4088 4.44439 19.9999 4.44439C28.591 4.44439 35.5555 11.4089 35.5555 19.9999C35.5555 24.1255 33.9166 28.0822 30.9994 30.9994C28.0821 33.9166 24.1255 35.5555 19.9999 35.5555ZM13.3333 18.8888H26.6666C27.2803 18.8888 27.7777 19.3863 27.7777 19.9999C27.7777 20.6136 27.2803 21.1111 26.6666 21.1111H13.3333C12.7196 21.1111 12.2222 20.6136 12.2222 19.9999C12.2222 19.3863 12.7196 18.8888 13.3333 18.8888Z"
+                    fill="#DB0000"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
 
@@ -144,13 +162,13 @@ export default {
           phoneNumber: this.currentUserCompany.phoneNumber,
           address: {
             street: this.currentUserCompany.address.street,
-            postCode: this.currentUserCompany.address.codePost,
+            postCode: this.currentUserCompany.address.postCode,
             city: this.currentUserCompany.address.city,
           },
           state: this.currentUserCompany.state,
         },
         _id: this.currentUserCompany._id,
-        sectors: this.sectorsCompanyCurrentUser,
+        sectors: this.sectorsCompanyCurrentUser.map((el) => ({ ...el })),
         newSectors: [],
       },
     };
@@ -168,6 +186,11 @@ export default {
       this.dataForm.newSectors.splice(i, 1);
     },
 
+    deleteSectorData(sector, i) {
+      this.dataForm.sectors.splice(i, 1);
+      this.$store.dispatch("Sectors/deleteSectorCurrentUser", sector);
+    },
+
     //call api for update company's user
     async updateCompany() {
       try {
@@ -176,12 +199,6 @@ export default {
 
         //call api for update company
         await this.$store.dispatch("CurrentUser/updateCurrentUserCompany", this.dataForm);
-        if (this.dataForm.newSectors.length > 0) {
-          await this.$store.dispatch("Sectors/createSectors", this.dataForm, "currentUser");
-        }
-        if (this.dataForm.sectors.length > 0) {
-          await this.$store.dispatch("Sectors/updateSectors", this.dataForm, "currentUser");
-        }
 
         //if success show alert custom and close window update
         this.$swal.fire({

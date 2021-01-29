@@ -75,7 +75,7 @@ export default {
     //return new format address company
     companyCodePostCity() {
       return Services.codePostCityOneLine(
-        this.currentUserCompany.address.codePost,
+        this.currentUserCompany.address.postCode,
         this.currentUserCompany.address.city
       );
     },

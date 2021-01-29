@@ -155,6 +155,14 @@ export default {
         headers
       );
 
+      //create and update sector of company
+      if (companyData.newSectors.length > 0) {
+        await store.dispatch("Sectors/createSectorsCurrentUser", companyData);
+      }
+      if (companyData.sectors.length > 0) {
+        await store.dispatch("Sectors/updateSectorsCurrentUser", companyData);
+      }
+
       //add update company in store and disable page loading
       context.commit("addCompanyOfCurrentUser", company.data);
       store.commit("Loading/stateLoading", false);

@@ -84,8 +84,6 @@ const routes = [
         },
         beforeEnter: async (to, from, next) => {
           //for see or not sub menu and modify the title in the title bar
-          store.commit("ParamApp/seeSubMenu", false);
-          store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
           await store.dispatch("Roles/getRoles");
           await store.dispatch("States/getAllState");
           await store.dispatch("Companies/getAllCompaniesAdmin");

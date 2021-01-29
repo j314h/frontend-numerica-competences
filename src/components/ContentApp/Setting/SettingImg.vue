@@ -44,7 +44,6 @@
 
 <script>
 import ErrorContent from "../../Elements/ErrorContent.vue";
-import { mapGetters } from "vuex";
 import ButtonApp from "../../Elements/ButtonApp.vue";
 
 export default {
@@ -63,6 +62,7 @@ export default {
     title: String,
     currentUser: Object,
     imgs: Array,
+    targetUrl: String,
   },
   data() {
     return {
@@ -96,22 +96,28 @@ export default {
       //build formData for send api
       const data = new FormData();
       data.append(this.nameImgTarget, this.$refs.file.files[0]);
+      const datas = {
+        data,
+        targetUrl: this.targetUrl,
+      };
+
       //send file
-      await this.$store.dispatch(this.commandeDispatch, data);
+      await this.$store.dispatch(this.commandeDispatch, datas);
       this.text = "Modifier";
       this.fileIsLoad = "";
       this.fileLoad = false;
+
       //if errors show alert custom
-      if (this.$store.getters["ParamApp/errors"][0]) {
+      if (this.$store.getters["Error/errors"][0]) {
         this.$swal.fire({
           position: "top-end",
           icon: "error",
-          title: this.$store.getters["ParamApp/errors"][0],
+          title: this.$store.getters["Error/errors"][0],
           showConfirmButton: false,
           timer: 2000,
         });
         setTimeout(() => {
-          this.$store.commit("ParamApp/resetErrors");
+          this.$store.commit("Error/resetError");
         }, 2000);
       } else {
         //if success show alert custom
@@ -123,6 +129,7 @@ export default {
           timer: 2000,
         });
       }
+
       //reset input file
       this.$refs.file.value = "";
     },

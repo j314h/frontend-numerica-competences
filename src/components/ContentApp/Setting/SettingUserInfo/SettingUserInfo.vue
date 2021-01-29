@@ -82,6 +82,7 @@ export default {
     currentUserCompany: Object,
     errors: Array,
     roles: Array,
+    sectorsCompanyCurrentUser: Array,
   },
   data() {
     return {
@@ -92,10 +93,6 @@ export default {
     };
   },
   computed: {
-    //load company of currentUser for if reload
-    sectorsCompanyCurrentUser() {
-      return this.$store.getters["CurrentUser/sectorsCompanyCurrentUser"];
-    },
     //this variable for change image pencil and X for update user and company
     imageUpdateUser() {
       if (this.$store.getters["Files/imgs"]) {

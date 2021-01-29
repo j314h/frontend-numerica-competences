@@ -8,6 +8,7 @@
         :authorization="authorization"
         :companiesAdmin="companiesAdmin"
         :currentUserCompany="currentUserCompany"
+        :sectorsCompanyCurrentUser="sectorsCompanyCurrentUser"
         :errors="errors"
         :roles="roles"
         class="box"
@@ -28,7 +29,8 @@
             :currentUser="currentUser"
             :imgs="imgs"
             :nameImgTarget="'logoNumerica'"
-            :commandeDispatch="'ParamApp/changeLogoNumerica'"
+            :commandeDispatch="'Files/updateImg'"
+            :targetUrl="'logo-numerica'"
             :title="'Modifier le logo Numerica principal'"
           ></setting-img>
         </div>
@@ -42,7 +44,8 @@
             :currentUser="currentUser"
             :imgs="imgs"
             :nameImgTarget="'logoIdentifiant'"
-            :commandeDispatch="'ParamApp/changeLogoIdentifiant'"
+            :commandeDispatch="'Files/updateImg'"
+            :targetUrl="'logo-identifiant'"
             :title="'Modifier l\'icon personnes, salariés, etc...'"
           ></setting-img>
         </div>
@@ -56,7 +59,8 @@
             :currentUser="currentUser"
             :imgs="imgs"
             :nameImgTarget="'logoMenu'"
-            :commandeDispatch="'ParamApp/changeLogoMenu'"
+            :commandeDispatch="'Files/updateImg'"
+            :targetUrl="'logo-menu'"
             :title="'Modifier le logo Numerica du menu'"
           ></setting-img>
         </div>
@@ -70,7 +74,8 @@
             :currentUser="currentUser"
             :imgs="imgs"
             :nameImgTarget="'logoFooterNumerica'"
-            :commandeDispatch="'ParamApp/changeLogoFooterNumerica'"
+            :commandeDispatch="'Files/updateImg'"
+            :targetUrl="'logo-numerica-footer'"
             :title="'Modifier le logo Numerica dans le bas de page'"
           ></setting-img>
         </div>
@@ -84,7 +89,8 @@
             :currentUser="currentUser"
             :imgs="imgs"
             :nameImgTarget="'logoUpdateElement'"
-            :commandeDispatch="'ParamApp/changeLogoUpdateElement'"
+            :commandeDispatch="'Files/updateImg'"
+            :targetUrl="'logo-update-element'"
             :title="'Modifier l\'icon de modification des élément'"
           ></setting-img>
         </div>
@@ -98,7 +104,8 @@
             :currentUser="currentUser"
             :imgs="imgs"
             :nameImgTarget="'logoCloseUpdateElement'"
-            :commandeDispatch="'ParamApp/changelogoCloseUpdateElement'"
+            :commandeDispatch="'Files/updateImg'"
+            :targetUrl="'logo-close-update-element'"
             :title="'Modifier l\'icon de fermeture'"
           ></setting-img>
         </div>
@@ -115,6 +122,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import TheFooter from "../../TheFooter/TheFooter.vue";
 import SettingImg from "./SettingImg.vue";
 import SettingThemeColor from "./SettingThemeColor.vue";
@@ -128,7 +136,6 @@ export default {
       authorization: ["root", "administrateur", "référent"],
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
       roles: Array,
-      imgs: Array,
     };
   },
   created() {
@@ -138,29 +145,32 @@ export default {
     this.loadData();
   },
   computed: {
-    //load currentUser for if reload user
+    //load data dynamic
     currentUser() {
       return this.$store.getters["CurrentUser/currentUser"];
     },
-
-    //load company of currentUser for if reload
     currentUserCompany() {
       return this.$store.getters["CurrentUser/currentUserCompany"];
     },
-
     companiesAdmin() {
       return this.$store.getters["Companies/companiesAdmin"];
     },
-
-    //load errors for if reload
+    sectorsCompanyCurrentUser() {
+      return this.$store.getters["CurrentUser/sectorsCompanyCurrentUser"];
+    },
+    imgs() {
+      return this.$store.getters["Files/imgs"];
+    },
     errors() {
       return this.$store.getters["Error/errors"];
     },
   },
   methods: {
+    //load divers data static
     loadData() {
       this.roles = this.$store.getters["Roles/roles"];
-      this.imgs = this.$store.getters["Files/imgs"];
+      this.$store.commit("ParamApp/seeSubMenu", false);
+      this.$store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
     },
   },
 };

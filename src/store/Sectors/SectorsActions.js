@@ -6,6 +6,9 @@ export default {
   //recover sectors of company seleted
   async getSectorsCompanySelected(context, idCompany) {
     try {
+      //add error in store
+      store.commit("Error/resetError");
+
       //call api and add sector company selected in store
       const sectors = await Vue.axios.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sectors/${idCompany}`);
       context.commit("addSectorsCompanySelected", sectors.data);
@@ -16,8 +19,11 @@ export default {
   },
 
   //create sectors
-  createSectors: async (context, data, string) => {
+  createSectorsCurrentUser: async (context, data) => {
     try {
+      //add error in store
+      store.commit("Error/resetError");
+
       //call api for create sector return array sector
       const sectors = await Vue.axios.post(
         `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sectors-create`,
@@ -25,7 +31,7 @@ export default {
         headers
       );
       //add sectors company current user if write in argument
-      if (string === "currentUser") store.commit("CurrentUser/addSectorsCompanyCurrentUser", sectors.data);
+      store.commit("CurrentUser/addSectorsCompanyCurrentUser", sectors.data);
     } catch (error) {
       //add error in store
       store.commit("Error/addError", error);
@@ -33,8 +39,11 @@ export default {
   },
 
   //update sectors of company
-  updateSectors: async (context, data, string) => {
+  updateSectorsCurrentUser: async (context, data) => {
     try {
+      //add error in store
+      store.commit("Error/resetError");
+
       //call api for create sector return array sector
       const sectors = await Vue.axios.post(
         `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sectors-update`,
@@ -42,7 +51,24 @@ export default {
         headers
       );
       //add sectors company current user if write in argument
-      if (string === "currentUser") store.commit("CurrentUser/addSectorsCompanyCurrentUser", sectors.data);
+      store.commit("CurrentUser/addSectorsCompanyCurrentUser", sectors.data);
+    } catch (error) {
+      //add error in store
+      store.commit("Error/addError", error);
+    }
+  },
+
+  //delete sectors
+  deleteSectorCurrentUser: async (context, data) => {
+    try {
+      //add error in store
+      store.commit("Error/resetError");
+
+      //call api for delete sector
+      const sectors = await Vue.axios.delete(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sector/${data._id}`);
+
+      //recover all sector of company and add sectors in store
+      store.commit("CurrentUser/addSectorsCompanyCurrentUser", sectors.data);
     } catch (error) {
       //add error in store
       store.commit("Error/addError", error);
