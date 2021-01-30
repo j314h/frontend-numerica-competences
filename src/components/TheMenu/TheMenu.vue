@@ -78,8 +78,8 @@
           >
             <svg
               @click="outCompanySelected"
-              width="15"
-              height="16"
+              width="12"
+              height="12"
               viewBox="0 0 15 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -149,9 +149,9 @@ export default {
     },
   },
   methods: {
-    //delete companySelected in store and in localstorage
+    //change value bool of out company select for indicate to click on btn outCompanySelected
     outCompanySelected() {
-      this.$store.commit("Companies/deleteCompaniesSelected");
+      this.$store.commit("ParamApp/getOutCompanySelected", true);
     },
 
     //first letter of text uppercase

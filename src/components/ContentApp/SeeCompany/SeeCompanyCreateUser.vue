@@ -88,22 +88,31 @@
             <v-select class="select" :options="libellesSectors" v-model="dataUser.sector"></v-select>
           </div>
 
+          <error-content :error="errors"></error-content>
+
           <!-- btn -->
           <div class="btn_submit">
             <button-app class="btn_sub" :mini="true" :textBtn="'Créer'"></button-app>
           </div>
         </div>
       </form>
+
+      <!-- text info formulaire -->
+      <div>
+        <p class="stxs-r text_info">* ce champs est obligatoire</p>
+        <!-- <p></p> version 2 if you need to add a specific info -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import ButtonApp from "../../Elements/ButtonApp.vue";
+import ErrorContent from "../../Elements/ErrorContent.vue";
 import vSelect from "../../Elements/vue-bootstrap-select";
 
 export default {
-  components: { vSelect, ButtonApp },
+  components: { vSelect, ButtonApp, ErrorContent },
   name: "SeeCompanyCreateUser",
   props: {
     idCompaniesSelected: String,
@@ -113,6 +122,7 @@ export default {
     sectorsCompanySelected: Array,
     employeesCompanySelected: Array,
     trades: Array,
+    errors: Array,
   },
   data() {
     return {
@@ -164,16 +174,40 @@ export default {
   methods: {
     //create new user for company selected
     createUser() {
-      //recover id of new user
-      this.getIdLeader();
-      this.getIdRole();
-      this.getIdSector();
-      this.getIdTrade();
-      this.$store.dispatch("Employees/createEmployeeCompanySelected", this.dataUser);
-      console.log(this.dataUser);
-      this.resetInput();
+      if (this.dataUser.role !== "Choisissez un rôle") {
+        //recover all id of new user
+        this.getIdLeader();
+        this.getIdRole();
+        this.getIdSector();
+        this.getIdTrade();
+
+        //call api
+        this.$store.dispatch("Employees/createEmployeeCompanySelected", this.dataUser);
+
+        //message succes and reset champs input
+        this.$swal.fire({
+          icon: "success",
+          title: `Création réussis`,
+          text: `Un email a été envoyé à l'adresse suivante : ${this.dataUser.email} pour validation du compte`,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+        this.resetInput();
+      } else {
+        //pop if role is not exist
+        this.$swal.fire({
+          icon: "error",
+          title: "Veuillez renseignez un rôle",
+          text: "Le rôle est obligatoire, pour le bon fonctionnement de l'application",
+        });
+      }
     },
 
+    //reset champs
     resetInput() {
       this.dataUser = {
         civility: "Mr",
@@ -198,7 +232,7 @@ export default {
       };
     },
 
-    //get id of sector of new leader
+    //get id of trade of new user
     getIdTrade() {
       if (this.dataUser.trade !== "Choisissez un métier") {
         const { _id } = this.trades.find((el) => el.libelle === this.dataUser.trade);
@@ -208,7 +242,7 @@ export default {
       }
     },
 
-    //get id of sector of new leader
+    //get id of sector of new user
     getIdSector() {
       if (this.dataUser.sector !== "Choisissez un secteur") {
         const { _id } = this.sectorsCompanySelected.find((el) => el.libelle === this.dataUser.sector);
@@ -218,7 +252,7 @@ export default {
       }
     },
 
-    //get id of role of new leader
+    //get id of role of new user
     getIdRole() {
       if (this.dataUser.role !== "Choisissez un rôle") {
         const { _id } = this.roles.find((el) => el.libelle === this.dataUser.role);
@@ -228,7 +262,7 @@ export default {
       }
     },
 
-    //get id of user leader of new leader
+    //get id of user leader of new user
     getIdLeader() {
       if (this.dataUser.leader !== "Choisissez un chef de secteur") {
         const { _id } = this.employeesCompanySelected.find(
@@ -274,10 +308,13 @@ form {
   display: flex;
   width: 80%;
   justify-content: flex-end;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 .btn_sub {
   margin-left: 20px;
   margin-bottom: 0px !important;
+}
+.text_info {
+  margin: 100px 0 0 0;
 }
 </style>

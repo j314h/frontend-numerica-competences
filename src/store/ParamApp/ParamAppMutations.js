@@ -7,4 +7,8 @@ export default {
   changeTitleHeadBand(state, text) {
     state.titleHeadBand = text;
   },
+  //for exit company selected
+  getOutCompanySelected(state, bool) {
+    state.outCompanySelected = bool;
+  },
 };

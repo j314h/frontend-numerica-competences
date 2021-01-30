@@ -9,6 +9,7 @@ export default {
     titleHeadBand: "",
     //booleen for sub menu appear or not
     isSubMenu: false,
+    outCompanySelected: false,
   },
   //actions,
   mutations,

@@ -75,6 +75,11 @@ export default {
       this.companiesAdmin = this.$store.getters["Companies/companiesAdmin"];
       this.btnm = this.$store.getters["CurrentUser/btnm"];
       this.errors = this.$store.getters["Error/errors"];
+
+      //test if user close company selected or not
+      if (this.$store.getters["ParamApp/outCompanySelected"]) {
+        this.$store.commit("Companies/deleteCompaniesSelected");
+      }
     },
   },
 };

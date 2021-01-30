@@ -21,6 +21,7 @@
         :roles="roles"
         :civ="civ"
         :trades="trades"
+        :errors="errors"
         name="SeeCompanyCreateUser"
       ></router-view>
 
@@ -36,8 +37,6 @@ export default {
   data() {
     return {
       idCompaniesSelected: String,
-      companySelected: Object,
-      sectorsCompanySelected: Array,
       currentUser: Object,
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
       nameImageUpdate: "logoUpdateElement",
@@ -65,16 +64,30 @@ export default {
     employeesCompanySelected() {
       return this.$store.getters["Employees/employeesCompanySelected"];
     },
+
+    //recover company selected
+    companySelected() {
+      return this.$store.getters["Companies/companySelected"];
+    },
+
+    //recover sector of company selected
+    sectorsCompanySelected() {
+      return this.$store.getters["Sectors/sectorsCompanySelected"];
+    },
+
+    //recover error
+    errors() {
+      return this.$store.getters["Error/errors"];
+    },
   },
   methods: {
+    //loading data for component
     loadData() {
       //for see or not sub menu
       this.$store.commit("ParamApp/seeSubMenu", true);
 
       //load data for company selected
       this.idCompaniesSelected = this.$store.getters["Companies/idCompaniesSelected"];
-      this.companySelected = this.$store.getters["Companies/companySelected"];
-      this.sectorsCompanySelected = this.$store.getters["Sectors/sectorsCompanySelected"];
       this.currentUser = this.$store.getters["CurrentUser/currentUser"];
       this.trades = this.$store.getters["Trades/tradesCompanySelected"];
       this.roles = this.$store.getters["Roles/roles"];

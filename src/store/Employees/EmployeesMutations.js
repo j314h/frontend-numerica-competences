@@ -5,7 +5,12 @@ export default {
   },
 
   //add employee of company selected
-  addEmployeeCompanySelected(state, users) {
-    state.employeesCompanySelected = users;
+  addEmployeeCompanySelected(state, employees) {
+    state.employeesCompanySelected = employees;
+  },
+
+  //add new employee in company selected
+  addNewEmployeeInCompanySelected(state, employee) {
+    state.employeesCompanySelected = [...state.employeesCompanySelected, employee];
   },
 };

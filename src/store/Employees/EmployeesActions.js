@@ -10,14 +10,15 @@ export default {
       store.commit("Loading/stateLoading", true);
       store.commit("Error/resetError");
 
-      const employees = await Vue.axios.post(
+      //call api for create new employee of company selected
+      const employee = await Vue.axios.post(
         `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}user-create`,
         data,
         headers
       );
 
-      //continuer le code ici
-
+      //add in array new employee and stop page loading
+      context.commit("addNewEmployeeInCompanySelected", employee.data);
       store.commit("Loading/stateLoading", false);
     } catch (error) {
       //add error in store disable page loading
