@@ -41,11 +41,14 @@ export default {
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
       nameImageUpdate: "logoUpdateElement",
       roles: Array,
-      civ: ["Mr", "Mme"],
+      civ: ["M.", "Mme"],
       trades: Array,
     };
   },
   created() {
+    this.loadData();
+  },
+  beforeMount() {
     this.loadData();
   },
   updated() {
@@ -83,9 +86,6 @@ export default {
   methods: {
     //loading data for component
     loadData() {
-      //for see or not sub menu
-      this.$store.commit("ParamApp/seeSubMenu", true);
-
       //load data for company selected
       this.idCompaniesSelected = this.$store.getters["Companies/idCompaniesSelected"];
       this.currentUser = this.$store.getters["CurrentUser/currentUser"];

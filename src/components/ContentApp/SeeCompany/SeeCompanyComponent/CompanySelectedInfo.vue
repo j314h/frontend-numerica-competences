@@ -72,9 +72,11 @@ li {
   display: flex;
 }
 .box_left {
+  padding: 20px;
   flex: 1;
 }
 .box_right {
+  padding: 20px;
   flex: 1;
 }
 .box_info_company_primary {

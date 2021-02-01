@@ -104,6 +104,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import router from "../../router";
 
 export default {
   name: "TheMenu",
@@ -152,6 +153,12 @@ export default {
     //change value bool of out company select for indicate to click on btn outCompanySelected
     outCompanySelected() {
       this.$store.commit("ParamApp/getOutCompanySelected", true);
+      if (this.$store.getters["ParamApp/titleHeadBand"] === "Tableau de bord") {
+        //test if user close company selected or not
+        if (this.$store.getters["ParamApp/outCompanySelected"]) {
+          this.$store.commit("Companies/deleteCompaniesSelected");
+        }
+      }
     },
 
     //first letter of text uppercase

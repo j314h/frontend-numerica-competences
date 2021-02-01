@@ -87,6 +87,13 @@ const routes = [
           await store.dispatch("Roles/getRoles");
           await store.dispatch("States/getAllState");
           await store.dispatch("Companies/getAllCompaniesAdmin");
+          store.commit("ParamApp/seeSubMenu", false);
+          store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
+          //if company selected is define reload info company selected and users of company selected
+          if (store.getters["Companies/idCompaniesSelected"]) {
+            await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+            await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          }
           next();
         },
       },

@@ -3,7 +3,9 @@
     <div class="box_info_detail">
       <!-- info personnal -->
       <div class="info_detail">
-        <p>{{ fullName }}</p>
+        <p>
+          {{ civ }} {{ firstName }} <span class="upper">{{ lastName }}</span>
+        </p>
         <p>{{ street }}</p>
         <p>{{ codePostCity }}</p>
         <p>{{ currentUser.phoneNumber }}</p>
@@ -15,28 +17,28 @@
         <!-- mot de passe -->
         <div>
           <p class="stxm-m" :class="currentUser.themeColor.colorText">
-            Mot de passe: <span :class="currentUser.themeColor.colorTextImportant">**********</span>
+            Mot de passe : <span :class="currentUser.themeColor.colorTextImportant">**********</span>
           </p>
         </div>
 
         <!-- role -->
         <div>
           <p class="stxm-m" :class="currentUser.themeColor.colorText">
-            Rôle: <span :class="currentUser.themeColor.colorTextImportant">{{ currentUser.role.libelle }}</span>
+            Rôle : <span :class="currentUser.themeColor.colorTextImportant">{{ currentUser.role.libelle }}</span>
           </p>
         </div>
 
         <!-- statut -->
         <div>
           <p class="stxm-m" :class="currentUser.themeColor.colorText">
-            Statut: <span :class="currentUser.themeColor.colorTextImportant">{{ currentUser.state.libelle }}</span>
+            Statut : <span :class="currentUser.themeColor.colorTextImportant">{{ currentUser.state.libelle }}</span>
           </p>
         </div>
 
         <!-- etat du compte -->
         <div>
           <p class="stxm-m" :class="currentUser.themeColor.colorText">
-            Etat du compte:
+            Etat du compte :
             <span v-if="currentUser.activated === true" :class="currentUser.themeColor.colorTextImportant">Vérifé</span>
             <span v-else :class="currentUser.themeColor.colorTextImportant">Non vérifié</span>
           </p>
@@ -45,7 +47,7 @@
         <!-- nombre de clients -->
         <div v-if="currentUser.role.libelle === 'root' || currentUser.role.libelle === 'administrateur'">
           <p class="stxm-m" :class="currentUser.themeColor.colorText">
-            Nombre de clients:
+            Nombre de clients :
             <span :class="currentUser.themeColor.colorTextImportant">{{ companiesAdmin.length }}</span>
           </p>
         </div>
@@ -64,13 +66,16 @@ export default {
     companiesAdmin: Array,
   },
   computed: {
-    //return new format of name user
-    fullName() {
-      return Services.fullName(
-        this.currentUser.civility,
-        this.currentUser.name.firstName,
-        this.currentUser.name.lastName
-      );
+    //return civility
+    civ() {
+      return this.currentUser.civility;
+    },
+    //return first name and last name
+    firstName() {
+      return Services.upperFirstLetter(this.currentUser.name.firstName);
+    },
+    lastName() {
+      return this.currentUser.name.lastName;
     },
 
     //create format street of address

@@ -48,7 +48,7 @@ export default {
         );
 
         //object if employee is not defined create object final
-        const data = { name: { firstName: "ajouter", lastName: "référent" } };
+        const data = { name: { firstName: "ajouter un", lastName: "référent" } };
         const object = { company, employee: !employee ? data : employee };
 
         //add new object in tab companiesReferents

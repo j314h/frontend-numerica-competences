@@ -13,13 +13,13 @@
       <div class="info_company">
         <!-- siret -->
         <p class="stxm-m" :class="currentUser.themeColor.colorText">
-          Numéro de siret:
+          Numéro de siret :
           <span :class="currentUser.themeColor.colorTextImportant">{{ currentUserCompany.siret }}</span>
         </p>
 
         <!-- NAF -->
         <p class="stxm-m" :class="currentUser.themeColor.colorText">
-          Code NAF: <span :class="currentUser.themeColor.colorTextImportant">{{ currentUserCompany.naf }}</span>
+          Code NAF : <span :class="currentUser.themeColor.colorTextImportant">{{ currentUserCompany.naf }}</span>
         </p>
 
         <!-- filliale -->
@@ -30,7 +30,7 @@
 
         <!-- sectors -->
         <ul>
-          <span class="stxm-m" :class="currentUser.themeColor.colorText">Secteurs:</span>
+          <span class="stxm-m" :class="currentUser.themeColor.colorText">Secteurs :</span>
           <div v-if="sectorsCompanyCurrentUser.length > 0">
             <li v-for="(sector, i) in sectorsCompanyCurrentUser" :key="i" :class="currentUser.themeColor.colorTextTab">
               {{ upper(sector.libelle) }}

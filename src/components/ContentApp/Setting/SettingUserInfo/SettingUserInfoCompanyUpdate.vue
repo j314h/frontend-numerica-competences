@@ -6,27 +6,27 @@
         <div class="info_company">
           <!-- name company -->
           <div>
-            <label>Dénomination sociale</label>
+            <label>Dénomination sociale * :</label>
             <input class="input" type="text" v-model="dataForm.data.name" required />
           </div>
 
           <!-- street -->
           <div>
-            <label>Adresse, numéro et rue</label>
-            <input class="input" type="text" v-model="dataForm.data.address.street" />
+            <label>Adresse * :</label>
+            <input class="input" type="text" v-model="dataForm.data.address.street" required />
           </div>
           <div>
-            <label>Code postal</label>
-            <input class="input" type="text" v-model="dataForm.data.address.postCode" />
+            <label>Code postal * :</label>
+            <input class="input" type="text" v-model="dataForm.data.address.postCode" required />
           </div>
           <div>
-            <label>Ville</label>
+            <label>Ville * :</label>
             <input class="input" type="text" v-model="dataForm.data.address.city" required />
           </div>
 
           <!-- phone number -->
           <div>
-            <label>Numero de téléphone</label>
+            <label>Numero de téléphone * :</label>
             <input class="input" type="text" v-model="dataForm.data.phoneNumber" required />
           </div>
         </div>
@@ -34,25 +34,25 @@
         <div class="info_company">
           <!-- siret -->
           <div>
-            <label>Numéro de Siret</label>
+            <label>Numéro de Siret * :</label>
             <input class="input" type="text" v-model="dataForm.data.siret" required />
           </div>
 
           <!-- naf -->
           <div>
-            <label>Code NAF</label>
+            <label>Code NAF * :</label>
             <input class="input" type="text" v-model="dataForm.data.naf" required />
           </div>
 
           <!-- fillale -->
           <div>
-            <label>Site de production - Filliale</label>
+            <label>Site de production - Filliale :</label>
             <input class="input" type="text" v-model="dataForm.data.filliale" />
           </div>
 
           <!-- sectors -->
           <div class="box_sectors">
-            <label>Secteur: </label>
+            <label>Secteur : </label>
             <div class="input_sector" v-for="(sector, i) in dataForm.sectors" :key="i">
               <input class="input" v-model="sector.libelle" />
               <!-- btn delete input -->
@@ -130,6 +130,10 @@
             <button-app :mini="true" :textBtn="'Modifier'"></button-app>
           </div>
         </div>
+      </div>
+      <div>
+        <p class="stxs-r text_info">* Champs obligatoire</p>
+        <!-- <p></p> version 2 if you need to add a specific info -->
       </div>
     </form>
   </div>
@@ -243,7 +247,7 @@ p {
   justify-content: space-around;
 }
 .box_info_company input {
-  margin: 10px 0;
+  margin: 10px 0 20px 0;
 }
 .box_info_company .info_company:nth-child(1) {
   min-width: 300px;
@@ -292,9 +296,13 @@ p {
   display: flex;
   justify-content: flex-end;
   width: 80%;
-  margin-top: 30px;
+  margin-top: 0px;
 }
 .box_error {
   margin: 10px 0;
+}
+.text_info {
+  color: #000;
+  margin: 10px 0 40px 0;
 }
 </style>

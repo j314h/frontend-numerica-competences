@@ -135,14 +135,7 @@ export default {
     return {
       authorization: ["root", "administrateur", "référent"],
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
-      roles: Array,
     };
-  },
-  created() {
-    this.loadData();
-  },
-  updated() {
-    this.loadData();
   },
   computed: {
     //load data dynamic
@@ -164,15 +157,11 @@ export default {
     errors() {
       return this.$store.getters["Error/errors"];
     },
-  },
-  methods: {
-    //load divers data static
-    loadData() {
-      this.roles = this.$store.getters["Roles/roles"];
-      this.$store.commit("ParamApp/seeSubMenu", false);
-      this.$store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
+    roles() {
+      return this.$store.getters["Roles/roles"];
     },
   },
+  methods: {},
 };
 </script>
 

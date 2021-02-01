@@ -6,43 +6,43 @@
         <div class="info_detail">
           <!-- first name -->
           <div>
-            <label>Prénom</label>
+            <label>Prénom * :</label>
             <input type="text" v-model="dataForm.data.name.firstName" class="input space_input" required />
           </div>
 
           <!-- last name -->
           <div>
-            <label class="space_input">Nom</label>
+            <label class="space_input">Nom * :</label>
             <input type="text" v-model="dataForm.data.name.lastName" class="input space_input" required />
           </div>
 
           <!-- street and number of street -->
           <div>
-            <label class="space_input">Adresse, numéro et rue</label>
+            <label class="space_input">Adresse :</label>
             <input type="text" v-model="dataForm.data.address.street" class="input space_input" />
           </div>
 
           <!-- code post -->
           <div>
-            <label class="space_input">Code postal</label>
+            <label class="space_input">Code postal : </label>
             <input type="text" v-model="dataForm.data.address.postCode" class="input space_input" />
           </div>
 
           <!-- city -->
           <div>
-            <label class="space_input">Ville</label>
+            <label class="space_input">Ville : </label>
             <input type="text" v-model="dataForm.data.address.city" class="input space_input" />
           </div>
 
           <!-- phone number -->
           <div>
-            <label class="space_input">Téléphone</label>
+            <label class="space_input">Téléphone :</label>
             <input type="tel" v-model="dataForm.data.phoneNumber" class="input space_input" />
           </div>
 
           <!-- email -->
           <div>
-            <label class="space_input">Adresse mail</label>
+            <label class="space_input">Adresse mail * :</label>
             <input type="email" v-model="dataForm.data.email" class="input space_input" autocomplete="off" required />
           </div>
         </div>
@@ -50,7 +50,7 @@
         <!-- info password -->
         <div class="info_detail">
           <div>
-            <label>Mot de passe</label>
+            <label>Mot de passe : </label>
 
             <!-- old password -->
             <input
@@ -82,9 +82,9 @@
             <!-- errors -->
             <error-content class="error_password" :error="errors"></error-content>
 
-            <!-- role -->
-            <div v-if="currentUser.role.libelle === 'root' || currentUser.role.libelle === 'admin'">
-              <label>Rôle</label>
+            <!-- role for current user, juste root change role-->
+            <div v-if="currentUser.role.libelle === 'root'">
+              <label>Rôle * :</label>
               <v-select class="select" :options="libellesRoles" v-model="dataForm.data.role"></v-select>
             </div>
 
@@ -94,6 +94,10 @@
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <p class="stxs-r text_info">* Champs obligatoire</p>
+        <!-- <p></p> version 2 if you need to add a specific info -->
       </div>
     </form>
   </div>
@@ -248,11 +252,15 @@ label {
 .box_btn {
   display: flex;
   justify-content: flex-end;
-  margin-top: 30px;
+  margin-top: 40px;
   width: 80%;
 }
 .error_password {
   margin: 20px 0;
+}
+.text_info {
+  color: #000;
+  margin: 10px 0 80px 0;
 }
 @media screen and (max-width: 884px) {
   .box_info_detail .info_detail:nth-child(2) {

@@ -7,46 +7,52 @@
       <div class="block_left">
         <!-- name -->
         <div>
-          <label :class="colorTextTab">Renseignez la dénomination sociale *</label>
-          <input class="input" type="text" v-model="data.name" required />
+          <label :class="colorTextTab">Dénomination sociale * :</label>
+          <input class="input" type="text" v-model="data.name" placeholder="Nom de l'entreprise" required />
         </div>
         <!-- street -->
         <div>
-          <label :class="colorTextTab">Renseignez le numéro et la rue *</label>
-          <input class="input" type="text" v-model="data.address.street" required />
+          <label :class="colorTextTab">Adresse * :</label>
+          <input class="input" type="text" v-model="data.address.street" placeholder="15 grande rue" required />
         </div>
         <!-- code post -->
         <div>
-          <label :class="colorTextTab">Renseignez le code postal *</label>
-          <input class="input" type="text" v-model="data.address.codePost" required />
+          <label :class="colorTextTab">Code postal * :</label>
+          <input class="input" type="text" v-model="data.address.codePost" placeholder="75000 " required />
         </div>
         <!-- city -->
         <div>
-          <label :class="colorTextTab">Renseignez la ville *</label>
-          <input class="input" type="text" v-model="data.address.city" required />
+          <label :class="colorTextTab">Ville * :</label>
+          <input class="input" type="text" v-model="data.address.city" placeholder="Paris" required />
         </div>
         <!-- phoneNumber -->
         <div>
-          <label :class="colorTextTab">Renseignez le numéro de téléphone *</label>
-          <input class="input" type="text" v-model="data.phoneNumber" required />
+          <label :class="colorTextTab">Numéro de téléphone * :</label>
+          <input
+            class="input"
+            type="text"
+            v-model="data.phoneNumber"
+            placeholder="Téléphone mobile ou bureau"
+            required
+          />
         </div>
       </div>
       <!-- block right -->
       <div class="block_right">
         <!-- filliale -->
         <div>
-          <label :class="colorTextTab">Renseignez le site de production ou la filliale *</label>
-          <input class="input" type="text" v-model="data.filliale" required />
+          <label :class="colorTextTab">Site de production ou filliale :</label>
+          <input class="input" type="text" v-model="data.filliale" placeholder="Psa - Paris" required />
         </div>
         <!-- siret -->
         <div>
-          <label :class="colorTextTab">Renseignez le numéro de siret *</label>
-          <input class="input" type="text" v-model="data.siret" required />
+          <label :class="colorTextTab">Numéro de siret * :</label>
+          <input class="input" type="text" v-model="data.siret" placeholder="Numéro composé de 14 chiffres" required />
         </div>
         <!-- naf -->
         <div>
-          <label :class="colorTextTab">Renseignez le code NAF (ou APE) *</label>
-          <input class="input" type="text" v-model="data.naf" required />
+          <label :class="colorTextTab">Code NAF (ou APE) * :</label>
+          <input class="input" type="text" v-model="data.naf" placeholder="85.59A" required />
         </div>
         <!-- sector -->
         <div>
@@ -72,7 +78,7 @@
             </button>
           </div>
           <div class="input_sector" v-for="(input, i) in nbrInputSector" :key="i">
-            <input class="input" v-model="sendData.sectors[i]" />
+            <input class="input" v-model="sendData.sectors[i]" placeholder="Nom du secteur" />
             <!-- btn delete input -->
             <button class="box_delete_input" @click.prevent="deleteSector(i)">
               <svg
@@ -106,7 +112,7 @@
       </div>
     </form>
     <div>
-      <p class="stxs-r text_info">* ce champs est obligatoire</p>
+      <p class="stxs-r text_info">* Champs obligatoire</p>
       <!-- <p></p> version 2 if you need to add a specific info -->
     </div>
   </div>
@@ -245,7 +251,7 @@ input {
   margin: 0 auto;
 }
 .title {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 .block_left {
   width: 450px;
@@ -294,7 +300,7 @@ input {
   display: flex;
   width: 80%;
   justify-content: flex-end;
-  margin-top: 100px;
+  margin-top: 30px;
 }
 .btn_sub {
   margin-left: 20px;

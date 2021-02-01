@@ -9,44 +9,44 @@
         <div class="block_left">
           <!-- roles -->
           <div>
-            <label>Attribuer un rôle *</label>
+            <label :class="currentUser.themeColor.colorTextTab">Attribuer un rôle *</label>
             <v-select class="select" :options="libellesRoles" v-model="dataUser.role"></v-select>
           </div>
 
           <!-- civility -->
           <div>
-            <label>Renseigner la civilité *</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner la civilité *</label>
             <v-select class="select" :options="civi" v-model="dataUser.civility"></v-select>
           </div>
 
           <!-- lastName -->
           <div>
-            <label>Renseigner le nom *</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner le nom *</label>
             <input class="input" v-model="dataUser.name.lastName" placeholder="Nom" required />
           </div>
 
           <!-- firstName -->
           <div>
-            <label>Renseigner le prénom *</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner le prénom *</label>
             <input class="input" v-model="dataUser.name.firstName" placeholder="Prénom" required />
           </div>
 
           <!-- email -->
           <div>
-            <label>Renseigner l'adresse e-mail *</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner l'adresse e-mail *</label>
             <input class="input" v-model="dataUser.email" placeholder="Email" required />
           </div>
 
           <!-- phone Number -->
           <div>
-            <label>Renseigner le numéro de téléphone</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner le numéro de téléphone</label>
             <input class="input" v-model="dataUser.phoneNumber" placeholder="Téléphone mobile ou bureau" />
           </div>
 
           <!-- register number -->
           <div>
-            <label>Renseigner le numéro de matricule</label>
-            <input class="input" v-model="dataUser.registerNumber" placeholder="Téléphone mobile ou bureau" />
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner le numéro de matricule</label>
+            <input class="input" v-model="dataUser.registerNumber" placeholder="Matricule" />
           </div>
         </div>
 
@@ -54,37 +54,37 @@
         <div class="block_right">
           <!-- street -->
           <div>
-            <label>Renseigner le numéro et la rue</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner le numéro et la rue</label>
             <input class="input" v-model="dataUser.address.street" placeholder="Adresse (ex: 15 grande rue)" />
           </div>
 
           <!-- code post -->
           <div>
-            <label>Renseigner le code postal</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner le code postal</label>
             <input class="input" v-model="dataUser.address.postCode" placeholder="Code postal" />
           </div>
 
           <!-- city -->
           <div>
-            <label>Renseigner la ville</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner la ville</label>
             <input class="input" v-model="dataUser.address.city" placeholder="Ville" />
           </div>
 
           <!-- trades -->
           <div>
-            <label>Attribuer un métier</label>
+            <label :class="currentUser.themeColor.colorTextTab">Attribuer un métier</label>
             <v-select class="select" :options="libelleTrades" v-model="dataUser.trade"></v-select>
           </div>
 
           <!-- leader -->
           <div>
-            <label>Attribuer un chef de secteur</label>
+            <label :class="currentUser.themeColor.colorTextTab">Attribuer un chef de secteur</label>
             <v-select class="select" :options="employeeForLeader" v-model="dataUser.leader"></v-select>
           </div>
 
           <!-- sectors -->
           <div>
-            <label>Attribuer un secteur</label>
+            <label :class="currentUser.themeColor.colorTextTab">Attribuer un secteur</label>
             <v-select class="select" :options="libellesSectors" v-model="dataUser.sector"></v-select>
           </div>
 
@@ -124,10 +124,14 @@ export default {
     trades: Array,
     errors: Array,
   },
+  created() {
+    this.$route.query.referent ? (this.dataUser.role = "Référent") : (this.dataUser.role = "");
+  },
+  updated() {},
   data() {
     return {
       dataUser: {
-        civility: "Mr",
+        civility: "M.",
         name: {
           lastName: "",
           firstName: "",
@@ -141,7 +145,7 @@ export default {
         email: "",
         phoneNumber: "",
         registerNumber: "",
-        role: "Choisissez un rôle",
+        role: String,
         company: this.idCompaniesSelected,
         trade: "Choisissez un métier",
         leader: "Choisissez un chef de secteur",
@@ -153,7 +157,14 @@ export default {
     //recover datas for selected
     libellesRoles() {
       const tab = this.roles.map((el) => el.libelle);
-      return ["Choisissez un rôle", ...tab];
+      //check if create user with role referent
+      if (this.$route.query.referent) {
+        this.dataUser.role = "Référent";
+        return tab;
+      } else {
+        this.dataUser.role = "Choisissez un rôle";
+        return ["Choisissez un rôle", ...tab];
+      }
     },
     libellesSectors() {
       const tab = this.sectorsCompanySelected.map((el) => el.libelle);
@@ -283,7 +294,7 @@ label {
   margin-bottom: 10px;
 }
 form {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -308,7 +319,7 @@ form {
   display: flex;
   width: 80%;
   justify-content: flex-end;
-  margin-top: 50px;
+  margin-top: 0px;
 }
 .btn_sub {
   margin-left: 20px;
