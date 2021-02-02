@@ -9,43 +9,43 @@
         <div class="block_left">
           <!-- roles -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Attribuer un rôle *</label>
+            <label :class="currentUser.themeColor.colorTextTab">Attribuer un rôle * : </label>
             <v-select class="select" :options="libellesRoles" v-model="dataUser.role"></v-select>
           </div>
 
           <!-- civility -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner la civilité *</label>
+            <label :class="currentUser.themeColor.colorTextTab">Civilité * : </label>
             <v-select class="select" :options="civi" v-model="dataUser.civility"></v-select>
           </div>
 
           <!-- lastName -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner le nom *</label>
-            <input class="input" v-model="dataUser.name.lastName" placeholder="Nom" required />
+            <label :class="currentUser.themeColor.colorTextTab">Nom * : </label>
+            <input class="input" v-model="dataUser.name.lastName" placeholder="JEAN" required />
           </div>
 
           <!-- firstName -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner le prénom *</label>
-            <input class="input" v-model="dataUser.name.firstName" placeholder="Prénom" required />
+            <label :class="currentUser.themeColor.colorTextTab">Prénom * : </label>
+            <input class="input" v-model="dataUser.name.firstName" placeholder="Dupont" required />
           </div>
 
           <!-- email -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner l'adresse e-mail *</label>
-            <input class="input" v-model="dataUser.email" placeholder="Email" required />
+            <label :class="currentUser.themeColor.colorTextTab">Adresse e-mail * : </label>
+            <input class="input" v-model="dataUser.email" placeholder="jeandupond@mail.com" required />
           </div>
 
           <!-- phone Number -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner le numéro de téléphone</label>
+            <label :class="currentUser.themeColor.colorTextTab">Téléphone :</label>
             <input class="input" v-model="dataUser.phoneNumber" placeholder="Téléphone mobile ou bureau" />
           </div>
 
           <!-- register number -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner le numéro de matricule</label>
+            <label :class="currentUser.themeColor.colorTextTab">Renseigner le numéro de matricule : </label>
             <input class="input" v-model="dataUser.registerNumber" placeholder="Matricule" />
           </div>
         </div>
@@ -54,37 +54,37 @@
         <div class="block_right">
           <!-- street -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner le numéro et la rue</label>
-            <input class="input" v-model="dataUser.address.street" placeholder="Adresse (ex: 15 grande rue)" />
+            <label :class="currentUser.themeColor.colorTextTab">Adresse : </label>
+            <input class="input" v-model="dataUser.address.street" placeholder="15 grande rue" />
           </div>
 
           <!-- code post -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner le code postal</label>
-            <input class="input" v-model="dataUser.address.postCode" placeholder="Code postal" />
+            <label :class="currentUser.themeColor.colorTextTab">Code postal :</label>
+            <input class="input" v-model="dataUser.address.postCode" placeholder="75000" />
           </div>
 
           <!-- city -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner la ville</label>
-            <input class="input" v-model="dataUser.address.city" placeholder="Ville" />
+            <label :class="currentUser.themeColor.colorTextTab">Ville :</label>
+            <input class="input" v-model="dataUser.address.city" placeholder="Paris" />
           </div>
 
           <!-- trades -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Attribuer un métier</label>
+            <label :class="currentUser.themeColor.colorTextTab">Attribuer un métier :</label>
             <v-select class="select" :options="libelleTrades" v-model="dataUser.trade"></v-select>
           </div>
 
           <!-- leader -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Attribuer un chef de secteur</label>
+            <label :class="currentUser.themeColor.colorTextTab">Attribuer un chef de secteur :</label>
             <v-select class="select" :options="employeeForLeader" v-model="dataUser.leader"></v-select>
           </div>
 
           <!-- sectors -->
           <div>
-            <label :class="currentUser.themeColor.colorTextTab">Attribuer un secteur</label>
+            <label :class="currentUser.themeColor.colorTextTab">Attribuer un secteur :</label>
             <v-select class="select" :options="libellesSectors" v-model="dataUser.sector"></v-select>
           </div>
 
@@ -99,7 +99,7 @@
 
       <!-- text info formulaire -->
       <div>
-        <p class="stxs-r text_info">* ce champs est obligatoire</p>
+        <p class="stxs-r text_info">* Champs obligatoire</p>
         <!-- <p></p> version 2 if you need to add a specific info -->
       </div>
     </div>
@@ -125,7 +125,7 @@ export default {
     errors: Array,
   },
   created() {
-    this.$route.query.referent ? (this.dataUser.role = "Référent") : (this.dataUser.role = "");
+    this.$route.query.referent ? (this.dataUser.role = "référent") : (this.dataUser.role = "");
   },
   updated() {},
   data() {
@@ -159,7 +159,7 @@ export default {
       const tab = this.roles.map((el) => el.libelle);
       //check if create user with role referent
       if (this.$route.query.referent) {
-        this.dataUser.role = "Référent";
+        this.dataUser.role = "référent";
         return tab;
       } else {
         this.dataUser.role = "Choisissez un rôle";

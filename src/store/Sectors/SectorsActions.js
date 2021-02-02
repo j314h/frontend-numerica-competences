@@ -19,6 +19,63 @@ export default {
   },
 
   //create sectors
+  createSectorsCompanySelected: async (context, data) => {
+    try {
+      //add error in store
+      store.commit("Error/resetError");
+
+      //call api for create sector return array sector
+      const sectors = await Vue.axios.post(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sectors-create`,
+        data,
+        headers
+      );
+      //add sectors company current user if write in argument
+      context.commit("addSectorsCompanySelected", sectors.data);
+    } catch (error) {
+      //add error in store
+      store.commit("Error/addError", error);
+    }
+  },
+
+  //update sectors of company
+  updateSectorsCompanySelected: async (context, data) => {
+    try {
+      //add error in store
+      store.commit("Error/resetError");
+
+      //call api for create sector return array sector
+      const sectors = await Vue.axios.post(
+        `${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sectors-update`,
+        data,
+        headers
+      );
+      //add sectors company current user if write in argument
+      context.commit("addSectorsCompanySelected", sectors.data);
+    } catch (error) {
+      //add error in store
+      store.commit("Error/addError", error);
+    }
+  },
+
+  //delete sectors
+  deleteSectorCompanySelected: async (context, data) => {
+    try {
+      //add error in store
+      store.commit("Error/resetError");
+
+      //call api for delete sector
+      const sectors = await Vue.axios.delete(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}sector/${data._id}`);
+
+      //recover all sector of company and add sectors in store
+      context.commit("addSectorsCompanySelected", sectors.data);
+    } catch (error) {
+      //add error in store
+      store.commit("Error/addError", error);
+    }
+  },
+
+  //create sectors
   createSectorsCurrentUser: async (context, data) => {
     try {
       //add error in store
@@ -57,6 +114,8 @@ export default {
       store.commit("Error/addError", error);
     }
   },
+
+  //relier sector company selected
 
   //delete sectors
   deleteSectorCurrentUser: async (context, data) => {

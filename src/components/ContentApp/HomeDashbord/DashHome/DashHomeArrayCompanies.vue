@@ -112,8 +112,11 @@
       </div>
 
       <!-- filliale -->
-      <div>
+      <div v-if="item.company.filliale">
         {{ upperFirstLetter(item.company.filliale) }}
+      </div>
+      <div v-else>
+        -
       </div>
 
       <!-- referent exist -->

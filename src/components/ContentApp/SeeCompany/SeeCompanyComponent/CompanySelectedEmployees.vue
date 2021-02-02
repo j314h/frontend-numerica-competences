@@ -27,20 +27,34 @@
           </router-link>
         </div>
 
-        <!-- trade -->
-        <div v-if="employee.trade" class="link">
-          <router-link class="link_router" :to="{ name: 'SeeCompany' }">
+        <!-- trade exist in company-->
+        <div v-if="trades.length > 0">
+          <div v-if="employee.trade && employee.trade.libelle" class="link">
             <div>
-              {{ trade(employee.trade) }}
+              {{ trade(employee.trade.libelle) }}
             </div>
-          </router-link>
+          </div>
+          <div v-else class="box_add_metier">
+            <v-select
+              @input="updateTradeOfEmployee($event, employee._id)"
+              class="select_trades stm-r"
+              :options="listTrades"
+              v-model="employee.trade"
+            ></v-select>
+          </div>
         </div>
-        <div v-else class="link">
-          <router-link class="link_router" :to="{ name: 'SeeCompany' }">
-            <div>
-              Ajouter un metier
-            </div>
-          </router-link>
+        <!-- if not trade exist in campany -->
+        <div v-else>
+          <div class="link">
+            <router-link class="link_router box_create_metier" :to="{ name: 'SeeCompanyCreateFileWork' }">
+              <div>
+                Creer un métier
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="#f84210" />
+                </svg>
+              </div>
+            </router-link>
+          </div>
         </div>
 
         <!-- role -->
@@ -57,11 +71,9 @@
           </div>
         </div>
         <div v-else class="link">
-          <router-link class="link_router" :to="{ name: 'SeeCompany' }">
-            <div>
-              Ajouter un secteur
-            </div>
-          </router-link>
+          <div>
+            Aucun secteur
+          </div>
         </div>
       </div>
     </div>
@@ -75,12 +87,24 @@
 
 <script>
 import { Services } from "../../../../lib/services";
+import ButtonApp from "../../../Elements/ButtonApp.vue";
+import VSelect from "../../../Elements/vue-bootstrap-select";
 
 export default {
   name: "CompanySelectedEmployees",
+  components: { VSelect, ButtonApp },
   props: {
     employeesCompanySelected: Array,
     currentUser: Object,
+    trades: Array,
+  },
+  data() {
+    return {
+      data: {
+        tradeInput: "Selectionner..",
+      },
+      assignTrade: false,
+    };
   },
   computed: {
     //full name with new format
@@ -93,6 +117,12 @@ export default {
       return (trade) => `${Services.upperFirstLetter(trade)}`;
     },
 
+    //list libelle of trade
+    listTrades() {
+      const tab = this.trades.map((el) => el.libelle);
+      return ["Selectionner..", ...tab];
+    },
+
     //role with first letter uppercase
     role() {
       return (role) => `${Services.upperFirstLetter(role)}`;
@@ -103,7 +133,20 @@ export default {
       return (sector) => `${Services.upperFirstLetter(sector)}`;
     },
   },
-  methods: {},
+  methods: {
+    //attribute trade for employee
+    updateTradeOfEmployee(e, idEmployee) {
+      //recover id corresponding to trade selected and create object for send api
+      const { _id } = this.trades.find((el) => el.libelle === e);
+      const datas = {
+        data: {
+          trade: { _id },
+        },
+        _id: idEmployee,
+      };
+      this.$store.dispatch("Employees/updateEmployeeCompanySelected", datas);
+    },
+  },
 };
 </script>
 
@@ -139,6 +182,29 @@ export default {
 }
 .link_router:hover {
   color: #f84210;
+  cursor: pointer;
+}
+.box_add_metier {
+  display: flex;
+  align-items: center;
+  color: #f84210;
+}
+.box_add_metier svg {
+  margin-left: 20px;
+  cursor: pointer;
+}
+.box_create_metier {
+  display: flex;
+  align-items: center;
+  color: #f84210;
+}
+.box_create_metier div svg {
+  margin-left: 10px;
+}
+.select_trades {
+  height: fit-content;
+}
+.add_trade:hover {
   cursor: pointer;
 }
 </style>

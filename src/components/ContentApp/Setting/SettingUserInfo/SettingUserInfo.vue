@@ -44,6 +44,7 @@
           :currentUserCompany="currentUserCompany"
           :sectorsCompanyCurrentUser="sectorsCompanyCurrentUser"
           :currentUser="currentUser"
+          :whatCompanyUpdate="whatCompanyUpdate"
           :errors="errors"
           v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
         ></setting-user-info-company-update>
@@ -90,6 +91,7 @@ export default {
       nameImageUserCompany: "logoUpdateElement",
       isUpdateUser: false,
       isUpdateCompany: false,
+      whatCompanyUpdate: "current",
     };
   },
   computed: {

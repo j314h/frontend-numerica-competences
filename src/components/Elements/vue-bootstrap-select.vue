@@ -8,7 +8,7 @@
     class="v-select"
     :class="{ disabled: disabled }"
   >
-    <button @click="toggle" type="button" class="v-select-toggle">
+    <button @click="toggle" type="button" class="v-select-toggle2">
       <div>{{ title }}</div>
       <div class="arrow-down"></div>
     </button>
@@ -52,7 +52,7 @@ export default {
     },
     labelTitle: {
       type: String,
-      default: "Nothing selected",
+      default: "Selectionner..",
     },
     labelNotFound: {
       type: String,
@@ -284,6 +284,32 @@ ul {
   }
 }
 
+.v-select-toggle2 {
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+  /*padding: 0.375rem 0.75rem;*/
+  color: #212529;
+  background-color: #f2f0ff;
+  border-color: transparent;
+  width: 100%;
+  text-align: right;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  padding: 2px 15px;
+  font-size: 12px !important;
+  font-family: inherit, sans-serif;
+  line-height: 1.5;
+  border-radius: 4px;
+  transition: background-color, border-color, box-shadow, 0.15s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e7f4ff;
+    border-color: transparent;
+  }
+}
+
 .arrow-down {
   display: inline-block;
   width: 0;
@@ -321,7 +347,7 @@ ul {
   user-select: none;
 
   &:hover:not(.default-option) {
-    background-color: #f8f9fa;
+    background-color: #add6ff;
   }
 
   &.disabled {

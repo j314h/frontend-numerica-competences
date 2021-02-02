@@ -50,6 +50,12 @@
             <input class="input" type="text" v-model="dataForm.data.filliale" />
           </div>
 
+          <!-- state for company selected-->
+          <div v-if="currentUser.role.libelle === 'root' || currentUser.role.libelle === 'administrateur'">
+            <label>Etat * :</label>
+            <v-select class="select" :options="libellesState" v-model="dataForm.data.state"></v-select>
+          </div>
+
           <!-- sectors -->
           <div class="box_sectors">
             <label>Secteur : </label>
@@ -136,21 +142,31 @@
         <!-- <p></p> version 2 if you need to add a specific info -->
       </div>
     </form>
+    <div class="box_btn_delete">
+      <button-delete
+        :entityDelete="'Companies'"
+        :idDelete="companySelected._id"
+        :textBtn="'Supprimer l\'entreprise'"
+      ></button-delete>
+    </div>
   </div>
 </template>
 
 <script>
-import ButtonApp from "../../../Elements/ButtonApp.vue";
-import ErrorContent from "../../../Elements/ErrorContent.vue";
+import ButtonApp from "../../../Elements/ButtonApp";
+import ButtonDelete from "../../../Elements/ButtonDelete.vue";
+import ErrorContent from "../../../Elements/ErrorContent";
+import VSelect from "../../../Elements/vue-bootstrap-select";
 
 export default {
-  components: { ButtonApp, ErrorContent },
-  name: "SettingUserInfoCompanyUpdate",
+  name: "CompanySelectedInfoUpdate",
+  components: { ButtonApp, ErrorContent, VSelect, ButtonDelete },
   props: {
-    currentUserCompany: Object,
-    sectorsCompanyCurrentUser: Array,
     currentUser: Object,
     errors: Array,
+    companySelected: Object,
+    sectorsCompanySelected: Array,
+    states: Array,
   },
   data() {
     return {
@@ -159,23 +175,28 @@ export default {
       //data for request update company's user
       dataForm: {
         data: {
-          name: this.currentUserCompany.name,
-          filliale: this.currentUserCompany.filliale,
-          siret: this.currentUserCompany.siret,
-          naf: this.currentUserCompany.naf,
-          phoneNumber: this.currentUserCompany.phoneNumber,
+          name: this.companySelected.name,
+          filliale: this.companySelected.filliale,
+          siret: this.companySelected.siret,
+          naf: this.companySelected.naf,
+          phoneNumber: this.companySelected.phoneNumber,
           address: {
-            street: this.currentUserCompany.address.street,
-            postCode: this.currentUserCompany.address.postCode,
-            city: this.currentUserCompany.address.city,
+            street: this.companySelected.address.street,
+            postCode: this.companySelected.address.postCode,
+            city: this.companySelected.address.city,
           },
-          state: this.currentUserCompany.state,
+          state: this.companySelected.state.libelle,
         },
-        _id: this.currentUserCompany._id,
-        sectors: this.sectorsCompanyCurrentUser.map((el) => ({ ...el })),
+        _id: this.companySelected._id,
+        sectors: this.sectorsCompanySelected.map((el) => ({ ...el })),
         newSectors: [],
       },
     };
+  },
+  computed: {
+    libellesState() {
+      return this.states.map((el) => el.libelle);
+    },
   },
   methods: {
     //count in fack tab for simulate loop in template for created input for sectors
@@ -192,7 +213,7 @@ export default {
 
     deleteSectorData(sector, i) {
       this.dataForm.sectors.splice(i, 1);
-      this.$store.dispatch("Sectors/deleteSectorCurrentUser", sector);
+      this.$store.dispatch("Sectors/deleteSectorCompanySelected", sector);
     },
 
     //call api for update company's user
@@ -201,8 +222,12 @@ export default {
         //reset error
         this.$store.commit("Error/resetError");
 
+        //recover id for state selected
+        const { _id } = this.states.find((el) => el.libelle === this.dataForm.data.state);
+        this.dataForm.data.state = _id;
+
         //call api for update company
-        await this.$store.dispatch("CurrentUser/updateCurrentUserCompany", this.dataForm);
+        await this.$store.dispatch("Companies/updateCompanySelected", this.dataForm);
 
         //if success show alert custom and close window update
         this.$swal.fire({
@@ -228,7 +253,6 @@ export default {
       }
     },
   },
-  computed: {},
 };
 </script>
 
@@ -262,6 +286,10 @@ p {
 }
 .box_sectors {
   margin: 10px 0 20px 0;
+}
+.select {
+  margin: 10px 0 30px 0;
+  width: 80%;
 }
 /**btn add input */
 .btn_add_input {
@@ -305,5 +333,10 @@ p {
 .text_info {
   color: #000;
   margin: 10px 0 40px 0;
+}
+.box_btn_delete {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 40px;
 }
 </style>

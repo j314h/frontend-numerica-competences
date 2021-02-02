@@ -22,7 +22,7 @@
       </div>
       <div>
         <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateFileWork' }"
-          >Créer une fiche métier</router-link
+          >Fiche métier</router-link
         >
       </div>
     </div>

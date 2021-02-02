@@ -13,4 +13,10 @@ export default {
   addNewEmployeeInCompanySelected(state, employee) {
     state.employeesCompanySelected = [...state.employeesCompanySelected, employee];
   },
+
+  //replace employee with employee updated
+  updateArrayEmployeeInCompanySelected(state, employee) {
+    const index = state.employeesCompanySelected.findIndex((el) => el._id === employee._id);
+    state.employeesCompanySelected.splice(index, 1, employee);
+  },
 };

@@ -18,7 +18,7 @@
         <!-- code post -->
         <div>
           <label :class="colorTextTab">Code postal * :</label>
-          <input class="input" type="text" v-model="data.address.codePost" placeholder="75000 " required />
+          <input class="input" type="text" v-model="data.address.postCode" placeholder="75000 " required />
         </div>
         <!-- city -->
         <div>
@@ -42,7 +42,7 @@
         <!-- filliale -->
         <div>
           <label :class="colorTextTab">Site de production ou filliale :</label>
-          <input class="input" type="text" v-model="data.filliale" placeholder="Psa - Paris" required />
+          <input class="input" type="text" v-model="data.filliale" placeholder="Psa - Paris" />
         </div>
         <!-- siret -->
         <div>
@@ -153,7 +153,7 @@ export default {
         phoneNumber: "",
         address: {
           street: "",
-          codePost: "",
+          postCode: "",
           city: "",
         },
         state: this.stateActif,

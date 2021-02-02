@@ -9,6 +9,11 @@
         :currentUser="currentUser"
         :employeesCompanySelected="employeesCompanySelected"
         :imageUpdateCompany="imageUpdateCompany"
+        :imageCloseUpdateCompany="imageCloseUpdateCompany"
+        :authorization="authorization"
+        :errors="errors"
+        :states="states"
+        :trades="trades"
         name="SeeCompanyHome"
       ></router-view>
 
@@ -40,8 +45,10 @@ export default {
       currentUser: Object,
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
       nameImageUpdate: "logoUpdateElement",
+      nameImageCloseUpdate: "logoCloseUpdateElement",
       roles: Array,
       civ: ["M.", "Mme"],
+      authorization: ["root", "administrateur", "Référent"],
       trades: Array,
     };
   },
@@ -63,6 +70,14 @@ export default {
       }
     },
 
+    //this variable for change image pencil and X for update user and company
+    imageCloseUpdateCompany() {
+      if (this.$store.getters["Files/imgs"]) {
+        const { fieldName } = this.$store.getters["Files/imgs"].find((el) => el.name === this.nameImageCloseUpdate);
+        return `${this.urlApiImg}${fieldName}`;
+      }
+    },
+
     //recover employee of company selected
     employeesCompanySelected() {
       return this.$store.getters["Employees/employeesCompanySelected"];
@@ -76,6 +91,11 @@ export default {
     //recover sector of company selected
     sectorsCompanySelected() {
       return this.$store.getters["Sectors/sectorsCompanySelected"];
+    },
+
+    //recover state
+    states() {
+      return this.$store.getters["States/states"];
     },
 
     //recover error

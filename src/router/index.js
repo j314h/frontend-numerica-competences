@@ -106,9 +106,10 @@ const routes = [
         },
         //recover company selected and sectors and trade and users of company selected
         beforeEnter: async (to, from, next) => {
+          await store.dispatch("States/getAllState");
           await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
           await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-          await store.dispatch("Trades/getTradesOfCompany", store.getters["Companies/idCompaniesSelected"]);
+          await store.dispatch("Trades/getTradesOfCompanySelected", store.getters["Companies/idCompaniesSelected"]);
           store.commit("ParamApp/changeTitleHeadBand", store.getters["Companies/companySelected"].name);
           store.commit("ParamApp/seeSubMenu", true);
           //change value bool of out company select for indicate to click on btn outCompanySelected
