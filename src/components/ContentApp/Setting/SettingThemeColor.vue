@@ -4,16 +4,22 @@
       <!-- text is switch compare of value -->
       <p v-if="valueTheme" class="stxm-m" :class="currentUser.themeColor.colorTextTab">Désactiver le mode sombre</p>
       <p v-else class="stxm-m" :class="currentUser.themeColor.colorTextTab">Activer le mode sombre</p>
-      <!-- input design with label in css -->
-      <input @change="modeDark" class="switch" type="checkbox" id="switch" v-model="valueTheme" />
-      <label class="switchlabel" for="switch"></label>
+
+      <!-- input switch -->
+      <button-switch-theme-color
+        v-on:switch="modeDark"
+        v-model="valueTheme"
+        :valueTheme="valueTheme"
+      ></button-switch-theme-color>
     </form>
   </div>
 </template>
 
 <script>
+import ButtonSwitchThemeColor from "../../Elements/Buttons/ButtonSwitchThemeColor.vue";
+
 export default {
-  components: {},
+  components: { ButtonSwitchThemeColor },
   name: "SettingThemeColor",
   props: {
     currentUser: Object,
@@ -31,6 +37,7 @@ export default {
     //switch mode dark or not
     //call api for save setting
     async modeDark() {
+      console.log(this.valueTheme);
       try {
         //depending on the value we change the name of the color theme in the user database
         this.valueTheme ? (this.data.name = "dark") : (this.data.name = "normal");
@@ -46,6 +53,7 @@ export default {
         });
       } catch (e) {
         this.$store.commit("Error/addError");
+
         //if error pop up for see error
         this.$swal.fire({
           position: "top-end",
@@ -64,13 +72,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-form {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-p {
-  margin-right: 40px;
-}
-</style>
+<style></style>

@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import ButtonApp from "../../../Elements/ButtonApp";
+import ButtonApp from "../../../Elements/Buttons/ButtonApp";
 import ErrorContent from "../../../Elements/ErrorContent.vue";
 import VSelect from "../../../Elements/vue-bootstrap-select";
 

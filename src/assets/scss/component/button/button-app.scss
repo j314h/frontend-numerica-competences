@@ -1,3 +1,4 @@
+/* size normal */
 .btn-orange {
   display: block;
   padding: 14px 22px;
@@ -31,4 +32,30 @@
   .btnm-orange {
     padding: 2px 5px;
   }
+}
+
+/* size small */
+
+.btnm-orange {
+  display: block;
+  padding: 5px 10px;
+  background-color: transparent;
+  @extend .stm-r;
+  @extend .cbrorange;
+  @extend .ctorange;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.btnm-orange:hover {
+  cursor: pointer;
+  @extend .cbgorange;
+  @extend .ctwhite;
+}
+
+.btnm-orange:focus {
+  outline: none;
 }

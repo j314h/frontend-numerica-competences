@@ -68,27 +68,13 @@
       <!--  company box -->
       <div v-if="companySelected.name !== undefined">
         <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'SeeCompany' }">
+          <!-- name company -->
           <div class="link_menu onglet" :class="colorMenuActive">
             <span>{{ upperFirstLetter(companySelected.name) }}</span>
           </div>
-          <router-link
-            class="link_menu close_entreprise stxm-r"
-            :class="colorMenuActive"
-            :to="{ name: 'HomeDashbord' }"
-          >
-            <svg
-              @click="outCompanySelected"
-              width="12"
-              height="12"
-              viewBox="0 0 15 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.72463 7.9587L14.7996 1.88371C15.0828 1.55308 15.0637 1.06022 14.7559 0.752414C14.4481 0.444607 13.9553 0.42557 13.6246 0.708716L7.54963 6.7837L1.47464 0.700383C1.14401 0.417236 0.65115 0.436273 0.343343 0.74408C0.0355359 1.05189 0.0164988 1.54475 0.299646 1.87538L6.37463 7.9587L0.291312 14.0337C0.0534993 14.2373 -0.0500887 14.5571 0.0231377 14.8615C0.096364 15.166 0.334046 15.4036 0.638462 15.4769C0.942879 15.5501 1.26265 15.4465 1.46631 15.2087L7.54963 9.1337L13.6246 15.2087C13.9553 15.4918 14.4481 15.4728 14.7559 15.165C15.0637 14.8572 15.0828 14.3643 14.7996 14.0337L8.72463 7.9587Z"
-                fill="#F84210"
-              />
-            </svg>
+          <!-- close company -->
+          <router-link class="link_menu close_entreprise" :class="colorMenuActive" :to="{ name: 'HomeDashbord' }">
+            <button-close v-on:close="outCompanySelected"></button-close>
           </router-link>
         </router-link>
       </div>
@@ -104,9 +90,10 @@
 
 <script>
 import { mapGetters } from "vuex";
-import router from "../../router";
+import ButtonClose from "../Elements/Buttons/ButtonClose.vue";
 
 export default {
+  components: { ButtonClose },
   name: "TheMenu",
   data() {
     return {

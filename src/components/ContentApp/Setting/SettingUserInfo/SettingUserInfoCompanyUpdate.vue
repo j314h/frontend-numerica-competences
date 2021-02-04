@@ -140,7 +140,7 @@
 </template>
 
 <script>
-import ButtonApp from "../../../Elements/ButtonApp.vue";
+import ButtonApp from "../../../Elements/Buttons/ButtonApp.vue";
 import ErrorContent from "../../../Elements/ErrorContent.vue";
 
 export default {

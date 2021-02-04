@@ -153,8 +153,8 @@
 </template>
 
 <script>
-import ButtonApp from "../../../Elements/ButtonApp";
-import ButtonDelete from "../../../Elements/ButtonDelete.vue";
+import ButtonApp from "../../../Elements/Buttons/ButtonApp";
+import ButtonDelete from "../../../Elements/Buttons/ButtonDelete.vue";
 import ErrorContent from "../../../Elements/ErrorContent";
 import VSelect from "../../../Elements/vue-bootstrap-select";
 

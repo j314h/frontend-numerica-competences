@@ -87,7 +87,7 @@
 
 <script>
 import { Services } from "../../../../lib/services";
-import ButtonApp from "../../../Elements/ButtonApp.vue";
+import ButtonApp from "../../../Elements/Buttons/ButtonApp.vue";
 import VSelect from "../../../Elements/vue-bootstrap-select";
 
 export default {
