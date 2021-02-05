@@ -141,10 +141,10 @@
 
 <script>
 import ButtonApp from "../../../Elements/Buttons/ButtonApp.vue";
-import ErrorContent from "../../../Elements/ErrorContent.vue";
+import ErrorBasic from "../../../Elements/ErrorBasic.vue";
 
 export default {
-  components: { ButtonApp, ErrorContent },
+  components: { ButtonApp, ErrorBasic },
   name: "SettingUserInfoCompanyUpdate",
   props: {
     currentUserCompany: Object,

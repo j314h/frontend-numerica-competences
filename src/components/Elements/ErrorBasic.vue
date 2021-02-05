@@ -6,11 +6,11 @@
 
 <script>
 export default {
-  name: "ErrorContent",
+  name: "ErrorBasic",
   props: {
     error: Array,
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>

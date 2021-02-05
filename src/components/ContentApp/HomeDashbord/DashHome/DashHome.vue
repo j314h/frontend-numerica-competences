@@ -2,8 +2,7 @@
   <div class="stxm-r">
     <dash-home-array-companies
       :companiesReferents="companiesReferents"
-      :cbgBox="thColor.cbgBox"
-      :colorTextTab="thColor.colorTextTab"
+      :themeColor="themeColor"
     ></dash-home-array-companies>
   </div>
 </template>
@@ -15,7 +14,7 @@ export default {
   name: "DashHome",
   components: { DashHomeArrayCompanies },
   props: {
-    thColor: Object,
+    themeColor: Object,
     companiesReferents: Array,
   },
   data() {

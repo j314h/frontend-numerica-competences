@@ -33,7 +33,7 @@
         </p>
 
         <!-- error message -->
-        <error-content class="error_box" :error="errors"></error-content>
+        <error-basic class="error_box" :error="errors"></error-basic>
 
         <!-- btn connexion -->
         <button-app class="btn_connexion" :textBtn="'Connexion'"></button-app>
@@ -44,13 +44,13 @@
 
 <script>
 import ButtonApp from "../Elements/Buttons/ButtonApp.vue";
-import ErrorContent from "../Elements/ErrorContent.vue";
-import InputSampleImg from "../Elements/InputSampleImg.vue";
+import ErrorBasic from "../Elements/ErrorBasic.vue";
+import InputSampleImg from "../Elements/Inputs/InputSampleImg.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "HomeForm",
-  components: { InputSampleImg, ErrorContent, ButtonApp },
+  components: { InputSampleImg, ErrorBasic, ButtonApp },
   props: {
     //for img logo numerica
     urlApiImg: String,

@@ -1,0 +1,16 @@
+.form_create_company {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 100px;
+}
+.block_input_create_company {
+  width: 400px;
+}
+.box_btn_form_create_company {
+  display: flex;
+  justify-content: flex-end;
+}
+.box_btn_form_create_company div:first-child {
+  margin-right: 10px;
+}

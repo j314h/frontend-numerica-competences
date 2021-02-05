@@ -1,0 +1,37 @@
+.label-input-multiple {
+  display: block;
+}
+.box_input_frame {
+  margin-top: 30px;
+}
+.box_btn_add_input {
+  display: flex;
+}
+.btn_add_input {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin-left: 20px;
+}
+.addbtn:hover path {
+  background-color: #f84210;
+  fill: #f84210;
+}
+.input_sector {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+.input_sector div {
+  flex: 4;
+}
+.box_delete_input {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin-left: 10px;
+  display: block;
+}
+.btn_delete_input:hover path {
+  fill: #db0000;
+}

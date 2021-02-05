@@ -43,13 +43,13 @@
 </template>
 
 <script>
-import ErrorContent from "../../Elements/ErrorContent.vue";
+import ErrorBasic from "../../Elements/ErrorBasic.vue";
 import ButtonApp from "../../Elements/Buttons/ButtonApp.vue";
 
 export default {
   name: "SettingImg",
   components: {
-    ErrorContent,
+    ErrorBasic,
     ButtonApp,
   },
   props: {

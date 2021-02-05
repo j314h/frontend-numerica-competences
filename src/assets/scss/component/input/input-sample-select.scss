@@ -1,0 +1,13 @@
+/* input balise select */
+.input_select {
+  @extend .cbginput;
+  @extend .stxm-r;
+  padding: 5px;
+  border: transparent;
+  border-radius: 4px;
+}
+.input_select:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px 0px rgba(0, 174, 255, 0.8);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 174, 255, 0.8);
+}

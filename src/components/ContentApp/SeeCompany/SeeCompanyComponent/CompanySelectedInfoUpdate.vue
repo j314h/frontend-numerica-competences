@@ -129,7 +129,7 @@
           </div>
 
           <!-- errors -->
-          <error-content class="box_error" :error="errors"></error-content>
+          <error-basic class="box_error" :error="errors"></error-basic>
 
           <!-- submit -->
           <div class="box_btn">
@@ -155,12 +155,12 @@
 <script>
 import ButtonApp from "../../../Elements/Buttons/ButtonApp";
 import ButtonDelete from "../../../Elements/Buttons/ButtonDelete.vue";
-import ErrorContent from "../../../Elements/ErrorContent";
+import ErrorBasic from "../../../Elements/ErrorBasic";
 import VSelect from "../../../Elements/vue-bootstrap-select";
 
 export default {
   name: "CompanySelectedInfoUpdate",
-  components: { ButtonApp, ErrorContent, VSelect, ButtonDelete },
+  components: { ButtonApp, ErrorBasic, VSelect, ButtonDelete },
   props: {
     currentUser: Object,
     errors: Array,

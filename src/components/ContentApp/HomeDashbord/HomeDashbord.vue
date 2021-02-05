@@ -2,10 +2,10 @@
   <div>
     <transition appear name="fade" mode="out-in">
       <!-- views home in home dashbord -->
-      <router-view :thColor="themeColor" :companiesReferents="companiesReferents" name="DashHome"></router-view>
+      <router-view :themeColor="themeColor" :companiesReferents="companiesReferents" name="DashHome"></router-view>
       <!-- views create company in dashbord -->
       <router-view
-        :thColor="themeColor"
+        :themeColor="themeColor"
         name="CreateCompany"
         :errors="errors"
         :idCurrentUser="idCurrentUser"

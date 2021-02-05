@@ -2,8 +2,7 @@
   <div class="stxm-r">
     <!-- form for create company -->
     <create-company-form
-      :cbgBox="thColor.cbgBox"
-      :colorTextTab="thColor.colorTextTab"
+      :themeColor="themeColor"
       :errors="errors"
       :btnm="btnm"
       :idCurrentUser="idCurrentUser"
@@ -19,7 +18,7 @@ export default {
   name: "CreateCompany",
   components: { CreateCompanyForm },
   props: {
-    thColor: Object,
+    themeColor: Object,
     errors: Array,
     idCurrentUser: String,
     btnm: String,
@@ -28,4 +27,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>

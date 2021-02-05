@@ -1,0 +1,25 @@
+/* input */
+.input {
+  @extend .cbginput;
+  @extend .stxm-r;
+  border: transparent;
+  border-radius: 4px;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0px 0px 3px 1px rgba(0, 80, 255, 0.4);
+  -webkit-box-shadow: 0px 0px 3px 1px rgba(0, 80, 255, 0.4);
+}
+
+.input:hover {
+  background-color: rgba(0, 80, 255, 0.1);
+}
+
+@media screen and (max-width: 700px) {
+  .input {
+    padding: 5px 10px;
+  }
+}

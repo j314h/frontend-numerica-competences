@@ -105,11 +105,11 @@
 
 <script>
 import ButtonApp from "../../../Elements/Buttons/ButtonApp";
-import ErrorContent from "../../../Elements/ErrorContent.vue";
+import ErrorBasic from "../../../Elements/ErrorBasic.vue";
 import VSelect from "../../../Elements/vue-bootstrap-select";
 
 export default {
-  components: { ButtonApp, ErrorContent, VSelect },
+  components: { ButtonApp, ErrorBasic, VSelect },
   name: "SettingUserInfoUpdate",
   props: {
     currentUser: Object,

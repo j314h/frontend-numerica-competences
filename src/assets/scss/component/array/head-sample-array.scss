@@ -1,0 +1,53 @@
+.box_array_head_search {
+  display: flex;
+}
+.line {
+  display: flex;
+  padding: 10px 20px;
+  border-bottom: 1px solid #4c39e9;
+}
+.champs_head {
+  flex: 1;
+}
+.linehead {
+  font-size: 1.8rem;
+  font-weight: 500;
+  height: 60px;
+  padding: 0px 20px;
+}
+.item_head {
+  display: flex;
+  align-items: center;
+}
+.item_head:hover {
+  cursor: pointer;
+}
+.item_head span {
+  margin-left: 10px;
+}
+.item_head:hover svg path {
+  stroke: #f84210;
+}
+.item_head_search {
+  display: flex;
+  align-items: center;
+}
+.item_head_search:hover {
+  cursor: pointer;
+}
+.item_head_search svg {
+  margin-right: 10px;
+}
+.item_head_search svg:hover path {
+  fill: #f84210;
+  cursor: pointer;
+}
+.input_search {
+  @extend .cbginput;
+  @extend .stxm-r;
+  border: transparent;
+  border-radius: 4px;
+  padding: 10px 20px;
+  width: 100%;
+  height: 25px;
+}

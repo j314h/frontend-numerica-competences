@@ -23,7 +23,7 @@
         />
         <img
           class="close_img"
-          @click="isUpdateCompany = !isUpdateCompany"
+          @click="closeUpdate"
           v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
           :src="imageCloseUpdateCompany"
         />
@@ -88,6 +88,12 @@ export default {
     //is not good, change this in futur versionning
     updateCompany() {
       this.isUpdateCompany = !this.isUpdateCompany;
+    },
+
+    //close box update company and reset errors
+    closeUpdate() {
+      this.isUpdateCompany = !this.isUpdateCompany;
+      this.$store.commit("Error/resetError");
     },
   },
 };

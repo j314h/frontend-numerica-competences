@@ -33,7 +33,7 @@
         </div>
 
         <!-- error -->
-        <error-content :error="errors"></error-content>
+        <error-basic :error="errors"></error-basic>
 
         <!-- button submit -->
         <button class="btn-orange">Enregistrer</button>
@@ -44,10 +44,10 @@
 
 <script>
 import { mapGetters } from "vuex";
-import ErrorContent from "../components/Elements/ErrorContent.vue";
+import ErrorBasic from "../components/Elements/ErrorBasic.vue";
 
 export default {
-  components: { ErrorContent },
+  components: { ErrorBasic },
   name: "HomeValidateAccount",
   data() {
     return {

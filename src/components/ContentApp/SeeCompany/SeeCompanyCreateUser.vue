@@ -88,7 +88,7 @@
             <v-select class="select" :options="libellesSectors" v-model="dataUser.sector"></v-select>
           </div>
 
-          <error-content :error="errors"></error-content>
+          <error-basic :error="errors"></error-basic>
 
           <!-- btn -->
           <div class="btn_submit">
@@ -108,11 +108,11 @@
 
 <script>
 import ButtonApp from "../../Elements/Buttons/ButtonApp.vue";
-import ErrorContent from "../../Elements/ErrorContent.vue";
+import ErrorBasic from "../../Elements/ErrorBasic.vue";
 import vSelect from "../../Elements/vue-bootstrap-select";
 
 export default {
-  components: { vSelect, ButtonApp, ErrorContent },
+  components: { vSelect, ButtonApp, ErrorBasic },
   name: "SeeCompanyCreateUser",
   props: {
     idCompaniesSelected: String,
