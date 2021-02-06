@@ -90,6 +90,10 @@ export default {
   created() {
     this.$store.commit("ParamApp/seeSubMenu", true);
   },
+  updated() {
+    this.$store.commit("ParamApp/seeSubMenu", true);
+    this.$store.commit("ParamApp/changeTitleHeadBand", this.companySelected.name);
+  },
   data() {
     return {
       //for head line

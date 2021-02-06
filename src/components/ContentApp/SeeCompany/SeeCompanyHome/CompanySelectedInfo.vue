@@ -15,7 +15,10 @@
       <div>
         <p>
           Site de production - Filliale :
-          <span :class="themeColor.textImportant">{{ upperFirstLetter(companySelected.filliale) }}</span>
+          <span v-if="companySelected.filliale" :class="themeColor.textImportant">{{
+            upperFirstLetter(companySelected.filliale)
+          }}</span>
+          <span v-else :class="themeColor.textImportant">-</span>
         </p>
         <p>
           Numéro de siret : <span :class="themeColor.textImportant">{{ companySelected.siret }}</span>
@@ -62,9 +65,6 @@ export default {
     sectorsCompanySelected: Array,
     employeesCompanySelected: Array,
     themeColor: Object,
-  },
-  update() {
-    console.log(this.companySelected.name);
   },
   computed: {
     //return number of employee of company selected
