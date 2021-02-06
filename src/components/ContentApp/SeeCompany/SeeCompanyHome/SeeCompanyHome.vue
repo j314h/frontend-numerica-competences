@@ -44,6 +44,7 @@
           :companySelected="companySelected"
           :sectorsCompanySelected="sectorsCompanySelected"
           :states="states"
+          :isUpdateCompany.sync="isUpdateCompany"
           v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
         ></company-selected-info-update>
 

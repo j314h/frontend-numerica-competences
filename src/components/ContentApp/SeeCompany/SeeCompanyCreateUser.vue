@@ -1,107 +1,153 @@
 <template>
   <div class="stxm-r">
-    <div class="box" :class="currentUser.themeColor.cbgBox">
-      <div class="header">
-        <h3 class="stxxm-m" :class="currentUser.themeColor.colorTextTab">Création salarié</h3>
-      </div>
-      <form @submit.prevent="createUser">
+    <div class="box" :class="themeColor.cbgCard">
+      <title-cards :themeColor="themeColor" :title="'Création salarié'"></title-cards>
+      <form @submit.prevent="createUser" class="form_create_company">
         <!-- block 1 -->
-        <div class="block_left">
+        <div class="block_input_create_company">
           <!-- roles -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Attribuer un rôle * : </label>
-            <v-select class="select" :options="libellesRoles" v-model="dataUser.role"></v-select>
-          </div>
+          <v-select
+            :themeColor="themeColor"
+            :textLabel="'Attribuer un rôle * : '"
+            :options="libellesRoles"
+            v-model="dataUser.role"
+          ></v-select>
 
           <!-- civility -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Civilité * : </label>
-            <v-select class="select" :options="civi" v-model="dataUser.civility"></v-select>
-          </div>
+          <v-select
+            :themeColor="themeColor"
+            :textLabel="'Civilité * : '"
+            :options="civi"
+            v-model="dataUser.civility"
+          ></v-select>
 
           <!-- lastName -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Nom * : </label>
-            <input class="input" v-model="dataUser.name.lastName" placeholder="JEAN" required />
-          </div>
+          <input-label-sample
+            :themeColor="themeColor"
+            :placeholder="`JEAN`"
+            :required="true"
+            :textLabel="`Nom * : `"
+            :type="'text'"
+            :value="dataUser.name.lastName"
+            v-model="dataUser.name.lastName"
+          ></input-label-sample>
 
           <!-- firstName -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Prénom * : </label>
-            <input class="input" v-model="dataUser.name.firstName" placeholder="Dupont" required />
-          </div>
+          <input-label-sample
+            :themeColor="themeColor"
+            :placeholder="`Dupont`"
+            :required="true"
+            :textLabel="`Prénom * : `"
+            :type="'text'"
+            :value="dataUser.name.firstName"
+            v-model="dataUser.name.firstName"
+          ></input-label-sample>
 
           <!-- email -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Adresse e-mail * : </label>
-            <input class="input" v-model="dataUser.email" placeholder="jeandupond@mail.com" required />
-          </div>
+          <input-label-sample
+            :themeColor="themeColor"
+            :placeholder="`jeandupond@mail.com`"
+            :required="true"
+            :textLabel="`Adresse e-mail * : `"
+            :type="'text'"
+            :value="dataUser.email"
+            v-model="dataUser.email"
+          ></input-label-sample>
 
           <!-- phone Number -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Téléphone :</label>
-            <input class="input" v-model="dataUser.phoneNumber" placeholder="Téléphone mobile ou bureau" />
-          </div>
+          <input-label-sample
+            :themeColor="themeColor"
+            :placeholder="`jeandupond@mail.com`"
+            :required="false"
+            :textLabel="`Téléphone : `"
+            :type="'text'"
+            :value="dataUser.phoneNumber"
+            v-model="dataUser.phoneNumber"
+          ></input-label-sample>
 
           <!-- register number -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Renseigner le numéro de matricule : </label>
-            <input class="input" v-model="dataUser.registerNumber" placeholder="Matricule" />
-          </div>
+          <input-label-sample
+            :themeColor="themeColor"
+            :placeholder="`Matricule`"
+            :required="false"
+            :textLabel="`Renseigner le numéro de matricule : `"
+            :type="'text'"
+            :value="dataUser.registerNumber"
+            v-model="dataUser.registerNumber"
+          ></input-label-sample>
         </div>
 
         <!-- bock 2 -->
-        <div class="block_right">
+        <div class="block_input_create_company">
           <!-- street -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Adresse : </label>
-            <input class="input" v-model="dataUser.address.street" placeholder="15 grande rue" />
-          </div>
+          <input-label-sample
+            :themeColor="themeColor"
+            :placeholder="`15 grande rue`"
+            :required="false"
+            :textLabel="`Adresse : `"
+            :type="'text'"
+            :value="dataUser.address.street"
+            v-model="dataUser.address.street"
+          ></input-label-sample>
 
           <!-- code post -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Code postal :</label>
-            <input class="input" v-model="dataUser.address.postCode" placeholder="75000" />
-          </div>
+          <input-label-sample
+            :themeColor="themeColor"
+            :placeholder="`75000`"
+            :required="false"
+            :textLabel="`Code postal : `"
+            :type="'text'"
+            :value="dataUser.address.postCode"
+            v-model="dataUser.address.postCode"
+          ></input-label-sample>
 
           <!-- city -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Ville :</label>
-            <input class="input" v-model="dataUser.address.city" placeholder="Paris" />
-          </div>
+          <input-label-sample
+            :themeColor="themeColor"
+            :placeholder="`Paris`"
+            :required="false"
+            :textLabel="`Ville : `"
+            :type="'text'"
+            :value="dataUser.address.city"
+            v-model="dataUser.address.city"
+          ></input-label-sample>
 
           <!-- trades -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Attribuer un métier :</label>
-            <v-select class="select" :options="libelleTrades" v-model="dataUser.trade"></v-select>
-          </div>
+          <v-select
+            :themeColor="themeColor"
+            :textLabel="'Attribuer un métier : '"
+            :options="libelleTrades"
+            v-model="dataUser.trade"
+          ></v-select>
 
           <!-- leader -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Attribuer un chef de secteur :</label>
-            <v-select class="select" :options="employeeForLeader" v-model="dataUser.leader"></v-select>
-          </div>
+          <v-select
+            :themeColor="themeColor"
+            :textLabel="'Attribuer un chef de secteur : '"
+            :options="employeeForLeader"
+            v-model="dataUser.leader"
+          ></v-select>
 
           <!-- sectors -->
-          <div>
-            <label :class="currentUser.themeColor.colorTextTab">Attribuer un secteur :</label>
-            <v-select class="select" :options="libellesSectors" v-model="dataUser.sector"></v-select>
-          </div>
+          <v-select
+            :themeColor="themeColor"
+            :textLabel="'Attribuer un secteur : '"
+            :options="libellesSectors"
+            v-model="dataUser.sector"
+          ></v-select>
 
+          <!-- see error -->
           <error-basic :error="errors"></error-basic>
 
           <!-- btn -->
-          <div class="btn_submit">
-            <button-app class="btn_sub" :mini="true" :textBtn="'Créer'"></button-app>
+          <div class="box_btn_update_info_company">
+            <button-app :themeColor="themeColor" :mini="true" :textBtn="'Créer'"></button-app>
           </div>
         </div>
       </form>
 
-      <!-- text info formulaire -->
-      <div>
-        <p class="stxs-r text_info">* Champs obligatoire</p>
-        <!-- <p></p> version 2 if you need to add a specific info -->
-      </div>
+      <!-- text info for form -->
+      <text-info-form :text="'* Champs Obligatoire'" :themeColor="themeColor"></text-info-form>
     </div>
   </div>
 </template>
@@ -109,10 +155,13 @@
 <script>
 import ButtonApp from "../../Elements/Buttons/ButtonApp.vue";
 import ErrorBasic from "../../Elements/ErrorBasic.vue";
-import vSelect from "../../Elements/vue-bootstrap-select";
+import TitleCards from "../../Elements/TitleCards.vue";
+import VSelect from "../../Elements/vue-bootstrap-select";
+import InputLabelSample from "../../Elements/Inputs/Input-label-sample";
+import TextInfoForm from "../../Elements/TextInfoForm.vue";
 
 export default {
-  components: { vSelect, ButtonApp, ErrorBasic },
+  components: { VSelect, ButtonApp, ErrorBasic, TitleCards, InputLabelSample, TextInfoForm },
   name: "SeeCompanyCreateUser",
   props: {
     idCompaniesSelected: String,
@@ -123,6 +172,7 @@ export default {
     employeesCompanySelected: Array,
     trades: Array,
     errors: Array,
+    themeColor: Object,
   },
   created() {
     this.$route.query.referent ? (this.dataUser.role = "référent") : (this.dataUser.role = "");
@@ -200,12 +250,6 @@ export default {
           icon: "success",
           title: `Création réussis`,
           text: `Un email a été envoyé à l'adresse suivante : ${this.dataUser.email} pour validation du compte`,
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
         });
         this.resetInput();
       } else {
@@ -288,44 +332,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-form {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.select {
-  margin: 10px 0 30px 0;
-  width: 80%;
-}
-.block_left {
-  width: 450px;
-}
-.block_left div {
-  margin-bottom: 40px;
-}
-.block_right {
-  width: 450px;
-}
-.block_right div {
-  margin-bottom: 40px;
-}
-.btn_submit {
-  display: flex;
-  width: 80%;
-  justify-content: flex-end;
-  margin-top: 0px;
-}
-.btn_sub {
-  margin-left: 20px;
-  margin-bottom: 0px !important;
-}
-.text_info {
-  margin: 100px 0 0 0;
-}
-</style>
+<style></style>

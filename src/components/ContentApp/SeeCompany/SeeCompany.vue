@@ -20,6 +20,7 @@
 
       <!-- view create user -->
       <router-view
+        :themeColor="themeColor"
         :idCompaniesSelected="idCompaniesSelected"
         :currentUser="currentUser"
         :sectorsCompanySelected="sectorsCompanySelected"

@@ -172,6 +172,7 @@
 <script>
 import InputLabelSample from "../../../Elements/Inputs/Input-label-sample.vue";
 import InputFrameAddMultiple from "../../../Elements/Inputs/InputFrameAddMultiple.vue";
+import { AlertQuickly } from "../../../../lib/SwalAlert";
 
 import ButtonApp from "../../../Elements/Buttons/ButtonApp";
 import ButtonDelete from "../../../Elements/Buttons/ButtonDelete.vue";
@@ -199,6 +200,7 @@ export default {
     sectorsCompanySelected: Array,
     states: Array,
     themeColor: Object,
+    isUpdateCompany: Boolean,
   },
   data() {
     return {
@@ -262,27 +264,15 @@ export default {
         //call api for update company
         await this.$store.dispatch("Companies/updateCompanySelected", this.dataForm);
 
-        //if success show alert custom and close window update
-        this.$swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Company is updating",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.$parent.updateCompany();
+        //if success show alert custom
+        this.$swal.fire(AlertQuickly("center", "success", `Entreprise mise à jour`, 2000));
+        this.$emit("update:isUpdateCompany", !this.isUpdateCompany);
       } catch (error) {
         //add error
         this.$store.commit("Error/addError", error);
 
-        //if error show alert custom
-        this.$swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: e.response ? e.response.data.message : e.message, //if throw error see your error in throw
-          showConfirmButton: false,
-          timer: 2000,
-        });
+        //if error pop up for see error
+        this.$swal.fire(AlertQuickly("center", "error", this.errors[0], 2000));
       }
     },
   },
