@@ -25,6 +25,13 @@
 .input_sector div {
   flex: 4;
 }
+.input_sector_sample {
+  display: flex;
+  align-items: center;
+}
+.input_sector_sample div {
+  flex: 4;
+}
 .box_delete_input {
   cursor: pointer;
   background-color: transparent;

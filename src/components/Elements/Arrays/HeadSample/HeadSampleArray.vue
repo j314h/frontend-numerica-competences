@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <div class="box_array_head_search" :class="themeColor.label">
-      <head-sample-line
-        v-for="(textLine, i) in textLines"
-        :key="i"
-        :textLine="textLine"
-        :target.sync="target"
-        :i="i"
-        v-model="value"
-        @input="search(textLine)"
-      ></head-sample-line>
-    </div>
+  <div class="box_array_head_search" :class="themeColor.label">
+    <head-sample-line
+      v-for="(textLine, i) in textLines"
+      :key="i"
+      :textLine="textLine"
+      :target.sync="target"
+      :i="i"
+      v-model="value"
+      @input="search(textLine)"
+    ></head-sample-line>
   </div>
 </template>
 
@@ -35,6 +33,7 @@ export default {
     };
   },
   methods: {
+    //update props
     search(field) {
       this.$emit("update:fieldSearch", field);
       this.$emit("update:valueSearch", this.value);

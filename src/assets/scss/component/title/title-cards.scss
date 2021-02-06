@@ -1,3 +1,17 @@
-.title_cards {
+.box_title_cards {
+  display: flex;
+  align-items: center;
   margin-bottom: 40px;
+}
+.box_title_cards div {
+  margin-left: 15px;
+}
+.box_title_cards div:hover {
+  cursor: pointer;
+}
+.title_cards {
+}
+.img_title_card {
+  width: 15px;
+  height: 15px;
 }

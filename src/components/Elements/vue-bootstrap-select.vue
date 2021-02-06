@@ -8,6 +8,9 @@
     class="v-select"
     :class="{ disabled: disabled }"
   >
+    <!-- label -->
+    <label class="label-sample stxm-m" :class="themeColor.label">{{ textLabel }}</label>
+
     <button @click="toggle" type="button" class="v-select-toggle2">
       <div>{{ title }}</div>
       <div class="arrow-down"></div>
@@ -42,6 +45,8 @@ export default {
   name: "VSelect",
   mixins: [clickaway],
   props: {
+    themeColor: Object,
+    textLabel: String,
     disabled: {
       type: Boolean,
       default: false,
@@ -239,7 +244,6 @@ ul {
 .v-select {
   position: relative;
   width: 100%;
-  height: 30px;
   cursor: pointer;
 
   &.disabled {
@@ -296,8 +300,8 @@ ul {
   text-align: right;
   white-space: nowrap;
   border: 1px solid transparent;
-  padding: 2px 15px;
-  font-size: 12px !important;
+  padding: 6px 15px;
+  font-size: 16px !important;
   font-family: inherit, sans-serif;
   line-height: 1.5;
   border-radius: 4px;
@@ -328,8 +332,8 @@ ul {
   position: absolute;
   width: 100%;
   background: red;
-  padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
+  padding: 0.5rem 0.5rem;
+  margin: 0.5rem 0 0;
   color: #212529;
   text-align: left;
   list-style: none;
@@ -375,13 +379,13 @@ ul {
 }
 
 .v-bs-searchbox {
-  padding: 4px 8px;
+  padding: 8px 8px;
 
   .form-control {
     display: block;
     width: 100%;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
+    padding: 7px;
+    font-size: 1.6rem;
     line-height: 1.5;
     color: #495057;
     background-color: #fff;

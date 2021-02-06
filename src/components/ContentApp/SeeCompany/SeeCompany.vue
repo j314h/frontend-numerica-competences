@@ -7,6 +7,7 @@
         :companySelected="companySelected"
         :sectorsCompanySelected="sectorsCompanySelected"
         :currentUser="currentUser"
+        :themeColor="themeColor"
         :employeesCompanySelected="employeesCompanySelected"
         :imageUpdateCompany="imageUpdateCompany"
         :imageCloseUpdateCompany="imageCloseUpdateCompany"
@@ -109,6 +110,7 @@ export default {
       //load data for company selected
       this.idCompaniesSelected = this.$store.getters["Companies/idCompaniesSelected"];
       this.currentUser = this.$store.getters["CurrentUser/currentUser"];
+      this.themeColor = this.$store.getters["CurrentUser/thColor"];
       this.trades = this.$store.getters["Trades/tradesCompanySelected"];
       this.roles = this.$store.getters["Roles/roles"];
     },
@@ -116,18 +118,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  transition: opacity 0.5s;
-}
-.fade-leave {
-  opacity: 1;
-}
-.fade-leave-active {
-  transition: opacity 0.5s;
-  opacity: 0;
-}
-</style>
+<style></style>

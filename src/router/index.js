@@ -10,7 +10,7 @@ const Setting = () => import("../components/ContentApp/Setting/Setting.vue");
 const CreateCompany = () => import("../components/ContentApp/HomeDashbord/CreateCompany/CreateCompany.vue");
 const SeeCompany = () => import("../components/ContentApp/SeeCompany/SeeCompany.vue");
 const SeeCompanyCreateUser = () => import("../components/ContentApp/SeeCompany/SeeCompanyCreateUser.vue");
-const SeeCompanyHome = () => import("../components/ContentApp/SeeCompany/SeeCompanyHome.vue");
+const SeeCompanyHome = () => import("../components/ContentApp/SeeCompany/SeeCompanyHome/SeeCompanyHome.vue");
 const SeeCompanyCreateFileWork = () => import("../components/ContentApp/SeeCompany/SeeCompanyCreateFileWork.vue");
 const HomeValidateAccount = () => import("../views/HomeValidateAccount.vue");
 

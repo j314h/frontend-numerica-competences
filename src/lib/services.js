@@ -4,6 +4,10 @@ export const Services = {
     return str.charAt(0).toUpperCase() + str.slice(1);
   },
 
+  upperAll: (str) => {
+    return str.toUpperCase();
+  },
+
   //full name user, first name + last name
   fullName: (civ, firstName, lastName) => {
     return `${Services.upperFirstLetter(civ)} ${Services.upperFirstLetter(firstName)} ${Services.upperFirstLetter(

@@ -1,0 +1,15 @@
+.form_update_company {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.box_btn_update_info_company {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0;
+}
+.box_btn_delete_company {
+  display: flex;
+  justify-content: flex-start;
+  margin: 30px 0;
+}

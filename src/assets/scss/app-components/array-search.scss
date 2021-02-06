@@ -1,0 +1,41 @@
+.array_companie {
+  min-width: 850px;
+}
+.line {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  min-width: 800px;
+  border-bottom: 1px solid #4c39e9;
+}
+.item_line {
+  flex: 1;
+  padding: 14px 20px;
+}
+.name_company {
+  display: flex;
+  align-items: center;
+}
+.name_company span {
+  margin-right: 10px;
+}
+.name_company .first_name_referent {
+  margin-right: 6px;
+}
+.first_name_referent {
+  margin-right: 0px;
+}
+.name_referent {
+  display: inline;
+  margin-right: 12px;
+  padding: 0 0;
+}
+.link_router {
+  color: #000;
+}
+.link_router:hover {
+  color: #f84210;
+  cursor: pointer;
+}
+@media screen and (max-width: 750px) {
+}
