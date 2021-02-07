@@ -10,7 +10,7 @@
       </ul>
     </div>
     <!-- menu 2 -->
-    <div>
+    <div class="menu_2">
       <h4>Service</h4>
       <ul>
         <li><router-link to="contact">Contact</router-link></li>
