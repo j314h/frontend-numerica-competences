@@ -37,7 +37,6 @@ export default {
     //switch mode dark or not
     //call api for save setting
     async modeDark() {
-      console.log(this.valueTheme);
       try {
         //depending on the value we change the name of the color theme in the user database
         this.valueTheme ? (this.data.name = "dark") : (this.data.name = "normal");

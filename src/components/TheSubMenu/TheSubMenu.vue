@@ -3,25 +3,25 @@
     <transition name="fade" mode="out-in">
       <!-- sub menu for dashbord -->
       <div v-if="titleHeadBand === 'Tableau de bord'" class="sub_menu_dashbord">
-        <div>
+        <div class="sub">
           <router-link class="link_sub_menu ctorange" :to="{ name: 'DashHome' }">Accueil</router-link>
         </div>
-        <div>
+        <div class="sub">
           <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateCompany' }">Créer une entreprise</router-link>
         </div>
       </div>
       <!-- other sub menu -->
       <!-- sub menu for dashbord -->
       <div v-if="titleHeadBand === companySelected.name" class="sub_menu_dashbord">
-        <div>
+        <div class="sub">
           <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyHome' }">Accueil</router-link>
         </div>
-        <div>
+        <div class="sub">
           <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateUser' }"
             >Créer un salarié</router-link
           >
         </div>
-        <div>
+        <div class="sub">
           <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateFileWork' }"
             >Fiche métier</router-link
           >
@@ -46,21 +46,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.link_sub_menu {
-  padding: 20px;
-  border-bottom: 5px solid transparent;
-  display: block;
-}
-.router-link-active {
-  border-bottom: 5px solid #f84210;
-}
-.sub_menu {
-}
-.sub_menu_dashbord {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  padding: 0 30px;
-}
+@import "../../assets/scss/app-components/menu/subMenu.scss";
 </style>

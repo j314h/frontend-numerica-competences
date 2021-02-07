@@ -30,52 +30,5 @@ export default {
 </script>
 
 <style scoped>
-/** globals */
-
-.menus_footer {
-  display: flex;
-  height: 100%;
-
-  padding-right: 65px;
-
-  font-size: 1.2rem;
-}
-
-h4 {
-  margin-bottom: 8px;
-  color: var(--color-secondary-text);
-  text-transform: uppercase;
-  font-weight: 900;
-}
-
-ul {
-  list-style: none;
-}
-
-a {
-  display: block;
-  height: 22px;
-  color: #7e818b;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #ffffff;
-}
-
-/** menu 1 */
-
-.menu_1 {
-  margin-right: 70px;
-}
-
-/** mobile */
-
-@media screen and (max-width: 800px) {
-  .menus_footer {
-    display: flex;
-    flex-direction: column;
-    margin: 50px 0 50px 0;
-  }
-}
+@import "../../assets/scss/app-components/footer/footerMenu.scss";
 </style>

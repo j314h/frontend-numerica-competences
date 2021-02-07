@@ -144,6 +144,7 @@
         </div>
       </div>
     </form>
+    <text-info-form :text="'* Champs obligatoire'" :themeColor="currentUser.themeColor"></text-info-form>
   </div>
 </template>
 
@@ -153,9 +154,10 @@ import ErrorBasic from "../../../Elements/ErrorBasic.vue";
 import InputLabelSample from "../../../Elements/Inputs/InputLabelSample.vue";
 import InputFrameAddMultiple from "../../../Elements/Inputs/InputFrameAddMultiple.vue";
 import InputSample from "../../../Elements/Inputs/InputSample.vue";
+import TextInfoForm from "../../../Elements/TextInfoForm";
 
 export default {
-  components: { ButtonApp, ErrorBasic, InputLabelSample, InputFrameAddMultiple, InputSample },
+  components: { ButtonApp, ErrorBasic, InputLabelSample, InputFrameAddMultiple, InputSample, TextInfoForm },
   name: "SettingUserInfoCompanyUpdate",
   props: {
     currentUserCompany: Object,

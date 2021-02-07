@@ -6,7 +6,7 @@
       <p>de Bourgogne Franche-Comté</p>
     </div>
     <!-- title -->
-    <h1 class="stxxl-b title">Numerica compétences</h1>
+    <h1 class="stxxl-b title_home_text">Numerica compétences</h1>
     <!-- intro -->
     <div class="box_intro_home stl-r">
       <p class="t-intro">
@@ -27,16 +27,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.slogan {
-  max-width: 300px;
-}
-.title {
-  margin: 50px 0;
-}
-.box_intro_home {
-  max-width: 704px;
-}
-.box_intro_home p:nth-child(2) {
-  margin-top: 25px;
-}
+@import "../../assets/scss/app-components/home/homeText.scss";
 </style>

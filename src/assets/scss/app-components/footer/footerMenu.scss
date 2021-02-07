@@ -1,0 +1,47 @@
+/** globals */
+
+.menus_footer {
+  display: flex;
+  height: 100%;
+
+  padding-right: 65px;
+
+  font-size: 1.2rem;
+}
+
+.menu_1 h4 {
+  margin-bottom: 8px;
+  color: var(--color-secondary-text);
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.menu_1 ul {
+  list-style: none;
+}
+
+.menu_1 a {
+  display: block;
+  height: 22px;
+  color: #7e818b;
+  text-decoration: none;
+}
+
+.menu_1 a:hover {
+  color: #ffffff;
+}
+/** menu 1 */
+
+.menu_1 {
+  margin-right: 70px;
+}
+
+/** mobile */
+
+@media screen and (max-width: 800px) {
+  .menus_footer {
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0 50px 0;
+  }
+}

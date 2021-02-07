@@ -45,7 +45,7 @@
           :nameImgTarget="'logoIdentifiant'"
           :commandeDispatch="'Files/updateImg'"
           :targetUrl="'logo-identifiant'"
-          :title="'Modifier l\'icon personnes, salariés, etc...'"
+          :title="'Modifier l\'icon personne, salarié, etc...'"
         ></setting-img>
       </div>
 
@@ -90,7 +90,7 @@
           :nameImgTarget="'logoUpdateElement'"
           :commandeDispatch="'Files/updateImg'"
           :targetUrl="'logo-update-element'"
-          :title="'Modifier l\'icon de modification des élément'"
+          :title="'Modifier l\'icon de modification des éléments'"
         ></setting-img>
       </div>
 

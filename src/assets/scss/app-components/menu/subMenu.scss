@@ -1,0 +1,15 @@
+.sub .link_sub_menu {
+  padding: 20px;
+  border-bottom: 5px solid transparent;
+  display: block;
+}
+.sub .router-link-active {
+  border-bottom: 5px solid #f84210;
+}
+.sub_menu .sub_menu_dashbord {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 0 30px;
+}

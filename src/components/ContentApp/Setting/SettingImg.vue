@@ -1,10 +1,10 @@
 <template>
   <div class="box">
-    <form @submit.prevent="changeLogoNumerica">
-      <h3 class="title_box stxm-m" :class="currentUser.themeColor.colorTextTab">{{ title }}</h3>
-      <div class="content_form">
+    <form class="setting_img_form" @submit.prevent="changeLogoNumerica">
+      <h3 class="setting_title_box stxm-m" :class="currentUser.themeColor.colorTextTab">{{ title }}</h3>
+      <div class="setting_content_form">
         <!-- content form -->
-        <div class="box_input">
+        <div class="setting_box_input">
           <label :for="nameImgTarget" class="input_file stxm-m ctorange cbrorange" :class="fileIsLoad">
             {{ text }}
           </label>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <!-- img an relation with label -->
-        <div class="box_img">
+        <div class="setting_box_img">
           <div v-for="(img, i) in imgs" :key="i">
             <img
               :class="{ input_file_background: bg }"
@@ -35,7 +35,7 @@
         </div>
       </div>
       <!-- submit -->
-      <div class="box_btn">
+      <div class="setting_box_btn">
         <button-app v-show="fileLoad" :mini="true" :textBtn="'Envoyer'"></button-app>
       </div>
     </form>
@@ -137,76 +137,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-form {
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-.title_box {
-  flex: 1;
-}
-.box_input {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-/* content */
-input[type="file"] {
-  display: none;
-}
-.input_file {
-  display: block;
-  overflow: hidden;
-  padding: 10px 20px;
-  border-radius: 4px;
-  transition: all 0.5s;
-}
-.input_file:hover {
-  cursor: pointer;
-  background-color: #f84210;
-  color: #ffffff;
-}
-
-/**class for input add new file load this add in DOM with binding */
-.is_load {
-  background-color: #61ff84;
-  border: transparent;
-  color: #000;
-}
-
-.input_file_background {
-  background-color: #7e818b;
-}
-
-.box_img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-.content_form {
-  margin: 10px 0;
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-/******** */
-.box_btn {
-  display: flex;
-  align-items: flex-end;
-  flex: 1;
-}
-
-@media screen and (max-width: 800px) {
-  .content_form {
-    flex-direction: column;
-  }
-  .box_img {
-    margin-top: 20px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
