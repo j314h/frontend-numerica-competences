@@ -1,105 +1,130 @@
 <template>
-  <div class="stxm-r" :class="currentUser.themeColor.colorTextTab">
-    <form @submit.prevent="updateUser">
-      <div class="box_info_detail">
-        <!-- info box 1 -->
-        <div class="info_detail">
-          <!-- first name -->
-          <div>
-            <label>Prénom * :</label>
-            <input type="text" v-model="dataForm.data.name.firstName" class="input space_input" required />
-          </div>
+  <div class="stxm-r">
+    <form @submit.prevent="updateUser" class="box_info_detail_user_update">
+      <!-- info box 1 -->
+      <div class="item_user_update">
+        <!-- last name -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`DUPONT`"
+          :required="true"
+          :textLabel="`Nom * : `"
+          :type="'text'"
+          :value="dataForm.data.name.lastName"
+          v-model="dataForm.data.name.lastName"
+        ></input-label-sample>
 
-          <!-- last name -->
-          <div>
-            <label class="space_input">Nom * :</label>
-            <input type="text" v-model="dataForm.data.name.lastName" class="input space_input" required />
-          </div>
+        <!-- first name -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`Jean`"
+          :required="true"
+          :textLabel="`Pénom * : `"
+          :type="'text'"
+          :value="dataForm.data.name.firstName"
+          v-model="dataForm.data.name.firstName"
+        ></input-label-sample>
 
-          <!-- street and number of street -->
-          <div>
-            <label class="space_input">Adresse :</label>
-            <input type="text" v-model="dataForm.data.address.street" class="input space_input" />
-          </div>
+        <!-- street and number of street -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`15 Grande rue`"
+          :required="false"
+          :textLabel="`Adresse : `"
+          :type="'text'"
+          :value="dataForm.data.address.street"
+          v-model="dataForm.data.address.street"
+        ></input-label-sample>
 
-          <!-- code post -->
-          <div>
-            <label class="space_input">Code postal : </label>
-            <input type="text" v-model="dataForm.data.address.postCode" class="input space_input" />
-          </div>
+        <!-- code post -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`75000`"
+          :required="false"
+          :textLabel="`Code postal : `"
+          :type="'text'"
+          :value="dataForm.data.address.postCode"
+          v-model="dataForm.data.address.postCode"
+        ></input-label-sample>
 
-          <!-- city -->
-          <div>
-            <label class="space_input">Ville : </label>
-            <input type="text" v-model="dataForm.data.address.city" class="input space_input" />
-          </div>
+        <!-- city -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`Paris`"
+          :required="false"
+          :textLabel="`Ville : `"
+          :type="'text'"
+          :value="dataForm.data.address.city"
+          v-model="dataForm.data.address.city"
+        ></input-label-sample>
 
-          <!-- phone number -->
-          <div>
-            <label class="space_input">Téléphone :</label>
-            <input type="tel" v-model="dataForm.data.phoneNumber" class="input space_input" />
-          </div>
+        <!-- phone number -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`Téléphone mobile ou bureau`"
+          :required="false"
+          :textLabel="`Numéro de téléphone : `"
+          :type="'text'"
+          :value="dataForm.data.phoneNumber"
+          v-model="dataForm.data.phoneNumber"
+        ></input-label-sample>
 
-          <!-- email -->
-          <div>
-            <label class="space_input">Adresse mail * :</label>
-            <input type="email" v-model="dataForm.data.email" class="input space_input" autocomplete="off" required />
-          </div>
-        </div>
-
-        <!-- info password -->
-        <div class="info_detail">
-          <div>
-            <label>Mot de passe : </label>
-
-            <!-- old password -->
-            <input
-              type="password"
-              v-model="passwordOld"
-              class="input space_input"
-              placeholder="Ancien mot de passe"
-              autocomplete="new-password"
-            />
-
-            <!-- new password -->
-            <input
-              type="password"
-              v-model="password"
-              class="input space_input"
-              placeholder="Nouveau mot de passe"
-              autocomplete="new-password"
-            />
-
-            <!-- confirme new password -->
-            <input
-              type="password"
-              v-model="confirmPasswordNew"
-              class="input space_input"
-              placeholder="Confirmer mot de passe"
-              autocomplete="new-password"
-            />
-
-            <!-- errors -->
-            <error-content class="error_password" :error="errors"></error-content>
-
-            <!-- role for current user, juste root change role-->
-            <div v-if="currentUser.role.libelle === 'root'">
-              <label>Rôle * :</label>
-              <v-select class="select" :options="libellesRoles" v-model="dataForm.data.role"></v-select>
-            </div>
-
-            <!-- submit -->
-            <div class="box_btn">
-              <button-app :mini="true" :textBtn="'Modifier'"></button-app>
-            </div>
-          </div>
-        </div>
+        <!-- email -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`jeandupond@mail.com`"
+          :required="true"
+          :textLabel="`Adresse mail * : `"
+          :type="'text'"
+          :value="dataForm.data.email"
+          v-model="dataForm.data.email"
+        ></input-label-sample>
       </div>
-      <div>
-        <p class="stxs-r text_info">* Champs obligatoire</p>
-        <!-- <p></p> version 2 if you need to add a specific info -->
+
+      <div class="item_user_update">
+        <!-- info password -->
+        <label class="label-sample stxm-m" :class="currentUser.themeColor.label">Mot de passe :</label>
+        <div class="box_password_update_current_user">
+          <input-sample
+            :placeholder="'Ancien mot de passe'"
+            :type="'password'"
+            v-model="passwordOld"
+            autocomplete="new-password"
+          ></input-sample>
+          <input-sample
+            :placeholder="'Nouveau mot de passe'"
+            :type="'password'"
+            v-model="password"
+            autocomplete="new-password"
+          ></input-sample>
+          <input-sample
+            :placeholder="'Confirmation mot de passe'"
+            :type="'password'"
+            v-model="confirmPasswordNew"
+            autocomplete="new-password"
+          ></input-sample>
+        </div>
+
+        <!-- role for current user, juste root change role-->
+        <div v-if="currentUser.role.libelle === 'root'">
+          <v-select
+            :textLabel="'Rôle * :'"
+            :themeColor="currentUser.themeColor"
+            :options="libellesRoles"
+            v-model="dataForm.data.role"
+          ></v-select>
+        </div>
+
+        <!-- errors -->
+        <error-basic class="error_password" :error="errors"></error-basic>
+
+        <!-- submit -->
+        <div class="box_btn_user_update">
+          <button-app :themeColor="currentUser.themeColor" :mini="true" :textBtn="'Modifier'"></button-app>
+        </div>
       </div>
     </form>
+    <text-info-form :text="'* Champs obligatoire'" :themeColor="currentUser.themeColor"></text-info-form>
   </div>
 </template>
 
@@ -107,14 +132,18 @@
 import ButtonApp from "../../../Elements/Buttons/ButtonApp";
 import ErrorBasic from "../../../Elements/ErrorBasic.vue";
 import VSelect from "../../../Elements/vue-bootstrap-select";
+import InputLabelSample from "../../../Elements/Inputs/InputLabelSample";
+import InputSample from "../../../Elements/Inputs/InputSample.vue";
+import TextInfoForm from "../../../Elements/TextInfoForm";
 
 export default {
-  components: { ButtonApp, ErrorBasic, VSelect },
+  components: { ButtonApp, ErrorBasic, VSelect, InputLabelSample, InputSample, TextInfoForm },
   name: "SettingUserInfoUpdate",
   props: {
     currentUser: Object,
     roles: Array,
     errors: Array,
+    isUpdateUser: Boolean,
   },
   data() {
     return {
@@ -157,12 +186,12 @@ export default {
           if (this.password === this.confirmPasswordNew && this.password && this.confirmPasswordNew) {
             this.dataForm.oldPassword = this.passwordOld;
             this.dataForm.password = this.password;
-            this.messageAlert = "Updating user is completed with password";
+            this.messageAlert = "Utilisateur et mot de passe modifier avec succès.";
           } else {
-            throw new Error("An error occurred while updating the password");
+            throw new Error("Une erreur est survenue pendant la mise à jour du mot de passe.");
           }
         } else {
-          this.messageAlert = "Updating user is successful without password";
+          this.messageAlert = "Utilisateur mise à jour réussis.";
         }
 
         //recover id for role selected
@@ -174,7 +203,7 @@ export default {
 
         //if success show alert custom
         this.$swal.fire({
-          position: "top-end",
+          position: "center",
           icon: "success",
           title: this.messageAlert,
           showConfirmButton: false,
@@ -182,16 +211,16 @@ export default {
         });
 
         //close window update with function in component parent
-        this.$parent.updateUser();
+        this.$emit("update:isUpdateUser", !this.isUpdateUser);
       } catch (error) {
         //clear input password
         this.clearInput();
 
         //if error show alert custom
         this.$swal.fire({
-          position: "top-end",
+          position: "center",
           icon: "error",
-          title: e.response ? e.response.data.message : e.message, //if throw error see your error in throw
+          title: error.response ? error.response.data.message : error.message, //if throw error see your error in throw
           showConfirmButton: false,
           timer: 2000,
         });
@@ -218,53 +247,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-p {
-  margin: 7px 0;
-}
-label {
-  display: block;
-}
-.space_input {
-  margin: 10px 0 0 0;
-}
-.box_info_detail {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding-bottom: 40px;
-}
-.info_detail {
-  padding: 30px;
-}
-.box_info_detail .info_detail:nth-child(1) {
-  min-width: 250px;
-  flex: 2;
-}
-.box_info_detail .info_detail:nth-child(2) {
-  min-width: 250px;
-  flex: 2;
-}
-.select {
-  margin: 10px 0 30px 0;
-  width: 80%;
-}
-.box_btn {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 40px;
-  width: 80%;
-}
-.error_password {
-  margin: 20px 0;
-}
-.text_info {
-  color: #000;
-  margin: 10px 0 80px 0;
-}
-@media screen and (max-width: 884px) {
-  .box_info_detail .info_detail:nth-child(2) {
-    margin: 0px 0 10px 0px;
-  }
-}
-</style>
+<style></style>

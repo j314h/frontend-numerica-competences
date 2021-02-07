@@ -24,7 +24,7 @@
           <!-- lastName -->
           <input-label-sample
             :themeColor="themeColor"
-            :placeholder="`JEAN`"
+            :placeholder="`DUPONT`"
             :required="true"
             :textLabel="`Nom * : `"
             :type="'text'"
@@ -35,7 +35,7 @@
           <!-- firstName -->
           <input-label-sample
             :themeColor="themeColor"
-            :placeholder="`Dupont`"
+            :placeholder="`Jean`"
             :required="true"
             :textLabel="`Prénom * : `"
             :type="'text'"
@@ -157,7 +157,7 @@ import ButtonApp from "../../Elements/Buttons/ButtonApp.vue";
 import ErrorBasic from "../../Elements/ErrorBasic.vue";
 import TitleCards from "../../Elements/TitleCards.vue";
 import VSelect from "../../Elements/vue-bootstrap-select";
-import InputLabelSample from "../../Elements/Inputs/Input-label-sample";
+import InputLabelSample from "../../Elements/Inputs/InputLabelSample";
 import TextInfoForm from "../../Elements/TextInfoForm.vue";
 
 export default {

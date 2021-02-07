@@ -170,15 +170,15 @@
 </template>
 
 <script>
-import InputLabelSample from "../../../Elements/Inputs/Input-label-sample.vue";
+import InputLabelSample from "../../../Elements/Inputs/InputLabelSample";
 import InputFrameAddMultiple from "../../../Elements/Inputs/InputFrameAddMultiple.vue";
+import InputSample from "../../../Elements/Inputs/InputSample.vue";
 import { AlertQuickly } from "../../../../lib/SwalAlert";
 
 import ButtonApp from "../../../Elements/Buttons/ButtonApp";
 import ButtonDelete from "../../../Elements/Buttons/ButtonDelete.vue";
 import ErrorBasic from "../../../Elements/ErrorBasic";
 import VSelect from "../../../Elements/vue-bootstrap-select";
-import InputSample from "../../../Elements/Inputs/InputSample.vue";
 import TextInfoForm from "../../../Elements/TextInfoForm.vue";
 
 export default {

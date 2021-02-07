@@ -1,46 +1,46 @@
 <template>
-  <div class="stxm-r" :class="currentUser.themeColor.colorTextTab">
-    <div class="box_info_company">
-      <!-- info personel -->
-      <div class="info_company">
-        <p>{{ companyName }}</p>
-        <p>{{ companyStreet }}</p>
-        <p>{{ companyCodePostCity }}</p>
-        <p>{{ currentUserCompany.phoneNumber }}</p>
+  <div class="box_info_detail_user" :class="currentUser.themeColor.textBasic">
+    <!-- info personel -->
+    <div class="info_detail_user">
+      <p>{{ companyName }}</p>
+      <p>{{ companyStreet }}</p>
+      <p>{{ companyCodePostCity }}</p>
+      <p>
+        Tél : <span :class="currentUser.themeColor.textImportant">{{ currentUserCompany.phoneNumber }}</span>
+      </p>
+    </div>
+
+    <!-- info detail -->
+    <div class="info_detail_user">
+      <!-- siret -->
+      <div class="stxm-m">
+        Numéro de siret :
+        <span :class="currentUser.themeColor.textImportant">{{ currentUserCompany.siret }}</span>
       </div>
 
-      <!-- info detail -->
-      <div class="info_company">
-        <!-- siret -->
-        <p class="stxm-m" :class="currentUser.themeColor.colorText">
-          Numéro de siret :
-          <span :class="currentUser.themeColor.colorTextImportant">{{ currentUserCompany.siret }}</span>
-        </p>
-
-        <!-- NAF -->
-        <p class="stxm-m" :class="currentUser.themeColor.colorText">
-          Code NAF : <span :class="currentUser.themeColor.colorTextImportant">{{ currentUserCompany.naf }}</span>
-        </p>
-
-        <!-- filliale -->
-        <p class="stxm-m" :class="currentUser.themeColor.colorText">
-          Site de production - Filliale :
-          <span :class="currentUser.themeColor.colorTextImportant">{{ companyFilliale }}</span>
-        </p>
-
-        <!-- sectors -->
-        <ul>
-          <span class="stxm-m" :class="currentUser.themeColor.colorText">Secteurs :</span>
-          <div v-if="sectorsCompanyCurrentUser.length > 0">
-            <li v-for="(sector, i) in sectorsCompanyCurrentUser" :key="i" :class="currentUser.themeColor.colorTextTab">
-              {{ upper(sector.libelle) }}
-            </li>
-          </div>
-          <div v-else>
-            <li :class="currentUser.themeColor.colorTextTab">Aucun Secteur</li>
-          </div>
-        </ul>
+      <!-- NAF -->
+      <div class="stxm-m">
+        Code NAF : <span :class="currentUser.themeColor.textImportant">{{ currentUserCompany.naf }}</span>
       </div>
+
+      <!-- filliale -->
+      <div class="stxm-m">
+        Site de production - Filliale :
+        <span :class="currentUser.themeColor.textImportant">{{ companyFilliale }}</span>
+      </div>
+
+      <!-- sectors -->
+      <ul>
+        <span class="stxm-m">Secteurs :</span>
+        <div v-if="sectorsCompanyCurrentUser.length > 0">
+          <li v-for="(sector, i) in sectorsCompanyCurrentUser" :key="i" :class="currentUser.themeColor.textImportant">
+            {{ upper(sector.libelle) }}
+          </li>
+        </div>
+        <div v-else>
+          <li :class="currentUser.themeColor.textImportant">Aucun Secteur</li>
+        </div>
+      </ul>
     </div>
   </div>
 </template>
@@ -88,26 +88,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-li {
-  padding: 10px 10px;
-  list-style: none;
-}
-p {
-  margin: 7px 0;
-}
-.subscrite_title {
-  padding-bottom: 30px;
-}
-.box_info_company {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-.box_info_company .info_company:first-child {
-  margin-right: 100px;
-}
-.box_info_company p {
-  margin-bottom: 10px;
-}
-</style>
+<style></style>

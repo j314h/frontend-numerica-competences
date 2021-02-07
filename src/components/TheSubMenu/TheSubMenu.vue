@@ -1,31 +1,33 @@
 <template>
   <div class="sub_menu stxm-r" :class="bgSubMenu">
-    <!-- sub menu for dashbord -->
-    <div v-if="titleHeadBand === 'Tableau de bord'" class="sub_menu_dashbord">
-      <div>
-        <router-link class="link_sub_menu ctorange" :to="{ name: 'DashHome' }">Accueil</router-link>
+    <transition name="fade" mode="out-in">
+      <!-- sub menu for dashbord -->
+      <div v-if="titleHeadBand === 'Tableau de bord'" class="sub_menu_dashbord">
+        <div>
+          <router-link class="link_sub_menu ctorange" :to="{ name: 'DashHome' }">Accueil</router-link>
+        </div>
+        <div>
+          <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateCompany' }">Créer une entreprise</router-link>
+        </div>
       </div>
-      <div>
-        <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateCompany' }">Créer une entreprise</router-link>
+      <!-- other sub menu -->
+      <!-- sub menu for dashbord -->
+      <div v-if="titleHeadBand === companySelected.name" class="sub_menu_dashbord">
+        <div>
+          <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyHome' }">Accueil</router-link>
+        </div>
+        <div>
+          <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateUser' }"
+            >Créer un salarié</router-link
+          >
+        </div>
+        <div>
+          <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateFileWork' }"
+            >Fiche métier</router-link
+          >
+        </div>
       </div>
-    </div>
-    <!-- other sub menu -->
-    <!-- sub menu for dashbord -->
-    <div v-if="titleHeadBand === companySelected.name" class="sub_menu_dashbord">
-      <div>
-        <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyHome' }">Accueil</router-link>
-      </div>
-      <div>
-        <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateUser' }"
-          >Créer un salarié</router-link
-        >
-      </div>
-      <div>
-        <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateFileWork' }"
-          >Fiche métier</router-link
-        >
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 

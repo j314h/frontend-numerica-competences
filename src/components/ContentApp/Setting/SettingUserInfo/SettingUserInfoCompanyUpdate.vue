@@ -1,139 +1,147 @@
 <template>
-  <div class="stxm-r" :class="currentUser.themeColor.colorTextTab">
-    <form @submit.prevent="updateCompany">
-      <div class="box_info_company">
-        <!-- info personel company-->
-        <div class="info_company">
-          <!-- name company -->
-          <div>
-            <label>Dénomination sociale * :</label>
-            <input class="input" type="text" v-model="dataForm.data.name" required />
-          </div>
+  <div class="stxm-r">
+    <form @submit.prevent="updateCompany" class="box_info_detail_user_update">
+      <!-- info personel company-->
+      <div class="item_user_update">
+        <!-- name company -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`Nom de l'entreprise`"
+          :required="true"
+          :textLabel="`Dénomination sociale * : `"
+          :type="'text'"
+          :value="dataForm.data.name"
+          v-model="dataForm.data.name"
+        ></input-label-sample>
 
-          <!-- street -->
-          <div>
-            <label>Adresse * :</label>
-            <input class="input" type="text" v-model="dataForm.data.address.street" required />
-          </div>
-          <div>
-            <label>Code postal * :</label>
-            <input class="input" type="text" v-model="dataForm.data.address.postCode" required />
-          </div>
-          <div>
-            <label>Ville * :</label>
-            <input class="input" type="text" v-model="dataForm.data.address.city" required />
-          </div>
+        <!-- street -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`15 Grande rue`"
+          :required="true"
+          :textLabel="`Adresse * : `"
+          :type="'text'"
+          :value="dataForm.data.address.street"
+          v-model="dataForm.data.address.street"
+        ></input-label-sample>
 
-          <!-- phone number -->
-          <div>
-            <label>Numero de téléphone * :</label>
-            <input class="input" type="text" v-model="dataForm.data.phoneNumber" required />
-          </div>
-        </div>
-        <!-- info detail -->
-        <div class="info_company">
-          <!-- siret -->
-          <div>
-            <label>Numéro de Siret * :</label>
-            <input class="input" type="text" v-model="dataForm.data.siret" required />
-          </div>
+        <!-- post code -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`75000`"
+          :required="true"
+          :textLabel="`Code postal * : `"
+          :type="'text'"
+          :value="dataForm.data.address.postCode"
+          v-model="dataForm.data.address.postCode"
+        ></input-label-sample>
 
-          <!-- naf -->
-          <div>
-            <label>Code NAF * :</label>
-            <input class="input" type="text" v-model="dataForm.data.naf" required />
-          </div>
+        <!-- city -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`Paris`"
+          :required="true"
+          :textLabel="`Ville * : `"
+          :type="'text'"
+          :value="dataForm.data.address.city"
+          v-model="dataForm.data.address.city"
+        ></input-label-sample>
 
-          <!-- fillale -->
-          <div>
-            <label>Site de production - Filliale :</label>
-            <input class="input" type="text" v-model="dataForm.data.filliale" />
-          </div>
-
-          <!-- sectors -->
-          <div class="box_sectors">
-            <label>Secteur : </label>
-            <div class="input_sector" v-for="(sector, i) in dataForm.sectors" :key="i">
-              <input class="input" v-model="sector.libelle" />
-              <!-- btn delete input -->
-              <button class="box_delete_input" @click.prevent="deleteSectorData(sector, i)">
-                <svg
-                  class="btn_delete_input"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 40 40"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M19.9999 2.22217C10.1815 2.22217 2.22217 10.1815 2.22217 19.9999C2.22217 29.8183 10.1815 37.7777 19.9999 37.7777C29.8183 37.7777 37.7777 29.8183 37.7777 19.9999C37.7777 15.285 35.9047 10.7631 32.5707 7.42916C29.2367 4.09518 24.7149 2.22217 19.9999 2.22217ZM19.9999 35.5555C11.4088 35.5555 4.44438 28.591 4.44438 19.9999C4.44438 11.4089 11.4088 4.44439 19.9999 4.44439C28.591 4.44439 35.5555 11.4089 35.5555 19.9999C35.5555 24.1255 33.9166 28.0822 30.9994 30.9994C28.0821 33.9166 24.1255 35.5555 19.9999 35.5555ZM13.3333 18.8888H26.6666C27.2803 18.8888 27.7777 19.3863 27.7777 19.9999C27.7777 20.6136 27.2803 21.1111 26.6666 21.1111H13.3333C12.7196 21.1111 12.2222 20.6136 12.2222 19.9999C12.2222 19.3863 12.7196 18.8888 13.3333 18.8888Z"
-                    fill="#DB0000"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- add sectors -->
-          <div>
-            <div class="box_btn_add_input">
-              <label>Ajoutez un secteur</label>
-              <!-- btn for add input -->
-              <button class="btn_add_input" @click.prevent="addInputSector">
-                <svg
-                  class="addbtn"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20C15.5228 20 20 15.5228 20 10C20 7.34784 18.9464 4.8043 17.0711 2.92893C15.1957 1.05357 12.6522 0 10 0ZM10 18.7499C5.16751 18.7499 1.25 14.8324 1.25 9.99994C1.25 5.16745 5.16751 1.24994 10 1.24994C14.8325 1.24994 18.75 5.16745 18.75 9.99994C18.75 12.3206 17.8281 14.5462 16.1872 16.1871C14.5462 17.8281 12.3206 18.7499 10 18.7499ZM10.625 9.37493H15.1063C15.4515 9.37493 15.7313 9.65475 15.7313 9.99993C15.7313 10.3451 15.4515 10.6249 15.1063 10.6249H10.625V15.1062C10.625 15.4514 10.3452 15.7312 10 15.7312C9.65487 15.7312 9.37505 15.4514 9.37505 15.1062V10.6249H4.8938C4.54862 10.6249 4.2688 10.3451 4.2688 9.99993C4.2688 9.65475 4.54862 9.37493 4.8938 9.37493H9.37505V4.89368C9.37505 4.5485 9.65487 4.26868 10 4.26868C10.3452 4.26868 10.625 4.5485 10.625 4.89368V9.37493Z"
-                    fill="#4c39e9"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div class="input_sector" v-for="(input, i) in nbrInputSector" :key="i">
-              <input class="input" v-model="dataForm.newSectors[i]" />
-              <!-- btn delete input -->
-              <button class="box_delete_input" @click.prevent="deleteSector(i)">
-                <svg
-                  class="btn_delete_input"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 40 40"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M19.9999 2.22217C10.1815 2.22217 2.22217 10.1815 2.22217 19.9999C2.22217 29.8183 10.1815 37.7777 19.9999 37.7777C29.8183 37.7777 37.7777 29.8183 37.7777 19.9999C37.7777 15.285 35.9047 10.7631 32.5707 7.42916C29.2367 4.09518 24.7149 2.22217 19.9999 2.22217ZM19.9999 35.5555C11.4088 35.5555 4.44438 28.591 4.44438 19.9999C4.44438 11.4089 11.4088 4.44439 19.9999 4.44439C28.591 4.44439 35.5555 11.4089 35.5555 19.9999C35.5555 24.1255 33.9166 28.0822 30.9994 30.9994C28.0821 33.9166 24.1255 35.5555 19.9999 35.5555ZM13.3333 18.8888H26.6666C27.2803 18.8888 27.7777 19.3863 27.7777 19.9999C27.7777 20.6136 27.2803 21.1111 26.6666 21.1111H13.3333C12.7196 21.1111 12.2222 20.6136 12.2222 19.9999C12.2222 19.3863 12.7196 18.8888 13.3333 18.8888Z"
-                    fill="#DB0000"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- errors -->
-          <error-content class="box_error" :error="errors"></error-content>
-
-          <!-- submit -->
-          <div class="box_btn">
-            <button-app :mini="true" :textBtn="'Modifier'"></button-app>
-          </div>
-        </div>
+        <!-- phone number -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`Téléphone mobile ou bureau`"
+          :required="true"
+          :textLabel="`Numéro de téléphone * : `"
+          :type="'text'"
+          :value="dataForm.data.phoneNumber"
+          v-model="dataForm.data.phoneNumber"
+        ></input-label-sample>
       </div>
-      <div>
-        <p class="stxs-r text_info">* Champs obligatoire</p>
-        <!-- <p></p> version 2 if you need to add a specific info -->
+
+      <!-- info detail -->
+      <div class="item_user_update">
+        <!-- siret -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`14 chiffres`"
+          :required="true"
+          :textLabel="`Numéro de siret * : `"
+          :type="'text'"
+          :value="dataForm.data.siret"
+          v-model="dataForm.data.siret"
+        ></input-label-sample>
+
+        <!-- naf -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`85.7A`"
+          :required="true"
+          :textLabel="`Code NAF * : `"
+          :type="'text'"
+          :value="dataForm.data.naf"
+          v-model="dataForm.data.naf"
+        ></input-label-sample>
+
+        <!-- fillale -->
+        <input-label-sample
+          :themeColor="currentUser.themeColor"
+          :placeholder="`85.7A`"
+          :required="false"
+          :textLabel="`Site de production - Filliale : `"
+          :type="'text'"
+          :value="dataForm.data.filliale"
+          v-model="dataForm.data.filliale"
+        ></input-label-sample>
+
+        <!-- sectors -->
+        <div class="box_sectors">
+          <label class="label-sample stxm-m" :class="currentUser.themeColor.label">Secteur : </label>
+          <div class="input_sector_sample" v-for="(sector, i) in dataForm.sectors" :key="i">
+            <input-sample
+              :type="'text'"
+              :placeholder="'Nom du secteur'"
+              :required="false"
+              :value="sector.libelle"
+              v-model="sector.libelle"
+            ></input-sample>
+            <!-- btn delete input -->
+            <button class="box_delete_input" @click.prevent="deleteSectorData(sector, i)">
+              <svg
+                class="btn_delete_input"
+                width="20"
+                height="20"
+                viewBox="0 0 40 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M19.9999 2.22217C10.1815 2.22217 2.22217 10.1815 2.22217 19.9999C2.22217 29.8183 10.1815 37.7777 19.9999 37.7777C29.8183 37.7777 37.7777 29.8183 37.7777 19.9999C37.7777 15.285 35.9047 10.7631 32.5707 7.42916C29.2367 4.09518 24.7149 2.22217 19.9999 2.22217ZM19.9999 35.5555C11.4088 35.5555 4.44438 28.591 4.44438 19.9999C4.44438 11.4089 11.4088 4.44439 19.9999 4.44439C28.591 4.44439 35.5555 11.4089 35.5555 19.9999C35.5555 24.1255 33.9166 28.0822 30.9994 30.9994C28.0821 33.9166 24.1255 35.5555 19.9999 35.5555ZM13.3333 18.8888H26.6666C27.2803 18.8888 27.7777 19.3863 27.7777 19.9999C27.7777 20.6136 27.2803 21.1111 26.6666 21.1111H13.3333C12.7196 21.1111 12.2222 20.6136 12.2222 19.9999C12.2222 19.3863 12.7196 18.8888 13.3333 18.8888Z"
+                  fill="#DB0000"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- add sectors -->
+        <input-frame-add-multiple
+          :themeColor="currentUser.themeColor"
+          :textLabel="'Ajouter un secteur'"
+          :placeholder="'Nom du secteur'"
+          :isAddEntity.sync="isAddEntity"
+          :sendData="dataForm.newSectors"
+        ></input-frame-add-multiple>
+
+        <!-- errors -->
+        <error-basic :error="errors"></error-basic>
+
+        <!-- submit -->
+        <div class="box_btn_user_update">
+          <button-app :themeColor="currentUser.themeColor" :mini="true" :textBtn="'Modifier'"></button-app>
+        </div>
       </div>
     </form>
   </div>
@@ -142,20 +150,25 @@
 <script>
 import ButtonApp from "../../../Elements/Buttons/ButtonApp.vue";
 import ErrorBasic from "../../../Elements/ErrorBasic.vue";
+import InputLabelSample from "../../../Elements/Inputs/InputLabelSample.vue";
+import InputFrameAddMultiple from "../../../Elements/Inputs/InputFrameAddMultiple.vue";
+import InputSample from "../../../Elements/Inputs/InputSample.vue";
 
 export default {
-  components: { ButtonApp, ErrorBasic },
+  components: { ButtonApp, ErrorBasic, InputLabelSample, InputFrameAddMultiple, InputSample },
   name: "SettingUserInfoCompanyUpdate",
   props: {
     currentUserCompany: Object,
     sectorsCompanyCurrentUser: Array,
     currentUser: Object,
     errors: Array,
+    isUpdateCompany: Boolean,
   },
   data() {
     return {
       nbrInputSector: [],
       countSector: 0,
+      isAddEntity: false,
       //data for request update company's user
       dataForm: {
         data: {
@@ -212,7 +225,7 @@ export default {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.$parent.updateCompany();
+        this.$emit("update:isUpdateCompany", !this.isUpdateCompany);
       } catch (error) {
         //add error
         this.$store.commit("Error/addError", error);
@@ -232,78 +245,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-label {
-  display: block;
-}
-p {
-  margin: 7px 0;
-}
-.subscrite_title {
-  padding-bottom: 30px;
-}
-.box_info_company {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-.box_info_company input {
-  margin: 10px 0 20px 0;
-}
-.box_info_company .info_company:nth-child(1) {
-  min-width: 300px;
-  flex: 1;
-  padding: 0 30px;
-}
-.box_info_company .info_company:nth-child(2) {
-  min-width: 300px;
-  flex: 1;
-  padding: 0 30px;
-}
-.box_sectors {
-  margin: 10px 0 20px 0;
-}
-/**btn add input */
-.btn_add_input {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  margin-left: 20px;
-}
-.addbtn:hover path {
-  background-color: #f84210;
-  fill: #f84210;
-}
-.box_btn_add_input {
-  display: flex;
-}
-.input_sector {
-  display: flex;
-  align-items: center;
-}
-.box_delete_input {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  margin-left: 10px;
-  display: block;
-}
-.btn_delete_input:hover path {
-  fill: #db0000;
-}
-
-/********************* */
-.box_btn {
-  display: flex;
-  justify-content: flex-end;
-  width: 80%;
-  margin-top: 0px;
-}
-.box_error {
-  margin: 10px 0;
-}
-.text_info {
-  color: #000;
-  margin: 10px 0 40px 0;
-}
-</style>
+<style></style>

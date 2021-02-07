@@ -1,67 +1,84 @@
 <template>
-  <div>
-    <!-- head -->
-    <!-- title -->
-    <div class="header">
-      <h3 class="stxxm-m" :class="currentUser.themeColor.colorTextTab">Informations personnelles</h3>
-      <img @click="updateUser" :src="imageUpdateUser" />
-    </div>
-    <div>
+  <div class="setting_user_info">
+    <!-- info user -->
+    <div class="box box_info_user_setting" :class="themeColor.cbgCard">
+      <!-- title user information -->
+      <title-cards
+        :themeColor="themeColor"
+        :title="'Informations personnelle'"
+        :isImage="true"
+        :imageCloseUpdateCompany="imageCloseUpdateCompany"
+        :imageUpdateCompany="imageUpdateCompany"
+        :authorization="authorization"
+        :currentUser="currentUser"
+        :isUpdateCompany.sync="isUpdateUser"
+      ></title-cards>
+
       <!-- user info detail if isUpdate is true on see-->
-      <transition name="fade" mode="out-in">
-        <!-- update user -->
-        <setting-user-info-update
-          v-if="isUpdateUser"
-          :currentUser="currentUser"
-          :errors="errors"
-          :roles="roles"
-        ></setting-user-info-update>
+      <div>
+        <transition name="fade" mode="out-in">
+          <!-- update user -->
+          <setting-user-info-update
+            v-if="isUpdateUser"
+            :currentUser="currentUser"
+            :errors="errors"
+            :roles="roles"
+            :isUpdateUser.sync="isUpdateUser"
+          ></setting-user-info-update>
 
-        <!-- see info user -->
-        <setting-user-info-detail
-          v-else
-          :currentUser="currentUser"
-          :companiesAdmin="companiesAdmin"
-        ></setting-user-info-detail>
-      </transition>
-
-      <!-- sous title -->
-      <div class="box_title_company">
-        <h6 class="stxm-m subscrite_title" :class="currentUser.themeColor.colorText">Votre entreprise</h6>
-        <div>
-          <img
-            v-if="authorization.includes(currentUser.role.libelle)"
-            @click="updateCompany"
-            :src="imageUpdateCompany"
-          />
-        </div>
+          <!-- see info user -->
+          <setting-user-info-detail
+            v-else
+            :currentUser="currentUser"
+            :companiesAdmin="companiesAdmin"
+          ></setting-user-info-detail>
+        </transition>
       </div>
+    </div>
+
+    <!-- info company current user -->
+    <div class="box box_info_user_setting" :class="themeColor.cbgCard">
+      <!-- title user information -->
+      <title-cards
+        :themeColor="themeColor"
+        :title="'Votre entreprise'"
+        :isImage="true"
+        :imageCloseUpdateCompany="imageCloseUpdateCompany"
+        :imageUpdateCompany="imageUpdateCompany"
+        :authorization="authorization"
+        :currentUser="currentUser"
+        :isUpdateCompany.sync="isUpdateCompany"
+      ></title-cards>
 
       <!-- company info if isUpdate is true on see -->
-      <transition name="fade" mode="out-in">
-        <!-- update company user -->
-        <setting-user-info-company-update
-          :currentUserCompany="currentUserCompany"
-          :sectorsCompanyCurrentUser="sectorsCompanyCurrentUser"
-          :currentUser="currentUser"
-          :whatCompanyUpdate="whatCompanyUpdate"
-          :errors="errors"
-          v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
-        ></setting-user-info-company-update>
+      <div>
+        <transition name="fade" mode="out-in">
+          <!-- update company user -->
+          <setting-user-info-company-update
+            :currentUserCompany="currentUserCompany"
+            :sectorsCompanyCurrentUser="sectorsCompanyCurrentUser"
+            :currentUser="currentUser"
+            :whatCompanyUpdate="whatCompanyUpdate"
+            :isUpdateCompany.sync="isUpdateCompany"
+            :errors="errors"
+            v-if="isUpdateCompany && authorization.includes(currentUser.role.libelle)"
+          ></setting-user-info-company-update>
 
-        <!-- see info company user -->
-        <setting-user-info-company
-          v-else
-          :currentUserCompany="currentUserCompany"
-          :sectorsCompanyCurrentUser="sectorsCompanyCurrentUser"
-          :currentUser="currentUser"
-        ></setting-user-info-company>
-      </transition>
+          <!-- see info company user -->
+          <setting-user-info-company
+            v-else
+            :currentUserCompany="currentUserCompany"
+            :sectorsCompanyCurrentUser="sectorsCompanyCurrentUser"
+            :currentUser="currentUser"
+          ></setting-user-info-company>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import TitleCards from "../../../Elements/TitleCards.vue";
 import SettingUserInfoCompany from "./SettingUserInfoCompany.vue";
 import SettingUserInfoCompanyUpdate from "./SettingUserInfoCompanyUpdate.vue";
 import SettingUserInfoDetail from "./SettingUserInfoDetail.vue";
@@ -73,6 +90,7 @@ export default {
     SettingUserInfoCompany,
     SettingUserInfoUpdate,
     SettingUserInfoCompanyUpdate,
+    TitleCards,
   },
   name: "SettingUserInfo",
   props: {
@@ -82,8 +100,11 @@ export default {
     companiesAdmin: Array,
     currentUserCompany: Object,
     errors: Array,
+    themeColor: Object,
     roles: Array,
     sectorsCompanyCurrentUser: Array,
+    imageUpdateCompany: String,
+    imageCloseUpdateCompany: String,
   },
   data() {
     return {
@@ -94,21 +115,7 @@ export default {
       whatCompanyUpdate: "current",
     };
   },
-  computed: {
-    //this variable for change image pencil and X for update user and company
-    imageUpdateUser() {
-      if (this.$store.getters["Files/imgs"]) {
-        const { fieldName } = this.$store.getters["Files/imgs"].find((el) => el.name === this.nameImageUser);
-        return `${this.urlApiImg}${fieldName}`;
-      }
-    },
-    imageUpdateCompany() {
-      if (this.$store.getters["Files/imgs"]) {
-        const { fieldName } = this.$store.getters["Files/imgs"].find((el) => el.name === this.nameImageUserCompany);
-        return `${this.urlApiImg}${fieldName}`;
-      }
-    },
-  },
+  computed: {},
   methods: {
     //see form for update user and change img pencil
     //activate in children for close window update
@@ -138,39 +145,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-img {
-  width: 20px;
-  height: 20px;
-  margin-left: 20px;
-}
-img:hover {
-  cursor: pointer;
-}
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  transition: opacity 0.3s;
-}
-.fade-leave {
-  opacity: 1;
-}
-.fade-leave-active {
-  transition: opacity 0.3s;
-  opacity: 0;
-}
-.header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: baseline;
-  padding-bottom: 20px;
-}
-
-.box_title_company {
-  display: flex;
-  justify-content: flex-start;
-  align-items: baseline;
-  margin-bottom: 30px;
-}
-</style>
+<style></style>

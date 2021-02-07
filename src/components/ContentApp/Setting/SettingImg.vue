@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <form @submit.prevent="changeLogoNumerica">
       <h3 class="title_box stxm-m" :class="currentUser.themeColor.colorTextTab">{{ title }}</h3>
       <div class="content_form">

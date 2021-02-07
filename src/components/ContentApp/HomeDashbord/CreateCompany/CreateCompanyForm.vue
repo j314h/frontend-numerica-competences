@@ -130,7 +130,7 @@
 import ButtonApp from "../../../Elements/Buttons/ButtonApp.vue";
 import ErrorBasic from "../../../Elements/ErrorBasic.vue";
 import InputFrameAddMultiple from "../../../Elements/Inputs/InputFrameAddMultiple.vue";
-import InputLabelSample from "../../../Elements/Inputs/Input-label-sample.vue";
+import InputLabelSample from "../../../Elements/Inputs/InputLabelSample";
 import ButtonSample from "../../../Elements/Buttons/ButtonSample.vue";
 import TextInfoForm from "../../../Elements/TextInfoForm";
 import { AlertQuickly } from "../../../../lib/SwalAlert";

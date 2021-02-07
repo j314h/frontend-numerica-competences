@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <form>
       <!-- text is switch compare of value -->
       <p v-if="valueTheme" class="stxm-m" :class="currentUser.themeColor.colorTextTab">Désactiver le mode sombre</p>
