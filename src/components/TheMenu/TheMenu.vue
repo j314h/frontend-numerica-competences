@@ -78,6 +78,19 @@
           </router-link>
         </router-link>
       </div>
+
+      <!-- create file work of company selected -->
+      <div v-if="currentComponent === 'ListFileWork' || currentComponent === 'CreateFileWork'">
+        <!-- link for list work -->
+        <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'ListFileWork' }">
+          <span class="link_menu_create_file">Liste des métiers</span>
+        </router-link>
+
+        <!-- create work -->
+        <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'CreateFileWork' }">
+          <span class="link_menu_create_file">Créer un metier</span>
+        </router-link>
+      </div>
     </div>
 
     <!-- footer menu -->
@@ -101,7 +114,21 @@ export default {
       menuIsOpen: true,
       //url backend image
       urlApiImg: process.env.VUE_APP_URL_API_IMG,
+      //current road and current component
+      currentRoad: "",
+      currentComponent: "",
     };
+  },
+  created() {
+    this.recoverCurrentComponent(this.$route);
+  },
+  updated() {
+    this.recoverCurrentComponent(this.$route);
+  },
+  watch: {
+    $route(to, from) {
+      this.recoverCurrentComponent(to);
+    },
   },
   computed: {
     //load theme color for currentUser
@@ -166,6 +193,12 @@ export default {
       } else {
         this.menuIsOpen = true;
       }
+    },
+
+    //recover the current roads and component
+    recoverCurrentComponent(x) {
+      this.currentRoad = x.path;
+      this.currentComponent = x.name;
     },
   },
 };

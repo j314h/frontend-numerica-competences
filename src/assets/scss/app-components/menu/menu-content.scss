@@ -7,17 +7,17 @@
   z-index: 999999;
   overflow: hidden;
 }
-
 .link_menu {
   display: flex;
   align-items: center;
   padding: 5px 10px;
 }
-
 .link_menu:hover {
   color: $orange;
 }
-
 .link_menu span {
   margin-left: 10px;
+}
+.link_menu_create_file {
+  padding: 0 0 0 30px;
 }

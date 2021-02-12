@@ -8,10 +8,10 @@ import store from "../store";
 import VueCookies from "vue-cookies";
 const Setting = () => import("../components/ContentApp/Setting/Setting.vue");
 const CreateCompany = () => import("../components/ContentApp/HomeDashbord/CreateCompany/CreateCompany.vue");
-const SeeCompany = () => import("../components/ContentApp/SeeCompany/SeeCompany.vue");
+const SeeCompany = () => import("../views/SeeCompany.vue");
 const SeeCompanyCreateUser = () => import("../components/ContentApp/SeeCompany/SeeCompanyCreateUser.vue");
 const SeeCompanyHome = () => import("../components/ContentApp/SeeCompany/SeeCompanyHome/SeeCompanyHome.vue");
-const SeeCompanyCreateFileWork = () => import("../components/ContentApp/SeeCompany/SeeCompanyCreateFileWork.vue");
+const SeeCompanyCreateFileWork = () => import("../views/SeeCompanyCreateFileWork.vue");
 const HomeValidateAccount = () => import("../views/HomeValidateAccount.vue");
 
 Vue.use(VueRouter);
@@ -136,9 +136,28 @@ const routes = [
           {
             path: "create-file-work", //dashbord create user compared with id company
             name: "SeeCompanyCreateFileWork",
+            redirect: { name: "ListFileWork" },
             components: {
               SeeCompanyCreateFileWork,
             },
+            children: [
+              {
+                path: "see-work", //dashbord create user compared with id company
+                name: "ListFileWork",
+                components: {
+                  ListFileWork: () =>
+                    import("../components/ContentApp/SeeCompany/SeeCompanyCreateFileWork/ListFileWork.vue"),
+                },
+              },
+              {
+                path: "create-work", //dashbord create user compared with id company
+                name: "CreateFileWork",
+                components: {
+                  CreateFileWork: () =>
+                    import("../components/ContentApp/SeeCompany/SeeCompanyCreateFileWork/CreateFileWork.vue"),
+                },
+              },
+            ],
           },
         ],
       },

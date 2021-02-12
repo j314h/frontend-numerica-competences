@@ -1,6 +1,7 @@
 <template>
   <div class="stxm-r">
-    Creer metier
+    <router-view name="ListFileWork"></router-view>
+    <router-view name="CreateFileWork"></router-view>
   </div>
 </template>
 

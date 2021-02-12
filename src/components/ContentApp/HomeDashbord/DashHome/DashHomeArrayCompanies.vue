@@ -12,7 +12,7 @@
 
     <!-- ligne -->
     <div v-for="(item, i) in companiesReferents" :key="i" class="line">
-      <!-- name -->
+      <!-- name company -->
       <div class="item_line box_name_company">
         <router-link class="link_router" :to="{ name: 'SeeCompany' }">
           <div class="name_company" @click="selectedCompany(item.company)">
