@@ -2,6 +2,7 @@ export default {
   //request connect user succes
   signInSuccess(state, data) {
     state.currentUser = data;
+    state.isSignIn = true;
   },
 
   //check exist token

@@ -8,6 +8,7 @@
       class="input"
       :type="type"
       @input="$emit('input', $event.target.value)"
+      @keyup="$emit('keyup', $event.target.value)"
       :value="value"
       :placeholder="placeholder"
       required
@@ -19,6 +20,7 @@
       class="input"
       :type="type"
       @input="$emit('input', $event.target.value)"
+      @keyup="$emit('keyup', $event.target.value)"
       :placeholder="placeholder"
       :value="value"
     />

@@ -88,7 +88,7 @@
 
         <!-- create work -->
         <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'CreateFileWork' }">
-          <span class="link_menu_create_file">Créer un metier</span>
+          <span class="link_menu_create_file">Créer un métier</span>
         </router-link>
       </div>
     </div>

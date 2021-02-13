@@ -12,6 +12,7 @@ import ValidateAccount from "./ValidateAccount/ValidateAccount";
 import Employees from "./Employees/Employees";
 import Roles from "./Roles/Roles";
 import Trades from "./Trades/Trades";
+import ApiRom from "./ApiRom/ApiRom";
 
 Vue.use(Vuex);
 
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     Error,
     Employees,
     Roles,
+    ApiRom,
     Trades,
   },
 });

@@ -1,7 +1,9 @@
 <template>
   <div class="stxm-r">
-    <router-view name="ListFileWork"></router-view>
-    <router-view name="CreateFileWork"></router-view>
+    <transition appear name="fade" mode="out-in">
+      <router-view name="ListFileWork"></router-view>
+      <router-view name="CreateFileWork"></router-view>
+    </transition>
   </div>
 </template>
 

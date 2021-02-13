@@ -7,6 +7,8 @@ export default {
   state: {
     //all trades of company selected
     tradesCompanySelected: [],
+    //api ROM
+    tokenApiRom: "",
   },
   mutations,
   actions,

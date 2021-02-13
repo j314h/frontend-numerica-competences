@@ -1,0 +1,58 @@
+.cfwc_box_search_trade {
+  display: flex;
+  align-items: flex-end;
+}
+.cfwc_box_search_trade .cfwc_btn_reset_search_trade {
+  margin-left: 20px;
+}
+
+/* box with all appellation */
+
+.cfwc_box_list_appellation {
+  background-color: #f2f0ff;
+  padding: 20px 20px 30px 20px;
+  width: auto;
+  min-width: 400px;
+  height: auto;
+  max-height: 400px;
+  box-shadow: 0px 0px 3px 1px rgba(0, 80, 255, 0.4);
+  -webkit-box-shadow: 0px 0px 3px 1px rgba(0, 80, 255, 0.4);
+  border-radius: 3px;
+  margin-top: 10px;
+  position: absolute;
+  overflow-y: scroll;
+  z-index: 9999;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+.cfwc_box_list_appellation::-webkit-scrollbar {
+  width: 0.8rem;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 1);
+}
+.cfwc_box_list_appellation::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+}
+.cfwc_box_list_appellation::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 183, 255, 0.2);
+  outline: 1px solid #fff;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.cfwc_box_option_list_appellation {
+  padding: 15px 20px 15px 20px;
+  border-bottom: 1px solid rgba(0, 80, 255, 0.4);
+}
+
+.cfwc_box_option_list_appellation:hover {
+  color: #f84210;
+  cursor: pointer;
+}
+
+/* ******************************** */
