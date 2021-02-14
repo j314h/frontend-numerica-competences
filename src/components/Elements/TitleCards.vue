@@ -2,7 +2,7 @@
   <div class="box_title_cards">
     <!-- title of cards in content primary -->
     <h3 v-if="!subTitle" class="stxxm-b title_cards" :class="themeColor.titleCard">{{ title }}</h3>
-    <h3 v-if="subTitle" class="stxxm-r title_cards" :class="themeColor.titleCard">{{ title }}</h3>
+    <h3 v-if="subTitle" class="stl-r title_cards" :class="themeColor.titleCard">{{ title }}</h3>
 
     <!-- img for update entity -->
     <div v-if="isImage">

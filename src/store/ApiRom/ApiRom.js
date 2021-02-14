@@ -8,6 +8,12 @@ export default {
     //all appelations of trades in api ROM
     appellations: [],
     competenceOfAppellationSelected: {},
+    //competence savoir of current trade build
+    competenceSavoir: [],
+    newCompetenceSavoir: {
+      typeCompetence: "Savoir",
+      libelle: null,
+    },
   },
   mutations,
   actions,
