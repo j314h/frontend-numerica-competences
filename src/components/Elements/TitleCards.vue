@@ -1,7 +1,8 @@
 <template>
   <div class="box_title_cards">
     <!-- title of cards in content primary -->
-    <h3 class="stxxm-b title_cards" :class="themeColor.titleCard">{{ title }}</h3>
+    <h3 v-if="!subTitle" class="stxxm-b title_cards" :class="themeColor.titleCard">{{ title }}</h3>
+    <h3 v-if="subTitle" class="stxxm-r title_cards" :class="themeColor.titleCard">{{ title }}</h3>
 
     <!-- img for update entity -->
     <div v-if="isImage">
@@ -36,6 +37,10 @@ export default {
     authorization: Array,
     currentUser: Object,
     isUpdateCompany: Boolean,
+    subTitle: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {};

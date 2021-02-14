@@ -1,0 +1,13 @@
+.cws_box_btn_create_new_competence {
+  display: flex;
+}
+.cws_box_btn_create_new_competence svg {
+  margin-right: 20px;
+}
+.cws_box_btn_create_new_competence svg:hover ~ span {
+  color: $orange;
+}
+.cws_box_btn_create_new_competence span:hover {
+  cursor: pointer;
+  color: $orange;
+}
