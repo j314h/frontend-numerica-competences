@@ -21,15 +21,12 @@
           :value="valueSearch"
           v-model="valueSearch"
           v-on:keyup="captureLetter"
-        ></input-label-sample>
-        <button-sample
-          class="cfwc_btn_reset_search_trade"
-          @click="btnReset"
-          :smallBtn="true"
-          :textBtn="'Effacer'"
-          :themeColor="thColor"
-        ></button-sample>
+        >
+        </input-label-sample>
+        <!-- btn reset -->
+        <button-close v-if="valueSearch !== ''" class="cfwc_btn_reset_search" v-on:close="btnReset"></button-close>
       </div>
+      <!-- volet search -->
       <div v-if="search === true" class="cfwc_box_list_appellation">
         <div>
           <option
@@ -248,6 +245,7 @@
 <script>
 //import FileWorkComponent from "./FileWorkComponent";
 import { mapGetters, mapState } from "vuex";
+import ButtonClose from "../../../../Elements/Buttons/ButtonClose.vue";
 import ButtonSample from "../../../../Elements/Buttons/ButtonSample";
 import InputLabelSample from "../../../../Elements/Inputs/InputLabelSample.vue";
 
@@ -257,6 +255,7 @@ export default {
     //FileWorkComponent,
     ButtonSample,
     InputLabelSample,
+    ButtonClose,
   },
   props: {
     isTradeSelected: Boolean,

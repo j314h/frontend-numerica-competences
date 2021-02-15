@@ -69,11 +69,25 @@
       <div v-if="companySelected.name !== undefined">
         <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'SeeCompany' }">
           <!-- name company -->
-          <div class="link_menu onglet" :class="colorMenuActive">
-            <span>{{ upperFirstLetter(companySelected.name) }}</span>
-          </div>
+          <svg
+            class="menu_principal_icon_company"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>{{ upperFirstLetter(companySelected.name) }}</span>
+          <!-- <div class="link_menu onglet" :class="colorMenuActive">
+          </div> -->
           <!-- close company -->
-          <router-link class="link_menu close_entreprise" :class="colorMenuActive" :to="{ name: 'HomeDashbord' }">
+          <router-link class="close_entreprise" :class="colorMenuActive" :to="{ name: 'HomeDashbord' }">
             <button-close v-on:close="outCompanySelected"></button-close>
           </router-link>
         </router-link>
@@ -82,12 +96,56 @@
       <!-- create file work of company selected -->
       <div v-if="currentComponent === 'ListFileWork' || currentComponent === 'CreateFileWork'">
         <!-- link for list work -->
-        <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'ListFileWork' }">
+        <router-link
+          class="link_menu menu_principal_sub stxm-r"
+          :class="colorMenuActive"
+          :to="{ name: 'ListFileWork' }"
+        >
+          <svg
+            class="menu_principal_icon_company"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
           <span class="link_menu_create_file">Liste des métiers</span>
         </router-link>
 
         <!-- create work -->
-        <router-link class="link_menu stxm-r" :class="colorMenuActive" :to="{ name: 'CreateFileWork' }">
+        <router-link
+          class="link_menu menu_principal_sub stxm-r"
+          :class="colorMenuActive"
+          :to="{ name: 'CreateFileWork' }"
+        >
+          <svg
+            class="menu_principal_icon_company"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
           <span class="link_menu_create_file">Créer un métier</span>
         </router-link>
       </div>

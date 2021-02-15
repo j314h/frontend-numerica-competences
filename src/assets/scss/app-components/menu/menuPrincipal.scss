@@ -3,6 +3,16 @@
 }
 .router-link-active svg path {
   fill: #f84210;
+  stroke: #f84210;
+}
+.router-link-active svg line {
+  fill: #f84210;
+  stroke: #f84210;
+}
+.link_menu span {
+}
+.menu_principal_sub {
+  padding-left: 40px;
 }
 .icon_setting:hover path {
   cursor: pointer;
@@ -42,8 +52,12 @@
 .content_menu {
   flex: 4;
 }
+.menu_principal_icon_company {
+  margin-left: 3px;
+}
 .close_entreprise {
   background-color: transparent;
+  margin-left: 50px;
 }
 .onglet {
   margin-right: 10px;

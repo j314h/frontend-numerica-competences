@@ -1,6 +1,11 @@
 .cfwc_box_search_trade {
-  display: flex;
-  align-items: flex-end;
+  max-width: 400px;
+  position: relative;
+}
+.cfwc_box_search_trade .cfwc_btn_reset_search {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
 }
 .cfwc_box_search_trade .cfwc_btn_reset_search_trade {
   margin-left: 20px;
