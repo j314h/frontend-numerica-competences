@@ -10,12 +10,10 @@ export default {
     competenceOfAppellationSelected: {},
     //competence savoir of current trade build
     competenceSavoir: [],
-    newCompetenceSavoir: {
-      typeCompetence: "Savoir",
-      libelle: null,
-    },
     //competence savoir faire of current trade build
     competenceSavoirFaire: [],
+    //competence transverse of current trade build
+    competenceTransverse: [],
   },
   mutations,
   actions,

@@ -36,10 +36,38 @@
           ></create-work-savoir>
 
           <!-- here competence savoir -->
-          <create-work-savoir-faire v-if="isSavoirFaire && !isSavoir"></create-work-savoir-faire>
+          <create-work-savoir-faire
+            v-if="isSavoirFaire && !isSavoir"
+            :isTradeSelected="isTradeSelected"
+            :isSavoir.sync="isSavoir"
+            :isSavoirFaire.sync="isSavoirFaire"
+            :isTransversal.sync="isTransversal"
+          ></create-work-savoir-faire>
+
+          <!-- here competence transverse -->
+          <create-work-transverse
+            v-if="isTransversal && !isSavoirFaire && !isSavoir"
+            :isTradeSelected="isTradeSelected"
+            :isSavoir.sync="isSavoir"
+            :isSavoirFaire.sync="isSavoirFaire"
+            :isTransversal.sync="isTransversal"
+          ></create-work-transverse>
         </transition>
 
-        <create-work-info-competence :isTradeSelected="isTradeSelected"></create-work-info-competence>
+        <!-- here box information of create trade current -->
+        <create-work-info-competence
+          :isTradeSelected="isTradeSelected"
+          :isSavoir.sync="isSavoir"
+          :isSavoirFaire.sync="isSavoirFaire"
+          :isTransversal.sync="isTransversal"
+        ></create-work-info-competence>
+        <button-app
+          class="cfw_btn_finish_trade"
+          v-if="isTradeSelected && isTransversal"
+          :mini="true"
+          :textBtn="'Terminer la fiche'"
+          :themeColor="thColor"
+        ></button-app>
       </div>
     </div>
   </div>
@@ -48,10 +76,12 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 import TitleCards from "../../../Elements/TitleCards.vue";
+import ButtonApp from "../../../Elements/Buttons/ButtonApp";
 import CreateFileWorkComponent from "./CreateFileWorkComponents/CreateFileWorkComponent";
 import CreateWorkInfoCompetence from "./CreateFileWorkComponents/CreateWorkInfoCompetence.vue";
 import CreateWorkSavoir from "./CreateFileWorkComponents/CreateWorkSavoir.vue";
 import CreateWorkSavoirFaire from "./CreateFileWorkComponents/CreateWorkSavoirFaire.vue";
+import CreateWorkTransverse from "./CreateFileWorkComponents/CreateWorkTransverse.vue";
 
 export default {
   name: "CreateFileWork",
@@ -61,6 +91,8 @@ export default {
     CreateWorkSavoir,
     CreateWorkSavoirFaire,
     CreateWorkInfoCompetence,
+    CreateWorkTransverse,
+    ButtonApp,
   },
   data() {
     return {
@@ -70,6 +102,8 @@ export default {
       isSavoir: true,
       //see competence savoir faire
       isSavoirFaire: false,
+      //see transversal
+      isTransversal: false,
     };
   },
   created() {
