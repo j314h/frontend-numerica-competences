@@ -1,0 +1,36 @@
+.cwic_box_info_create_trade_competence {
+  position: fixed;
+  right: 70px;
+  width: 450px;
+  height: 300px;
+  overflow-y: scroll;
+  padding: 5px 20px 20px 20px;
+  box-shadow: 2px 2px 5px 1px #2f2f2f;
+  -moz-box-shadow: 2px 2px 5px 1px #2f2f2f;
+  -webkit-box-shadow: 2px 2px 5px 1px #2f2f2f;
+  -o-box-shadow: 2px 2px 5px 1px #2f2f2f;
+}
+.cwic_box_info_create_trade_competence::-webkit-scrollbar {
+  width: 0.8rem;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 1);
+}
+.cwic_box_info_create_trade_competence::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+}
+.cwic_box_info_create_trade_competence::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 183, 255, 0.2);
+  outline: 1px solid #fff;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.cwic_box_info_create_trade_competence p {
+  margin: 15px 0;
+}
+.cwic_box_info_create_trade_competence div {
+  margin-bottom: 5px;
+}

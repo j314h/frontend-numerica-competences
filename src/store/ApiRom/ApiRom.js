@@ -14,6 +14,8 @@ export default {
       typeCompetence: "Savoir",
       libelle: null,
     },
+    //competence savoir faire of current trade build
+    competenceSavoirFaire: [],
   },
   mutations,
   actions,

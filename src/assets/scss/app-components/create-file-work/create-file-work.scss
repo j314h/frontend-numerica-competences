@@ -5,3 +5,13 @@
   display: block;
   margin: 0 0 20px 0;
 }
+.cwf_box_create_trade_competence {
+  display: flex;
+  justify-content: space-between;
+}
+.cwf_box_create_trade_competence:nth-child(1) {
+  flex: 4;
+}
+.cwf_box_create_trade_competence:nth-child(2) {
+  flex: 1;
+}

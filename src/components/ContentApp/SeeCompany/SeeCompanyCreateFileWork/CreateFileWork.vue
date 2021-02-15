@@ -20,22 +20,27 @@
 
       <!-- trade selected -->
       <div v-else>
-        <title-cards :title="'Création de la fiche métier :'" :themeColor="thColor"></title-cards>
+        <title-cards :title="'Création de la fiche métier'" :themeColor="thColor"></title-cards>
       </div>
 
-      <!-- create file work with choice competence "savoir, savoir etre, transversal" -->
-      <transition appear name="fade" mode="out-in">
-        <!-- here competence savoir -->
-        <create-work-savoir
-          v-if="isTradeSelected && isSavoir && !isSavoirFaire"
-          :isTradeSelected="isTradeSelected"
-          :isSavoir.sync="isSavoir"
-          :isSavoirFaire.sync="isSavoirFaire"
-        ></create-work-savoir>
+      <!-- box for create trade competence -->
+      <div class="cwf_box_create_trade_competence">
+        <!-- create file work with choice competence "savoir, savoir etre, transversal" -->
+        <transition appear name="fade" mode="out-in">
+          <!-- here competence savoir -->
+          <create-work-savoir
+            v-if="isTradeSelected && isSavoir && !isSavoirFaire"
+            :isTradeSelected="isTradeSelected"
+            :isSavoir.sync="isSavoir"
+            :isSavoirFaire.sync="isSavoirFaire"
+          ></create-work-savoir>
 
-        <!-- here competence savoir -->
-        <create-work-savoir-faire v-if="isSavoirFaire && !isSavoir"></create-work-savoir-faire>
-      </transition>
+          <!-- here competence savoir -->
+          <create-work-savoir-faire v-if="isSavoirFaire && !isSavoir"></create-work-savoir-faire>
+        </transition>
+
+        <create-work-info-competence :isTradeSelected="isTradeSelected"></create-work-info-competence>
+      </div>
     </div>
   </div>
 </template>
@@ -44,6 +49,7 @@
 import { mapGetters, mapState } from "vuex";
 import TitleCards from "../../../Elements/TitleCards.vue";
 import CreateFileWorkComponent from "./CreateFileWorkComponents/CreateFileWorkComponent";
+import CreateWorkInfoCompetence from "./CreateFileWorkComponents/CreateWorkInfoCompetence.vue";
 import CreateWorkSavoir from "./CreateFileWorkComponents/CreateWorkSavoir.vue";
 import CreateWorkSavoirFaire from "./CreateFileWorkComponents/CreateWorkSavoirFaire.vue";
 
@@ -54,6 +60,7 @@ export default {
     CreateFileWorkComponent,
     CreateWorkSavoir,
     CreateWorkSavoirFaire,
+    CreateWorkInfoCompetence,
   },
   data() {
     return {
@@ -73,7 +80,7 @@ export default {
     ...mapGetters("CurrentUser", ["thColor"]),
 
     //recover appellation selection from user
-    ...mapState("ApiRom", ["competenceOfAppellationSelected"]),
+    ...mapState("ApiRom", ["competenceOfAppellationSelected", "competenceSavoir"]),
   },
 };
 </script>

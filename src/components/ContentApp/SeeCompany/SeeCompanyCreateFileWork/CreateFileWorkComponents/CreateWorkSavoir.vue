@@ -165,19 +165,19 @@ export default {
   methods: {
     //for see new input for add competence
     seeInputCompetenceSavoir() {
-      this.$emit("update:addSavoir", !this.addSavoir);
+      this.addSavoir = !this.addSavoir;
     },
 
     //for hidd new input
     hiddInputCompetenceSavoir() {
-      this.$emit("update:addSavoir", !this.addSavoir);
+      this.addSavoir = !this.addSavoir;
     },
 
     //add competences in newCompetence
     addCompetenceSavoir() {
       if (this.newCompetenceSavoir.libelle != null) {
         this.competenceBasic = this.newCompetenceSavoir;
-        this.$emit("update:addSavoir", !this.addSavoir);
+        this.addSavoir = !this.addSavoir;
       }
       this.newCompetenceSavoir = {
         typeCompetence: "Savoir",
