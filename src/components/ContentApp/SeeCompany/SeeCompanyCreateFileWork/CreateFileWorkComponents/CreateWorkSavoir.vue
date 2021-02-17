@@ -93,11 +93,6 @@
           >
         </div>
       </div>
-
-      <!-- btn validate competence savoir -->
-      <div class="cws_btn_validate_competence_savoir">
-        <button-app :mini="true" :textBtn="'Validez'" :themeColor="thColor"></button-app>
-      </div>
     </form>
   </div>
 </template>
@@ -177,13 +172,6 @@ export default {
         typeCompetence: "Savoir",
         libelle: null,
       };
-    },
-
-    //valider there competences savoir
-    competenceSavoirValidate() {
-      //change value for go in competence savoir faire
-      this.$emit("update:isSavoirFaire", !this.isSavoirFaire);
-      this.$emit("update:isSavoir", !this.isSavoir);
     },
   },
 };

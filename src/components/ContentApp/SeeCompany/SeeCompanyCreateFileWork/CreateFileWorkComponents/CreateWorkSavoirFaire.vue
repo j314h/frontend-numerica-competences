@@ -97,27 +97,6 @@
           >
         </div>
       </div>
-
-      <!-- btn validate competence savoir -->
-      <div class="cwsf_btn_validate_competence_savoir">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          @click="backCompetenceSavoir"
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#f84210"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <polyline points="12 8 8 12 12 16"></polyline>
-          <line x1="16" y1="12" x2="8" y2="12"></line>
-        </svg>
-        <button-app :mini="true" :textBtn="'Validez'" :themeColor="thColor"></button-app>
-      </div>
     </form>
   </div>
 </template>
@@ -197,21 +176,6 @@ export default {
         typeCompetence: "SavoirFaire",
         libelle: null,
       };
-    },
-
-    //valider there competences savoir
-    competenceSavoirFaireValidate() {
-      //change value for go in competence savoir faire
-      this.$emit("update:isSavoirFaire", false);
-      this.$emit("update:isSavoir", false);
-      this.$emit("update:isTransversal", true);
-    },
-
-    //back in competences savoir
-    backCompetenceSavoir() {
-      this.$emit("update:isSavoirFaire", false);
-      this.$emit("update:isTransversal", false);
-      this.$emit("update:isSavoir", true);
     },
   },
 };

@@ -9,14 +9,26 @@ export default {
     state.competenceOfAppellationSelected = competence;
   },
 
+  //change name of file work current
+  changeNameOfTradeCurrent(state, name) {
+    state.nameTrade = name;
+  },
+
   //add competence savoir selected of current user
   selectedCompetenceSavoir(state, competence) {
-    state.competenceSavoir = competence;
+    competence === false ? (state.competenceSavoir = []) : (state.competenceSavoir = competence);
   },
 
   //add competence savoir faire selected of current user
   selectedCompetenceSavoirFaire(state, competence) {
-    state.competenceSavoirFaire = competence;
+    competence === false ? (state.competenceSavoirFaire = []) : (state.competenceSavoirFaire = competence);
+  },
+
+  //add competence transverse selected of current user
+  selectedCompetenceTransverse(state, competence) {
+    competence === false
+      ? (state.competenceTransverseSelected = [])
+      : (state.competenceTransverseSelected = competence);
   },
 
   //add new competences in competence of basic in competenceOfAppellationSelected
@@ -24,7 +36,7 @@ export default {
     state.competenceOfAppellationSelected.competencesDeBase.push(newCompetence);
   },
 
-  //add new competences in competence of basic in competenceOfAppellationSelected
+  //add new competences transver in competence of basic in competenceOfAppellationSelected
   addNewCompetenceTransverse(state, newCompetence) {
     const obj = { competences: [newCompetence] };
     state.competenceOfAppellationSelected.groupesCompetencesSpecifiques.push(obj);

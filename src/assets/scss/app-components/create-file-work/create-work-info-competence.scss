@@ -1,17 +1,13 @@
 .cwic_box_info_create_trade_competence {
-  position: fixed;
   right: 70px;
-  width: 400px;
-  height: 300px;
+  // width: 400px;
+  height: 250px;
   overflow-y: scroll;
   padding: 5px 20px 20px 20px;
-  box-shadow: 2px 2px 7px 0px #7a7a7a;
-  -moz-box-shadow: 2px 2px 7px 0px #7a7a7a;
-  -webkit-box-shadow: 2px 2px 7px 0px #7a7a7a;
-  -o-box-shadow: 2px 2px 7px 0px #7a7a7a;
+  border: 1px solid #4b39e949;
 }
 .cwic_box_info_create_trade_competence::-webkit-scrollbar {
-  width: 0.8rem;
+  width: 0.5rem;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 1);
 }
@@ -21,7 +17,7 @@
 }
 .cwic_box_info_create_trade_competence::-webkit-scrollbar-thumb {
   background-color: rgba(0, 183, 255, 0.2);
-  outline: 1px solid #fff;
+  outline: 1px solid #4b39e949;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -34,14 +30,19 @@
 .cwic_box_info_create_trade_competence div {
   margin-bottom: 5px;
 }
+
+.cwic_box_competence {
+  border-bottom: 1px solid #4c39e9;
+  padding: 10px 0;
+}
+.cwic_competence {
+  padding: 2px 10px;
+}
+
 .cwic_btn_go {
   display: flex;
   align-items: center;
 }
 .cwic_btn_go svg {
-  margin-left: 10px;
-}
-.cwic_btn_go:hover {
-  color: #f84210;
-  cursor: pointer;
+  margin-left: 2px;
 }
