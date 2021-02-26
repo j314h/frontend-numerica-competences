@@ -5,6 +5,7 @@ import getters from "./RolesGetters";
 export default {
   namespaced: true,
   state: {
+    //all roles of user
     roles: [],
   },
   actions,
