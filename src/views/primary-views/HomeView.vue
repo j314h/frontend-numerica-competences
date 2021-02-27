@@ -1,10 +1,10 @@
 <template>
-  <div class="box_home">
-    <!-- preloader juste for load connect user-->
-    <RingLoader v-if="isLoading" :loading="isLoading" :color="'#F84210'" :color2="'#4C39E9'" :size="'100px'" />
+  <!-- preloader -->
+  <RingLoader v-if="isLoading" :loading="isLoading" :color="'#F84210'" :color2="'#4C39E9'" :size="'100px'" />
 
+  <div v-else class="box_home">
     <!-- component home for page connection user -->
-    <Home v-else />
+    <Home />
   </div>
 </template>
 

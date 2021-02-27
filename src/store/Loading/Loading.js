@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     //for loading activate page
-    isLoading: false,
+    isLoading: true,
   },
   //actions,
   mutations,

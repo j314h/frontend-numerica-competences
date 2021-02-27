@@ -26,10 +26,8 @@ const routes = [
 
     beforeEnter: async (to, from, next) => {
       //check if cookie for variable isSignIn and check if img is load or not
-      store.commit("CurrentUser/checkedJwt", VueCookies.isKey("jwt"));
-      //!localStorage.getItem("imgs") ? await store.dispatch("Files/getFiles") : null;
-
       //if cookie token not exist not next
+      store.commit("CurrentUser/checkedJwt", VueCookies.isKey("jwt"));
       store.getters["CurrentUser/isSignIn"] ? next("/dashbord-page") : next();
     },
   },
@@ -47,17 +45,6 @@ const routes = [
         redirect: { name: "DashHome" },
         components: {
           HomeDashbord,
-        },
-        //recover state and companies admin, referent recover in dispatch getAllCompaniesAdmin
-        beforeEnter: async (to, from, next) => {
-          await store.dispatch("States/getAllState");
-          await store.dispatch("Companies/getAllCompaniesAdmin");
-          //if company selected is define reload info company selected and users of company selected
-          if (store.getters["Companies/idCompaniesSelected"]) {
-            await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-            await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-          }
-          next();
         },
         children: [
           {

@@ -8,6 +8,7 @@ export default {
   async getAllCompaniesAdmin(context) {
     try {
       //reset error
+
       store.commit("Error/resetError");
 
       //call api for get comapnies of user connected
@@ -16,6 +17,7 @@ export default {
       //add companies of user connected
       context.commit("addAllCompaniesUserConnected", data.data.companies);
       store.commit("Employees/addEmployeesReferentCompaniesAdmin", data.data.tabReferent);
+      console.log("salut");
     } catch (error) {
       store.commit("Error/addError", error);
     }

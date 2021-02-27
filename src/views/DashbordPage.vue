@@ -1,6 +1,9 @@
 <template>
+  <!-- loading a wait data of img api -->
+  <RingLoader v-if="isLoading" :loading="isLoading" :color="'#F84210'" :color2="'#4C39E9'" :size="'100px'" />
+
   <!-- page app -->
-  <div class="box_dashbord">
+  <div v-else class="box_dashbord">
     <!-- menu -->
     <the-menu class="menu_principal"></the-menu>
 
@@ -15,14 +18,13 @@
         <transition appear name="fade" mode="out-in">
           <!-- view home for dashbord -->
           <router-view name="HomeDashbord"></router-view>
+
           <!-- view for setting app -->
           <router-view name="Setting"></router-view>
+
           <!-- views see company -->
           <router-view name="SeeCompany"></router-view>
         </transition>
-
-        <!-- preloader for all app, each load-->
-        <ring-loader :loading="isLoading" :color="'#F84210'" :color2="'#4C39E9'" :size="'100px'"></ring-loader>
       </div>
     </div>
   </div>
@@ -50,6 +52,20 @@ export default {
     },
   },
   methods: {},
+  async created() {
+    //load img of app
+    this.$store.commit("Loading/stateLoading", true);
+    //load data for dashbord
+    await this.$store.dispatch("Files/getFiles");
+    await this.$store.dispatch("States/getAllState");
+    await this.$store.dispatch("Companies/getAllCompaniesAdmin");
+    //if company selected is define reload info company selected and users of company selected
+    if (this.$store.getters["Companies/idCompaniesSelected"]) {
+      await this.$store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+      await this.$store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+    }
+    this.$store.commit("Loading/stateLoading", false);
+  },
 };
 </script>
 

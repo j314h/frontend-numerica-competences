@@ -6,6 +6,7 @@ export default {
   async getAllState(context) {
     try {
       //reset error and call api for recover all state
+
       store.commit("Error/resetError");
       const states = await Vue.prototype.$http.get(`${process.env.VUE_APP_URL_API_NUMERICA_COMPETENCE}states`);
 

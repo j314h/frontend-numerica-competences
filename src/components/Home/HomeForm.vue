@@ -68,7 +68,7 @@ export default {
     //connexion user
     connexionUser() {
       this.$store.dispatch("CurrentUser/signIn", this.data);
-      resetInput();
+      this.resetInput();
     },
 
     //reset input
