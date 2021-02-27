@@ -1,4 +1,4 @@
-.box_form {
+.home_form_box {
   max-width: 300px;
   margin: auto;
   background-color: #ffffff;
@@ -6,7 +6,7 @@
   border-radius: 10px;
 }
 
-.box_img {
+.home_form_img {
   text-align: center;
   margin-bottom: 40px;
 }
@@ -16,43 +16,47 @@
   height: 70px;
 }
 
-.box_input {
+.home_form_box_input {
   text-align: center;
 }
-
-.box_input :nth-child(1) {
+.home_form_box_input :nth-child(1) {
   width: 100%;
 }
-
-.box_input :nth-child(2) {
+.home_form_box_input :nth-child(2) {
   width: 100%;
   margin-top: 20px;
 }
 
-.password_forget {
+.home_form_box_password_forget {
   text-align: right;
   padding: 10px 0;
 }
-
-.ctblue:hover {
+.home_form_link_password_forget {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.home_form_link_password_forget:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.error_box {
+.home_form_box_error {
   text-align: center;
   margin: 5px 0 20px 0;
 }
 
-.btn_connexion {
+.hom_form_btn_connexion {
   display: flex;
   justify-content: center;
 }
 
 /** mobile */
 @media screen and (max-width: 700px) {
-  .box_form {
+  .home_form_box {
     max-width: 280px;
     padding: 20px 30px 30px 30px;
+  }
+  .home_form {
+    margin: 30px 0;
   }
 }

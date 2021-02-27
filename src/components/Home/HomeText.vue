@@ -1,19 +1,23 @@
 <template>
-  <div class="ctwhite">
+  <div class="home_text">
     <!-- slogan -->
-    <div class="stxm-b upper slogan">
+    <div class="home_text_slogan upper">
       <p>Pôle numérique</p>
       <p>de Bourgogne Franche-Comté</p>
     </div>
+
     <!-- title -->
-    <h1 class="stxxl-b title_home_text">Numerica compétences</h1>
+    <div class="home_text_title">
+      <H1Component :text="'Numerica compétences'" />
+    </div>
+
     <!-- intro -->
-    <div class="box_intro_home stl-r">
-      <p class="t-intro">
+    <div class="home_text_intro stl-r">
+      <p>
         Numerica a conçu un module spécifique pour accompagner votre entreprise dans l’évaluation de ses collaborateurs
         et dans sa stratégie d’évolution des carrières.
       </p>
-      <p class="t-intro">
+      <p>
         Ainsi, vous pouvez identifier instantanément les besoins en formation de vos employés.
       </p>
     </div>
@@ -21,11 +25,13 @@
 </template>
 
 <script>
+//components
+import H1Component from "../../components-globals/Titles/H1Component";
+
 export default {
   name: "HomeText",
+  components: {
+    H1Component,
+  },
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../../assets/scss/app-components/home/homeText.scss";
-</style>

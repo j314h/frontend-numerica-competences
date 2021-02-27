@@ -1,0 +1,28 @@
+/* Globals */
+@import "./style/var/root.scss";
+@import "./style/text/index-text.scss";
+@import "./style/color/index-color.scss";
+@import "./style/background/bg-image.scss";
+@import "./style/globals-rules.scss";
+
+/* Effect transition */
+@import "./style/transition.scss";
+
+/* Components */
+@import "./app-components/index-app-components.scss";
+//home
+@import "./components/home/home.scss";
+@import "./components/home/home-form.scss";
+@import "./components/home/home-text.scss";
+
+//footer
+@import "./components/footer/footer.scss";
+@import "./components/footer/footer-menu.scss";
+
+/* Components globals */
+@import "./component/index-components.scss";
+//titles
+@import "./components-globals/titles/h1-component.scss";
+
+//img
+@import "./components-globals/imgs/img-sample.scss";

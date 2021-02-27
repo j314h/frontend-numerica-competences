@@ -40,5 +40,5 @@ export default {
 
 <style lang="scss">
 //load css globals app no scoped
-@import "./assets/scss/globals.scss";
+@import "./assets/scss/styles.scss";
 </style>

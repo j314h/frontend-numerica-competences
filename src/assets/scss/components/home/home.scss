@@ -5,7 +5,7 @@
   flex-direction: column;
 }
 
-.box_content {
+.home_box_content {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,18 +14,15 @@
   background: linear-gradient(287.2deg, #8937db 29.09%, #4c39e9 63.29%);
 }
 
-.partial_flex_1 {
+.home_partial_component {
   flex: 1;
 }
 
 /** mobile */
 @media screen and (max-width: 700px) {
-  .box_content {
+  .home_box_content {
     flex-direction: column;
     padding: 30px 10px;
     justify-content: center;
-  }
-  .form {
-    margin: 30px 0;
   }
 }

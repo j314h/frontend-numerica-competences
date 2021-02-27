@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView";
+import HomeView from "../views/primary-views/HomeView";
 import DashbordPage from "../views/DashbordPage";
 import HomeDashbord from "../components/ContentApp/HomeDashbord/HomeDashbord.vue";
 import DashHome from "../components/ContentApp/HomeDashbord/DashHome/DashHome.vue";
@@ -27,7 +27,7 @@ const routes = [
     beforeEnter: async (to, from, next) => {
       //check if cookie for variable isSignIn and check if img is load or not
       store.commit("CurrentUser/checkedJwt", VueCookies.isKey("jwt"));
-      !localStorage.getItem("imgs") ? await store.dispatch("Files/getFiles") : null;
+      //!localStorage.getItem("imgs") ? await store.dispatch("Files/getFiles") : null;
 
       //if cookie token not exist not next
       store.getters["CurrentUser/isSignIn"] ? next("/dashbord-page") : next();
