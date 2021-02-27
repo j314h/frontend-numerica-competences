@@ -43,6 +43,7 @@ export default {
     }
   },
 
+  //update company selected
   async updateCompanySelected(context, companyData) {
     try {
       //see page loading and reset error

@@ -19,13 +19,16 @@
       </svg>
       <p>Retour sélection des compétences</p>
     </div>
-    <title-cards :title="'Votre fiche métier'" :themeColor="thColor"></title-cards>
+    <TitleCards :title="'Votre fiche métier'" :themeColor="thColor" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+
+//components
 import TitleCards from "../../../../Elements/TitleCards.vue";
+
 export default {
   name: "FinishFileWork",
   components: {
@@ -45,5 +48,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
