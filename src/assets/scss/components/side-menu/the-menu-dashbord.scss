@@ -1,0 +1,13 @@
+.the_menu_dashbord_box a {
+  display: flex;
+  align-items: center;
+  padding: 15px 10px;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.the_menu_dashbord_box a:hover {
+  color: $orange;
+}
+.the_menu_dashbord_box a span {
+  margin-left: 10px;
+}

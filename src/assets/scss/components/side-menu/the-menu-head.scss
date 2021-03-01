@@ -1,0 +1,26 @@
+.the_menu_head_box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 15px;
+}
+.the_menu_head_name_user {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.the_menu_head_img_setting {
+  display: flex;
+  height: 18px;
+}
+.the_menu_head_img_setting :only-child:hover {
+  cursor: pointer;
+}
+.the_menu_head_img_setting button {
+  background-color: transparent;
+  border: transparent;
+}
+.the_menu_head_img_setting div {
+  display: flex;
+  height: 18px;
+}
