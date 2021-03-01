@@ -10,7 +10,23 @@
 @import "./views/dashbord-page.scss";
 
 /* Components */
-@import "./app-components/index-app-components.scss";
+@import "./components/create-company/create-company.scss";
+@import "./components/array-search/array-search.scss";
+@import "./components/company-selected/company-selected-info.scss";
+@import "./components/company-selected/company-selected-info-update.scss";
+@import "./components/company-selected/list-file-work.scss";
+@import "./components/setting/setting-user-info-detail.scss";
+@import "./components/setting/setting-user-info-detail-update.scss";
+@import "./components/setting/setting-user-info.scss";
+@import "./components/setting/setting.scss";
+@import "./components/setting/setting-img.scss";
+@import "./components/create-file-work/create-file-work.scss";
+@import "./components/create-file-work/create-work-savoir.scss";
+@import "./components/create-file-work/create-work-savoir-faire.scss";
+@import "./components/create-file-work/create-file-work-component.scss";
+@import "./components/create-file-work/create-work-info-competence.scss";
+@import "./components/create-file-work/finish-file-work.scss";
+@import "./components/competence-menu/menu-create-file-work.scss";
 //home
 @import "./components/home/home.scss";
 @import "./components/home/home-form.scss";
@@ -37,7 +53,6 @@
 @import "./components/footer/footer-menu.scss";
 
 /* Components globals */
-@import "./component/index-components.scss";
 //titles
 @import "./components-globals/titles/h1-component.scss";
 
@@ -55,3 +70,14 @@
 
 //link
 @import "./components-globals/link/router-link.scss";
+
+@import "./components-globals/input/index-input.scss";
+
+@import "./components-globals/error/error-basic.scss";
+
+@import "./components-globals/button/index-button.scss";
+
+@import "./components-globals/text/text-info-form.scss";
+@import "./components-globals/titles/title-cards.scss";
+
+@import "./components-globals/array/index-array.scss";
