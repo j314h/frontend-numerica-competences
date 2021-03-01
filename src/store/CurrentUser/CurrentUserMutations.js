@@ -5,6 +5,10 @@ export default {
     state.isSignIn = true;
   },
 
+  addIsSingIn(sate, value) {
+    sate.isSignIn = value;
+  },
+
   //check exist token
   checkedJwt(state, cookie) {
     state.isSignIn = cookie;

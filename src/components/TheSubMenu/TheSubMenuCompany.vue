@@ -1,5 +1,5 @@
 <template>
-  <div class="sub_menu">
+  <div>
     <div class="sub">
       <router-link class="link_sub_menu " :to="{ name: 'SeeCompanyHome' }">Accueil</router-link>
     </div>

@@ -1,9 +1,6 @@
 <template>
-  <!-- loading a wait data of img api -->
-  <RingLoader v-if="isLoading" :loading="isLoading" :color="'#F84210'" :color2="'#4C39E9'" :size="'100px'" />
-
   <!-- page app -->
-  <div v-else class="dashbord_box">
+  <div class="dashbord_box">
     <!-- menu -->
     <TheMenu />
 
@@ -15,7 +12,7 @@
 
       <!-- content text assigns background and text color according to dark mode-->
       <div class="dashbord_content" :class="bgContent + ' ' + colorText">
-        <transition appear name="fade" mode="out-in">
+        <transition v-if="!loading" appear name="fade" mode="out-in">
           <!-- view home for dashbord -->
           <router-view name="HomeDashbord"></router-view>
 
@@ -25,6 +22,7 @@
           <!-- views see company -->
           <router-view name="SeeCompany"></router-view>
         </transition>
+        <RingLoader :loading="isLoading" :color="'#F84210'" :color2="'#4C39E9'" :size="'100px'" />
       </div>
     </div>
   </div>
@@ -36,12 +34,17 @@ import { mapGetters } from "vuex";
 //components
 import TheHeadband from "../../components/TheHeadband/TheHeadband";
 import TheMenu from "../../components/TheMenu/TheMenu";
-import RingLoader from "../../components/PreLoader/RingLoader";
+import RingLoader from "../../components-globals/PreLoader/RingLoader";
 import TheSubMenu from "../../components/TheSubMenu/TheSubMenu";
 
 export default {
-  components: { TheMenu, TheHeadband, RingLoader, TheSubMenu },
+  components: { TheMenu, TheHeadband, TheSubMenu, RingLoader },
   name: "DashbordPage",
+  data() {
+    return {
+      loading: true,
+    };
+  },
   computed: {
     //recover current user
     ...mapGetters("CurrentUser", ["bgContent", "colorText"]),
@@ -65,6 +68,7 @@ export default {
         this.$store.getters["Companies/idCompaniesSelected"]
       );
     }
+    this.loading = false;
   },
 };
 </script>

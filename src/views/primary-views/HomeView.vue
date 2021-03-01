@@ -1,10 +1,7 @@
 <template>
-  <!-- preloader -->
-  <RingLoader v-if="isLoading" :loading="isLoading" :color="'#F84210'" :color2="'#4C39E9'" :size="'100px'" />
-
-  <div v-else class="box_home">
+  <div class="box_home">
     <!-- component home for page connection user -->
-    <Home />
+    <Home v-if="!loading" />
   </div>
 </template>
 
@@ -13,18 +10,19 @@ import { mapGetters } from "vuex";
 
 //components
 import Home from "../../components/Home/Home";
-import RingLoader from "../../components/PreLoader/RingLoader";
 
 export default {
   name: "HomeView",
-  components: { Home, RingLoader },
-  computed: {
-    //true or false loading
-    ...mapGetters("Loading", ["isLoading"]),
+  components: { Home },
+  data() {
+    return {
+      loading: true,
+    };
   },
-  created() {
+  async beforeCreate() {
     //load img of app
-    this.$store.dispatch("Files/getFiles");
+    await this.$store.dispatch("Files/getFiles");
+    this.loading = false;
   },
 };
 </script>

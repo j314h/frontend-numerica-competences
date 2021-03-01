@@ -43,7 +43,8 @@ export default {
   async verificationUserConnect(context) {
     try {
       //see page loading and reset error
-      //store.commit("Loading/stateLoading", true);
+      // store.commit("Loading/stateLoading", true);
+      // context.commit("addIsSingIn", true);
       store.commit("Error/resetError");
 
       //call api for verification and call api for company of current user

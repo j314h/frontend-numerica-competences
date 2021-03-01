@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     //imgs of this app
-    imgs: [],
+    imgs: null,
   },
   actions,
   mutations,

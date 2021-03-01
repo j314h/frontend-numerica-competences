@@ -2,10 +2,13 @@
   <div class="sub_menu_box" :class="bgSubMenu">
     <transition name="fade" mode="out-in">
       <!-- sub menu for dashbord -->
-      <TheSubMenuDashbord v-if="titleHeadBand === 'Tableau de bord'" />
-
+      <div class="sub_menu" v-if="titleHeadBand === 'Tableau de bord'">
+        <TheSubMenuDashbord />
+      </div>
       <!-- sub menu for company -->
-      <TheSubMenuCompany v-if="titleHeadBand === companySelected.name" />
+      <div class="sub_menu" v-if="titleHeadBand === companySelected.name">
+        <TheSubMenuCompany />
+      </div>
     </transition>
   </div>
 </template>

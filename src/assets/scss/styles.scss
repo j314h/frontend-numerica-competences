@@ -23,6 +23,9 @@
 @import "./components/side-menu/the-menu-dashbord.scss";
 @import "./components/side-menu/the-menu-footer.scss";
 
+//transition
+@import "./components-globals/transition/transition.scss";
+
 //sub menu
 @import "./components/sub-menu/sub-menu-all.scss";
 
@@ -49,9 +52,6 @@
 
 //menu sandwich
 @import "./components-globals/menu-sandwich/menu-sandwich.scss";
-
-//Effect transition
-@import "./components-globals/transition/transition.scss";
 
 //link
 @import "./components-globals/link/router-link.scss";

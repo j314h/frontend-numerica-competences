@@ -44,7 +44,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-import ErrorBasic from "../components/Elements/ErrorBasic.vue";
+
+//components
+import ErrorBasic from "../../components/Elements/ErrorBasic.vue";
 
 export default {
   components: { ErrorBasic },

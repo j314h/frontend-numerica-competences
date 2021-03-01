@@ -8,11 +8,11 @@ import store from "../store";
 import VueCookies from "vue-cookies";
 const Setting = () => import("../components/ContentApp/Setting/Setting.vue");
 const CreateCompany = () => import("../components/ContentApp/HomeDashbord/CreateCompany/CreateCompany.vue");
-const SeeCompany = () => import("../views/SeeCompany.vue");
+const SeeCompany = () => import("../views/company-views/SeeCompany.vue");
 const SeeCompanyCreateUser = () => import("../components/ContentApp/SeeCompany/SeeCompanyCreateUser.vue");
 const SeeCompanyHome = () => import("../components/ContentApp/SeeCompany/SeeCompanyHome/SeeCompanyHome.vue");
-const SeeCompanyCreateFileWork = () => import("../views/SeeCompanyCreateFileWork.vue");
-const HomeValidateAccount = () => import("../views/HomeValidateAccount.vue");
+const SeeCompanyCreateFileWork = () => import("../views/company-views/SeeCompanyCreateFileWork.vue");
+const HomeValidateAccount = () => import("../views/primary-views/HomeValidateAccount.vue");
 
 Vue.use(VueRouter);
 
@@ -77,10 +77,12 @@ const routes = [
           store.commit("ParamApp/seeSubMenu", false);
           store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
           //if company selected is define reload info company selected and users of company selected
-          if (store.getters["Companies/idCompaniesSelected"]) {
-            await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-            await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-          }
+          // if (store.getters["Companies/idCompaniesSelected"]) {
+          //   await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          //   await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          //   console.log(store.getters["ParamApp/titleHeadBand"]);
+          // }
+
           next();
         },
       },

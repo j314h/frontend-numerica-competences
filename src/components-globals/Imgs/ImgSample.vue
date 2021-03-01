@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="src !== 'undefined'">
     <img :src="`${urlApiImg}${src}`" />
   </div>
 </template>
