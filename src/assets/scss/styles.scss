@@ -1,0 +1,57 @@
+/* Globals */
+@import "./style/var/root.scss";
+@import "./style/text/index-text.scss";
+@import "./style/color/index-color.scss";
+@import "./style/background/bg-image.scss";
+@import "./globals-rules.scss";
+
+/* views */
+@import "./views/home-view.scss";
+@import "./views/dashbord-page.scss";
+
+/* Components */
+@import "./app-components/index-app-components.scss";
+//home
+@import "./components/home/home.scss";
+@import "./components/home/home-form.scss";
+@import "./components/home/home-text.scss";
+
+//menu
+@import "./components/side-menu/the-menu.scss";
+@import "./components/side-menu/the-menu-head.scss";
+@import "./components/side-menu/the-menu-content.scss";
+@import "./components/side-menu/the-menu-dashbord.scss";
+@import "./components/side-menu/the-menu-footer.scss";
+
+//transition
+@import "./components-globals/transition/transition.scss";
+
+//sub menu
+@import "./components/sub-menu/sub-menu-all.scss";
+
+//head band
+@import "./components/head-band/head-band.scss";
+
+//footer
+@import "./components/footer/footer.scss";
+@import "./components/footer/footer-menu.scss";
+
+/* Components globals */
+@import "./component/index-components.scss";
+//titles
+@import "./components-globals/titles/h1-component.scss";
+
+//img
+@import "./components-globals/imgs/img-sample.scss";
+@import "./components-globals/imgs/img-setting.scss";
+@import "./components-globals/imgs/img-disconnect.scss";
+@import "./components-globals/imgs/img-company.scss";
+@import "./components-globals/imgs/img-create-work.scss";
+@import "./components-globals/imgs/img-dashbord.scss";
+@import "./components-globals/imgs/img-list-work.scss";
+
+//menu sandwich
+@import "./components-globals/menu-sandwich/menu-sandwich.scss";
+
+//link
+@import "./components-globals/link/router-link.scss";

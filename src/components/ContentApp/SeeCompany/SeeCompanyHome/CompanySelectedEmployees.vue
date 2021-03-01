@@ -74,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="item_line">
+    <div v-else class="item_line line">
       <div>
         <p>Aucun salarié</p>
       </div>

@@ -1,31 +1,13 @@
 <template>
-  <div class="sub_menu stxm-r" :class="bgSubMenu">
+  <div class="sub_menu_box" :class="bgSubMenu">
     <transition name="fade" mode="out-in">
       <!-- sub menu for dashbord -->
-      <div v-if="titleHeadBand === 'Tableau de bord'" class="sub_menu_dashbord">
-        <div class="sub">
-          <router-link class="link_sub_menu ctorange" :to="{ name: 'DashHome' }">Accueil</router-link>
-        </div>
-        <div class="sub">
-          <router-link class="link_sub_menu ctorange" :to="{ name: 'CreateCompany' }">Créer une entreprise</router-link>
-        </div>
+      <div class="sub_menu" v-if="titleHeadBand === 'Tableau de bord'">
+        <TheSubMenuDashbord />
       </div>
-      <!-- other sub menu -->
-      <!-- sub menu for dashbord -->
-      <div v-if="titleHeadBand === companySelected.name" class="sub_menu_dashbord">
-        <div class="sub">
-          <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyHome' }">Accueil</router-link>
-        </div>
-        <div class="sub">
-          <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateUser' }"
-            >Créer un salarié</router-link
-          >
-        </div>
-        <div class="sub">
-          <router-link class="link_sub_menu ctorange" :to="{ name: 'SeeCompanyCreateFileWork' }"
-            >Fiche métier</router-link
-          >
-        </div>
+      <!-- sub menu for company -->
+      <div class="sub_menu" v-if="titleHeadBand === companySelected.name">
+        <TheSubMenuCompany />
       </div>
     </transition>
   </div>
@@ -34,8 +16,16 @@
 <script>
 import { mapGetters } from "vuex";
 
+//components
+import TheSubMenuDashbord from "./TheSubMenuDashbord";
+import TheSubMenuCompany from "./TheSubMenuCompany";
+
 export default {
   name: "TheSubMenu",
+  components: {
+    TheSubMenuDashbord,
+    TheSubMenuCompany,
+  },
   computed: {
     //recover info current user and company selected and title head band
     ...mapGetters("CurrentUser", ["bgSubMenu"]),
@@ -44,7 +34,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../../assets/scss/app-components/menu/subMenu.scss";
-</style>

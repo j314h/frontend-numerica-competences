@@ -1,18 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView";
-import DashbordPage from "../views/DashbordPage";
+import HomeView from "../views/primary-views/HomeView";
+import DashbordPage from "../views/primary-views/DashbordPage";
 import HomeDashbord from "../components/ContentApp/HomeDashbord/HomeDashbord.vue";
 import DashHome from "../components/ContentApp/HomeDashbord/DashHome/DashHome.vue";
 import store from "../store";
 import VueCookies from "vue-cookies";
 const Setting = () => import("../components/ContentApp/Setting/Setting.vue");
 const CreateCompany = () => import("../components/ContentApp/HomeDashbord/CreateCompany/CreateCompany.vue");
-const SeeCompany = () => import("../views/SeeCompany.vue");
+const SeeCompany = () => import("../views/company-views/SeeCompany.vue");
 const SeeCompanyCreateUser = () => import("../components/ContentApp/SeeCompany/SeeCompanyCreateUser.vue");
 const SeeCompanyHome = () => import("../components/ContentApp/SeeCompany/SeeCompanyHome/SeeCompanyHome.vue");
-const SeeCompanyCreateFileWork = () => import("../views/SeeCompanyCreateFileWork.vue");
-const HomeValidateAccount = () => import("../views/HomeValidateAccount.vue");
+const SeeCompanyCreateFileWork = () => import("../views/company-views/SeeCompanyCreateFileWork.vue");
+const HomeValidateAccount = () => import("../views/primary-views/HomeValidateAccount.vue");
 
 Vue.use(VueRouter);
 
@@ -26,10 +26,8 @@ const routes = [
 
     beforeEnter: async (to, from, next) => {
       //check if cookie for variable isSignIn and check if img is load or not
-      store.commit("CurrentUser/checkedJwt", VueCookies.isKey("jwt"));
-      !localStorage.getItem("imgs") ? await store.dispatch("Files/getFiles") : null;
-
       //if cookie token not exist not next
+      store.commit("CurrentUser/checkedJwt", VueCookies.isKey("jwt"));
       store.getters["CurrentUser/isSignIn"] ? next("/dashbord-page") : next();
     },
   },
@@ -47,17 +45,6 @@ const routes = [
         redirect: { name: "DashHome" },
         components: {
           HomeDashbord,
-        },
-        //recover state and companies admin, referent recover in dispatch getAllCompaniesAdmin
-        beforeEnter: async (to, from, next) => {
-          await store.dispatch("States/getAllState");
-          await store.dispatch("Companies/getAllCompaniesAdmin");
-          //if company selected is define reload info company selected and users of company selected
-          if (store.getters["Companies/idCompaniesSelected"]) {
-            await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-            await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-          }
-          next();
         },
         children: [
           {
@@ -90,10 +77,12 @@ const routes = [
           store.commit("ParamApp/seeSubMenu", false);
           store.commit("ParamApp/changeTitleHeadBand", "Paramètres");
           //if company selected is define reload info company selected and users of company selected
-          if (store.getters["Companies/idCompaniesSelected"]) {
-            await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-            await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
-          }
+          // if (store.getters["Companies/idCompaniesSelected"]) {
+          //   await store.dispatch("Companies/getCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          //   await store.dispatch("Sectors/getSectorsCompanySelected", store.getters["Companies/idCompaniesSelected"]);
+          //   console.log(store.getters["ParamApp/titleHeadBand"]);
+          // }
+
           next();
         },
       },

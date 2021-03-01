@@ -6,11 +6,11 @@ export default {
   namespaced: true,
   state: {
     //info for current user
-    currentUser: {},
+    currentUser: null,
     //info for company of current user
-    currentUserCompany: {},
+    currentUserCompany: null,
     //for sectors of company current user
-    sectorsCompanyCurrentUser: [],
+    sectorsCompanyCurrentUser: null,
     // connected
     isSignIn: false,
   },

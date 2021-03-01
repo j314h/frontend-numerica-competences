@@ -19,7 +19,7 @@ export default {
     } catch (error) {
       //add error in store disable page loading
       store.commit("Error/addError", error);
-      store.commit("Loading/disabledLoading", false);
+      store.commit("Loading/stateLoading", false);
     }
   },
 

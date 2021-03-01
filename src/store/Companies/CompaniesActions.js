@@ -8,6 +8,8 @@ export default {
   async getAllCompaniesAdmin(context) {
     try {
       //reset error
+      store.commit("Loading/stateLoading", true);
+
       store.commit("Error/resetError");
 
       //call api for get comapnies of user connected
@@ -16,8 +18,10 @@ export default {
       //add companies of user connected
       context.commit("addAllCompaniesUserConnected", data.data.companies);
       store.commit("Employees/addEmployeesReferentCompaniesAdmin", data.data.tabReferent);
+      store.commit("Loading/stateLoading", false);
     } catch (error) {
       store.commit("Error/addError", error);
+      store.commit("Loading/stateLoading", false);
     }
   },
 
@@ -25,7 +29,7 @@ export default {
   async getCompanySelected(context, idCompany) {
     try {
       //see page loading and reset error
-      //store.commit("Loading/stateLoading", true);
+      store.commit("Loading/stateLoading", true);
       store.commit("Error/resetError");
 
       //call api for recover company selected and users of company selected
@@ -35,11 +39,11 @@ export default {
       //add company in store and recover and add sectors of company selected
       context.commit("addCompanySelected", company.data);
       store.commit("Employees/addEmployeeCompanySelected", usersCompany.data);
-      //store.commit("Loading/stateLoading", false);
+      store.commit("Loading/stateLoading", false);
     } catch (error) {
       //add error in store disable page loading
       store.commit("Error/addError", error);
-      //store.commit("Loading/stateLoading", false);
+      store.commit("Loading/stateLoading", false);
     }
   },
 

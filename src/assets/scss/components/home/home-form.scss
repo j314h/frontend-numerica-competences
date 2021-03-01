@@ -1,0 +1,62 @@
+.home_form_box {
+  max-width: 300px;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 30px 30px 30px 30px;
+  border-radius: 10px;
+}
+
+.home_form_img {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.box_img img {
+  width: 70px;
+  height: 70px;
+}
+
+.home_form_box_input {
+  text-align: center;
+}
+.home_form_box_input :nth-child(1) {
+  width: 100%;
+}
+.home_form_box_input :nth-child(2) {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.home_form_box_password_forget {
+  text-align: right;
+  padding: 10px 0;
+}
+.home_form_link_password_forget {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.home_form_link_password_forget:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.home_form_box_error {
+  text-align: center;
+  margin: 5px 0 20px 0;
+}
+
+.hom_form_btn_connexion {
+  display: flex;
+  justify-content: center;
+}
+
+/** mobile */
+@media screen and (max-width: 700px) {
+  .home_form_box {
+    max-width: 280px;
+    padding: 20px 30px 30px 30px;
+  }
+  .home_form {
+    margin: 30px 0;
+  }
+}

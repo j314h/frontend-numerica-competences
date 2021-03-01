@@ -1,14 +1,20 @@
 <template>
   <div class="headband" :class="currentUser.themeColor.bgLayout + ' ' + currentUser.themeColor.colorMenuActive">
-    <h3 class="stl-m">{{ titleHeadBand }}</h3>
+    <H3Component :styleCustom="'headband_title'" :text="titleHeadBand" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 
+//components
+import H3Component from "../../components-globals/Titles/H3Component";
+
 export default {
   name: "TheHeadband",
+  components: {
+    H3Component,
+  },
   data() {
     return {};
   },

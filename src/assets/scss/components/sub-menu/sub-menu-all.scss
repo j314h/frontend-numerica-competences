@@ -1,0 +1,19 @@
+.sub_menu_box .sub_menu > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 0 30px;
+}
+.sub .link_sub_menu {
+  padding: 20px;
+  border-bottom: 5px solid transparent;
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: $orange;
+}
+
+.sub .router-link-active {
+  border-bottom: 5px solid #f84210;
+}

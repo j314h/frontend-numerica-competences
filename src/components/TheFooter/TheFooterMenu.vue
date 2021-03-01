@@ -1,7 +1,7 @@
 <template>
-  <div class="menus_footer ctwhite">
+  <div class="footer_box_menu">
     <!-- menu 1 -->
-    <div class="menu_1">
+    <div class="footer_menu_1">
       <h4>Numerica Competence</h4>
       <ul>
         <li><router-link to="presentation">Présentation</router-link></li>
@@ -10,7 +10,7 @@
       </ul>
     </div>
     <!-- menu 2 -->
-    <div class="menu_2">
+    <div class="footer_menu_2">
       <h4>Service</h4>
       <ul>
         <li><router-link to="contact">Contact</router-link></li>
@@ -28,7 +28,3 @@ export default {
   name: "FooterMenuComponent",
 };
 </script>
-
-<style scoped>
-@import "../../assets/scss/app-components/footer/footerMenu.scss";
-</style>
